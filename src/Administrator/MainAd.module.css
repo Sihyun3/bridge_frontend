@@ -1,0 +1,99 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin:0px;
+    padding: 0px;
+    color: #000;
+  }
+
+.mainBox {
+    width: 1200px;
+    margin: 180px auto;
+  }
+
+.mainText {
+    font-size: 35px;
+    margin-bottom: 50px;
+  }
+
+.report {
+    width: 225px;
+    height: 395px;
+    margin-right: 40px;
+    border-radius: 20px;
+    background-color: #E1E5E9;
+    border: 0px ;
+    box-shadow: 10px 10px 0px rgba(243, 239, 239, 0.6);
+    display: inline-block;
+}
+
+.report:hover {
+    background-color: rgba(225, 229, 233, 0.7);
+}
+
+.reportIcon {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 60px auto;
+}
+
+.report p {
+    margin-left: 10px;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.reportArrow {
+    width: 20px;
+    height: 20px;
+}
+
+
+.notify {
+    width: 225px;
+    height: 395px;
+    margin-right: 40px;
+    border-radius: 20px;
+    background-color: #E1E5E9;
+    border: 0px ;
+    box-shadow: 10px 10px 0px rgba(243, 239, 239, 0.6);
+    display: inline-block;
+}
+
+.notify:hover {
+    background-color: rgba(225, 229, 233, 0.7);
+}
+
+.deal {
+    width: 225px;
+    height: 395px;
+    margin-right: 40px;
+    border-radius: 20px;
+    border: 0px;
+    background-color: #E1E5E9;
+    box-shadow: 10px 10px 0px rgba(243, 239, 239, 0.6);
+    display: inline-block;
+}
+
+.deal:hover {
+    background-color: rgba(225, 229, 233, 0.7);
+}
+
+.certification {
+    width: 225px;
+    height: 395px;
+    border-radius: 20px;
+    border: 0px;
+    background-color: #E1E5E9;
+    box-shadow: 10px 10px 0px rgba(243, 239, 239, 0.6);
+    display: inline-block;
+}
+
+.certification:hover {
+    background-color: rgba(225, 229, 233, 0.7);
+}

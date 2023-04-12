@@ -1,0 +1,81 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin:0px;
+    padding: 0px;
+    color: #000;
+  }
+
+.mainBox {
+    width: 1200px;
+    margin: 100px auto;
+}
+
+.mainText {
+    font-size: 50px;
+}
+
+.firstLine {
+    margin-top: 30px;
+}
+
+.online {
+    width: 548px;
+    height: 328px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: bottom;
+
+}
+
+.online p {
+    margin-top: 180px;
+    margin-left: 20px;
+}
+.offline p {
+    margin-top: 180px;
+    margin-left: 20px;
+}
+.musicSep p {
+    margin-top: 110px;
+    margin-left: 20px;
+}
+.community p {
+    margin-top: 110px;
+    margin-left: 20px;
+}
+
+.offline {
+    width: 548px;
+    height: 328px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.musicSep {
+    width: 550px;
+    height: 243px;
+    margin-right: 50px;
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.community {
+    width: 550px;
+    height: 243px;
+    margin-left: 50px;
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: left;
+}
