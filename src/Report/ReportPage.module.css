@@ -1,10 +1,11 @@
 .Box{
     width:645px;
-    height:686px;
+    height: 579px;
     background-color: #b4abab;
     margin:100px auto;
     border: 1px solid rgb(217,217,217,0.1);
     border-radius: 0.5rem;
+    margin-top: 180px;
 }
 .Target{
     width:500px;
@@ -23,10 +24,33 @@
 }
 .input{
     width: 500px;
-    height: 400px;
+    height: 250px;
     margin: 0 auto;
 }
 .inner{
     width: 100%;
     height: 100%;
+    vertical-align: top;
+}
+.Select{
+    width:500px;
+    height: 54px;
+    margin: 0 auto;
+    background-color: red;
+    border-radius: 0.5rem;
+    font-size: 30px;
+    margin-top:30px;
+    margin-bottom:30px;
+    text-align: center;
+    line-height: 54px;
+    display: block
+}
+.button{
+    width: 72px;
+    height: 38px;
+    background-color:yellow;
+    margin-left:501px;
+    border: solid 1px black;
+    margin-top:20px;
+    border-radius: 0.5rem;
 }

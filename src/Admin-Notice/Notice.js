@@ -1,5 +1,5 @@
 import style from './Notice.module.css'
-import searchImg from 'C:/tantara/tantara_frontend/src/TipList/searchImg.png'
+import searchImg from '../TipList/searchImg.png'
 
 const Notice = () => {
     return (
@@ -28,16 +28,16 @@ const Notice = () => {
                 <button className={style.delete}>삭제</button>
             </div>
             <div className={style.list}>
-                <input type="checkbox" className={style.checkbox}/>
+                <input type="checkbox" className={style.checkbox} />
                 <a className={style.title}>제목</a>
                 <a className={style.writer}>작성자</a>
             </div>
             <div className={style.list}>
-                <input type="checkbox" className={style.checkbox}/>
+                <input type="checkbox" className={style.checkbox} />
                 <a className={style.title}>제목</a>
                 <a className={style.writer}>작성자</a>
             </div>
-           
+
         </>
     )
 
