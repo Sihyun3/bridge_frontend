@@ -1,0 +1,60 @@
+/* 전체 속성 reset */
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin:0px;
+    padding: 0px;
+    color: #000;
+  }
+
+.mainBox {
+    width: 570px;
+    height: 690px;
+    background-color: #E1E5E9;
+    margin: 200px auto;
+    border-radius: 15px;
+}
+
+.mainText {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+
+.dealDate {
+    width: 440px;
+    height: 40px;
+    margin: 0px auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+input[type=date]::-webkit-datetime-edit-text {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-month-field{
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-day-field {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-year-field {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.search {
+    width: 440px;
+    height: 40px;
+    margin: 0px auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+}

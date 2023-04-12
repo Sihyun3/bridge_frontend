@@ -1,5 +1,10 @@
+
 import style from './TipList.module.css'
+<<<<<<< HEAD:src/Tip/TipList.js
 import searchImg from 'C:/bridge/bridge_frontend/src/Admin-Notice/searchImg.png'
+=======
+import searchImg from './searchImg.png';
+>>>>>>> 721e7bafcacc2572e586dc606c7a4bd36a1c7097:src/TipList/TipList.js
 
 const TipList = () => {
     return (

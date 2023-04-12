@@ -10,6 +10,7 @@ import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
 import TipDetail from './Tip/TipDetail';
+import DealListAd from './Administrator/DealListAd';
 
 
 
@@ -17,9 +18,24 @@ function App() {
   return (
     <>
 
-  <TipDetail/> 
-  
+    <DealListAd />
+      {/* <MainAd /> */}
+
+      {/* <Main />
+      <Login />
+
+      <Layout />
+
+      <Main />
+      <Login />
+      <ReportPage />
+      <SignUp />
+      <TipList />
+      <Login />
+      <SignUp />
+      <TipList />
+      <Notice /> */}
     </>
-        )
-  }
-  export default App;
+  )
+}
+export default App;
