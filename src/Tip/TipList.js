@@ -1,7 +1,9 @@
+
 import style from './TipList.module.css'
 import searchImg from './searchImg.png'
 import '../reset.css'
 import Header1 from '../Header/Header1'
+
 
 const TipList = () => {
     return (

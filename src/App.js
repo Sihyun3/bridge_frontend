@@ -6,7 +6,7 @@ import Login from './Login/Login'
 import MainAd from './Administrator/MainAd';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
-import TipList from './TipList/TipList';
+import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
 import Footer from './Footer/Footer';
 import { Route } from 'react-router-dom';
