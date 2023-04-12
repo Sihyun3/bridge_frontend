@@ -1,5 +1,6 @@
+
 import style from './TipList.module.css'
-import searchImg from 'C:/tantara/tantara_frontend/src/TipList/searchImg.png'
+import searchImg from './searchImg.png';
 
 const TipList = () => {
     return (
