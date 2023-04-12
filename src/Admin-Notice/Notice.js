@@ -1,5 +1,5 @@
 import style from './Notice.module.css'
-import searchImg from 'C:/tantara/tantara_frontend/src/TipList/searchImg.png'
+import searchImg from 'C:/bridge/bridge_frontend/src/Admin-Notice/searchImg.png'
 
 const Notice = () => {
     return (
