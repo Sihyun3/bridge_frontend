@@ -65,7 +65,7 @@ a {color:snow; text-decoration: none; outline: none}
 	width:1200px; 
 	margin: 0px auto; 
 	position:relative;
-	min-height: 501px;
+	min-height: 441px;
 }
 *{
     font-family: 'Noto Sans KR', sans-serif;
@@ -82,3 +82,10 @@ a {color:snow; text-decoration: none; outline: none}
 	clear: both;
 	content: "";
   }
+  .box1 {
+    height: 280px;
+    width: 100%;
+    background-color: #f8dbdb;
+    text-align: center;
+    margin-top: 80px;
+}

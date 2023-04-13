@@ -23,7 +23,7 @@ const Notice = () => {
             </div>
             <div className={style.rightbox}>
                 <input type="text" className={style.search} />
-                <img className={style.searchImg} src={searchImg} />
+                {/* <img className={style.searchImg} src={searchImg} /> */}
             </div>
             <div className={style.write}>
                 <button className={style.writebutton}>작성</button>

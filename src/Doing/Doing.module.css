@@ -1,0 +1,61 @@
+.Doing{
+    background-color: #e2e2e2;
+    width: 1200px;
+    margin-top: 60px;
+    border-radius: 0.5rem;
+}
+.teamname{
+    text-align: center;
+    font-size: 36px;
+    padding-top: 40px;
+}
+.isDoing{
+    text-align: center;
+    padding-top: 40px;
+    font-size:20px
+}
+.upload{
+    height: 38px;
+    width: 72px;
+    margin-left: 1025.5px;
+    background-color: snow;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 0.5rem;
+}
+.contents{
+    width: 995px;
+    height:80px;
+    margin:0 auto;
+    margin-top: 20px;
+}
+.date{
+    font-size: 10px;
+    margin-left: 20px;
+    margin-bottom: 3px;
+}
+.Doingbox{
+    width:995px;
+    height: 60px;
+    background-color: snow;
+    border-radius: 0.5rem;
+}
+.img{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin-top: 18px;
+    margin-left:20px;
+    align-items:center;
+    float:left;
+}
+.name{
+    margin-left: 15px;
+    float:left;
+    line-height: 60px;
+}
+.contents{
+    margin-left: 40px;
+    float:left;
+    line-height: 60px;
+}
