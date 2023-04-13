@@ -1,11 +1,7 @@
 import style from './Notice.module.css'
-<<<<<<< HEAD
-import searchImg from 'C:/bridge/bridge_frontend/src/Admin-Notice/searchImg.png'
-=======
 
 import searchImg from '../TipList/searchImg.png'
 
->>>>>>> fbaffe88ac03d0591c1e4924f7a56bd41f9327ec
 
 const Notice = () => {
     return (
