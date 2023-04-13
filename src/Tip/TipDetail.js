@@ -1,9 +1,10 @@
 import style from './TipDetail.module.css'
 import { Route, Link } from 'react-router-dom';
 import back_button from 'C:/bridge/bridge_frontend/src/Tip/back-button.png'
+
 const TipDetail = () => {
     return (
-        <div>
+        <div className='container clearfix' >
 
             <div className={style.back}>
                 <img className={style.backbutton} src={back_button} />
@@ -27,6 +28,17 @@ const TipDetail = () => {
                 </ul>
             </div>
             <div className={style.line}></div>
+            <div className={style.comment}><h2>댓글</h2></div>
+            <div className={style.comments}>
+                <p>작성자: 까닭이요, 이웃 듯합니다. 가난한 하늘에는 이 이름자 어머니, 라이너 이웃 듯합니다.라이너 이웃 듯합니다.</p>
+                <p>작성자: 언덕 하나에 거외다. 불러 흙으로 하나에 있습니다. </p>
+                <p>작성자: 인의 다 불러 이웃 무엇인지 봅니다. 아무 그리워 보고, 위에 아직 책상을 헤일 이름과 나의 까닭입니다. 사람들의 멀듯이, 이름과, 버리었습니다.</p>
+            </div>
+            <div className={style.line}></div>
+            <div className={style.input}>
+                <input type='text' className={style.writeComment}/>
+                <input type="button" className={style.finish} onClick value="등록" />
+            </div>
         </div>
     )
 }

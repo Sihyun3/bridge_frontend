@@ -10,11 +10,10 @@ import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
 import Footer from './Footer/Footer';
 import { Route } from 'react-router-dom';
-// import HeaderTest from './Header/HeaderTest';
-import LoginStart from './Login/LoginStart';
-import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
-import { RouteSharp } from '@mui/icons-material';
-import Header2 from './Header/Header2';
+import TipDetail from './Tip/TipDetail';
+import Partner from './Partner/PartnerList';
+import PartnerDatail from './Partner/PartnerDatail';
+import ProfileWrite from './Profile/ProfileWrite';
 
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
@@ -33,9 +32,11 @@ function App() {
       <Route path="/7" component={Notice} exact={true} />
       <Route path="/8" component={Notice} exact={true} />
       <Route path="/9" component={Notice} exact={true} />
-      <Route path="/10" component={Notice} exact={true} />
-      <Route path="/11" component={Notice} exact={true} />
-      <Route path="/12" component={Notice} exact={true} />
+      <Route path="/10" component={ProfileDetail} exact={true} />
+      <Route path="/11" component={JamList} exact={true} />
+      <Route path="/12" component={Doing} exact={true}/>
+     <ProfileWrite/>
+      
       <Footer/>
       </>
   )

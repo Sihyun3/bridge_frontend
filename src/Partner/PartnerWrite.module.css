@@ -1,0 +1,62 @@
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin: 0px;
+    padding: 0px;
+    color: #000;
+}
+
+.mainBox {
+    width: 570px;
+    height: 690px;
+    background-color: #E1E5E9;
+    margin: 200px auto;
+    border-radius: 15px;
+}
+
+.mainText {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* .title {
+    width: 440px;
+    height: 40px;
+    margin: 0px auto;
+    background-color: #D2B9FB;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    
+} */
+
+.textTitle {
+    border: none;
+    width: 440px;
+    height: 40px;
+    margin: 0px auto;
+    background-color: #D2B9FB;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+.dealDate {
+    border: none;
+    width: 280px;
+    height: 25px;
+    background-color: #D2B9FB;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-top: 0px;
+}
+
+/* .input[type="date"] {
+    border: none;
+} */

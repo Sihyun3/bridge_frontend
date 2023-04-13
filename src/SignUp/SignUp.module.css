@@ -1,31 +1,33 @@
 
-/*로그인 박스*/
+/*회원가입 박스*/
 .loginbackg {
     width: 585px;
     height: 640px;
     border: 1px solid rgb(217,217,217,0.1);
     text-align: center;
-    margin: 0 auto;
+    margin: 140px auto 60px auto;
     background-color: rgba(217, 217, 217, 0.5);
-    border-radius: 0.5rem;
+    border-radius: 1rem;
   }
   /*아이디&비밀번호 입력 인풋박스 위에 반쪽 사이즈 네개*/
   .signupinput {
     margin:14px;
     margin-bottom: 7px;
     margin-top: 7px;
-    width:205px;
+    width:195px;
     height:40px;
     border: none;
     border-radius: 0.3rem;
+    padding:0px 5px;
   }
    /*아이디&비밀번호 입력 인풋박스*/
    .signupinput2 {
     margin:6px;
-    width:440px;
+    width:430px;
     height:40px;
     border: none;
     border-radius: 0.3rem;
+    padding:0px 5px;
   }
   /*아이디&비밀번호 글씨*/
   .loginp {
@@ -33,7 +35,7 @@
     margin-bottom: 5px;
     margin-right: 370px;
   }
-  /*로그인 버튼*/
+  /*회원가입 버튼*/
   .loginbutton {
     margin-top:20px;
     width:440px;
@@ -47,6 +49,7 @@
   .login {
     margin-top:80px;
     margin-bottom:40px;
+    font-size:28px;
   }
   /*클릭시 회원가입페이지로 이동되는 '회원가입' 글씨*/
   .signup {
