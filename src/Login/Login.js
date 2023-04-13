@@ -2,6 +2,7 @@ import style from './Login.module.css';
 import { Link } from 'react-router-dom';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
+import React from 'react';
 
 const Login = () => {
     return (
@@ -24,5 +25,6 @@ const Login = () => {
 
     )
 }
+
 
 export default Login;
