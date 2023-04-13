@@ -1,10 +1,10 @@
 import style from './MainAd.module.css';
 import React from 'react';
-import warning from '../img/warning.png';
-import arrow from '../img/right-arrow.png';
-import megaphone from '../img/megaphone.png';
-import coin from '../img/coin.png';
-import checkbox from '../img/checkbox.png';
+import warning from './warning.png';
+import arrow from './right-arrow.png';
+import megaphone from './megaphone.png';
+import coin from './coin.png';
+import checkbox from './checkbox.png';
 
 
 const MainAd = () => {

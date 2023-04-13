@@ -1,0 +1,51 @@
+/* 전체 속성 reset */
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin: 0px;
+    padding: 0px;
+    color: #000;
+}
+
+.mainBox {
+    width: 645px;
+    height: 800px;
+    margin: 300px auto;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+}
+
+.mainText {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.request {
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    margin-top: 70px;
+    display: inline-block;
+}
+
+.requestText {
+    font-size: 25px;
+
+}
+
+.requestImg {
+    width: 120px;
+    height: 120px;
+}
+
+.response {
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+
+}

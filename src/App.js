@@ -10,7 +10,10 @@ import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
 import Footer from './Footer/Footer';
 import { Route } from 'react-router-dom';
-// import { Routes } from 'react-router-dom';
+import DealListAd from './Administrator/DealListAd';
+import PartnerWrite from './Partner/PartnerWrite';
+import Charge from './Charge/Charge';
+import Payment from './Payment/Payment';
 
 function App() {
   return (
@@ -28,6 +31,12 @@ function App() {
       <Route path="/9" component={Notice} exact={true} />
       <Route path="/10" component={Notice} exact={true} />
       <Route path="/11" component={Notice} exact={true} />
+      <Route path="/12" component={MainAd} exact={true} />
+      <Route path="/13" component={DealListAd} exact={true} />
+      <Route path="/14" component={PartnerWrite} exact={true} />
+      <Route path="/15" component={Charge} exact={true} />
+      <Route path="/16" component={Payment} exact={true} />
+
       <Footer/>
     </>
   )

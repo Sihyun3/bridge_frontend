@@ -1,6 +1,6 @@
 import style from './Notice.module.css'
 
-import searchImg from '../TipList/searchImg.png'
+import searchImg from './searchImg.png'
 
 
 const Notice = () => {

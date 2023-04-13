@@ -1,6 +1,6 @@
 import style from './DealListAd.module.css';
-import plus from '../img/plus.png';
-import minus from '../img/minus.png';
+import plus from './plus.png';
+import minus from './minus.png';
 
 const DealListAd = () => {
     return (
@@ -10,18 +10,18 @@ const DealListAd = () => {
                 <div className={style.dealDate}>
                     <p>거래 일자</p> 
                     <input className={style.dealInput1} type='date'/> - <input type='date' className={style.dealInput2}></input>
-                    <button className={style.dealButton1}> 3개월 </button>
-                    <button className={style.dealButton2}> 6개월 </button>
+                    <button className={style.dealButton1}>3개월</button>
+                    <button className={style.dealButton2}>6개월</button>
                 </div>
                 <div className={style.search}>
-                   <p> 검색하기</p> <input type='text' className={style.searchInput}></input>
+                   <p>검색하기</p> <input type='text' className={style.searchInput}></input>
                 </div>
                 <div className={style.buttonBox}>
                 <button className={style.initButton}>초기화</button>
                 <button className={style.searchButton}>검색</button>
                 </div>
                 <div className={style.contentBox}>
-                    <div className={style.tableText}> 총 00건 </div>
+                    <div className={style.tableText}>총 00건</div>
                     <table>
                         <colgroup className={style.tableCol}>
                         <col width="30%"/>
