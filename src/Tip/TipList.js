@@ -1,6 +1,6 @@
 
 import style from './TipList.module.css'
-import searchImg from './searchImg.png'
+import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
 import Header1 from '../Header/Header1'
 
@@ -12,7 +12,7 @@ const TipList = () => {
             <div className={style.box1}>
                 <h1>게시판</h1>
             </div>
-            <div className='container clearfix' >
+            <div className='container clearfix'>
  
 
                 <div className={style.leftbox}>
