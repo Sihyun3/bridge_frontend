@@ -27,6 +27,7 @@ const TipDetail = () => {
                 </ul>
             </div>
             <div className={style.line}></div>
+            <div className={style.comment}><h2>댓글</h2></div>
         </div>
     )
 }

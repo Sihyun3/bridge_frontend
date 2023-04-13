@@ -11,30 +11,17 @@ import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
 import TipDetail from './Tip/TipDetail';
 import DealListAd from './Administrator/DealListAd';
+import Footer from './Footer/Footer';
 
 
 
 function App() {
   return (
     <>
-
-    <DealListAd />
-      {/* <MainAd /> */}
-
-      {/* <Main />
-      <Login />
-
-      <Layout />
-
-      <Main />
-      <Login />
-      <ReportPage />
-      <SignUp />
-      <TipList />
-      <Login />
-      <SignUp />
-      <TipList />
-      <Notice /> */}
+  <Header/>
+  {/* <TipDetail/> */}
+    <TipList/>
+    <Footer/>
     </>
   )
 }
