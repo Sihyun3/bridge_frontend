@@ -1,0 +1,47 @@
+/*파트너 모집 글씨 써진 박스*/
+.box1 {
+    height: 280px;
+    width: 100%;
+    background-color: #f8dbdb;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.box1 h1 {
+    padding-top: 100px;
+    font-size: 48px;
+    float: left;
+    margin-left:360px;
+    margin-top:40px;
+}
+/*태그박스*/
+.tagbox {
+    margin:40px 0;
+    background-color: rgb(217,217,217,0.5);
+    float: left;
+    width:1200px;
+    height:200px;
+    border-radius: 0.7rem;
+}
+/*#태그 글자*/
+.tag {
+    font-size:28px;
+    width:1200px;
+    padding-left:40px;
+    padding-top:20px;
+}
+/*태그들을 묶는 박스*/
+.taglist {
+    padding:20px 140px;
+}
+/*태그들*/
+.taglist a{
+    background-color: #d2b9fb;
+    width:auto;
+    padding:4px 12px;
+    border-radius: 0.5rem;
+    font-size:18px;
+    color:black;
+    margin:8px 16px;
+
+}
