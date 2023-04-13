@@ -1,5 +1,11 @@
 import style from './Notice.module.css'
+<<<<<<< HEAD
 import searchImg from 'C:/bridge/bridge_frontend/src/Admin-Notice/searchImg.png'
+=======
+
+import searchImg from '../TipList/searchImg.png'
+
+>>>>>>> fbaffe88ac03d0591c1e4924f7a56bd41f9327ec
 
 const Notice = () => {
     return (
@@ -28,16 +34,16 @@ const Notice = () => {
                 <button className={style.delete}>삭제</button>
             </div>
             <div className={style.list}>
-                <input type="checkbox" className={style.checkbox}/>
+                <input type="checkbox" className={style.checkbox} />
                 <a className={style.title}>제목</a>
                 <a className={style.writer}>작성자</a>
             </div>
             <div className={style.list}>
-                <input type="checkbox" className={style.checkbox}/>
+                <input type="checkbox" className={style.checkbox} />
                 <a className={style.title}>제목</a>
                 <a className={style.writer}>작성자</a>
             </div>
-           
+
         </>
     )
 
