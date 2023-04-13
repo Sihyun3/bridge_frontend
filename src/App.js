@@ -8,41 +8,13 @@ import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
-<<<<<<< HEAD
-import TipDetail from './Tip/TipDetail';
-import DealListAd from './Administrator/DealListAd';
-import PartnerWrite from './Partner/PartnerWrite';
-
-
-=======
 import Footer from './Footer/Footer';
 import { Route } from 'react-router-dom';
 // import { Routes } from 'react-router-dom';
->>>>>>> fbaffe88ac03d0591c1e4924f7a56bd41f9327ec
 
 function App() {
   return (
     <>
-<<<<<<< HEAD
-    <PartnerWrite/>
-    {/* <DealListAd /> */}
-      {/* <MainAd /> */}
-
-      {/* <Main />
-      <Login />
-
-      <Layout />
-
-      <Main />
-      <Login />
-      <ReportPage />
-      <SignUp />
-      <TipList />
-      <Login />
-      <SignUp />
-      <TipList />
-      <Notice /> */}
-=======
       <Header/>
       <Route path="/" component={Main} exact={true} />
       <Route path="/1" component={Notice} exact={true} />
@@ -57,7 +29,6 @@ function App() {
       <Route path="/10" component={Notice} exact={true} />
       <Route path="/11" component={Notice} exact={true} />
       <Footer/>
->>>>>>> fbaffe88ac03d0591c1e4924f7a56bd41f9327ec
     </>
   )
 }
