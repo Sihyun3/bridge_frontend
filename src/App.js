@@ -11,14 +11,15 @@ import TipList from './Tip/TipList';
 import Notice from './Admin-Notice/Notice';
 import TipDetail from './Tip/TipDetail';
 import DealListAd from './Administrator/DealListAd';
+import PartnerWrite from './Partner/PartnerWrite';
 
 
 
 function App() {
   return (
     <>
-
-    <DealListAd />
+    <PartnerWrite/>
+    {/* <DealListAd /> */}
       {/* <MainAd /> */}
 
       {/* <Main />
