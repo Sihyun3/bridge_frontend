@@ -1,13 +1,3 @@
-/* 전체 속성 reset */
-*{
-    font-family: 'Noto Sans KR', sans-serif;
-    list-style: none;
-    text-decoration: none;
-    border-collapse: collapse;
-    margin:0px;
-    padding: 0px;
-    color: #000;
-  }
 
 /* 컨텐츠 모두 묶는 박스 */
 .mainBox {

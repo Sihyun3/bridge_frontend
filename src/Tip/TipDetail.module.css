@@ -7,7 +7,6 @@
     margin-top:160px;
     width: 64px;
     height: 64px;
-    margin-left:360px;
     float:left;
 }
 .title {
@@ -29,19 +28,18 @@ width: 1200px;
 height: 2px;
 background: #D9D9D9;
 float: left;
-margin-left: 360px;
 margin-top:40px;
 
 }
 /*콘텐츠 박스*/
 .content {
-    width:1120px;
+    width:1040px;
     height: auto;
     border:1px solid #d9d9d9;
     float:left;
     margin-top:60px;
-    margin-left:360px;
-    margin-right:360px;
+    margin-left: 40px;
+    margin-right: 40px;
     padding:40px;
     border-radius: 0.5rem;
 }
@@ -54,7 +52,7 @@ margin-top:40px;
 .heartbox {
     float:left;
     margin-top:20px;
-    margin-left: 920px;
+    margin-left: 560px;
 }
 .heartbox i {
     font-size:40px;
@@ -63,10 +61,66 @@ margin-top:40px;
 .editbox {
     float:left;
     margin-top:30px;
-    width:600px;
+    width:560px;
     
 }
 .editbox ul li {
     float: right;
     margin: 0 10px;
+    cursor: pointer;
+}
+.editbox a {
+    color:black;
+}
+/*댓글 글자 div*/
+.comment {
+    float:left;
+    margin-top:40px;
+    font-size:20px;
+    margin-bottom: 40px;
+    margin-left:40px;
+    width:1200px;
+}
+/*댓글들 개별*/
+.comments p {
+    margin-left:40px;
+    float:left;
+    width:auto;
+    display: block;
+    background-color: #D9D9D9;
+    padding:12px;
+    border-radius: 0.5rem;
+    margin-top:8px;
+    margin-bottom: 8px;
+
+}
+/*덧글 작성칸 div*/
+.input{
+    width:1200px;
+    float:left;
+    padding: 40px 0;
+}
+/*덧글 작성 인풋칸*/
+.writeComment {
+    width:1100px;
+    height:40px;
+    border-radius: 0.5rem;
+    background-color: #d9d9d9;
+    border:none;
+    margin-left:40px;
+}
+/* 덧글 작성 버튼 */
+.finish {
+    height:30px;
+    width:60px;
+    position: relative;
+    right:100px;
+    border-radius: 0.5rem;
+    border:none;
+    background-color: #ae6fff;
+    font-size:16px;
+    color:white;
+}
+.finish:hover {
+    cursor: pointer;
 }
