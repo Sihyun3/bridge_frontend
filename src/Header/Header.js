@@ -1,8 +1,19 @@
-import { Link } from 'react-router-dom';
+
 import style from './Header.module.css';
+import React, { useState } from 'react';
 
 
-    const Header = () => {
+
+function Header({ nickname }) {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+    function handleLogin() {
+      setIsLoggedIn(true);
+    }
+  
+    function handleLogout() {
+      setIsLoggedIn(false);
+    }
         return (
             <>
                 <header className={style.header}>

@@ -63,9 +63,29 @@ a {color:snow; text-decoration: none; outline: none}
 }
 .container{
 	width:1200px; 
-	margin: 0 auto; 
-	position:relative;  
+	margin: 0px auto; 
+	position:relative;
+	min-height: 441px;
 }
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin:0px;
+    padding: 0px;
+    color: #000;
+  }
 
-
-
+  .clearfix::after {
+	display: block;
+	clear: both;
+	content: "";
+  }
+  .box1 {
+    height: 280px;
+    width: 100%;
+    background-color: #f8dbdb;
+    text-align: center;
+    margin-top: 80px;
+}
