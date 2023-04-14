@@ -18,14 +18,13 @@ import TipDetail from './Tip/TipDetail';
 import Partner from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import ProfileWrite from './Profile/ProfileWrite';
+import LoginStart from './Login/LoginStart';
 import ProfileDetail from './Profile/ProfileDetail';
-import Header2 from './Header/Header2.js'
-import JamList from './Jam/Jamlist'
-import Doing from './Doing/Doing'
-import LoginStart from './Login/LoginStart'
-import Header1 from './Header/Header1';
-import Header from './Header/Header';
-import JamDetail from './Jam/JamDetail';
+import MainAd from './Administrator/MainAd';
+import Header2 from './Header/Header2';
+import JamList from './Jam/Jamlist';
+import Doing from './Doing/Doing';
+import JamWrite from './Jam/JamWrite';
 
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
@@ -33,8 +32,8 @@ import JamDetail from './Jam/JamDetail';
 function App() {
   return (
     <>
-      <Header/>
-      {/* <Route path="/" component={LoginStart} exact={true}/>
+      <Header2 />
+      <Route path="/" component={LoginStart} exact={true} />
       <Route path="/1" component={Main} exact={true} />
       <Route path="/2" component={Notice} exact={true} />
       <Route path="/3" component={Login} exact={true} />
@@ -46,13 +45,17 @@ function App() {
       <Route path="/9" component={Notice} exact={true} />
       <Route path="/10" component={ProfileDetail} exact={true} />
       <Route path="/11" component={JamList} exact={true} />
-      <Route path="/12" component={Doing} exact={true}/>
-      <Route path="/12" component={Doing} exact={true}/>
-      <Route path="/12" component={Doing} exact={true}/> */}
-   <JamDetail/>
-      
-      <Footer/>
-      </>
+      <Route path="/12" component={Doing} exact={true} />
+      <Route path="/13" component={Charge} exact={true} />
+      <Route path="/14" component={DealListAd} exact={true} />
+      <Route path="/15" component={MainAd} exact={true} />
+      <Route path="/16" component={PartnerWrite} exact={true} />
+      <Route path="/17" component={Payment} exact={true} />
+      <Route path="/18" component={ProfileWrite} exact={true} />
+      <Route path="/19" component={JamWrite} exact={true} />
+
+      <Footer />
+    </>
   )
 }
 export default App;

@@ -1,0 +1,219 @@
+/* 전체 속성 reset */
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin: 0px;
+    padding: 0px;
+    color: #000;
+}
+
+.container {
+    width: 1920px;
+    height: 0 auto;
+    background-color: aliceblue;
+}
+
+/* 잼 작성 페이지 전체 */
+.box {
+    width:1200px;
+    height:648px;
+    border:2px solid #d9d9d9;
+    margin-bottom: 120px;
+    border-radius: 12px;
+}
+
+/* 잼 아이콘 묶음 */
+.title1 {
+    margin-top:80px;
+    margin-bottom: 30px;
+    margin-left: 120px;
+
+}
+
+/* 잼 아이콘 */
+.JamIcon {
+    position: relative;
+    display: inline-block;
+    right:60px;
+    bottom: 28px;
+}
+
+/* Jam 텍스트 */
+.titleName {
+    color: white;
+    position:relative;
+    display:inline-block;
+    font-size: 36px;
+    bottom: 32px;
+    right: 48px;
+}
+
+/* 제목 전체 묶어줌 */
+.titleBox {
+    margin-top: 80px;
+}
+
+/* '제목' 텍스트 */
+.title2 {
+    color: white;
+    margin-left: 90px;
+    margin-right: 40px;
+    font-size: 24px;
+}
+
+/* 제목 입력칸 */
+.titleInput {
+    width: 760px;
+    height: 40px;
+    background-color: #D2B9FB;
+    border-radius: 8px;
+}
+
+/* 소개글 전체 div */
+.introduceBox {
+    margin-top: 28px;
+    margin-bottom: 15px;
+}
+
+/* '소개글' 텍스트 */
+.introduce {
+    color: white;
+    margin-left: 76px;
+    margin-right: 40px;
+    font-size: 24px;
+}
+
+/* 소개글 입력창 */
+.introduceInput {
+    width: 760px;
+    height: 120px;
+    background-color: #D2B9FB;
+    border-radius: 8px;  
+}
+
+/* 사진 부분 div 로 크게 묶은 것 */
+.potoBox {
+    margin-top: 15px;  
+}  
+
+/* '사진' 텍스트 */
+.poto {
+    color: white;
+    margin-left: 90px;
+    margin-right: 52px;
+    font-size: 24px;
+    /* height: 40px; */
+    position: relative;
+    top:12px;
+    
+}
+
+/* 사진 첨부하는 칸 */
+.potofile {
+    width: 760px;
+    height: 40px;
+    background-color: #D2B9FB;
+    border-radius: 8px;
+    color: transparent;
+}
+
+/* 사진 첨부 버튼 */
+.potoButton {
+    width: 60px;
+    height: 40px;
+    color: black;
+    font-size: 20px;
+    background-color: #D9D9D9;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-left: 890px;
+    position: relative;
+    bottom: 55px;
+    left: 100px;
+}
+
+/* input 안에 선택된 파일 없음 안보이게 하는 코드 */
+input[type=file]::file-selector-button {
+    display: none;
+}
+
+/* 악기선택창 이동 칸 */
+.Select {
+    width:760px;
+    height: 44px;
+    margin-left: 193px;
+    background-color: #D2B9FB;
+    border-radius: 12px;
+    font-size: 24px;
+    margin-top:28px;
+    text-align: center;
+    color: white;
+    position: relative;
+    top:25px;
+}
+
+/* 음표 이미지 */
+.musicImg {
+    margin-left: 70px;
+    position: relative;
+    bottom: 40px;
+    left: 12px;
+}
+
+/* '음악파일' 텍스트 */
+.musicfile {
+    color: white;
+    font-size: 24px;
+    margin-left: 60px;
+    position: relative;
+    bottom: 30px;
+}
+
+/* 음악 파일 첨부하도록 하는 input type file */
+.musicInput {
+    width: 760px;
+    height: 40px;
+    background-color: #D2B9FB;
+    border-radius: 12px;
+    color: transparent;
+    position: relative;
+    bottom: 47px;
+    left: 32px;
+}
+
+/* 음악파일 첨부 버튼 */
+.musicButton {
+    width: 60px;
+    height: 40px;
+    color: black;
+    font-size: 20px;
+    background-color: #D9D9D9;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-left: 890px;
+    position: relative;
+    bottom: 103px;
+    left: 105px;
+}
+
+/* 사진 첨부랑 악기선택 이동 사이에 선 */
+.hr {
+    margin-left: 50px;
+}
+
+/* 등록버튼 */
+.submitBtn {
+    width: 50px;
+    height: 50px;
+    color: black;
+    font-size: 20px;
+    background-color: #C79BFF;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-left: 800px;
+    position: relative;
+    bottom: 90px;
+    left: 105px;
+}

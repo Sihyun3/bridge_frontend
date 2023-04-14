@@ -3,7 +3,7 @@ import style from './JamList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
 import Header1 from '../Header/Header1'
-import img from "../img/checkbox.png"
+import img from "./checkbox.png"
 const JamList = () => {
 
 
