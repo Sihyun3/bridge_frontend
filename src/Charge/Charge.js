@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import style from './Charge.module.css';
 
 const Charge = () => {
 
-    const [possess, setPossess] = useState('');
     return (
         <>
             <div className={style.mainBox}>
