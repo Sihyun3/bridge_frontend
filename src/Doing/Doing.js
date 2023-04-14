@@ -1,7 +1,7 @@
 import style from './Doing.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
-import img from "../img/checkbox.png"
+import img from "./checkbox.png"
 
 function Doing() {
     const a = 0;
