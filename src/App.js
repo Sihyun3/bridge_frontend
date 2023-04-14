@@ -9,6 +9,7 @@ import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './TipList/TipList';
 import Notice from './Admin-Notice/Notice';
+import ReportDetail from './Admin-Report/ReportDetail';
 
 
 
@@ -16,23 +17,21 @@ function App() {
   return (
     <>
 
-    {/* <Main/>
+      {/* <Main/>
     <Login/> */}
-    <MainAd/>
-
+      <MainAd />
       <Layout />
-
-
       <Main />
       <Login />
-      <ReportPage/>
+      <ReportPage />
+      <ReportDetail />
       {/* <SignUp/> */}
       {/* <TipList/> */}
-    {/* <Login/> */}
-    {/* <SignUp/> */}
-    {/* <TipList/> */}
-    <Notice/>
+      {/* <Login/> */}
+      {/* <SignUp/> */}
+      {/* <TipList/> */}
+      <Notice />
     </>
-        )
-  }
-  export default App;
+  )
+}
+export default App;
