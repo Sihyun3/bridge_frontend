@@ -1,0 +1,82 @@
+/*제목&소개글 묶은 박스*/
+.title {
+    width:1120px;
+    float: left;
+    border: 2px solid #d9d9d9;
+    margin-top:120px;
+    padding:40px;
+    border-radius: 1rem;
+}
+/*제목*/
+.title h1 {
+    font-size: 20px;
+}
+/* 소개글*/
+.title p {
+    font-size: 16px;
+}
+/*플레이버튼 박스*/
+.playbox{
+    width:1120px;
+    height:80px;
+    float: left;
+    margin-left:80px;
+    margin-top: 32px;
+}
+/*플레이버튼*/
+.playbutton {
+    width:60px;
+    height:60px;
+}
+/*잼(악기들),첨부란을 한번에 묶는 박스*/
+.jam {
+    width:1120px;
+    padding:40px;
+    border:2px solid #d9d9d9;
+    float:left;
+    border-radius: 1rem;
+    margin: 12px 0px 40px 0px;
+}
+/*악기 이미지*/
+.instrument {
+    width:60px;
+    height:60px;
+}
+/*첨부구역 div*/
+.input {
+    margin:40px 0px 0px 0px;
+    
+    
+}
+/*첨부란에 음표 */
+.singlenote {
+    width:60px;
+    height:60px;
+    margin-right: 100px;
+    padding-top:20px;
+}
+/*인풋창*/
+.musicinput {
+    width:760px;
+    height:30px;
+    margin-bottom: 20px;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #d9d9d9;
+    vertical-align: bottom;
+}
+/*첨부&등록 버튼*/
+.music {
+    margin-bottom: 20px;
+    width:60px;
+    height:30px;
+    border:none;
+    border-radius: 0.5rem;
+    margin: 0px 12px;
+    position: relative;
+    bottom: 20px;
+
+}
+.music:last-child {
+    background-color: #c79bff;
+}

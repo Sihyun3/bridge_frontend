@@ -1,6 +1,6 @@
 import Header1 from '../Header/Header1'
 import style from '../Partner/PartnerDatail.module.css'
-import back_button from 'C:/bridge/bridge_frontend/src/Tip/back-button.png'
+import back_button from '../Tip/back-button.png'
 import writer from '../Partner/note.png'
 import cat from '../Partner/cat.jpg'
 
