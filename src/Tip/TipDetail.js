@@ -1,6 +1,6 @@
 import style from './TipDetail.module.css'
 import { Route, Link } from 'react-router-dom';
-import back_button from 'C:/bridge/bridge_frontend/src/Tip/back-button.png'
+import back_button from './back-button.png'
 
 const TipDetail = () => {
     return (

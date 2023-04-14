@@ -18,7 +18,11 @@ import TipDetail from './Tip/TipDetail';
 import Partner from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import ProfileWrite from './Profile/ProfileWrite';
-
+import JamList from './Jam/Jamlist'
+import LoginStart from './Login/LoginStart'
+import ProfileDetail from './Profile/ProfileDetail'
+import Doing from './Doing/Doing'
+import Header2 from './Header/Header2';
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
 
@@ -39,10 +43,7 @@ function App() {
       <Route path="/10" component={ProfileDetail} exact={true} />
       <Route path="/11" component={JamList} exact={true} />
       <Route path="/12" component={Doing} exact={true}/>
-      <Route path="/12" component={Doing} exact={true}/>
-      <Route path="/12" component={Doing} exact={true}/>s
-     <ProfileWrite/>
-      
+     {/* <ProfileWrite/> */}
       <Footer/>
       </>
   )

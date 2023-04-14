@@ -1,19 +1,18 @@
-
 import style from './TipList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
 import Header1 from '../Header/Header1'
 
-
 const TipList = () => {
+
     return (
-        <>  
-        <Header1/>
+        <>
+            <Header1 />
             <div className={style.box1}>
                 <h1>게시판</h1>
             </div>
             <div className='container clearfix'>
- 
+
 
                 <div className={style.leftbox}>
                     <button className={style.good}>좋아요순</button>
@@ -40,8 +39,6 @@ const TipList = () => {
             </div>
         </>
     )
-
-
 }
 
 export default TipList;
