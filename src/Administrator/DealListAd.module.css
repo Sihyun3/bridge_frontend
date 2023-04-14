@@ -9,6 +9,7 @@
     color: #000;
   }
 
+/* 메인 박스 */
 .mainBox {
     width: 570px;
     height: 690px;
@@ -17,6 +18,7 @@
     border-radius: 15px;
 }
 
+/* 메인 텍스트(거래 내역) */
 .mainText {
     text-align: center;
     font-size: 30px;
@@ -25,6 +27,7 @@
     margin-bottom: 50px;
 }
 
+/* 거래일자 박스 */
 .dealDate {
     width: 440px;
     height: 40px;
@@ -34,20 +37,25 @@
     margin-bottom: 10px;
 }
 
+/* 거래일자 택스트 */
 .dealDate p {
     display: inline-block;
     margin-left: 20px;
 }
 
+/* 거래 일자 input 첫번째 박스 */
 .dealInput1 {
     width: 80px;
     margin-left: 20px;
     /* font-size: 10px; */
 }
 
+/* 거래일자 input 두번째 박스 */
 .dealInput2 {
     width: 80px;
 }
+
+/* 거래일자 박스 내 3개월, 6개월 버튼 */
 .dealButton1, .dealButton2 {
     width: 50px;
     height: 30px; 
@@ -57,7 +65,7 @@
     margin-top: 7px;
 }
 
-
+/* 검색하기 박스 */
 .search {
     width: 440px;
     height: 40px;
@@ -66,12 +74,14 @@
     border-radius: 5px;
 }
 
+/* 검색하기 텍스트 */
 .search p {
     display: inline-block;
     margin-left: 20px;
     margin-top: 10px;
 }
 
+/* 검색하기 input 박스 */
 .searchInput {
     width: 315px;
     height: 30px;
@@ -82,12 +92,15 @@
     margin-top: 5px;
 }
 
+/* 초기화, 검색 묶는 박스 */
 .buttonBox {
     width: 440px;
     margin: 0px auto;
     text-align: center;
     margin-top: 20px;
 }
+
+/* 초기화 버튼, 검색 버튼 */
 .initButton, .searchButton {
     width: 70px;
     height: 30px;
@@ -95,18 +108,22 @@
     border-radius: 5px;
 }
 
+/* 초기화 버튼 */
 .initButton {
     margin-right: 10px;
 }
 
+/* 검색 버튼 */
 .searchButton {
     margin-left: 10px;
 }
 
+/* 초기화, 검색 버튼 클릭 */
 .initButton:hover, .searchButton:hover {
     background-color: rgba(165, 166, 166, 0.5);
 }
 
+/* 거래내역 실제 컨텐츠 */
 .contentBox {
     width: 440px;
     height: 360px;
@@ -115,6 +132,7 @@
     border-radius: 5px;
 }
 
+/* 테이블 제목 */
 .tableText {
     font-size: 17px;
     font-weight: bold;
@@ -122,6 +140,7 @@
     padding-left: 25px;
 }
 
+/* 테이블 박스 */
 table {
     /* border: 1px solid; */
     width: 400px;
@@ -135,6 +154,7 @@ table {
     
 }
 
+/* 테이블 제목, 데이터 셀 */
 th, td {
     border: 1px solid;
     text-align: center;
@@ -142,18 +162,21 @@ th, td {
     border-color: rgba(161, 161, 161, 0.5);
 }
 
+/* 테이블 제목 셀 */
 th {
     height: 40px;
     vertical-align: middle;
     font-weight: bold;
 }
 
+/* 테이블 데이터 셀 */
 td {
     font-size: 13px;
     vertical-align: middle;
     color: rgba(161, 161, 161, 1);
 }
 
+/* 테이블 내 plus, minus 아이콘 */
 .plus, .minus {
     width: 15px;
     height: 15px;

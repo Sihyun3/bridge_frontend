@@ -24,6 +24,7 @@ import MainAd from './Administrator/MainAd';
 import Header2 from './Header/Header2';
 import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
+import Chatting from './Chatting/Chatting';
 
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
@@ -49,7 +50,10 @@ function App() {
       <Route path="/14" component={DealListAd} exact={true}/>
       <Route path="/15" component={MainAd} exact={true}/>
       <Route path="/16" component={PartnerWrite} exact={true}/>
-     <ProfileWrite/>
+      <Route path="/17" component={Payment} exact={true}/>
+      <Route path="/18" component={Chatting} exact={true}/>
+
+      {/* <ProfileWrite/> */}
       
       <Footer/>
       </>
