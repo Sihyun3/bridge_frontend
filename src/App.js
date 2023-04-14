@@ -18,6 +18,14 @@ import TipDetail from './Tip/TipDetail';
 import Partner from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import ProfileWrite from './Profile/ProfileWrite';
+import ProfileDetail from './Profile/ProfileDetail';
+import Header2 from './Header/Header2.js'
+import JamList from './Jam/Jamlist'
+import Doing from './Doing/Doing'
+import LoginStart from './Login/LoginStart'
+import Header1 from './Header/Header1';
+import Header from './Header/Header';
+import JamDetail from './Jam/JamDetail';
 
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
@@ -25,8 +33,8 @@ import ProfileWrite from './Profile/ProfileWrite';
 function App() {
   return (
     <>
-      <Header2/>
-      <Route path="/" component={LoginStart} exact={true}/>
+      <Header/>
+      {/* <Route path="/" component={LoginStart} exact={true}/>
       <Route path="/1" component={Main} exact={true} />
       <Route path="/2" component={Notice} exact={true} />
       <Route path="/3" component={Login} exact={true} />
@@ -40,8 +48,8 @@ function App() {
       <Route path="/11" component={JamList} exact={true} />
       <Route path="/12" component={Doing} exact={true}/>
       <Route path="/12" component={Doing} exact={true}/>
-      <Route path="/12" component={Doing} exact={true}/>s
-     <ProfileWrite/>
+      <Route path="/12" component={Doing} exact={true}/> */}
+   <JamDetail/>
       
       <Footer/>
       </>
