@@ -22,6 +22,7 @@
     border:2px solid #d9d9d9;
     margin-bottom: 120px;
     border-radius: 12px;
+    padding-left: 80px;
 }
 
 /* 잼 아이콘 묶음 */
@@ -42,12 +43,13 @@
 
 /* Jam 텍스트 */
 .titleName {
-    color: white;
+    color: black;
     position:relative;
     display:inline-block;
-    font-size: 36px;
+    font-size: 40px;
     bottom: 32px;
     right: 48px;
+    font-weight: bold;
 }
 
 /* 제목 전체 묶어줌 */
@@ -57,10 +59,10 @@
 
 /* '제목' 텍스트 */
 .title2 {
-    color: white;
+    color: black;
     margin-left: 90px;
     margin-right: 40px;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 /* 제목 입력칸 */
@@ -69,20 +71,22 @@
     height: 40px;
     background-color: #D2B9FB;
     border-radius: 8px;
+    border: none;
+    text-align: center;
 }
 
 /* 소개글 전체 div */
 .introduceBox {
-    margin-top: 28px;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 
 /* '소개글' 텍스트 */
 .introduce {
-    color: white;
+    color: black;
     margin-left: 76px;
-    margin-right: 40px;
-    font-size: 24px;
+    margin-right: 44px;
+    font-size: 16px;
 }
 
 /* 소개글 입력창 */
@@ -91,6 +95,8 @@
     height: 120px;
     background-color: #D2B9FB;
     border-radius: 8px;  
+    border: none;
+    text-align: center;
 }
 
 /* 사진 부분 div 로 크게 묶은 것 */
@@ -100,10 +106,10 @@
 
 /* '사진' 텍스트 */
 .poto {
-    color: white;
-    margin-left: 90px;
-    margin-right: 52px;
-    font-size: 24px;
+    color: black;
+    margin-left: 88px;
+    margin-right: 48px;
+    font-size: 16px;
     /* height: 40px; */
     position: relative;
     top:12px;
@@ -121,17 +127,17 @@
 
 /* 사진 첨부 버튼 */
 .potoButton {
-    width: 60px;
-    height: 40px;
+    width: 50px;
+    height: 36px;
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     background-color: #D9D9D9;
     border-radius: 12px;
     margin-top: 15px;
     margin-left: 890px;
     position: relative;
-    bottom: 55px;
-    left: 100px;
+    bottom: 50px;
+    left: 50px;
 }
 
 /* input 안에 선택된 파일 없음 안보이게 하는 코드 */
@@ -140,35 +146,37 @@ input[type=file]::file-selector-button {
 }
 
 /* 악기선택창 이동 칸 */
-.Select {
+.SelectBox {
     width:760px;
-    height: 44px;
-    margin-left: 193px;
+    height: 40px;
+    margin-left: 164px;
     background-color: #D2B9FB;
-    border-radius: 12px;
-    font-size: 24px;
+    border-radius: 8px;
     margin-top:28px;
+}
+.Select {
+    font-size: 16px;
     text-align: center;
-    color: white;
+    color: rgb(87, 87, 87);
     position: relative;
-    top:25px;
+    top: 12px;
 }
 
 /* 음표 이미지 */
 .musicImg {
-    margin-left: 70px;
+    margin-left: 60px;
     position: relative;
-    bottom: 40px;
-    left: 12px;
+    bottom: 30px;
 }
 
 /* '음악파일' 텍스트 */
 .musicfile {
-    color: white;
-    font-size: 24px;
+    color: rgb(87, 87, 87);
+    font-size: 16px;
     margin-left: 60px;
     position: relative;
-    bottom: 30px;
+    bottom: 96px;
+    left: 400px;
 }
 
 /* 음악 파일 첨부하도록 하는 input type file */
@@ -176,25 +184,25 @@ input[type=file]::file-selector-button {
     width: 760px;
     height: 40px;
     background-color: #D2B9FB;
-    border-radius: 12px;
+    border-radius: 8px;
     color: transparent;
     position: relative;
-    bottom: 47px;
-    left: 32px;
+    bottom: 67px;
+    left: 164px;
 }
 
 /* 음악파일 첨부 버튼 */
 .musicButton {
-    width: 60px;
-    height: 40px;
+    width: 50px;
+    height: 36px;
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     background-color: #D9D9D9;
     border-radius: 12px;
     margin-top: 15px;
-    margin-left: 890px;
+    margin-left: 830px;
     position: relative;
-    bottom: 103px;
+    bottom: 134px;
     left: 105px;
 }
 
@@ -205,15 +213,14 @@ input[type=file]::file-selector-button {
 
 /* 등록버튼 */
 .submitBtn {
-    width: 50px;
+    width: 60px;
     height: 50px;
     color: black;
-    font-size: 20px;
-    background-color: #C79BFF;
+    font-size: 16px;
+    background-color: #c19df0;
     border-radius: 12px;
-    margin-top: 15px;
-    margin-left: 800px;
+    margin-left: 740px;
     position: relative;
-    bottom: 90px;
-    left: 105px;
+    bottom: 110px;
+    left: 196px;
 }
