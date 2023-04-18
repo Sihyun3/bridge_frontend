@@ -2,9 +2,17 @@ import style from './Login.module.css';
 import { Link } from 'react-router-dom';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
-import React from 'react';
+import React, { useEffect } from 'react';
+import KakaoLogin from './KaKaoLogin';
 
 const Login = () => {
+
+    useEffect(() => {
+        const isLogin = !!window.localStorage.getItem('userName');
+        if (isLogin) {
+            window.location.href='/';
+        }
+    }, []);
     return (
         <>
             <div className={style.loginbackg}>
@@ -19,6 +27,7 @@ const Login = () => {
                 <Link to="/signup"><p className={style.signup}>회원가입</p></Link>
                 <p className={style.loginsns}>SNS계정 간편 로그인</p>
                 <img className={style.logo} src={KakaoLogo}/>
+                <KakaoLogin />
                 <img className={style.logo} src={NaverLogo}/>
             </div>
         </>

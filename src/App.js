@@ -25,10 +25,43 @@ import JamWrite from './Jam/JamWrite';
 
 // 모듈
 import { Route } from 'react-router-dom';
+import KakaoLogin from './Login/KaKaoLogin';
 
 function App() {
+  // 로그인 페이지로 이동
+  const handlerLogin = (e) => {
+    e.preventDefault();
+    window.location.href = '/3';
+  };
+
+    // 로그아웃 처리 
+  // 로컬 스토리지 내용 삭제 후 홈(/)으로 이동
+  const handlerLogout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
+  };
+
+    // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
+  // 로그인 상태인 경우 로그인 정보와 로그아웃 버튼을 
+  // 로그아웃 상태인 경우 로그인 버튼을 제공
+  const isNotLoginPage = window.location.pathname === '/3' ? false : true;
+  const isLogin = !!window.localStorage.getItem('userName');
+
   return (
     <>
+     { isNotLoginPage && isLogin && 
+          <> 
+            { window.localStorage.getItem('userName') }님 환영합니다.
+            &nbsp;
+            <button onClick={handlerLogout}>Logout</button>
+          </> 
+        }
+    { isNotLoginPage && !isLogin && 
+          <>
+            <button onClick={handlerLogin}>Login</button>
+          </>
+        }   
       <Header2 />
       <Route path="/" component={LoginStart} exact={true} />
 
@@ -38,6 +71,7 @@ function App() {
       {/* 로그인, 회원가입 */}
       <Route path="/3" component={Login} exact={true} />
       <Route path="/4" component={SignUp} exact={true} />
+      {/* <Route path='/4.1' component={KakaoLogin} exact={true} /> */}
       {/* 관리자 */}
       <Route path="/5" component={ReportPage} exact={true} />
       <Route path="/6" component={ReportDetail} exact={true} />
