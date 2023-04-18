@@ -11,6 +11,19 @@ function Doing() {
             <div className='box1'>
                 <h1>게시판</h1>
             </div>
+            <div className={style.list}>
+                <h2>작업 목록</h2>
+                <div className={style.doinglist}>
+                    <img src={img} />
+                    <p>닉네임</p>
+                    <p>#악기태그</p>
+                </div>
+                <div className={style.doinglist}>
+                    <img src={img} />
+                    <p>닉네임</p>
+                    <p>#악기태그</p>
+                </div>
+            </div>
             <div className='container clearfix'>
                 <div className={style.Doing} >
                     <p className={style.teamname}>Team Name</p>

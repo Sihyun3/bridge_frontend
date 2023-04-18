@@ -35,6 +35,7 @@ function App() {
   };
 
     // 로그아웃 처리 
+  // 로그아웃 처리 
   // 로컬 스토리지 내용 삭제 후 홈(/)으로 이동
   const handlerLogout = (e) => {
     e.preventDefault();
@@ -43,14 +44,19 @@ function App() {
   };
 
     // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
+  // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
   // 로그인 상태인 경우 로그인 정보와 로그아웃 버튼을 
   // 로그아웃 상태인 경우 로그인 버튼을 제공
   const isNotLoginPage = window.location.pathname === '/3' ? false : true;
   const isLogin = !!window.localStorage.getItem('userName');
 
+
+     
+      <Header2 />
   return (
     <>
-     { isNotLoginPage && isLogin && 
+     
+    { isNotLoginPage && isLogin && 
           <> 
             { window.localStorage.getItem('userName') }님 환영합니다.
             &nbsp;
@@ -62,7 +68,8 @@ function App() {
             <button onClick={handlerLogin}>Login</button>
           </>
         }   
-      <Header2 />
+
+      {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
 
       {/* 메인, 공지 */}

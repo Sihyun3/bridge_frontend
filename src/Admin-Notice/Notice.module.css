@@ -51,7 +51,7 @@
 
 /*작성일자순 정렬 버튼*/
 .date {
-    margin-left: 360px;
+
     margin-top: 30px;
     height: 28px;
     width: 104px;
@@ -76,7 +76,7 @@
     background-color: #d9d9d9;
     border-radius: 0.3rem;
     width:240px;
-    margin-left:792px;
+    margin-left:824px;
     position: relative;
 
 }
@@ -95,7 +95,7 @@
     float:left;
     width:100%;
     padding-top:20px;
-    margin-left:1352px;
+    margin-left:996px;
 }
 /* 작성&삭제 버튼*/
 .write button{
@@ -122,8 +122,6 @@
     width:1168px;
     height:36px;
     float: left;
-    margin-left: 360px;
-    margin-right: 360px;
     border-radius: 0.4rem;
     /* text-align: center; */
     
