@@ -26,18 +26,19 @@ import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
 import JamWrite from './Jam/JamWrite';
 import ReportDetail from './Admin-Report/ReportDetail';
-
+import { useState } from 'react';
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <>
-      <Header2 />
+      {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
       <Route path="/1" component={Main} exact={true} />
       <Route path="/2" component={Notice} exact={true} />
-      <Route path="/3" component={Login} exact={true} />
+      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       <Route path="/4" component={ReportPage} exact={true} />
       <Route path="/5" component={SignUp} exact={true} />
       <Route path="/6" component={TipList} exact={true} />
