@@ -2,9 +2,27 @@ import style from './Doing.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import jwt_decode from "jwt-decode";
 
 function Doing() {
     const a = 0;
+
+    const [payList, setPayList] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/bridge/paylist/${id}`,
+            { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then((response) => {
+                setPayList(response.data.list);
+
+            }).catch((error) => {
+                return;
+            }
+        )
+    }, []);
     return (
         <>
             {/* <Header1 /> */}
@@ -34,8 +52,8 @@ function Doing() {
                             <p className={style.date}>2023년 4월 7일</p>
                             <div className={style.Doingbox}>
                                 <img className={style.img} src={img} />
-                                <p className={style.name}>의뢰인</p>
-                                <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
+                                <p className={style.name}>{userId1}</p>
+                                <p className={style.contents}>예치금 {plmoney} 원이 결제 되었습니다.</p>
                                 <li className={style.clearfix} >
                                     <ul className={style.button}>코멘트</ul>
                                     <ul className={style.button}>펼치기</ul>

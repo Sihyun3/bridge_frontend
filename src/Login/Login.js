@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
-import React, { useEffect } from 'react';
 import KakaoLogin from './KaKaoLogin';
 import NaverLogin from '../NaverLogin';
-
-
-
 
 
 
@@ -50,6 +46,6 @@ const Login = () => {
 
     )
 }
-}
+
 
 export default Login;
