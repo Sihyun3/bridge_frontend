@@ -9,6 +9,7 @@
     color: #000;
   }
 
+/* 메인 박스 */
 .mainBox {
     width: 640px;
     height: 800px;
@@ -16,7 +17,8 @@
     margin: 300px auto;
     border-radius: 5px;
   }
-
+  
+/* 메인 텍스트 (포인트 충전) */
 .mainText {
     font-size: 40px;
     font-weight: bold;
@@ -25,6 +27,7 @@
     padding-bottom: 170px;
 }
 
+/* 첫 줄 박스(현재 보유 포인트, 금액) */
 .possess {
     width: 450px;   
     height: 40px;
@@ -33,6 +36,7 @@
     margin-bottom: 10px;
 }
 
+/* 첫 줄 텍스트(현재 보유 포인트) */
 .possessText {
     font-size: 16px;
     display: inline-block;
@@ -40,6 +44,7 @@
     margin-left: 40px;
 }
 
+/* 첫 줄 금액 */
 .possessMoney {
     font-size: 16px;
     padding-top: 10px;
@@ -47,6 +52,7 @@
     float: right;
 }
 
+/* 두 번째 줄 박스(충전할 금액, 금액) */
 .charge {
     width: 450px;
     height: 40px;
@@ -55,26 +61,30 @@
     margin-bottom: 10px;
 }
 
+/* 두번째 줄 텍스트(충전할 금액, 원) */
 .chargeText1, .chargeText2 {
     font-size: 16px;
     display: inline-block;
     padding-top: 10px;
 }
 
+/* 두번째 줄 텍스트(충전할 금액) */
 .chargeText1 {
     margin-left: 40px;
 }
 
-
+/* 두 번째 줄 input박스랑 원 */
 .chargeBox {
     float: right;
 }
 
+/* 두 번째 줄 원 */
 .chargeText2 {
     margin-right: 40px;
     margin-left: 5px;
 }
 
+/* 두 번째 줄 input 박스 */
 .chargeInput {
     width: 200px;
     border-radius: 5px;
@@ -82,12 +92,14 @@
     text-align: center;
 }
 
+/* 수평선 */
 .hr {
     width: 450px;
     margin: 20px auto 15px;
     border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
+/* 세번째 줄 박스 */
 .result {
     width: 445px;
     height: 40px;
@@ -96,20 +108,25 @@
     margin-bottom: 20px;
 }
 
+/* 세 번째 줄 텍스트(충전 후 예상 포인트, 금액) */
 .resultText1, .resultText2 {
     display: inline-block;
     font-size: 16px;
     padding-top: 10px;
 }
 
+/* 세 번째 줄 텍스트 (충전 후 예상 포인트) */
 .resultText1 {
     margin-left: 40px;
 }
 
+/* 세 번재 줄 텍스트(금액) */
 .resultText2 {
     float: right;
     margin-right: 40px;
 }
+
+/* 충전하기 버튼 박스 */
 .regist {
     width: 500px;
     margin: 0 auto;
@@ -119,6 +136,7 @@
     margin-top: 200px;
 }
 
+/* 충전하기 버튼 */
 .registButton {
     width: 120px;
     height: 50px;

@@ -144,3 +144,50 @@
 .commentsbox:last-child{
     margin-bottom: 60px;
 }
+
+.list {
+    width:292px;
+    height:620px;
+    margin-top: 60px;
+    float:left;
+    background-color: #6a6a6a;
+    margin-left:30px;
+    border-radius: 0.5rem;
+    padding:28px;
+    margin-bottom:20px;
+    
+}
+.doinglist {
+    display: inline-block;
+    width:262px;
+    margin: 12px 0px;
+
+}
+.list h2 {
+    font-size:26px;
+    text-align: center;
+    margin-bottom: 60px;
+    color:white;
+}
+.list p {
+    margin-bottom: 12px;
+    color:white;
+    
+}
+.list p:first-child {
+
+    font-size:20px;
+    float:left;
+
+}
+
+.list p:last-child {
+    float:left;
+}
+.doinglist img {
+    width: 40px;
+    height:40px;
+    float:left;
+    margin-right: 20px;
+    border-radius: 50%;
+}

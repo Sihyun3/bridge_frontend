@@ -6,6 +6,7 @@ import searchImg from './searchImg.png'
 const Notice = () => {
     return (
         <>
+    
             <div className={style.nav}>
                 <ul className={style.menu}>
                     <li>메인 </li>
@@ -18,6 +19,7 @@ const Notice = () => {
             <div className={style.box1}>
                 <h1>공지사항</h1>
             </div>
+            <div className='container clearfix'>
             <div className={style.leftbox}>
                 <button className={style.date}>작성일자</button>
             </div>
@@ -39,7 +41,38 @@ const Notice = () => {
                 <a className={style.title}>제목</a>
                 <a className={style.writer}>작성자</a>
             </div>
-
+            <div className={style.list}>
+                <input type="checkbox" className={style.checkbox} />
+                <a className={style.title}>제목</a>
+                <a className={style.writer}>작성자</a>
+            </div>
+            <div className={style.list}>
+                <input type="checkbox" className={style.checkbox} />
+                <a className={style.title}>제목</a>
+                <a className={style.writer}>작성자</a>
+            </div>
+            <div className={style.list}>
+                <input type="checkbox" className={style.checkbox} />
+                <a className={style.title}>제목</a>
+                <a className={style.writer}>작성자</a>
+            </div>
+            <div className={style.list}>
+                <input type="checkbox" className={style.checkbox} />
+                <a className={style.title}>제목</a>
+                <a className={style.writer}>작성자</a>
+            </div>
+            <div className={style.list}>
+                <input type="checkbox" className={style.checkbox} />
+                <a className={style.title}>제목</a>
+                <a className={style.writer}>작성자</a>
+            </div>
+            <div className={style.list}>
+                <input type="checkbox" className={style.checkbox} />
+                <a className={style.title}>제목</a>
+                <a className={style.writer}>작성자</a>
+            </div>
+          
+        </div>
         </>
     )
 

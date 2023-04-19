@@ -1,7 +1,9 @@
 import style from './Login.module.css';
 import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
+<<<<<<< HEAD
 import React from 'react';
 import { useState } from "react";
 import axios from "axios";
@@ -30,6 +32,33 @@ const Login = ({history, setIsLogin}) => {
             })
     };
 
+=======
+import React, { useEffect } from 'react';
+import KakaoLogin from './KaKaoLogin';
+import NaverLogin from '../NaverLogin';
+
+
+
+
+
+
+const Login = () => {
+    useEffect(() => {
+        // 로컬 스토리지에 userName이 존재하는 경우 로그인한 것으로 판단
+        // 이미 로그인한 경우 홈(/)으로 이동
+        const isLogin = !!window.localStorage.getItem('userName');
+        if (isLogin) {
+            window.location.href = '/';
+        }
+    }, []);
+
+    useEffect(() => {
+        const isLogin = !!window.localStorage.getItem('userName');
+        if (isLogin) {
+            window.location.href='/';
+        }})
+
+>>>>>>> c81980d1b278460875e20c6b6004630abe23f762
     return (
         <>
             <div className={style.loginbackg}>
@@ -44,12 +73,14 @@ const Login = ({history, setIsLogin}) => {
                 <Link to="/5"><p className={style.signup}>회원가입</p></Link>
                 <p className={style.loginsns}>SNS계정 간편 로그인</p>
                 <img className={style.logo} src={KakaoLogo}/>
+                <KakaoLogin />
                 <img className={style.logo} src={NaverLogo}/>
+                <div className={style.naver}><NaverLogin/></div>
             </div>
         </>
 
     )
 }
-
+}
 
 export default Login;
