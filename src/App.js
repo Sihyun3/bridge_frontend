@@ -26,6 +26,7 @@ import JamWrite from './Jam/JamWrite';
 // 모듈
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
+import JamDetail2 from './Jam/JamDetail2';
 
 function App() {
   // 로그인 페이지로 이동
@@ -92,6 +93,9 @@ function App() {
       {/* 잼 */}
       <Route path="/12" component={JamList} exact={true} />
       <Route path="/13" component={JamWrite} exact={true} />
+      <Route path="/14" component={JamDetail2} exact={true} />
+      {/* 잼 => 이클립스 백엔드 실행 & /14 실행 */}
+
       {/* 파트너 구인 */}
       <Route path="/14" component={PartnerWrite} exact={true}/>
       <Route path="/15" component={Chatting} exact={true}/>

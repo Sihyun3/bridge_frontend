@@ -1,6 +1,5 @@
 import style from './Login.module.css';
 import { Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
 import React, { useEffect } from 'react';
@@ -49,7 +48,6 @@ const Login = () => {
         </>
 
     )
-}
 }
 
 export default Login;
