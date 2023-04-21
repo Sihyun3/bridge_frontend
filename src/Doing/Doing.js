@@ -4,7 +4,7 @@ import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
 import { useEffect, useState } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 
 
 
