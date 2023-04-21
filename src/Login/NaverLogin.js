@@ -9,6 +9,8 @@ const NaverLogin = () => {
     // 네이버 개발자 사이트에 등록한 애플리케이션의 ID와 Callback URL을 상수로 정의
     const NAVER_CLIENT_ID = `5chnMhfd1oStUPJr9rqa`;
     const NAVER_CALLBACK_URL = `http://localhost:3000/login`;
+    const NAVER_CLIENT_ID = `9i6fzGFoSxccJUEKZ46S`;
+    const NAVER_CALLBACK_URL = `http://localhost:3000`;
 
     // 네이버 로그인에 필요한 #1 값 설정, #2 초기화, 
     // #3 로그인 결과를 반환하는 콜백 함수를 등록해 주는 함수
@@ -19,6 +21,7 @@ const NaverLogin = () => {
             callbackUrl: NAVER_CALLBACK_URL, 
             isPopup: true, 
             loginButton: { color: 'green', type: 3, height: 60 }
+            loginButton: { color: 'green', type: 1, height: 60 }
         });
 
         // #2

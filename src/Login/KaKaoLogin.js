@@ -3,6 +3,14 @@ import { useState } from 'react';
 import { useEffect } from "react";
 
 const KakaoLogin = ({history}) => {
+
+// const REST_API_KEY = "~~";
+// const REDIRECT_URI =  "http://localhost:3000/auth/kakao/callback";
+
+// export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+
+const KakaoLogin = () => {
     const { Kakao } = window;
 
     const JAVASCRIPT_APP_KEY = '68aeb9a371fc365c535495a103132163';
@@ -13,6 +21,7 @@ const KakaoLogin = ({history}) => {
     const [userName, setUserName] = useState('');
     const [userNickName, setUserNickName] = useState('');
 
+  
     const handlerLogin = () => {
         // 간편 로그인을 요청
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
@@ -98,6 +107,7 @@ const KakaoLogin = ({history}) => {
         })
     }
 
+    
     
 
     return (
