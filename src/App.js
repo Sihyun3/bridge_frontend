@@ -10,7 +10,6 @@ import Login from './Login/Login';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
-import ReportDetail from './Admin-Report/ReportDetail';
 import ProfileDetail from './Profile/ProfileDetail';
 import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
@@ -22,13 +21,17 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
-
-// 모듈
+import ReportDetail from './Admin-Report/ReportDetail';
+import { useState } from 'react';
+// import { Routes } from 'react-router-dom';
+// import Header2 from './Header/Header2';
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
+import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
   // 로그인 페이지로 이동
   const handlerLogin = (e) => {
     e.preventDefault();
@@ -49,7 +52,7 @@ function App() {
   // 로그인 상태인 경우 로그인 정보와 로그아웃 버튼을 
   // 로그아웃 상태인 경우 로그인 버튼을 제공
   const isNotLoginPage = window.location.pathname === '/3' ? false : true;
-  const isLogin = !!window.localStorage.getItem('userName');
+  // const isLogin = !!window.localStorage.getItem('userName');
 
 
      
@@ -57,7 +60,7 @@ function App() {
   return (
     <>
      
-    { isNotLoginPage && isLogin && 
+    {/* { isNotLoginPage && isLogin && 
           <> 
             { window.localStorage.getItem('userName') }님 환영합니다.
             &nbsp;
@@ -68,7 +71,7 @@ function App() {
           <>
             <button onClick={handlerLogin}>Login</button>
           </>
-        }   
+        }    */}
 
       {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
@@ -76,17 +79,13 @@ function App() {
       {/* 메인, 공지 */}
       <Route path="/1" component={Main} exact={true} />
       <Route path="/2" component={Notice} exact={true} />
-      {/* 로그인, 회원가입 */}
-      <Route path="/3" component={Login} exact={true} />
-      <Route path="/4" component={SignUp} exact={true} />
-      {/* <Route path='/4.1' component={KakaoLogin} exact={true} /> */}
-      {/* 관리자 */}
-      <Route path="/5" component={ReportPage} exact={true} />
-      <Route path="/6" component={ReportDetail} exact={true} />
-      <Route path="/7" component={DealListAd} exact={true}/>
-      <Route path="/8" component={MainAd} exact={true}/>
-      {/* 프로필 */}
-      <Route path="/9" component={ProfileWrite} exact={true}/>
+      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/4" component={ReportPage} exact={true} />
+      <Route path="/5" component={SignUp} exact={true} />
+      <Route path="/6" component={TipList} exact={true} />
+      <Route path="/7" component={ReportDetail} exact={true} />
+      <Route path="/8" component={Notice} exact={true} />
+      <Route path="/9" component={Notice} exact={true} />
       <Route path="/10" component={ProfileDetail} exact={true} />
       {/* 팁 */}
       <Route path="/11" component={TipList} exact={true} />
@@ -104,7 +103,7 @@ function App() {
       <Route path="/18" component={Charge} exact={true}/>
 
       {/* 비었음 사용할 것 */}
-      <Route path="/19" component={Notice} exact={true} />
+      <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
 
       <Footer />

@@ -51,13 +51,13 @@
 /*첨부란에 음표 */
 .singlenote {
     width:60px;
-    height:60px;
+    height:80px;
     margin-right: 100px;
     padding-top:20px;
 }
 /*인풋창*/
 .musicinput {
-    width:760px;
+    width:700px;
     height:30px;
     margin-bottom: 20px;
     border-radius: 0.5rem;
@@ -79,4 +79,6 @@
 }
 .music:last-child {
     background-color: #c79bff;
+   
+
 }
