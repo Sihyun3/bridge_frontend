@@ -2,6 +2,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from "react";
 
+
+// const REST_API_KEY = "~~";
+// const REDIRECT_URI =  "http://localhost:3000/auth/kakao/callback";
+
+// export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+
 const KakaoLogin = () => {
     const { Kakao } = window;
 
@@ -10,12 +17,12 @@ const KakaoLogin = () => {
     // 액세스 토큰을 상태 변수로 선언 
     // 로그인 버튼 출력 제어에 사용
     const [accessToken, setAccessToken] = useState('');
-
+  
     const handlerLogin = () => {
         // 간편 로그인을 요청
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
         Kakao.Auth.authorize({
-            redirectUri: 'http://localhost:3000/3'
+            redirectUri: 'http://localhost:3000'
         });
     };
 
@@ -30,7 +37,7 @@ const KakaoLogin = () => {
                 'https://kauth.kakao.com/oauth/token', {
                     grant_type: 'authorization_code',                   // 고정
                     client_id: JAVASCRIPT_APP_KEY,                      // 앱 REST API 키
-                    redirect_uri: 'http://localhost:3000/3',   // 인가 코드가 리다이렉트된 URI
+                    redirect_uri: 'http://localhost:3000',   // 인가 코드가 리다이렉트된 URI
                     code: code                                          // 인가 코드 받기 요청으로 얻은 인가 코드
                 }, {
                     headers: {
@@ -70,6 +77,7 @@ const KakaoLogin = () => {
         }
     }, []);
 
+    
     
 
     return (

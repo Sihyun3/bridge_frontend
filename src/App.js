@@ -26,6 +26,7 @@ import JamWrite from './Jam/JamWrite';
 // 모듈
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
+import JamDetail from './Jam/JamDetail';
 
 function App() {
   // 로그인 페이지로 이동
@@ -56,7 +57,7 @@ function App() {
   return (
     <>
      
-    { isNotLoginPage && isLogin && 
+    {/* { isNotLoginPage && isLogin && 
           <> 
             { window.localStorage.getItem('userName') }님 환영합니다.
             &nbsp;
@@ -67,7 +68,7 @@ function App() {
           <>
             <button onClick={handlerLogin}>Login</button>
           </>
-        }   
+        }    */}
 
       {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
@@ -100,7 +101,7 @@ function App() {
       <Route path="/18" component={Charge} exact={true}/>
 
       {/* 비었음 사용할 것 */}
-      <Route path="/19" component={Notice} exact={true} />
+      <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
 
       <Footer />
