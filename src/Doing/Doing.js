@@ -11,20 +11,25 @@ function Doing() {
     const a = 0;
 
     const [payList, setPayList] = useState([]);
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/bridge/paylist/${id}`,
-            { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-            .then((response) => {
-                setPayList(response.data.list);
+        // console.log(localStorage.userId);
+        // axios.get(`http://localhost:8080/api/bridge/paylist/${userId}/${plIdx}`,
+        //     { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        //     .then((response) => {
+        //         setPayList(response.data.list);
 
-            }).catch((error) => {
-                return;
-            }
-        )
+        //     }).catch((error) => {
+        //         return;
+        //     }
+        // )
     }, []);
     return (
         <>
+        {/* <div>
+            <h1> {list.userId}, {list.userId1}</h1>
+        </div> */}
             {/* <Header1 /> */}
             <div className='box1'>
                 <h1>게시판</h1>
@@ -52,8 +57,8 @@ function Doing() {
                             <p className={style.date}>2023년 4월 7일</p>
                             <div className={style.Doingbox}>
                                 <img className={style.img} src={img} />
-                                <p className={style.name}>{userId1}</p>
-                                <p className={style.contents}>예치금 {plmoney} 원이 결제 되었습니다.</p>
+                                <p className={style.name}>{payList.userId1}</p>
+                                <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
                                 <li className={style.clearfix} >
                                     <ul className={style.button}>코멘트</ul>
                                     <ul className={style.button}>펼치기</ul>

@@ -22,7 +22,7 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
-import ReportDetail from './Admin-Report/ReportDetail';
+// import ReportDetail from './Admin-Report/ReportDetail';
 import { useState } from 'react';
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';

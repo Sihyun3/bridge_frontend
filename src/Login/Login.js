@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
-import React from 'react';
+// import React from 'react';
 import { useState } from "react";
 import axios from "axios";
+import KakaoLogin from './KaKaoLogin';
+import NaverLogin from './NaverLogin';
 
 const Login = ({history, setIsLogin}) => {
     const [userId,setId] = useState('');
@@ -13,10 +15,10 @@ const Login = ({history, setIsLogin}) => {
     const handlerOnClick = e =>{
         e.preventDefault();
         axios.post(`http://localhost:8080/login`,{userId,userPassword})
-            .then(respone => {
-                if(respone.data){
+            .then(response => {
+                if(response.data){
                     alert('정상적으로 로그인되었습니다')
-                    sessionStorage.setItem("token",respone.data);
+                    sessionStorage.setItem("token",response.data);
                     setIsLogin(true);
                     history.goBack();
                 }else{
@@ -67,7 +69,7 @@ const Login = ({history, setIsLogin}) => {
                 <img className={style.logo} src={KakaoLogo}/>
                 <KakaoLogin />
                 <img className={style.logo} src={NaverLogo}/>
-                <div className={style.naver}><NaverLogin/></div>
+                <div className={style.naver}><NaverLogin /></div>
             </div>
         </>
 
