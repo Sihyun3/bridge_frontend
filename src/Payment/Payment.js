@@ -6,6 +6,7 @@ const Payment = () => {
 
     return (
         <>
+                <div className='container clearfix' >
             <div className={style.mainBox}>
                 <div className={style.mainText}>결제</div>
                 <div className={style.profile}>
@@ -51,6 +52,7 @@ const Payment = () => {
 
                     <p className={style.paymentNotice}> 잔액이 부족합니다. 포인트를 충전해주세요. </p>
                 </div>
+            </div>
             </div>
         </>
     );

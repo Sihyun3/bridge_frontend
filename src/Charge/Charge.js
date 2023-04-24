@@ -4,6 +4,7 @@ const Charge = () => {
 
     return (
         <>
+              <div className='container clearfix'>
             <div className={style.mainBox}>
                 <h1 className={style.mainText}>포인트 충전</h1>
                 <div className={style.mainContent}>
@@ -27,6 +28,7 @@ const Charge = () => {
                 <div className={style.regist}>
                     <button className={style.registButton}>충전하기</button>
                 </div>
+            </div>
             </div>
         </>
     );
