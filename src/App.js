@@ -21,22 +21,15 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
-<<<<<<< HEAD
-
-=======
 // import ReportDetail from './Admin-Report/ReportDetail';
->>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
 import { useState } from 'react';
 
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
 
 
-<<<<<<< HEAD
-=======
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
->>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
