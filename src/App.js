@@ -10,7 +10,6 @@ import Login from './Login/Login';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
-import ReportDetail from './Admin-Report/ReportDetail';
 import ProfileDetail from './Profile/ProfileDetail';
 import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
@@ -22,13 +21,22 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
+<<<<<<< HEAD
 
+=======
+// import ReportDetail from './Admin-Report/ReportDetail';
+>>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
 import { useState } from 'react';
 
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
 
 
+<<<<<<< HEAD
+=======
+import JamDetail from './Jam/JamDetail';
+import JamDetail2 from './Jam/JamDetail2';
+>>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -60,7 +68,7 @@ function App() {
   return (
     <>
      
-    { isNotLoginPage && isLogin && 
+    {/* { isNotLoginPage && isLogin && 
           <> 
             { window.localStorage.getItem('userName') }님 환영합니다.
             &nbsp;
@@ -71,7 +79,7 @@ function App() {
           <>
             <button onClick={handlerLogin}>Login</button>
           </>
-        }   
+        }    */}
 
       {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
@@ -92,6 +100,9 @@ function App() {
       {/* 잼 */}
       <Route path="/12" component={JamList} exact={true} />
       <Route path="/13" component={JamWrite} exact={true} />
+      <Route path="/14" component={JamDetail2} exact={true} />
+      {/* 잼 => 이클립스 백엔드 실행 & /14 실행 */}
+
       {/* 파트너 구인 */}
       <Route path="/14" component={PartnerWrite} exact={true}/>
       <Route path="/15" component={Chatting} exact={true}/>
@@ -100,7 +111,7 @@ function App() {
       <Route path="/18" component={Charge} exact={true}/>
 
       {/* 비었음 사용할 것 */}
-      <Route path="/19" component={Notice} exact={true} />
+      <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
 
       <Footer />
