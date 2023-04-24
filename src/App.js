@@ -22,14 +22,16 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
-import ReportDetail from './Admin-Report/ReportDetail';
+
+
 import { useState } from 'react';
 // import { Routes } from 'react-router-dom';
 // import Header2 from './Header/Header2';
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
+import JamDetail from './Jam/JamDetail';
 
-function App() {
+// function App() {
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -93,16 +95,18 @@ function App() {
       {/* 잼 */}
       <Route path="/12" component={JamList} exact={true} />
       <Route path="/13" component={JamWrite} exact={true} />
+      <Route path="/14" component={JamDetail} exact={true} />
+      
       {/* 파트너 구인 */}
-      <Route path="/14" component={PartnerWrite} exact={true}/>
-      <Route path="/15" component={Chatting} exact={true}/>
-      <Route path="/16" component={Payment} exact={true}/>
-      <Route path="/17" component={Doing} exact={true}/>
-      <Route path="/18" component={Charge} exact={true}/>
+      <Route path="/15" component={PartnerWrite} exact={true}/>
+      <Route path="/16" component={Chatting} exact={true}/>
+      <Route path="/17" component={Payment} exact={true}/>
+      <Route path="/18" component={Doing} exact={true}/>
+      <Route path="/19" component={Charge} exact={true}/>
 
       {/* 비었음 사용할 것 */}
-      <Route path="/19" component={Notice} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
+      <Route path="/21" component={Notice} exact={true} />
 
       <Footer />
     </>
