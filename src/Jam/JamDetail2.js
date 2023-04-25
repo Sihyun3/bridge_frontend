@@ -45,7 +45,11 @@ export default function JamDetail2() {
     e.preventDefault();
     console.log(`ccComments: ${comment}`);
     //cIdx 부분 5번으로 하드코딩 
+<<<<<<< HEAD
     axios.post(`http://localhost:8080/api/insertComments/5`, { "userId":writer, "ccComments": comment  })
+=======
+    axios.post(`http://localhost:8080/api/insertComments/5`, { "userId": writer, "contents": comment })
+>>>>>>> 05eb80d18eb71adecd2b441e9cf30e43ca20d57a
       .then(response => {
         console.log(response);
         alert('코맨트가 정상적으로 등록되었습니다')
@@ -246,9 +250,9 @@ const handlerClickDelete = () => {
                           
 
       {/* <div className="one-line-list"> */}
-        {/* <ul className="line-list"> */}
-          {/* 코맨트 리스트 데이터 출력 */}
-          {/* {
+      {/* <ul className="line-list"> */}
+      {/* 코맨트 리스트 데이터 출력 */}
+      {/* {
             data.map((n) => (
               <li key={n.commentIdx}>
                 <div>
@@ -261,6 +265,7 @@ const handlerClickDelete = () => {
         </ul>
       </div> */}
 
+<<<<<<< HEAD
              
     
                
@@ -271,5 +276,10 @@ const handlerClickDelete = () => {
 
   
     
+=======
+      <input type='file' webkitdirectory />
+
+    </>
+>>>>>>> 05eb80d18eb71adecd2b441e9cf30e43ca20d57a
   );
 }

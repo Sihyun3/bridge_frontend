@@ -5,6 +5,7 @@ import minus from './minus.png';
 const DealListAd = () => {
     return (
         <>
+              <div className='container clearfix'></div>
             <div className={style.mainBox}>
                 <h1 className={style.mainText}>거래내역</h1>
                 <div className={style.dealDate}>

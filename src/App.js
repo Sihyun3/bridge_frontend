@@ -23,8 +23,7 @@ import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
 import ReportDetail from './Admin-Report/ReportDetail';
 import { useState } from 'react';
-// import { Routes } from 'react-router-dom';
-// import Header2 from './Header/Header2';
+
 import { Route } from 'react-router-dom';
 // import KakaoLogin from './Login/KaKaoLogin';
 
