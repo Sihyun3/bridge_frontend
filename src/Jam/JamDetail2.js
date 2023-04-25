@@ -23,7 +23,7 @@ export default function JamDetail2() {
     e.preventDefault();
     console.log(`Comment: ${comment}`);
     //cIdx 부분 5번으로 하드코딩 
-    axios.post(`http://localhost:8080/api/insertComments/5`, { "userId":writer, "contents": comment  })
+    axios.post(`http://localhost:8080/api/insertComments/5`, { "userId": writer, "contents": comment })
       .then(response => {
         console.log(response);
         alert('코맨트가 정상적으로 등록되었습니다')
@@ -124,9 +124,9 @@ export default function JamDetail2() {
       </form>
 
       {/* <div className="one-line-list"> */}
-        {/* <ul className="line-list"> */}
-          {/* 코맨트 리스트 데이터 출력 */}
-          {/* {
+      {/* <ul className="line-list"> */}
+      {/* 코맨트 리스트 데이터 출력 */}
+      {/* {
             data.map((n) => (
               <li key={n.commentIdx}>
                 <div>
@@ -138,7 +138,9 @@ export default function JamDetail2() {
           }
         </ul>
       </div> */}
-      
+
+      <input type='file' webkitdirectory />
+
     </>
   );
 }
