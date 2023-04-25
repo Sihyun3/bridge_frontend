@@ -17,8 +17,12 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.5",
     "hoist-non-react-statics": "^3.3.2",
+<<<<<<< HEAD
     "howler": "^2.2.3",
     "r-audio": "^1.2.0",
+=======
+    "jwt-decode": "^3.1.2",
+>>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
@@ -26,6 +30,7 @@
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
     "styled-components": "^5.3.9",
+    "wavesurfer.js": "^6.6.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

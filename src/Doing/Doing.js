@@ -2,11 +2,44 @@ import style from './Doing.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
+<<<<<<< HEAD
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import jwt_decode from "jwt-decode";
+=======
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import jwt_decode from "jwt-decode";
+
+
 
 function Doing() {
     const a = 0;
+
+<<<<<<< HEAD
+    const [payList, setPayList] = useState([]);
+    const [userId, setUserId] = useState('');
+
+    useEffect(() => {
+        // console.log(localStorage.userId);
+        // axios.get(`http://localhost:8080/api/bridge/paylist/${userId}/${plIdx}`,
+        //     { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        //     .then((response) => {
+        //         setPayList(response.data.list);
+
+        //     }).catch((error) => {
+        //         return;
+        //     }
+        // )
+    }, []);
+=======
+>>>>>>> 3a02c6dacd6edaee4480d3a16f2ca1b6f1a42273
     return (
         <>
+        {/* <div>
+            <h1> {list.userId}, {list.userId1}</h1>
+        </div> */}
             {/* <Header1 /> */}
             <div className='box1'>
                 <h1>게시판</h1>
@@ -34,8 +67,13 @@ function Doing() {
                             <p className={style.date}>2023년 4월 7일</p>
                             <div className={style.Doingbox}>
                                 <img className={style.img} src={img} />
-                                <p className={style.name}>의뢰인</p>
+<<<<<<< HEAD
+                                <p className={style.name}>{payList.userId1}</p>
                                 <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
+=======
+                                <p className={style.name}>의뢰인</p>
+                                <p className={style.contents}>ㄴㅁㅇㄴ</p>
+>>>>>>> 3a02c6dacd6edaee4480d3a16f2ca1b6f1a42273
                                 <li className={style.clearfix} >
                                     <ul className={style.button}>코멘트</ul>
                                     <ul className={style.button}>펼치기</ul>
@@ -77,7 +115,7 @@ function Doing() {
                                     <ul className={style.commentsbutton}>펼치기</ul>
                                 </li>
                             </div>
-
+                            
                         </>
                     }
 
