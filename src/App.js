@@ -31,6 +31,7 @@ import { Route } from 'react-router-dom';
 
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
+import MusicSplit from './MusicSplit/MusicSplit';
 
 function App() {
   // const [isLogin, setIsLogin] = useState(false);
@@ -107,7 +108,7 @@ function App() {
       {/* 비었음 사용할 것 */}
       <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
-      <Route path="/21" component={Notice} exact={true} />
+      <Route path="/21" component={MusicSplit} exact={true} />
 
       <Footer />
     </>
