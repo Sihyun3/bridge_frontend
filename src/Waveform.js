@@ -149,7 +149,7 @@ const Waveform = forwardRef((props, ref) => {
         {/* <p className ={style.explain} >{a}</p>  */}
         <div className="controls">
           <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-          <button onClick={test}>asdasd</button>
+          {/* <button onClick={test}>asdasd</button> */}
           <input
             type="range"
             id="volume"

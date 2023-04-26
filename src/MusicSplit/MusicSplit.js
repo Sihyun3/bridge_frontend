@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Waveform from "../Waveform";
+import style from './MusicSpilt.module.css';
 
 const MusicSplit = () => {
 
@@ -116,9 +117,10 @@ const MusicSplit = () => {
           {
             files && files.map(fn => {
               const url = `http://localhost:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
+              
               return (
                 <>
-                  <li><a href={url}>{fn}</a></li>
+                  <li><a className={style.test} href={url}>{fn}</a></li>
                   <Waveform src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                 </>
               )

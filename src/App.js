@@ -108,6 +108,8 @@ function App() {
       {/* 비었음 사용할 것 */}
       <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
+
+      {/* 음원 분리 */}
       <Route path="/21" component={MusicSplit} exact={true} />
 
       <Footer />
