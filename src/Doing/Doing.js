@@ -2,14 +2,23 @@ import style from './Doing.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
+<<<<<<< HEAD
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
+=======
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import jwt_decode from "jwt-decode";
+
+
+>>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
 
 function Doing() {
     const a = 0;
 
+<<<<<<< HEAD
     const [payList, setPayList] = useState([]);
     const [userId, setUserId] = useState('');
 
@@ -25,6 +34,8 @@ function Doing() {
         //     }
         // )
     }, []);
+=======
+>>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
     return (
         <>
         {/* <div>
@@ -57,8 +68,13 @@ function Doing() {
                             <p className={style.date}>2023년 4월 7일</p>
                             <div className={style.Doingbox}>
                                 <img className={style.img} src={img} />
+<<<<<<< HEAD
                                 <p className={style.name}>{payList.userId1}</p>
                                 <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
+=======
+                                <p className={style.name}>의뢰인</p>
+                                <p className={style.contents}>ㄴㅁㅇㄴ</p>
+>>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
                                 <li className={style.clearfix} >
                                     <ul className={style.button}>코멘트</ul>
                                     <ul className={style.button}>펼치기</ul>
