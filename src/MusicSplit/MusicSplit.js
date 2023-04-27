@@ -8,6 +8,8 @@ const MusicSplit = () => {
   const [data, setData] = useState([]);
   const [musicUUID, setMusicUUID] = useState('');
   const [files, setFiles] = useState([]);
+  
+  const [clicked, setClicked] = useState(false);
 
   //컨테이너 true 면 loading
   const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +52,7 @@ const MusicSplit = () => {
           alert('분리된 음악 파일이 존재하지 않습니다.');
         } else {
           setFiles(fileNames);
+          setClicked(true);
         }
       })
       .catch(error => {
@@ -113,11 +116,16 @@ const MusicSplit = () => {
           {isLoading && <div> 분리중입니다.</div>}
           {isSplitCompleted && <div> 분리가 완료되었습니다.</div>}
 
+          {/* 분리확인 버튼 클릭시 만들어진 map 이 화면에 보여짐 */}
+          <div>
+            {!clicked && <button onClick={handleCheck}>분리 확인</button>}
+          </div>
+
           {/* 분리된 음원파일 다운로드 링크 및 재생 파형 만드는 Map */}
           {
             files && files.map(fn => {
               const url = `http://localhost:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
-              
+
               return (
                 <>
                   <li><a className={style.test} href={url}>{fn}</a></li>
@@ -127,11 +135,6 @@ const MusicSplit = () => {
             })
           }
         </ul>
-      </div>
-
-      {/* 분리확인 버튼 클릭시 위에서 만들어진 map 이 화면에 보여짐 */}
-      <div>
-        <button onClick={handleCheck}>분리 확인</button>
       </div>
     </>
   );

@@ -30,7 +30,7 @@ export default function JamDetail2() {
       }
       )
       .catch(error => console.log(error));
-  }, []);
+  }, [commentsList]);
 
   // 코멘트 등록 핸들러
   const handleCommentSubmit = (e) => {
