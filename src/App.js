@@ -27,7 +27,7 @@ import { useState } from 'react';
 import { Route } from 'react-router-dom';
 import KakaoLogin from './Login/KaKaoLogin';
 
-
+import TipWrite from './Tip/TipWrite'
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 
@@ -84,7 +84,7 @@ function App() {
       <Route path="/4" component={ReportPage} exact={true} />
       <Route path="/5" component={SignUp} exact={true} />
       <Route path="/6" component={TipList} exact={true} />
-      <Route path="/7" component={ReportDetail} exact={true} />
+      {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
       <Route path="/8" component={Notice} exact={true} />
       <Route path="/9" component={Notice} exact={true} />
       <Route path="/10" component={ProfileDetail} exact={true} />
@@ -106,6 +106,8 @@ function App() {
       {/* 비었음 사용할 것 */}
       <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
+      <Route path="/21" component={TipWrite} exact={true} />
+
 
       <Footer />
     </>

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import axios from "axios";
-import Waveform from "./Waveform2";
+import Waveform from "./Waveform";
 
 export default function JamDetail2() {
   const [value, setvalue] = useState([]);
@@ -74,6 +74,9 @@ export default function JamDetail2() {
       child.current[index].PlayAll();
     });
   }
+  const test = ()=>{
+    setData([...data, 1])
+  }
 
   return (
     <>
@@ -100,8 +103,9 @@ export default function JamDetail2() {
             />
             {/* 파형 */}
             <Waveform
+            data={data}
               key={musicInfo.musicUUID}
-              src={`http://localhost:8080/api/getMusic/${musicInfo.musicUUID}`}
+              src={`http://localhost:8080/api/insertmusic/rkskek.mp3`}
               ref={(elem) => (child.current[index] = elem)}
             />
             {/* 노래제목 */}
@@ -122,7 +126,7 @@ export default function JamDetail2() {
         <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코맨트를 입력하세요" />
         <button type="submit">작성</button>
       </form>
-
+      <button onClick={test}>test</button>
       {/* <div className="one-line-list"> */}
         {/* <ul className="line-list"> */}
           {/* 코맨트 리스트 데이터 출력 */}

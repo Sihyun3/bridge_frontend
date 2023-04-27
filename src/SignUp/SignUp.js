@@ -49,6 +49,7 @@ const SignUp = ({ history }) => {
         setName(e.target.value);
     };
     const handlerChangeUserId = e => {
+        
         setUserId(e.target.value);
     };
     const handlerChangePassword = e => {

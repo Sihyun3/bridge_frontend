@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
-<<<<<<< HEAD
 import KakaoLogin from './KaKaoLogin';
-import NaverLogin from './NaverLogin'
-=======
-// import React from 'react';
->>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
+// import NaverLogin from './NaverLogin'
 import { useState } from "react";
 import axios from "axios";
-import KakaoLogin from './KaKaoLogin';
-import NaverLogin from './NaverLogin';
+
 
 const Login = ({history, setIsLogin}) => {
     const [userId,setId] = useState('');
@@ -37,9 +32,6 @@ const Login = ({history, setIsLogin}) => {
                 sessionStorage.clear();
             })
     };
-<<<<<<< HEAD
-
-=======
 // import React, { useEffect } from 'react';
 // import KakaoLogin from './KaKaoLogin';
 // import NaverLogin from '../NaverLogin';
@@ -80,7 +72,6 @@ const Login = ({history, setIsLogin}) => {
 //         if (isLogin) {
 //             window.location.href='/';
 //         }})
->>>>>>> 7fdaa8d4a113bf4c6392f71b024ea22117a9cb10
     return (
         <>
                     <div className='container clearfix' >
@@ -98,7 +89,7 @@ const Login = ({history, setIsLogin}) => {
                 <img className={style.logo} src={KakaoLogo}/>
                 <KakaoLogin />
                 <img className={style.logo} src={NaverLogo}/>
-                <div className={style.naver}><NaverLogin /></div>
+                {/* <div className={style.naver}><NaverLogin /></div> */}
             </div>
             </div>
         </>

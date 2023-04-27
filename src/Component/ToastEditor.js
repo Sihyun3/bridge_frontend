@@ -4,19 +4,23 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { useRef } from 'react';
 import axios from 'axios';
 
-const ToastEditor = ({writer}) => {
+const ToastEditor = ({title}) => {
 
     const editorRef = useRef(null);
     const submit = (e) => {
         e.preventDefault();
         const files = editorRef.current.getInstance().getHTML();
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/movie/review/write/`,
-            { "userId": writer, "contents" :files }
+        console.log(files);
+        console.log(typeof(title)) 
+        axios.post(`http://localhost:8080/api/inserttip`,
+            { "tbTitle": title, "tbContents" :files },
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
         )
             .then(response => {
                 alert("정상처리 되었습니다.");
             })
             .catch(error => {
+                console.log(error)
                 alert("오류가 발생하였습니다.");
             })
     }
@@ -37,7 +41,7 @@ const ToastEditor = ({writer}) => {
                 //글자색 변경 플러그인
                 plugins={[colorSyntax]}
             />
-            <button onClick={showContent}>작성</button>
+            {/* <button onClick={showContent}>작성</button> */}
             <button onClick={submit}>디비에 넣기</button>
             {/* <button onCLick={abc}>바꾸기</button> */}
         </>
