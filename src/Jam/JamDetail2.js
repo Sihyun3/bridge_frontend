@@ -1,12 +1,78 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
+<<<<<<< HEAD
 import Waveform from "./Waveform";
+=======
+import Waveform from "../Waveform";
+import { Co2Sharp } from "@mui/icons-material";
+>>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
 
 export default function JamDetail2() {
+
   const [value, setvalue] = useState([]);
   const [data, setData] = useState([]);
   const child = useRef([]);
 
+  // 코멘트
+  const [comment, setComment] = useState('');
+  const [writer, setWriter] = useState('');
+  const [commentsList, setCommentsList] = useState([]);
+
+  const handleChangeComment = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleChangeWriter = e => {
+    setWriter(e.target.value);
+  };
+
+  //화면 자동 렌더링 필요
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/openComments/1`)
+      .then(response => {
+        setCommentsList(response.data.selectCommentsList)
+      }
+      )
+      .catch(error => console.log(error));
+  }, [commentsList]);
+
+  // 코멘트 등록 핸들러
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    //cIdx 부분 1번으로 하드코딩==> 수정 필요
+    axios.post(`http://localhost:8080/api/insertComments/1`, { "userId": writer, "ccComments": comment })
+      .then(response => {
+        console.log(response);
+        alert('코맨트가 정상적으로 등록되었습니다')
+
+      })
+      .catch(error => {
+        console.log(error);
+        alert(`오류가 발생했습니다 (${error.message})`);
+      });
+  };
+
+  // 코멘트 삭제 핸들러
+  const handlerClickDelete = (ccIdx) => {
+    axios.delete(`http://localhost:8080/api/CommentsDelete/${ccIdx}`)
+      .then(response => {
+        console.log(response);
+        if (response.data === 1) {
+          alert('정상적으로 삭제되었습니다.');
+          // history.push('/insertComments');				// 정상적으로 삭제되면 목록으로 이동
+        } else {
+          alert('삭제에 실패했습니다.');
+          return;
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        alert(`삭제에 실패했습니다. (${error.message})`);
+        return;
+      });
+  };
+
+  // 잼 음악 파일 업로드 axios Post
   const onSubmit = (e) => {
     e.preventDefault();
     let files = e.target.profile_files.files;
@@ -14,7 +80,6 @@ export default function JamDetail2() {
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
-
     axios({
       method: 'POST',
       url: `http://localhost:8080/api/insertmusic`,
@@ -29,33 +94,39 @@ export default function JamDetail2() {
     });
   }
 
+  //잼 체크 박스 전체 선택 
   const onCheckAll = (isChecked) => {
     if (isChecked) {
-      // 전체 선택
       const indexArray = data.map((music, index) => index);
       setvalue(indexArray);
     } else {
-      // 전체 선택 해제
       setvalue([]);
     }
   }
 
+  // 잼 전체 재생 (자식에서 부모로)
   const allplay = () => {
     value.forEach((index) => {
       child.current[index].PlayAll();
     });
   }
+  const test = ()=>{
+    setData([...data, 1])
+  }
 
   return (
     <>
+      {/* 전체선택하는 체크박스 */}
       <div>
         <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
         <span>전체 선택</span>
       </div>
 
+      {/* 파형&체크박스 맵 돌린거 */}
       {data.map((musicInfo, index) => {
         return (
           <div key={musicInfo.musicUUID}>
+            {/* 체크박스 */}
             <input
               type="checkbox"
               checked={value.includes(index)}
@@ -67,29 +138,76 @@ export default function JamDetail2() {
                 }
               }}
             />
+            {/* 파형 */}
             <Waveform
+            data={data}
               key={musicInfo.musicUUID}
-              src={`http://localhost:8080/api/getMusic/${musicInfo.musicUUID}`}
+              src={`http://localhost:8080/api/insertmusic/rkskek.mp3`}
               ref={(elem) => (child.current[index] = elem)}
             />
+            {/* 노래제목 */}
             {musicInfo.musicTitle}
           </div>
         );
-      })}
+      })}  {/* 맵 끝*/}
 
-      <br />
+      {/* 잼 전체 재생 버튼 */}
       <button onClick={allplay}>All Play/Pause</button>
-
-      <br />
-      <hr />
-      <br />
 
       <form onSubmit={(e) => onSubmit(e)}>
         <input type="file" name="profile_files" multiple="multiple" />
         <button type="submit">제출</button>
       </form>
+
+<<<<<<< HEAD
+      <form onSubmit={handleCommentSubmit}>
+        <input type="text" id="writer" name="writer" value={writer} onChange={handleChangeWriter} placeholder="작성자" />
+        <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코맨트를 입력하세요" />
+        <button type="submit">작성</button>
+      </form>
+      <button onClick={test}>test</button>
+      {/* <div className="one-line-list"> */}
+        {/* <ul className="line-list"> */}
+          {/* 코맨트 리스트 데이터 출력 */}
+          {/* {
+            data.map((n) => (
+              <li key={n.commentIdx}>
+=======
+      {/* 댓글 목록  map*/}
+      {/* 작성자만 삭제 가능하게 만들어야함  ==> 수정 필요*/}
+      <hr />
+      <br />
+      <br />
+      <div>
+        <h2>댓글 목록</h2>
+        <hr />
+        <ul className="comment_list">
+          {commentsList.map(commentsList => {
+            return (
+              <li key={commentsList.commentIdx}>
+>>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
+                <div>
+                  <li>작성자 {commentsList.userId}</li>
+                  <li>작성일 {commentsList.cdate}</li>
+                </div>
+                <div className="view_contents">
+                  <li>내용 {commentsList.ccComments}</li>
+                  <input type="button" className="btn" value="삭제" onClick={() => handlerClickDelete(commentsList.ccIdx)} />
+                </div>
+                <hr />
+              </li>
+            )
+          })
+          }
+        </ul>
+      </div>
+        
+      {/* 코멘트 작성 폼 */}
+      <form onSubmit={handleCommentSubmit}>
+        <input type="text" id="writer" name="writer" value={writer} onChange={handleChangeWriter} placeholder="작성자" />
+        <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코멘트를 입력하세요" />
+        <button type="submit">작성</button>
+      </form>
     </>
-  );
-}
-
-
+  )
+};

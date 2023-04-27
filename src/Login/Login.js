@@ -1,13 +1,14 @@
+
 import style from './Login.module.css';
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import KakaoLogo from  './KakaoLogo.png';
 import NaverLogo from './NaverLogo.png';
-// import React from 'react';
+import KakaoLogin from './KaKaoLogin';
+// import NaverLogin from './NaverLogin'
 import { useState } from "react";
 import axios from "axios";
-import KakaoLogin from './KaKaoLogin';
-import NaverLogin from './NaverLogin';
+
 
 const Login = ({history, setIsLogin}) => {
 
@@ -46,8 +47,50 @@ const Login = ({history, setIsLogin}) => {
     }, []);
 
 
+// import React, { useEffect } from 'react';
+// import KakaoLogin from './KaKaoLogin';
+// import NaverLogin from '../NaverLogin';
+// import style from './Login.module.css';
+// import { Link } from 'react-router-dom';
+// import KakaoLogo from  './KakaoLogo.png';
+// import NaverLogo from './NaverLogo.png';
+// import React, { useEffect } from 'react';
+// import KakaoLogin from './KaKaoLogin';
+// import NaverLogin from '../NaverLogin';
+// // import {KAKAO_AUTH_URL} from '../Login/KaKaoLogin';
+
+
+
+// const Login = () => {
+//     useEffect(() => {
+//         // 로컬 스토리지에 userName이 존재하는 경우 로그인한 것으로 판단
+//         // 이미 로그인한 경우 홈(/)으로 이동
+//         const isLogin = !!window.localStorage.getItem('userName');
+//         if (isLogin) {
+//             window.location.href = '/';
+//         }
+//     }, []);
+
+
+// const Login = () => {
+//     useEffect(() => {
+//         // 로컬 스토리지에 userName이 존재하는 경우 로그인한 것으로 판단
+//         // 이미 로그인한 경우 홈(/)으로 이동
+//         const isLogin = !!window.localStorage.getItem('userName');
+//         if (isLogin) {
+//             window.location.href = '/';
+//         }
+//     }, []);
+
+//     useEffect(() => {
+//         const isLogin = !!window.localStorage.getItem('userName');
+//         if (isLogin) {
+//             window.location.href='/';
+//         }})
+
     return (
         <>
+                    <div className='container clearfix' >
             <div className={style.loginbackg}>
                 <h1 className={style.login}>로그인</h1>
 
@@ -59,13 +102,16 @@ const Login = ({history, setIsLogin}) => {
                 <button className={style.loginbutton} onClick={handlerOnClick}>로그인</button>
                 <Link to="/5"><p className={style.signup}>회원가입</p></Link>
                 <p className={style.loginsns}>SNS계정 간편 로그인</p>
-                <div className={style.kakao}><KakaoLogin /></div>
-                <div className={style.naver}><NaverLogin/></div>
+                <img className={style.logo} src={KakaoLogo}/>
+                <KakaoLogin />
+                <img className={style.logo} src={NaverLogo}/>
+                {/* <div className={style.naver}><NaverLogin /></div> */}
+            </div>
             </div>
         </>
-
     )
 }
 
 
 export default Login;
+
