@@ -56,3 +56,4 @@ const Login = ({history, setIsLogin}) => {
         </>
     )
 }
+export default Login;

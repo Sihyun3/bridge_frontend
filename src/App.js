@@ -6,7 +6,7 @@ import Footer from './Footer/Footer';
 import LoginStart from './Login/LoginStart';
 import Main from './Main/Main';
 import Notice from './Admin-Notice/Notice';
-import Login from './Login/Login';
+// import Login from './Login/Login';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
@@ -32,9 +32,10 @@ import { Route } from 'react-router-dom';
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
+import { useEffect } from 'react';
 
 function App() {
-  // const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   // 로그인 페이지로 이동
   // const handlerLogin = (e) => {
   //   e.preventDefault();
@@ -58,7 +59,9 @@ function App() {
   // const isLogin = !!window.localStorage.getItem('userName');
 
 
-     
+     useEffect(()=>{
+      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiYzE0NzhlZC05ZjE5LTRkMGUtOGEyMi05ZmRmYmI3NjVlODgiLCJpYXQiOjE2ODI1NjAzOTAsImV4cCI6MTY4MjY0Njc5MH0.dkSCzKTF-wXRfyvtYit_MScEPgDJPFDOehHY1I8Tdt8");
+     },[])
      
   return (
     <>
