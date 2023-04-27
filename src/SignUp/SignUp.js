@@ -10,6 +10,8 @@ const SignUp = ({ history }) => {
     const [userName, setName] = useState();
     //아이디
     const [userId, setUserId] = useState();
+    //닉네임
+    const [userNickname, setNickName] = useState();
     //비밀번호
     const [userPassword, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
@@ -17,15 +19,17 @@ const SignUp = ({ history }) => {
     const [userPhoneNumber, setPhone] = useState();
     //이메일
     const [userEmail, setEmail] = useState();
+
     const [confrimMessage, setConfrimMessage] = useState();
     const [Pmessage, setPmassage] = useState();
     const [Emassage, setEmassage] = useState();
-    const [userNickname, setNickName] = useState();
+    
 
     const handlerOnClick = e => {
         if (confrimMessage == null && Pmessage == null && Emassage == null && userId != null) {
-            axios.post(`http://localhost:8080/api/regist`, { userId, userPassword, userPhoneNumber, userEmail, userName, userNickname })
-                .then(respone => {
+            axios.post(`http://localhost:8080/api/regist`, { "userId" : userId, "userPw": userPassword, "userPhoneNumber": userPhoneNumber, 
+            "userEmail": userEmail, "userName" : userName, "userNickName" : userNickname })
+                .then(response => {
 
                     alert('정상적으로 등록 되었습니다.')
                     history.push('/login')
