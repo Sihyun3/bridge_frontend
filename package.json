@@ -26,7 +26,10 @@
     "react-transition-group": "^4.4.5",
     "styled-components": "^5.3.9",
     "wavesurfer.js": "^6.6.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@toast-ui/editor": "3.0",
+    "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
+    "@toast-ui/react-editor": "^3.2.3"
   },
   "scripts": {
     "start": "react-scripts start",

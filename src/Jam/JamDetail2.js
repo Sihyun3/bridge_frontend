@@ -1,8 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
+import Waveform from "./Waveform";
 import Waveform from "../Waveform";
 import { Co2Sharp } from "@mui/icons-material";
 import jwt_decode from "jwt-decode";
+
 
 export default function JamDetail2() {
 
@@ -26,7 +28,7 @@ export default function JamDetail2() {
     setWriter(e.target.value);
   };
 
-  //화면 자동 렌더링 필요
+ 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/openComments/1`)
       .then(response => {
@@ -118,6 +120,9 @@ export default function JamDetail2() {
       child.current[index].PlayAll();
     });
   }
+  const test = ()=>{
+    setData([...data, 1])
+  }
 
   return (
     <>
@@ -145,8 +150,9 @@ export default function JamDetail2() {
             />
             {/* 파형 */}
             <Waveform
+            data={data}
               key={musicInfo.musicUUID}
-              src={`http://localhost:8080/api/getMusic/${musicInfo.musicUUID}`}
+              src={`http://localhost:8080/api/insertmusic/rkskek.mp3`}
               ref={(elem) => (child.current[index] = elem)}
             />
             {/* 노래제목 */}

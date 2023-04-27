@@ -28,7 +28,7 @@ import { Route } from 'react-router-dom';
 // import KakaoLogin from './Login/KaKaoLogin';
 
 
-
+import TipWrite from './Tip/TipWrite'
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
@@ -42,21 +42,21 @@ function App() {
   //   window.location.href = '/3';
   // };
 
-    // 로그아웃 처리 
-  // 로그아웃 처리 
-  // 로컬 스토리지 내용 삭제 후 홈(/)으로 이동
+  //   // 로그아웃 처리 
+  // // 로그아웃 처리 
+  // // 로컬 스토리지 내용 삭제 후 홈(/)으로 이동
   // const handlerLogout = (e) => {
   //   e.preventDefault();
   //   localStorage.clear();
   //   window.location.href = '/';
   // };
 
-    // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
-  // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
-  // 로그인 상태인 경우 로그인 정보와 로그아웃 버튼을 
-  // 로그아웃 상태인 경우 로그인 버튼을 제공
+  //   // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
+  // // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
+  // // 로그인 상태인 경우 로그인 정보와 로그아웃 버튼을 
+  // // 로그아웃 상태인 경우 로그인 버튼을 제공
   // const isNotLoginPage = window.location.pathname === '/3' ? false : true;
-  // const isLogin = !!window.localStorage.getItem('userName');
+  // // const isLogin = !!window.localStorage.getItem('userName');
 
 
      useEffect(()=>{
@@ -89,7 +89,7 @@ function App() {
       <Route path="/4" component={ReportPage} exact={true} />
       <Route path="/5" component={SignUp} exact={true} />
       <Route path="/6" component={TipList} exact={true} />
-      <Route path="/7" component={ReportDetail} exact={true} />
+      {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
       <Route path="/8" component={Notice} exact={true} />
       <Route path="/9" component={Notice} exact={true} />
       <Route path="/10" component={ProfileDetail} exact={true} />
@@ -111,6 +111,8 @@ function App() {
       {/* 비었음 사용할 것 */}
       <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
+      <Route path="/21" component={TipWrite} exact={true} />
+
 
       {/* 음원 분리 */}
       <Route path="/21" component={MusicSplit} exact={true} />
