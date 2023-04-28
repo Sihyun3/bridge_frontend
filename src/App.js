@@ -83,7 +83,7 @@ function App() {
       {/* 메인, 공지 */}
       <Route path="/1" component={Main} exact={true} />
       <Route path="/2" component={Notice} exact={true} />
-      {/* <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} /> */}
+      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       <Route path="/4" component={ReportPage} exact={true} />
       <Route path="/5" component={SignUp} exact={true} />
       <Route path="/6" component={TipList} exact={true} />

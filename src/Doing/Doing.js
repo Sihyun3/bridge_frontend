@@ -2,45 +2,103 @@ import style from './Doing.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
-import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 
 
-function Doing() {
+const Doing = () => {
     const a = 0;
 
     const [payList, setPayList] = useState([]);
     const [userId1, setUserId1] = useState('');
     const [userId2, setUserId2] = useState('');
+    const [listArray, setListArray] = useState([
+        {
+            receiver: '',
+            photo: '',
+            tag: ''
+        }
+    ]);
 
     useEffect(() => {
-        console.log(localStorage.userId);
-        axios.get(`http://localhost:8080/api/bridge/paylist/${userId1}/${userId2}`,
-            { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-            .then((response) => {
-                setPayList(response.data.list);
+        console.log(sessionStorage.token);
 
-            }).catch((error) => {
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+
+        let userId = decode_token.name;
+        setUserId1(userId);
+        console.log(decode_token);
+
+        axios.get(`http://localhost:8080/api/bridge/projectList/${userId}`,
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then((response) => {
+                console.log(response);
+                setListArray(response.data.map((data) => {
+                    return ({
+                        receiver: data.userId2,
+                        photo: data.userPhoto,
+                        tag: data.userTag
+                    })
+                }))
+            })
+            .catch((error) => {
+                console.log(error);
                 return;
-            }
-        )
+            })
     }, []);
+
+    // const handlerClickSelect = (userId2) => {
+
+    //     setUserId2(userId2);
+    //     console.log(userId2);
+    //     // axios.get(`http://localhost:8080/api/bridge/paylist/${userId1}/${userId2}`,
+    //     //     { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+    //     //     .then((response) => {
+    //     //         console.log(response);
+    //     //     }).catch((error) => {
+    //     //         return;
+    //     //     }
+    //     //     )
+
+    // }
+
+    const ProjectList = () => {
+        return listArray && listArray.map((value, index) => {
+            return (
+                <div key={index} className={style.doinglist}>
+                    <button >
+                    {value.receiver}
+                    {value.photo}
+                    {value.tag}
+                    </button>
+                </div>
+            );
+        });
+    };
+
+
+    
 
     return (
         <>
-        {/* <div>
+            {/* <div>
             <h1> {list.userId}, {list.userId1}</h1>
         </div> */}
             {/* <Header1 /> */}
+
+            <div>
+                {console.log(listArray)}
+            </div>
             <div className='box1'>
                 <h1>게시판</h1>
             </div>
             <div className={style.list}>
                 <h2>작업 목록</h2>
-                <div className={style.doinglist}>
+                <div>{ProjectList()}</div>
+                {/* <div className={style.doinglist}>
                     <img src={img} />
                     <p>닉네임</p>
                     <p>#악기태그</p>
@@ -49,7 +107,8 @@ function Doing() {
                     <img src={img} />
                     <p>닉네임</p>
                     <p>#악기태그</p>
-                </div>
+                </div> */}
+
             </div>
             <div className='container clearfix'>
                 <div className={style.Doing} >
@@ -106,7 +165,7 @@ function Doing() {
                                     <ul className={style.commentsbutton}>펼치기</ul>
                                 </li>
                             </div>
-                            
+
                         </>
                     }
 
@@ -114,4 +173,6 @@ function Doing() {
             </div>
         </>
     )
-} export default Doing;
+}
+
+export default Doing;

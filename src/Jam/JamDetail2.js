@@ -1,11 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-<<<<<<< HEAD
-import Waveform from "./Waveform";
-=======
 import Waveform from "../Waveform";
 import { Co2Sharp } from "@mui/icons-material";
->>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
 
 export default function JamDetail2() {
 
@@ -159,7 +155,6 @@ export default function JamDetail2() {
         <button type="submit">제출</button>
       </form>
 
-<<<<<<< HEAD
       <form onSubmit={handleCommentSubmit}>
         <input type="text" id="writer" name="writer" value={writer} onChange={handleChangeWriter} placeholder="작성자" />
         <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코맨트를 입력하세요" />
@@ -172,7 +167,6 @@ export default function JamDetail2() {
           {/* {
             data.map((n) => (
               <li key={n.commentIdx}>
-=======
       {/* 댓글 목록  map*/}
       {/* 작성자만 삭제 가능하게 만들어야함  ==> 수정 필요*/}
       <hr />
@@ -185,7 +179,6 @@ export default function JamDetail2() {
           {commentsList.map(commentsList => {
             return (
               <li key={commentsList.commentIdx}>
->>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4
                 <div>
                   <li>작성자 {commentsList.userId}</li>
                   <li>작성일 {commentsList.cdate}</li>
