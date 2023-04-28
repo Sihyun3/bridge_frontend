@@ -5,6 +5,9 @@ import NaverLogo from '../Login/NaverLogo.png';
 import axios from "axios";
 import { useState } from "react";
 
+
+
+
 const SignUp = ({ history }) => {
     //이름
     const [userName, setName] = useState();
@@ -32,7 +35,7 @@ const SignUp = ({ history }) => {
 
                 })
                 .catch(error => {
-                    alert('aaaaaaaid, pw가 일치하지 않습니다')
+                    alert('id, pw가 일치하지 않습니다')
                     console.log(error)
                     sessionStorage.clear();
                 })
@@ -51,6 +54,25 @@ const SignUp = ({ history }) => {
     const handlerChangeUserId = e => {
         setUserId(e.target.value);
     };
+    //ID 중복확인
+    const userIdCheck = () => {
+        axios.post(`http://localhost:8080/api/idlist/${userId}`,)
+            .then(response => {
+                const data = response.data;
+                if (data === 1) {
+                    alert("이미 사용중인 아이디입니다.");
+                } else if (data === 0) {
+                    alert("사용 가능한 아이디입니다.")
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+
+
+
     const handlerChangePassword = e => {
         setPassword(e.target.value);
     };
@@ -95,7 +117,8 @@ const SignUp = ({ history }) => {
 
                     <input className={style.signupinput} onChange={handlerChangeName} placeholder="이름을 입력해주세요." />
                     <input className={style.signupinput} onChange={handlerChangeNickName} placeholder="닉네임을 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeUserId} placeholder="아이디를 입력해주세요." />
+                    <input className={style.signupinput} onChange={handlerChangeUserId} placeholder="아이디를 입력해주세요."/>
+                    <button className={style.idcheck} onClick={userIdCheck}>ID확인</button>
                     <input className={style.signupinput} onChange={handlerChangeEmail} placeholder="이메일을 입력해주세요." />
                     <div>{Emassage}</div>
 
@@ -110,6 +133,7 @@ const SignUp = ({ history }) => {
                     <p className={style.loginsns}>SNS로 가입하기</p>
                     <img className={style.logo} src={KakaoLogo} />
                     <img className={style.logo} src={NaverLogo} />
+                   
                 </div>
             </div>
         </>

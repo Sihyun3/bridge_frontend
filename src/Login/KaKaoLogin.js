@@ -3,16 +3,11 @@ import { useState } from 'react';
 import { useEffect } from "react";
 
 
-// const REST_API_KEY = "~~";
-// const REDIRECT_URI =  "http://localhost:3000/auth/kakao/callback";
 
-// export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-
-const KakaoLogin = () => {
+const KakaoLogin = ({history}) => {
     const { Kakao } = window;
 
-    const JAVASCRIPT_APP_KEY = '68aeb9a371fc365c535495a103132163';
+    const JAVASCRIPT_APP_KEY = '7e512efaee6eeeeca2d427733a82b016';
     
     // 액세스 토큰을 상태 변수로 선언 
     // 로그인 버튼 출력 제어에 사용
@@ -22,8 +17,9 @@ const KakaoLogin = () => {
         // 간편 로그인을 요청
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
         Kakao.Auth.authorize({
-            redirectUri: 'http://localhost:3000'
+            redirectUri: 'http://localhost:3000/3'
         });
+        KakaoHandler();
     };
 
     useEffect(() => {
@@ -37,7 +33,7 @@ const KakaoLogin = () => {
                 'https://kauth.kakao.com/oauth/token', {
                     grant_type: 'authorization_code',                   // 고정
                     client_id: JAVASCRIPT_APP_KEY,                      // 앱 REST API 키
-                    redirect_uri: 'http://localhost:3000',   // 인가 코드가 리다이렉트된 URI
+                    redirect_uri: 'http://localhost:3000/3',   // 인가 코드가 리다이렉트된 URI
                     code: code                                          // 인가 코드 받기 요청으로 얻은 인가 코드
                 }, {
                     headers: {
@@ -62,12 +58,16 @@ const KakaoLogin = () => {
 
                     // 애플리케이션에서 필요한 정보를 추출해서 로컬 스토리지에 저장
                     const { kakao_account } = response;
-                    localStorage.setItem('userName', kakao_account.profile.nickname);
+                    
                     localStorage.setItem('userNickname', kakao_account.profile.nickname);
                     localStorage.setItem('userPhoto', kakao_account.profile.profile_image_url);
-
+                    localStorage.setItem('email', kakao_account.email);
+                    localStorage.setItem('accesstoken', accessToken);
+                    
+                    
                     // 홈(/) 화면으로 이동
-                    window.location.href = "/";
+                    // window.location.href = "/";
+                    history.push("/");
                 })
                 .catch(error => {
                     console.log(error);
@@ -78,7 +78,15 @@ const KakaoLogin = () => {
     }, []);
 
     
-    
+    const KakaoHandler = () =>{
+        axios.post('http://localhost:8080/login',{"userNickname":localStorage.getItem('userNickname')})
+        .then(response =>{
+            sessionStorage.setItem("token",response.data);
+        })
+        .catch(error => {
+            console.error(error); // 에러 발생 시 에러 출력
+          });
+    }
 
     return (
         <>
@@ -86,7 +94,7 @@ const KakaoLogin = () => {
             { !accessToken && 
                 <img style={{width: 277, height: 60, cursor: 'pointer'}} 
                      src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" 
-                     onClick={handlerLogin} /> 
+                     onClick={handlerLogin}  /> 
             }
         </>
     );
