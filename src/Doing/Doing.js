@@ -11,9 +11,9 @@ import jwt_decode from "jwt-decode";
 const Doing = () => {
     const a = 0;
 
-    const [payList, setPayList] = useState([]);
     const [userId1, setUserId1] = useState('');
     const [userId2, setUserId2] = useState('');
+    const [visible, setVisible] = useState(true);
     const [listArray, setListArray] = useState([
         {
             receiver: '',
@@ -21,6 +21,18 @@ const Doing = () => {
             tag: ''
         }
     ]);
+    const [payList, setPayList] = useState(
+        {
+            sender: '',
+            receiver: '',
+            money: '',
+            date: ''
+        }
+    );
+    const [commentList, setCommentList] = useState([{
+        writer: '',
+        content: ''
+    }])
 
     useEffect(() => {
         console.log(sessionStorage.token);
@@ -49,39 +61,86 @@ const Doing = () => {
                 return;
             })
     }, []);
-    //
 
-    // const handlerClickSelect = (userId2) => {
+    const handlerClickSelect = (receiver) => {
 
-    //     setUserId2(userId2);
-    //     console.log(userId2);
-    //     // axios.get(`http://localhost:8080/api/bridge/paylist/${userId1}/${userId2}`,
-    //     //     { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-    //     //     .then((response) => {
-    //     //         console.log(response);
-    //     //     }).catch((error) => {
-    //     //         return;
-    //     //     }
-    //     //     )
+        setUserId2(receiver);
+        const userId22 = receiver;
+        console.log(userId1);
+        console.log(userId2);
 
-    // }
+        axios.get(`http://localhost:8080/api/bridge/paylist/${userId1}/${userId22}`,
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then((response) => {
+                console.log(response);
+                setPayList({
+                    sender: response.data.userId1,
+                    receiver: response.data.userId2,
+                    money: response.data.plMoney,
+                    date: response.data.plDate
+                })
+            }).catch((error) => {
+                return;
+            }
+            )
+
+    }
+
+    const handlerClickComment = (pcIdx) => {
+
+        setVisible(!visible);
+        axios.get(`http://localhost:8080/api/bridge/partnerdetail/${pcIdx}`,
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then((response) => {
+                console.log(response);
+                setCommentList(response.data.map((data) => {
+                    return ({
+                        writer: data.userId,
+                        content: data.pdcComment
+                    })
+                })
+                )
+            }).catch((error) => {
+                return;
+            })
+    }
 
     const ProjectList = () => {
+        // console.log(listArray);
         return listArray && listArray.map((value, index) => {
             return (
                 <div key={index} className={style.doinglist}>
-                    <button >
-                    {value.receiver}
-                    {value.photo}
-                    {value.tag}
+                    <button onClick={() => handlerClickSelect(value.receiver)}>
+                        {value.receiver}
+                        {value.photo}
+                        {value.tag}
                     </button>
                 </div>
             );
         });
     };
 
+    const ProjectPage = () => {
+        console.log(payList);
+        return (
+            <div className={style.contents}>
+                {payList.sender}가 {payList.receiver}에게
+                {payList.money}를 {payList.date}에 주었습니다.
+            </div>
+        );
+    }
 
-    
+    const CommentList = () => {
+        return !visible && commentList && commentList.map((data)=> {
+            return(
+                <div>
+                <p className={style.commentsname}>{data.writer}</p>
+                <p className={style.commentscontents}>{data.content}</p>
+                </div>
+            );
+        })
+    }
+
 
     return (
         <>
@@ -90,9 +149,9 @@ const Doing = () => {
         </div> */}
             {/* <Header1 /> */}
 
-            <div>
+            {/* <div>
                 {console.log(listArray)}
-            </div>
+            </div> */}
             <div className='box1'>
                 <h1>게시판</h1>
             </div>
@@ -121,10 +180,10 @@ const Doing = () => {
                             <p className={style.date}>2023년 4월 7일</p>
                             <div className={style.Doingbox}>
                                 <img className={style.img} src={img} />
-                                <p className={style.name}>{payList.userId1}</p>
-                                <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
+                                <div>{ProjectPage()}</div>
+                                {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
                                 <p className={style.name}>의뢰인</p>
-                                <p className={style.contents}>ㄴㅁㅇㄴ</p>
+                                <p className={style.contents}>ㄴㅁㅇㄴ</p> */}
                                 <li className={style.clearfix} >
                                     <ul className={style.button}>코멘트</ul>
                                     <ul className={style.button}>펼치기</ul>
@@ -138,11 +197,12 @@ const Doing = () => {
                                 <p className={style.date}>2023년 4월 7일</p>
                                 <div className={style.Doingbox}>
                                     <img className={style.img} src={img} />
-                                    <p className={style.name}>의뢰인</p>
-                                    <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
+                                    <p>{CommentList()}</p> 
+                                    {/* <p className={style.name}>의뢰인</p> */}
+                                    {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p> */}
                                     <li className={style.clearfix} >
                                         <ul className={style.button}>코멘트</ul>
-                                        <ul className={style.button}>펼치기</ul>
+                                        <ul className={style.button}><button onClick={() => handlerClickComment(1)}>{visible? '펼치기' : '접기'}</button></ul>
                                     </li>
                                 </div>
                             </div>
