@@ -69,11 +69,9 @@ const Doing = () => {
         return listArray && listArray.map((value, index) => {
             return (
                 <div key={index} className={style.doinglist}>
-                    <button >
                     {value.receiver}
                     {value.photo}
                     {value.tag}
-                    </button>
                 </div>
             );
         });

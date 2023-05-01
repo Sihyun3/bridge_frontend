@@ -6,7 +6,7 @@ import Footer from './Footer/Footer';
 import LoginStart from './Login/LoginStart';
 import Main from './Main/Main';
 import Notice from './Admin-Notice/Notice';
-import Login from './Login/Login';
+// import Login from './Login/Login';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
@@ -32,10 +32,11 @@ import TipWrite from './Tip/TipWrite'
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
+import { useEffect } from 'react';
+import NoticeDetail from './Admin-Notice/NoticeDetail';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  
   // 로그인 페이지로 이동
   // const handlerLogin = (e) => {
   //   e.preventDefault();
@@ -59,8 +60,10 @@ function App() {
   // // const isLogin = !!window.localStorage.getItem('userName');
 
 
+     useEffect(()=>{
+      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiYzE0NzhlZC05ZjE5LTRkMGUtOGEyMi05ZmRmYmI3NjVlODgiLCJpYXQiOjE2ODI1NjAzOTAsImV4cCI6MTY4MjY0Njc5MH0.dkSCzKTF-wXRfyvtYit_MScEPgDJPFDOehHY1I8Tdt8");
+     },[])
      
-     // <Header2 />
   return (
     <>
      
@@ -89,7 +92,8 @@ function App() {
       <Route path="/6" component={TipList} exact={true} />
       {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
       <Route path="/8" component={Notice} exact={true} />
-      <Route path="/9" component={Notice} exact={true} />
+      {/* <Route path="/9" component={NoticeDetail} exact={true} /> */}
+      <Route path='/api/announcementDetail/:aIdx' component={NoticeDetail} exact={true}/>
       <Route path="/10" component={ProfileDetail} exact={true} />
       {/* 팁 */}
       <Route path="/11" component={TipList} exact={true} />
@@ -107,13 +111,13 @@ function App() {
       <Route path="/19" component={Charge} exact={true}/>
 
       {/* 비었음 사용할 것 */}
-      <Route path="/19" component={JamDetail} exact={true} />
+      <Route path="/23" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
       <Route path="/21" component={TipWrite} exact={true} />
 
 
       {/* 음원 분리 */}
-      <Route path="/21" component={MusicSplit} exact={true} />
+      <Route path="/22" component={MusicSplit} exact={true} />
 
       <Footer />
     </>

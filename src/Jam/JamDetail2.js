@@ -14,6 +14,9 @@ export default function JamDetail2() {
   const [writer, setWriter] = useState('');
   const [commentsList, setCommentsList] = useState([]);
 
+  //추가
+  const [insert, setInsert] = useState(0);
+
   const handleChangeComment = (e) => {
     setComment(e.target.value);
   };
@@ -22,15 +25,21 @@ export default function JamDetail2() {
     setWriter(e.target.value);
   };
 
-  //화면 자동 렌더링 필요
+ 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/openComments/1`)
       .then(response => {
         setCommentsList(response.data.selectCommentsList)
+        const token = sessionStorage.getItem('token');
+        console.log("111111111" + token);
+        const decode_token = jwt_decode(token);
+        console.log("222222222" + decode_token);
+        setWriter(decode_token.sub);
       }
       )
       .catch(error => console.log(error));
-  }, [commentsList]);
+  }, [insert]);
+  //commentsList
 
   // 코멘트 등록 핸들러
   const handleCommentSubmit = (e) => {
@@ -39,6 +48,7 @@ export default function JamDetail2() {
     axios.post(`http://localhost:8080/api/insertComments/1`, { "userId": writer, "ccComments": comment })
       .then(response => {
         console.log(response);
+        setInsert(insert + 1);
         alert('코맨트가 정상적으로 등록되었습니다')
 
       })
@@ -78,7 +88,8 @@ export default function JamDetail2() {
     }
     axios({
       method: 'POST',
-      url: `http://localhost:8080/api/insertmusic`,
+      //cIdx 1번으로 하드코딩
+      url: `http://localhost:8080/api/insertmusic/1`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
@@ -197,7 +208,7 @@ export default function JamDetail2() {
         
       {/* 코멘트 작성 폼 */}
       <form onSubmit={handleCommentSubmit}>
-        <input type="text" id="writer" name="writer" value={writer} onChange={handleChangeWriter} placeholder="작성자" />
+        <input type="text" id="writer" name="writer" value={writer} readOnly />
         <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코멘트를 입력하세요" />
         <button type="submit">작성</button>
       </form>

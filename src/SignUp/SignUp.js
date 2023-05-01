@@ -27,8 +27,8 @@ const SignUp = ({ history }) => {
 
     const handlerOnClick = e => {
         if (confrimMessage == null && Pmessage == null && Emassage == null && userId != null) {
-            axios.post(`http://localhost:8080/api/regist`, { "userId" : userId, "userPw": userPassword, "userPhoneNumber": userPhoneNumber, 
-            "userEmail": userEmail, "userName" : userName, "userNickName" : userNickname })
+            axios.post(`http://localhost:8080/api/regist`, { "userId" : userId, "userPassword": userPassword, "userPhoneNumber": userPhoneNumber, 
+            "userEmail": userEmail, "userName" : userName, "userNickname" : userNickname })
                 .then(response => {
 
                     alert('정상적으로 등록 되었습니다.')
@@ -74,7 +74,7 @@ const SignUp = ({ history }) => {
             setPmassage(null);
         } else {
             setPhone(e.target.value);
-            setPmassage('형식이 올바르지 않습니다.');
+            setPmassage('번호 형식이 올바르지 않습니다.');
         }
     };
 
@@ -84,7 +84,7 @@ const SignUp = ({ history }) => {
             setEmassage(null);
         } else {
             setEmail(e.target.value);
-            setEmassage('형식이 올바르지 않습니다.');
+            setEmassage('이메일 형식이 올바르지 않습니다.');
         }
 
     };
