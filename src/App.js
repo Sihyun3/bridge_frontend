@@ -34,6 +34,7 @@ import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import { useEffect } from 'react';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
+import ReportList from './Admin-Report/ReportList';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -87,14 +88,14 @@ function App() {
       <Route path="/1" component={Main} exact={true} />
       <Route path="/2" component={Notice} exact={true} />
       {/* <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} /> */}
-      <Route path="/4" component={ReportPage} exact={true} />
+   
       <Route path="/5" component={SignUp} exact={true} />
       <Route path="/6" component={TipList} exact={true} />
-      {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
+     
       <Route path="/8" component={Notice} exact={true} />
       {/* <Route path="/9" component={NoticeDetail} exact={true} /> */}
       <Route path='/api/announcementDetail/:aIdx' component={NoticeDetail} exact={true}/>
-      <Route path="/10" component={ProfileDetail} exact={true} />
+      
       {/* 팁 */}
       <Route path="/11" component={TipList} exact={true} />
       {/* 잼 */}
@@ -112,13 +113,21 @@ function App() {
 
       {/* 비었음 사용할 것 */}
       <Route path="/23" component={JamDetail} exact={true} />
-      <Route path="/20" component={Notice} exact={true} />
-      <Route path="/21" component={TipWrite} exact={true} />
-
+      
+      
+      {/* 신고 */}
+      <Route path="/4" component={ReportPage} exact={true} />
+      <Route path="/21" component={ReportList} exact={true} />
+      <Route path="/7/:reportIdx" component={ReportDetail} exact={true} />
 
       {/* 음원 분리 */}
       <Route path="/22" component={MusicSplit} exact={true} />
 
+      {/* 프로필 */}
+      <Route path="/10" component={ProfileDetail} exact={true} />
+      <Route path="/20" component={ProfileWrite} exact={true} />
+
+      
       <Footer />
     </>
   )

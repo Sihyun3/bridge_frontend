@@ -23,7 +23,7 @@ function ReportPage() {
         console.log("222222222" + decode_token);
         setUserId(decode_token.sub);
         //신고당하는사람 하드코딩 => 나중에 get 해오기 => 수정 필요 !!! 
-        setReportedUserId("testerId");
+        setReportedUserId("tester");
     })
 
     //신고 제출 
@@ -32,6 +32,7 @@ function ReportPage() {
         axios.post(`http://localhost:8080/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail ,"reportReason":select})
             .then(response => {
                 console.log(response);
+                alert('정상적으로 신고되었습니다');
             })
             .catch(error => {
                 console.log(error);
