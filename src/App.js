@@ -30,6 +30,7 @@ import KakaoLogin from './Login/KaKaoLogin';
 import JamDetail from './Jam/JamDetail';
 import Content from './Doing/Content.js';
 import ContentUpdate from './Doing/ContentUpdate';
+// import ContentUpdate from './Doing/ContentUpdate';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -57,9 +58,10 @@ function App() {
 
 
      
-      <Header2 />
+    
   return (
     <>
+      {/* <Header2 /> */}
      
     {/* { isNotLoginPage && isLogin && 
           <> 
@@ -75,7 +77,7 @@ function App() {
         }    */}
 
       {/* <Header2 /> */}
-      {/* <Route path="/" component={LoginStart} exact={true} /> */}
+      <Route path="/" component={LoginStart} exact={true} />
 
       {/* 메인, 공지 */}
       <Route path="/1" component={Main} exact={true} />
@@ -98,13 +100,12 @@ function App() {
       <Route path="/15" component={Chatting} exact={true}/>
       <Route path="/16" component={Payment} exact={true}/>
       <Route path="/17" component={Doing} exact={true}/>
+      <Route path="/17/:pcIdx" component={ContentUpdate} exact={true} />
       <Route path="/18" component={Charge} exact={true}/>
 
       {/* 비었음 사용할 것 */}
       <Route path="/19" component={JamDetail} exact={true} />
       <Route path="/20" component={Notice} exact={true} />
-      <Route path="/21" component={ContentUpdate} exact={true} />
-     
       <Footer />
     </>
   )

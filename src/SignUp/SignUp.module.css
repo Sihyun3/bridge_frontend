@@ -23,7 +23,7 @@
    /*아이디&비밀번호 입력 인풋박스*/
    .signupinput2 {
     margin:6px;
-    width:420px;
+    width:430px;
     height:40px;
     border: none;
     border-radius: 0.3rem;
@@ -69,13 +69,16 @@
     height:46px;
     margin: 16px;
   } 
-  /* 아이디 중복확인 체크버튼 */
-  .idcheck {
-    position: absolute;  
-    right: 618px;
-    top:218px;
-    padding:4px;
-    border-radius: 0.3rem;
-    background-color: #d9d9d9;
-    font-size:12px;
+  .kakao {
+    width:auto;
+    float: left;
+    margin-left:140px;
+    margin-top:20px;
+  }
+  /*네이버 로고*/
+  .naver {
+    width:auto;
+    float: left;
+    margin-left:50px;
+    margin-top:20px;
   }

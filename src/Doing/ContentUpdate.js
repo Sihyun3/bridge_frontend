@@ -2,21 +2,53 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../Doing/Content.module.css"
 
-const ContentUpdate = ({ history, match }) => {
-    // const {pdIdx} = match.params
-    const pdIdx = 1;
-    const pcIdx = 22;
+const ContentUpdate = () => {
+    // const { pcIdx } = match.params;
+    // const { pdIdx } = match.params;
+    const pcIdx = 1;
+    const pdIdx = 2; 
+    
 
-
-    const [ContentList, setContentList] = useState([]);
+    const [ContentList, setContentList] = useState({
+        content : '',
+        date : '',
+        file : '',
+        writer:''
+    });
     const [pcContent, setPcContent] = useState('');
     const [pcImg, setPcImg] = useState('');
     const [pdcComment, setPdcComment] = useState('');
     const [pcWriter, setPcWriter] = useState('');
     // const [pdIdx, setPdIdx] = useState('');
+    const [test, setTest] = useState(0);
+
     const fd = new FormData();
 
     const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/bridge/partnerdetail/content/${pcIdx}`)
+            .then(response => {
+                console.log(response);
+                // console.log(pcIdx);
+                // console.log(response.data);
+                setContentList({
+                    content : response.data.pcContent.pcContent,
+                    date : response.data.pcContent.pcDate,
+                    file : response.data.pcContent.pcFile,
+                    writer : response.data.pcContent.pcWriter
+                })
+                setTest(response.data.pcContent.pcIdx);
+                console.log("111111111" + test);
+                // const token = sessionStorage.getItem('token');
+                // console.log("111111111" + token);
+                // const decode_token = jwt_decode(token);
+                // console.log("222222222" + decode_token);
+                // setWriter(decode_token.sub);
+            }
+            )
+            .catch(error => console.log(error));
+    }, []);
 
     const handlerChangePcImg = e => {
         if (!e.target.files[0]) {
@@ -33,6 +65,8 @@ const ContentUpdate = ({ history, match }) => {
     const handlerChangePdcComment = e => setPdcComment(e.target.value);
     const handlerChangePcWriter = (e) => setPcWriter(e.target.value);
 
+
+
     const handlerSubmit = (e) => {
         e.preventDefault();
         let files = pcImg;
@@ -47,11 +81,16 @@ const ContentUpdate = ({ history, match }) => {
 
         axios({
             method: 'PUT',
-            url: `http://localhost:8080/api/bridge/partnerdetail/update/${pcIdx}`,
+            url: `http://localhost:8080/api/bridge/partnerdetail/update/${test}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         }).then((response) => {
-            console.log(response.data);
+            console.log(">>>>>>>>>>>" + response.data.pcContent);
+            console.log("=========" + response.data);
+            setPcContent(pcContent);
+            setPcImg(pcImg);
+            console.log("333333333333" + pcImg);
+
 
             alert("업로드가 성공했습니다.")
         }).catch(() => {
@@ -62,7 +101,7 @@ const ContentUpdate = ({ history, match }) => {
         // if (pcWriter != userNickname) {
         //     alert('작성자만 삭제할 수 있습니다.');
         //     console.log(userNickname);
-        
+
         //     return;
         // }
         axios.put(`http://localhost:8080/api/bridge/partnerdetail/delete/${pcIdx}`)
@@ -70,7 +109,7 @@ const ContentUpdate = ({ history, match }) => {
                 console.log(response);
                 if (response.data === "Y") {
                     alert('정상적으로 삭제되었습니다.');
-                    window.location.replace(`/17`); 
+                    window.location.replace(`/17`);
                 } else {
                     alert('삭제에 실패했습니다.');
                     return;
@@ -86,30 +125,31 @@ const ContentUpdate = ({ history, match }) => {
 
     return (
         <>
-            <div className={style.contentbox}>
-                <form onSubmit={handlerSubmit}>
+            {/* {
+                ContentList.map(ContentList => ( */}
+                    <div className={style.contentbox}>
 
-                    <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder="글 내용을 입력해주세요" />
+                        <form onSubmit={handlerSubmit}>
+                            {console.log(ContentList)}
+                            
+                            {ContentList.writer}
 
-                    <input className={style.file} type="file" id="pcImg" name="a" multiple="multiple" onChange={handlerChangePcImg} placeholder="클릭시 파일을 등록합니다." />
-                    {/* <input type="file"  name="profile_files"  multiple="multiple"/> */}
-                    {/* <li>
-                            댓글:{" "}
-                            <input type="text" value={pdcComment} onChange={handlerChangePdcComment} />
-                        </li> */}
-                    {/* <li>
-                            작성자:{" "}
-                            <input type="text" value={pcWriter} onChange={handlerChangePcWriter} />
-                        </li> */}
+                            <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder={ContentList.content}>
+                                {ContentList.content}
+                            </textarea>
 
-                    {/* <input type="button" className={style.finish} value="삭제" onClick={handlerClickDelete}/> */}
-                    <input type="button" id="submit" className={style.delete} onClick={() => handlerClickDelete(pcContent, pcImg, pcWriter)} value="삭제" />
-                    <button className={style.done} type="submit" onClick={handlerSubmit}>등록</button>
-                </form>
-            </div>
+                            <input className={style.file} type="file" id="pcImg"  name="a" multiple="multiple" onChange={handlerChangePcImg} placeholder="클릭시 파일을 등록합니다." />
+                            <input type="button" id="submit" className={style.delete} onClick={() => handlerClickDelete(pcContent, pcImg, pcWriter)} value="삭제" />
+                            <button className={style.done} type="submit" onClick={handlerSubmit}>등록</button>
+                        </form>
+                    </div>
+                {/* ) */}
+                {/* )} */}
         </>
-    )
 
+    )
 }
+
+
 
 export default ContentUpdate;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../Doing/Content.module.css"
+import jwt_decode from "jwt-decode";
 
 
 function Content({ match }) {
@@ -37,6 +38,10 @@ function Content({ match }) {
         e.preventDefault();
         let files = pcImg;
         let formData = new FormData();
+
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        let pcWriter = decode_token.name;
 
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
