@@ -32,7 +32,7 @@ const SignUp = ({ history }) => {
 
                 })
                 .catch(error => {
-                    alert('aaaaaaaid, pw가 일치하지 않습니다')
+                    alert('id, pw가 일치하지 않습니다')
                     console.log(error)
                     sessionStorage.clear();
                 })

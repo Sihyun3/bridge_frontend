@@ -110,24 +110,6 @@
     
     
 
-<<<<<<< HEAD
-    return (
-        <>
-            {/* https://developers.kakao.com/tool/resource/login */}
-            <form onSubmit={passInformation}>
-            { !accessToken && 
-                <img style={{width: 277, height: 60, cursor: 'pointer'}} 
-                     src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" 
-                     onClick={handlerLogin} /> 
-            }
-            <button type="submit">로그인 정보 넘기기</button>
-            </form>
-        </>
-    );
-};
-}
-export default KakaoLogin;
-=======
 //     return (
 //         <>
 //             {/* https://developers.kakao.com/tool/resource/login */}
@@ -144,4 +126,3 @@ export default KakaoLogin;
 // };
 
 // export default KakaoLogin;
->>>>>>> 66271881008dd3f80a0abe0fedb0bab2d0ec78f4

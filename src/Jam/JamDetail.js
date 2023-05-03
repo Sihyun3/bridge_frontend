@@ -1,8 +1,15 @@
 import style from './JamDetail.module.css'
 import play from './play.png'
 import note from './note.png'
-
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 const JamDetail = () => {
+    const [data,setData] = useState([]);
+    
+    useEffect(()=>{
+        axios.get('http://localhost:8080')
+    },[])
+
     return (
         <>
             <div className='container clearfix'>
