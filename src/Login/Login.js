@@ -6,28 +6,26 @@ import NaverLogin from './NaverLogin'
 import { useState } from "react";
 import axios from "axios";
 // // import {KAKAO_AUTH_URL} from '../Login/KaKaoLogin';
+import { useHistory } from 'react-router-dom';
 
 
-
-const Login = ({history, setIsLogin}) => {
+const Login = ({ setIsLogin}) => {
 
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword]=useState('');
-
+    const history = useHistory();
     const handlerOnClick = e =>{
         e.preventDefault();
         axios.post(`http://localhost:8080/login`,
-            {"userId": userId,"userPw": userPassword})
+            {"userId": userId,"userPassword": userPassword})
             .then(response => {
                 if(response.data){
                     alert('정상적으로 로그인되었습니다');
                     console.log(response);
+                    console.log(history)
                     sessionStorage.setItem("token",response.data);
                     setIsLogin(true);
                     history.push('/');
-                }else{
-                    alert('id, pw가 일치하지 않습니다')
-                    sessionStorage.clear();
                 }
             })
             .catch(error => {
@@ -37,14 +35,12 @@ const Login = ({history, setIsLogin}) => {
             })
     };
     
-    useEffect(() => {
-        // 로컬 스토리지에 userName이 존재하는 경우 로그인한 것으로 판단
-        // 이미 로그인한 경우 홈(/)으로 이동
-        const isLogin = window.sessionStorage.getItem('token');
-        if (isLogin) {
-            window.location.href = '/';
-        } 
-    }, []);
+    // useEffect(() => {
+    //     const isLogin = window.sessionStorage.getItem('token');
+    //     if (isLogin) {
+    //         history.push('/');
+    //     } 
+    // }, []);
 
 
     return (

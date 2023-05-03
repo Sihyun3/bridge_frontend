@@ -39,14 +39,6 @@ function Notice({ history, noticeIdx, title  }) {
     }, []);
 
 
-    // const [isCheckAll, setIsCheckAll] = useState(false);
-    
-    // const [checkedArray, setCheckedArray] = useState([]);
-    // const [checkedItems, setCheckedItems] = useState(new Set());
-
-    // const handlerCheckBox = (e) => {
-    //     setCheckBox(e.target.value);
-    // }
 
     /* 체크박스 전체 */
     const onAllCheckBox = (isChecked) => {
@@ -58,16 +50,6 @@ function Notice({ history, noticeIdx, title  }) {
         }
     }
 
-    // 체크박스 선택
-
-    // const CheckBox = (isChecked) => {
-    //     if(isChecked) {
-    //         const checkedList = datas.map((notice, index) => index);
-    //      setCheckedLists([checkedList]);
-    //     } else {
-    //      setCheckedLists([]);
-    //     console.log("체크되었고 해당 데이터가 체크리스트에 담겼습니다.");
-    // };
 
 
 
@@ -109,43 +91,12 @@ function Notice({ history, noticeIdx, title  }) {
             });
     };
 
-    // const onCheckAll = (isChecked) => {
-    //     if (isChecked) {
-    //       const indexArray = data.map((music, index) => index);
-    //       setvalue(indexArray);
-    //     } else {
-    //       setvalue([]);
-    //     }
-    //   }
 
 
     const handlerOnclick = () => {
         history.push('/notice/write');
     };
 
-    // const [isCheckAll, setIsCheckAll] = useState(false);
-    // const [isCheckedBox, setIsCheckedBox] = useState(false);
-    // const [checkedArray, setCheckedArray] = useState([]);
-    // const [checkedItems, setCheckedItems] = useState(new Set());
-
-  
-
-//     return (
-//         <>
-//             {/* <div className='container clearfix'> */}
-// const Notice = () => {
-
-//     const [data, setData] = useState([]);
-//     const [aIdx, setAIdx] = useState('');
-
-//     useEffect(() => {
-//         axios.get(`http://localhost:8080/api/announcementList`)
-//             .then(response => {
-//                 console.log(response.data);
-//                 setData(response.data);
-//             })
-//             .catch(error => console.log(error));
-//     }, [])
 
 
     return (
@@ -172,7 +123,7 @@ function Notice({ history, noticeIdx, title  }) {
             <form onSubmit={handlerSerchSubmit}>
                 <div className={style.rightbox}>
                     <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
-                    {/* <img type="button" className={style.searchImg}src={searchImg}  onClick={() => { onSubmit();}}></img> */}
+
                     <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
                 </div>
             </form>
@@ -181,11 +132,11 @@ function Notice({ history, noticeIdx, title  }) {
 
             <div className={style.write}>
                 <button className={style.writebutton} onClick={handlerOnclick} >작성</button>
-                {/* <Link to="/notice/write" className="btn">작성</Link> */}
+
                 <button className={style.delete} value={noticeIdx} onClick={handlerClickDelete}>선택삭제</button>
                 <input type="checkbox" checked={value.length === datas.length} onChange={(e) => onAllCheckBox(e.target.checked)} />
                 <span>전체선택</span>
-                {/* 체크박스 맵 돌린 거 */}
+
                 {datas.map((notice, index) => {
                     return (
                         <div key={notice.noticeIdx}>
@@ -210,11 +161,6 @@ function Notice({ history, noticeIdx, title  }) {
                                     }
                                 }}
                             />
-
-                                {/* <input type="checkbox" className={style.checkbox} value={notice.noticeIdx} checked={value.length === datas.length} onChange={(e) => onAllCheckBox(e.target.checked)}/> */}
-                                {/* <div key={notice.noticeIdx}>
-                        <div>{notice.noticeIdx}</div> */}
-                                {/* <Link to={`/notice/detail/${notice.noticeIdx}`}>{notice.title}</Link></div> */}
                                 <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>
@@ -242,10 +188,6 @@ function Notice({ history, noticeIdx, title  }) {
                                     }
                                 }}
                             />
-                                {/* <input type="checkbox" className={style.checkbox} value={notice.noticeIdx} checked={value.length === datas.length} onChange={(e) => onAllCheckBox(e.target.checked)} /> */}
-                                {/* <div key={notice.noticeIdx}>
-                <div>{notice.noticeIdx}</div> */}
-                                {/* <Link to={`/notice/detail/${notice.noticeIdx}`}>{notice.title}</Link></div> */}
                                 <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>
@@ -260,8 +202,7 @@ function Notice({ history, noticeIdx, title  }) {
 
 
                     <div>
-                        {/* let total = filteredDatas.length;
-                            const numPages = Math.ceil(total / limit); */}
+
                         <nav className="pageNum" >
                             <button onClick={() => setPage(page - 1)} disabled={page === 1} >
                                 &lt;
@@ -299,28 +240,9 @@ function Notice({ history, noticeIdx, title  }) {
                                     </button>
                             }
 
-                            {/* {filteredDatas !=="" && 
-                 
-                    } */}
                         </nav>
                     </div>
-                    {/* </div> */ }
-                {/* 관리자 아이디일때만 버튼 보이도록 수정 필요*/}
-                {/* <button className={style.writebutton}>작성</button> */}
-                {/* <button className={style.delete}>삭제</button> */}
-            {/* </div> */}
-                {/* {
-                    data.map((announcement) => {
-                        return(
-                        <div className={style.list}>
-                        {/* <input type="checkbox" className={style.checkbox} /> */}
-                        {/* className={style.title} */}
-                        {/* <Link to={`/api/announcementDetail/${announcement.aidx}`} className={style.title}>{announcement.atitle}</Link>
-                        <a className={style.writer}>{announcement.adate}</a> */}
-                    {/* </div> */}
-                        {/* )
-                    })
-                }  */}
+   
         </div> 
         </>
             );

@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import style from './NoticeWrite.module.css';
 // import style from './Notice.module.css';
 import '../reset.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 
 
 function NoticeDetail({match, history}) {

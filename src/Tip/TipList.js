@@ -11,7 +11,6 @@ const TipList = () => {
         axios.get(`http://localhost:8080/api/tiplist/`)
             .then(r => {
                 setData(r.data);
-                // console.log(r.data)
             })
     }, [])
     return (
@@ -37,15 +36,15 @@ const TipList = () => {
                 {
                     data.map((data) => {
                         console.log(data.tbIdx)
-                        return(
-                            <Link to={`/8/${data.tbIdx}`} className={style.list}>
-                            <a className={style.title}>{data.tbTitle}</a>
-                            <a className={style.heart}>♡</a>
-                            <a className={style.count}>{data.tbHeart}</a>
-                            <a className={style.writer}>{data.userId}</a>
-                        </Link>
+                        return (
+                            <Link to={`/15/${data.tbIdx}`} className={style.list}>
+                                <a className={style.title}>{data.tbTitle}</a>
+                                <a className={style.heart}>♡</a>
+                                <a className={style.count}>{data.tbHeart}</a>
+                                <a className={style.writer}>{data.userId}</a>
+                            </Link>
                         )
-                        
+
                     })
                 }
 

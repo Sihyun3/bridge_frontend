@@ -1,12 +1,11 @@
 // 헤더 풋터
 import Header2 from './Header/Header2';
 import Footer from './Footer/Footer';
-
 //페이지 임포트
 import LoginStart from './Login/LoginStart';
 import Main from './Main/Main';
 import Notice from './Admin-Notice/Notice';
-// import Login from './Login/Login';
+import Login from './Login/Login';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
@@ -23,19 +22,17 @@ import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
 import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
-
-
-import { Route } from 'react-router-dom';
-// import KakaoLogin from './Login/KaKaoLogin';
-
-
 import TipWrite from './Tip/TipWrite'
 import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
-import { useEffect } from 'react';
-import NoticeDetail from './Admin-Notice/NoticeDetail';
 import ReportList from './Admin-Report/ReportList';
+import ReportDetail from './Admin-Report/ReportDetail';
+import TipEdit from './Tip/TipEdit'
+import TipDetail from './Tip/TipDetail'
+
+import { useEffect,useState } from 'react';
+import { Route } from 'react-router-dom';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -49,89 +46,56 @@ function App() {
       {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
 
-      {/* 메인, 공지 */}
-      {/* <Route path="/1" component={Main} exact={true} /> */}
-      <Route path="/2" component={Notice} exact={true} />
-      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
-      <Route path="/4" component={ReportPage} exact={true} />
-      <Route path="/5" component={SignUp} exact={true} />
-      <Route path="/6" component={TipList} exact={true} />
-      <Route path="/7/:tbIdx" component={TipEdit} excat = {true}/>
-      {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
-      <Route path="/8/:tbIdx" component={TipDetail} exact={true} />
-      <Route path="/9" component={Notice} exact={true} />
-      <Route path="/10" component={ProfileDetail} exact={true} />
-      
-      {/* 로그인, 회원가입 */}
-      {/* <Route path="/3" component={Login} exact={true} /> */}
-      {/* <Route path="/4" component={SignUp} exact={true} /> */}
-      {/* 관리자 */}
-      {/* <Route path="/5" component={ReportPage} exact={true} />
-      <Route path="/6" component={ReportDetail} exact={true} /> */}
-      {/* <Route path="/7" component={DealListAd} exact={true}/> */}
-      {/* <Route path="/8" component={MainAd} exact={true}/> */}
-      {/* 프로필 */}
-      {/* <Route path="/9" component={ProfileWrite} exact={true}/> */}
-      {/* <Route path="/10" component={ProfileDetail} exact={true} /> */}
-      {/* <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} /> */}
-   
-      <Route path="/5" component={SignUp} exact={true} />
-      <Route path="/6" component={TipList} exact={true} />
-     
-      <Route path="/8" component={Notice} exact={true} />
-      {/* <Route path="/9" component={NoticeDetail} exact={true} /> */}
-      <Route path='/api/announcementDetail/:aIdx' component={NoticeDetail} exact={true}/>
-      
-      {/* 팁 */}
-      {/* <Route path="/11" component={TipList} exact={true} /> */}
-      {/* 잼 */}
-      {/* <Route path="/12" component={JamList} exact={true} /> */}
-      {/* <Route path="/13" component={JamWrite} exact={true} /> */}
-      {/* 파트너 구인 */}
-      {/* <Route path="/14" component={PartnerWrite} exact={true}/> */}
-      {/* <Route path="/15" component={Chatting} exact={true}/> */}
-      {/* <Route path="/16" component={Payment} exact={true}/> */}
-      {/* <Route path="/17" component={Doing} exact={true}/> */}
-      {/* <Route path="/18" component={Charge} exact={true}/> */}
+      {/* 메인*/}
+      <Route path="/1" component={Main} exact={true} />
 
-      {/* 비었음 사용할 것 */}
+      {/* 공지사항 */}
+      <Route path="/2" component={Notice} exact={true} />
       <Route path="/notice/write" component={NoticeWrite} exact={true} />
-      <Route path="/notice" component={Notice} exact={true} />
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
-      {/* <Footer /> */}
-      <Route path="/12" component={JamList} exact={true} />
-      <Route path="/13" component={JamWrite} exact={true} />
-      <Route path="/14" component={JamDetail2} exact={true} />
-      {/* 잼 => 이클립스 백엔드 실행 & /14 실행 */}
+      {/* 로그인 */}
+      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
 
-      {/* 파트너 구인 */}
-      <Route path="/15" component={PartnerWrite} exact={true}/>
-      <Route path="/16" component={Chatting} exact={true}/>
-      <Route path="/17" component={Payment} exact={true}/>
-      <Route path="/18" component={Doing} exact={true}/>
-      <Route path="/19" component={Charge} exact={true}/>
+      {/* 회원 가입 */}
+      <Route path="/4" component={SignUp} exact={true} />
 
-      {/* 비었음 사용할 것 */}
-      <Route path="/22" component={JamDetail} exact={true} />
-      <Route path="/20" component={Notice} exact={true} />
-      <Route path="/21" component={TipWrite} exact={true} />
-
-      <Route path="/23" component={JamDetail} exact={true} />
-      
-      
       {/* 신고 */}
-      <Route path="/4" component={ReportPage} exact={true} />
-      <Route path="/21" component={ReportList} exact={true} />
-      <Route path="/7/:reportIdx" component={ReportDetail} exact={true} />
+      <Route path="/5" component={ReportPage} exact={true} />
+            {/* 리포트 리스트 페이지 없음 */}
+      <Route path="/6" component={ReportList} exact={true} />
+
+      <Route path="/7/:reportIdx" component={ReportDetail} exact={true} /> 
+      {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
+
+
+      {/* 잼 */}
+      <Route path="/8" component={JamList} exact={true} />
+      <Route path="/9" component={JamWrite} exact={true} />
+      <Route path="/10" component={JamDetail2} exact={true} />
+      <Route path="/11" component={JamDetail} exact={true} />
+
+      {/* 팁게시판 */}
+      <Route path="/13" component={TipList} exact={true} />
+      <Route path="/14/:tbIdx" component={TipEdit} excat = {true}/>
+      <Route path="/15/:tbIdx" component={TipDetail} exact={true} />
+      <Route path="/16" component={TipWrite} exact={true} />
 
       {/* 음원 분리 */}
-      <Route path="/22" component={MusicSplit} exact={true} />
+      <Route path="/17" component={MusicSplit} exact={true} />
+
+      {/* 채팅 */}
+      <Route path="/18" component={Chatting} exact={true}/>
 
       {/* 프로필 */}
-      <Route path="/10" component={ProfileDetail} exact={true} />
+      <Route path="/19" component={ProfileDetail} exact={true} />
       <Route path="/20" component={ProfileWrite} exact={true} />
-
+     
+      {/* 파트너 구인 */}
+      <Route path="/21" component={PartnerWrite} exact={true}/>
+      <Route path="/23" component={Payment} exact={true}/>
+      <Route path="/24" component={Doing} exact={true}/>
+      <Route path="/25" component={Charge} exact={true}/>
       
       <Footer />
     </>
