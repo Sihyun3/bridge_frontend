@@ -76,6 +76,7 @@
     background-color: #d9d9d9;
     border-radius: 0.3rem;
     width:240px;
+    margin-left:792px;
     position: relative;
 
 }
@@ -94,16 +95,16 @@
     float:left;
     width:100%;
     padding-top:20px;
+    margin-left:1335px;
 }
-
 /* 작성&삭제 버튼*/
 .write button{
-    
-    width:70px;
+    width:80px;
     height:30px;
     border-radius: 0.6rem;
     font-size:16px;
     margin-left: 16px;
+    /* padding-left: -40px; */
 }
 /*작성 버튼*/
 .writebutton{
@@ -133,25 +134,47 @@
     /* padding-left: 60px; */
     padding-right: 36px;
     padding-top: 8px;
+    line-height: 2.2;
     font-size: 16px;
-    display: inline-block;
 }
+
 /*제목*/
 .title {
+    width: 500px;
     padding-left: 30px;
-    padding-bottom: 8px;
+    /* padding-bottom: 8px; */
 }
 
 /*작성자*/
 .writer {
-    float:right
+    float:right;
+    margin-right: 20px;
+    /* margin-top: 8px; */
+    /* margin-bottom: 10px; */
+    /* padding-left: 500px; */
+    /* text-align: right; */
 }
+
 /*체크박스*/
 .checkbox {
     width:20px;
     height:20px;
     margin-top: 8px;
+    /* margin-bottom: 5px; */
     display: inline-block;
     margin-left:10px;
 
+}
+
+/* 페이징 */
+.pageName{
+    margin-top: 1300px;
+    align-content: center; 
+}
+
+/* clearfix */
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
 }
