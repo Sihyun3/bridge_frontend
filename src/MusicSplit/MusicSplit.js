@@ -27,7 +27,7 @@ const MusicSplit = () => {
     }
     axios({
       method: 'POST',
-      url: `http://localhost:8080/api/insertMusicForSplit`,
+      url: `http://localhost:8080/api/insertMusicForSplit/1`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {

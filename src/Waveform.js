@@ -25,11 +25,11 @@ const formWaveSurferOptions = ref => ({
         padding: '2px',
         'font-size': '10px'
       }
-    })
+  })
   ]
 });
 
-const Waveform = forwardRef((props, ref, data) => {
+const Waveform = forwardRef((props, ref) => {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [playing, setPlay] = useState(false);
@@ -83,8 +83,6 @@ const Waveform = forwardRef((props, ref, data) => {
 
     wavesurfer.current.on("ready", function () {
       totalTime = wavesurfer.current.getDuration();
-      wavesurfer.current.setCurrentTime(100);
-      console.log(wavesurfer.current.getCurrentTime());
       setTotalTime(totalTime);
       tMin = Math.floor(totalTime / 60);
       setTMin(tMin);
@@ -94,11 +92,11 @@ const Waveform = forwardRef((props, ref, data) => {
       // pauseTime = wavesurfer.current.getDuration();
       // setPauseTime(pauseTime);
     })
+
     wavesurfer.current.on("audioprocess", function () {
       if (wavesurfer.current) {
         wavesurfer.current.setVolume(volume);
         setVolume(volume);
-
         currentTime = wavesurfer.current.getCurrentTime();
         setCurrentTime(currentTime);
         min = Math.floor(currentTime / 60);
@@ -109,6 +107,7 @@ const Waveform = forwardRef((props, ref, data) => {
     });
     return () => wavesurfer.current.destroy();
   }, [url]);
+
   const handlePlayPause = () => {
     setPlay(!playing);
     wavesurfer.current.playPause();
@@ -126,7 +125,7 @@ const Waveform = forwardRef((props, ref, data) => {
 
   // const [hover, setHover] = useState<string>('');
 
-  // 멈춰 !!!!@!!@!!
+  // 멈춰 !!!!
   // let a = pMin + ":" + pSec
   // const [isHovering, setIsHovering] = useState(false);
 
