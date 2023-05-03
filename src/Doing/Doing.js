@@ -2,6 +2,7 @@ import style from './Doing.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
+import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";

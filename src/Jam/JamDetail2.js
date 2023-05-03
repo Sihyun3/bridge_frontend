@@ -167,18 +167,6 @@ export default function JamDetail2() {
         <button type="submit">제출</button>
       </form>
 
-      <form onSubmit={handleCommentSubmit}>
-        <input type="text" id="writer" name="writer" value={writer} onChange={handleChangeWriter} placeholder="작성자" />
-        <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코맨트를 입력하세요" />
-        <button type="submit">작성</button>
-      </form>
-      <button onClick={test}>test</button>
-      {/* <div className="one-line-list"> */}
-        {/* <ul className="line-list"> */}
-          {/* 코맨트 리스트 데이터 출력 */}
-          {/* {
-            data.map((n) => (
-              <li key={n.commentIdx}>
       {/* 댓글 목록  map*/}
       {/* 작성자만 삭제 가능하게 만들어야함  ==> 수정 필요*/}
       <hr />

@@ -11,6 +11,7 @@ import style from '../Login/Login.module.css'
 
 // // export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+// const KakaoLogin = ({history}) => {
 
 const KakaoLogin = ({ }) => {
     const { Kakao } = window;
@@ -109,8 +110,8 @@ const KakaoLogin = ({ }) => {
                         });
                 })
                 .catch(error => console.log(error));
-        }
-    }, []);
+            }
+        },[]);
 
 
 
