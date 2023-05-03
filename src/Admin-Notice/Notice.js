@@ -3,7 +3,9 @@ import { useState, useEffect, useCallback } from 'react';
 // import style from './Notice.module.css'
 import style from './NoticeTest.module.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+// import style from './Notice.module.css'
 import searchImg from './searchImg.png'
+// import { Link } from 'react-router-dom'
 
 
 function Notice({ history, noticeIdx, title  }) {
@@ -128,9 +130,27 @@ function Notice({ history, noticeIdx, title  }) {
 
   
 
+//     return (
+//         <>
+//             {/* <div className='container clearfix'> */}
+// const Notice = () => {
+
+//     const [data, setData] = useState([]);
+//     const [aIdx, setAIdx] = useState('');
+
+//     useEffect(() => {
+//         axios.get(`http://localhost:8080/api/announcementList`)
+//             .then(response => {
+//                 console.log(response.data);
+//                 setData(response.data);
+//             })
+//             .catch(error => console.log(error));
+//     }, [])
+
+
     return (
         <>
-            {/* <div className='container clearfix'> */}
+    
             <div className={style.nav}>
                 <ul className={style.menu}>
                     <li>메인 </li>
@@ -143,6 +163,7 @@ function Notice({ history, noticeIdx, title  }) {
             <div className={style.box1}>
                 <h1>공지사항</h1>
             </div>
+            <div className='container clearfix'>
             <div className={style.leftbox}>
                 <button className={style.date}>작성일자</button>
             </div>
@@ -164,7 +185,7 @@ function Notice({ history, noticeIdx, title  }) {
                 <button className={style.delete} value={noticeIdx} onClick={handlerClickDelete}>선택삭제</button>
                 <input type="checkbox" checked={value.length === datas.length} onChange={(e) => onAllCheckBox(e.target.checked)} />
                 <span>전체선택</span>
-                {/* 파형&체크박스 맵 돌린거 */}
+                {/* 체크박스 맵 돌린 거 */}
                 {datas.map((notice, index) => {
                     return (
                         <div key={notice.noticeIdx}>
@@ -284,6 +305,23 @@ function Notice({ history, noticeIdx, title  }) {
                         </nav>
                     </div>
                     {/* </div> */ }
+                {/* 관리자 아이디일때만 버튼 보이도록 수정 필요*/}
+                {/* <button className={style.writebutton}>작성</button> */}
+                {/* <button className={style.delete}>삭제</button> */}
+            {/* </div> */}
+                {/* {
+                    data.map((announcement) => {
+                        return(
+                        <div className={style.list}>
+                        {/* <input type="checkbox" className={style.checkbox} /> */}
+                        {/* className={style.title} */}
+                        {/* <Link to={`/api/announcementDetail/${announcement.aidx}`} className={style.title}>{announcement.atitle}</Link>
+                        <a className={style.writer}>{announcement.adate}</a> */}
+                    {/* </div> */}
+                        {/* )
+                    })
+                }  */}
+        </div> 
         </>
             );
 }

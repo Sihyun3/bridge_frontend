@@ -1,11 +1,33 @@
 import style from './Payment.module.css';
 import user from './user.png';
 import arrow from './PaymentImg.png';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
 const Payment = () => {
 
+    const [userId, setUserId] = useState('');
+    const [currentPoint, setCurrentPoint] = useState(0);
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        setUserId(decode_token.sub);
+        axios.get(`http://localhost:8080/api/chargePoint/${userId}`)
+            .then(response => {
+                console.log(response.data);
+                setCurrentPoint(response.data.userPoint);
+                // setWillPoint(currentPoint);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [userId]);
+
     return (
         <>
+                <div className='container clearfix' >
             <div className={style.mainBox}>
                 <div className={style.mainText}>결제</div>
                 <div className={style.profile}>
@@ -42,7 +64,7 @@ const Payment = () => {
                         <p className={style.pointP}>P</p>
                     </div>
                     <div className={style.havePoint}>
-                        <span className={style.have}>보유 99,999 P</span>
+                        <span className={style.have}>보유 {currentPoint} P</span>
                         <label for='All' className={style.selectText}>모두 사용</label>
                         <input type='checkbox' className={style.selectAll} id='All' name='All' value="All" />
                     </div>
@@ -51,6 +73,7 @@ const Payment = () => {
 
                     <p className={style.paymentNotice}> 잔액이 부족합니다. 포인트를 충전해주세요. </p>
                 </div>
+            </div>
             </div>
         </>
     );

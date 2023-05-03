@@ -6,6 +6,7 @@ import send from './send.png';
 const Chatting = () => {
     return (
         <>
+                  <div className='container clearfix'>
             <div className={style.mainBox}>
                 <div className={style.chatListBox}>
                     <div className={style.chatListText}>채팅 목록</div>
@@ -98,6 +99,7 @@ const Chatting = () => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     );

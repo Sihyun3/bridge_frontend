@@ -1,39 +1,79 @@
 import style from './ReportDetail.module.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 // import Page from 'react';
 // import '../reset.css';
 
 
-function ReportDetail() {
+function ReportDetail({ match }) {
+  const { reportIdx } = match.params;
+  const [reportReason, setReportReason] = useState('');
+  const [reportReasonDetail, setReportReasonDetail] = useState('');
+  const [userId, setUserId] = useState('');
+  const [reportedUserId, setReportedUserId] = useState('');
+  const [reportCount, setReportCount] = useState('');
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/openReportDetail/${reportIdx}`)
+      .then(response => {
+        setReportReason(response.data.reportReason);
+        setReportReasonDetail(response.data.reportReasonDetail);
+        setUserId(response.data.userId);
+        setReportedUserId(response.data.reportedUserId);
+        
+        axios.get(`http://localhost:8080/api/reportCount/${response.data.reportedUserId}`)
+          .then(response => {
+            setReportCount(response.data);
+          })
+          .catch(error => {
+            // console.log(`http://localhost:8080/api/reportCount/${reportedUserId}`);
+            console.log(error);
+          })
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  },[]);
+
+  const handleReport = () => {
+    axios.put(`http://localhost:8080/api/handleReport/${userId}`, {"userId":reportedUserId})
+          .then(response => {
+            alert('영구정지 처리되었습니다.')
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          })
+  };
+
+
   return (
     <>
       <div className={style.grayBox}>
         <h1 className={style.boxTitle}>사용자 신고 상세내역</h1>
         <div className={style.box}>
           <h5 className={style.boxText1}>신고 대상 :</h5>
-          <div className={style.inputBox1}>이시현</div>
+          <div className={style.inputBox1}>{reportedUserId} </div>
         </div>
         <div className={style.box}>
           <h5 className={style.boxText1}>신고자 :</h5>
-          <div className={style.inputBox1} >조아라</div>
+          <div className={style.inputBox1} >{userId}</div>
         </div>
         <div className={style.box2}>
           <h5 className={style.boxText2}>사유 :</h5>
-          <div className={style.inputBox2}>인격모독</div>
+          <div className={style.inputBox2}>{reportReason}</div>
         </div>
         <div className={style.box3}>
           <h5 className={style.boxText3}>상세내용 :</h5>
-          <div className={style.inputBox3}>정말 어이없네요 영정 부탁드려요.</div>
+          <div className={style.inputBox3}>{reportReasonDetail}</div>
         </div>
         <div className={style.box4}>
-          <h5 className={style.boxText4}>제재하기 :</h5>
+        신고 당한 횟수 : {reportCount}
         </div>
-        <div className={style.box5}>
-          <input className={style.inputBox4} type="radio" name="date"/> 7일
-          <input className={style.inputBox4} type="radio" name="date"/> 한 달
-          <input className={style.inputBox4} type="radio" name="date"/> 영구정지
-          <input className={style.inputBox4} type="radio" name="date"/> 제재 안 함
-        </div>
-        <button className={style.button1} onClick=''>처리하기</button>
+
+        {/* 영구정지 처리시 1로 값 바뀜 => 스프링 로그인에서 if문 사용해서 제재 필요 */}
+        <button className={style.button1} onClick={handleReport}>영구정지</button>
+        <button className={style.button1}>목록</button>
       </div>
     </>
   );
