@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Waveform from "../Waveform";
+import Waveform from "../Component/Waveform";
 import style from './MusicSpilt.module.css';
 
 const MusicSplit = () => {

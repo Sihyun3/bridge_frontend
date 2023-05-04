@@ -5,7 +5,9 @@ import Header1 from '../Header/Header1'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 const TipList = () => {
+    const history = useHistory();
     const [data, setData] = useState([]);
     useEffect(() => {
         axios.get(`http://localhost:8080/api/tiplist/`)
@@ -31,7 +33,9 @@ const TipList = () => {
                     <img className={style.searchImg} src={searchImg} />
                 </div>
                 <div className={style.write}>
-                    <button className={style.writebutton}>작성</button>
+                    <button className={style.writebutton} onClick={()=>{
+                        history.push('/16')
+                    }}>작성</button>
                 </div>
                 {
                     data.map((data) => {

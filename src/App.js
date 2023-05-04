@@ -37,7 +37,7 @@ import { Route } from 'react-router-dom';
 function App() {
   const [isLogin, setIsLogin] = useState(false);
      useEffect(()=>{
-      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiYzE0NzhlZC05ZjE5LTRkMGUtOGEyMi05ZmRmYmI3NjVlODgiLCJpYXQiOjE2ODI1NjAzOTAsImV4cCI6MTY4MjY0Njc5MH0.dkSCzKTF-wXRfyvtYit_MScEPgDJPFDOehHY1I8Tdt8");
+      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
      },[])
      
   return (
@@ -73,7 +73,7 @@ function App() {
       <Route path="/8" component={JamList} exact={true} />
       <Route path="/9" component={JamWrite} exact={true} />
       <Route path="/10" component={JamDetail2} exact={true} />
-      <Route path="/11" component={JamDetail} exact={true} />
+      <Route path="/11/:cIdx" component={JamDetail} exact={true} />
 
       {/* 팁게시판 */}
       <Route path="/13" component={TipList} exact={true} />
@@ -96,7 +96,7 @@ function App() {
       <Route path="/23" component={Payment} exact={true}/>
       <Route path="/24" component={Doing} exact={true}/>
       <Route path="/25" component={Charge} exact={true}/>
-      
+      {/*  */}
       <Footer />
     </>
   )
