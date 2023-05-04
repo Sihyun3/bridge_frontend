@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Waveform from "../Waveform";
 import { Co2Sharp } from "@mui/icons-material";
+import jwt_decode from "jwt-decode";
 
 export default function JamDetail2() {
 

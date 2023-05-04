@@ -53,7 +53,7 @@ const KakaoLogin = ({ }) => {
             )
                 .then(response => {
 
-                    console.log(response)
+                    console.log(response);
 
                     const accessToken = response.data.access_token;         // 사용자 액세스 토큰 값
                     setAccessToken(accessToken);
@@ -82,8 +82,9 @@ const KakaoLogin = ({ }) => {
                             axios.post(`http://localhost:8080/api/bridge/pass/login`, { "userNickName": kakao_account.profile.nickname,
                                     'userEmail' : kakao_account.email })
                                 .then((response) => {
+                                    console.log(response);
                                     if (response.data) {
-                                        // sessionStorage.setItem("token", response.data);
+                                        sessionStorage.setItem("token", response.data);
                                         alert('로그인 성공');
                                         window.location.href = "/";
 
