@@ -69,3 +69,16 @@
     height:46px;
     margin: 16px;
   } 
+  .kakao {
+    width:auto;
+    float: left;
+    margin-left:140px;
+    margin-top:20px;
+  }
+  /*네이버 로고*/
+  .naver {
+    width:auto;
+    float: left;
+    margin-left:50px;
+    margin-top:20px;
+  }

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from "react";
+import kakaoLogo from '../Login/kakao_login_large.png';
+import style from '../Login/Login.module.css'
 
 // const KakaoLogin = ({history}) => {
 
@@ -9,6 +11,7 @@ import { useEffect } from "react";
 
 // // export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+// const KakaoLogin = ({history}) => {
 
 const KakaoLogin = ({ }) => {
     const { Kakao } = window;
@@ -107,8 +110,13 @@ const KakaoLogin = ({ }) => {
                         });
                 })
                 .catch(error => console.log(error));
+<<<<<<< HEAD
         }
     }, []);
+=======
+            }
+        },[]);
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
 
 
 
@@ -116,8 +124,13 @@ const KakaoLogin = ({ }) => {
         <>
             {/* https://developers.kakao.com/tool/resource/login */}
             {!accessToken &&
+<<<<<<< HEAD
                 <img style={{ width: 277, height: 60, cursor: 'pointer' }}
                     src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png"
+=======
+                <img className={style.logo} style={{ width: 120, height: 60, cursor: 'pointer' }}
+                    src={kakaoLogo}
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
                     onClick={handlerLogin} />
             }
         </>
@@ -125,20 +138,4 @@ const KakaoLogin = ({ }) => {
 }
 export default KakaoLogin;
 
-//     return (
-//         <>
-//             {/* https://developers.kakao.com/tool/resource/login */}
-//             <form onSubmit={passInformation}>
-//             { !accessToken &&
-//                 <img style={{width: 277, height: 60, cursor: 'pointer'}}
-//                      src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png"
-//                      onClick={handlerLogin} />
-//             }
-//             <button type="submit">로그인 정보 넘기기</button>
-//             </form>
-//         </>
-//     );
-// };
-
-// export default KakaoLogin;
 

@@ -9,9 +9,13 @@ import Content from './Content';
 import ContentUpdate from './ContentUpdate';
 import ContentDetail from './ContentDetail';
 
+import ProjectListPage from './ProjectListPage';
+import Content from './Content';
+
 
 
 const Doing = ({ history, match, pcIdx }) => {
+    const a = 0;
 
     const [userId1, setUserId1] = useState('');
     const [userId2, setUserId2] = useState('');
@@ -29,8 +33,7 @@ const Doing = ({ history, match, pcIdx }) => {
             content: '',
             writer: '',
             pdNumber: ''
-        }
-    ]);
+        }])
     const [listArray, setListArray] = useState([
         {
             receiver: '',
@@ -220,6 +223,16 @@ const Doing = ({ history, match, pcIdx }) => {
                         </button>
                     </div>
                     {/* {console.log(pdIdx)} */}
+
+                    <div className={style.doinglist} key={index}>
+                        <button onClick={() => setPdIdx(handlerClickSelect(index + 1, value.receiver))}>
+                            <div className={style.img}>{value.photo}</div>
+                            <p className={style.p1}>{value.receiver} </p>
+                            <p className={style.p2}>{value.tag}</p>
+                        </button>
+
+                        {console.log(pdIdx)}
+                    </div>
                 </>
             );
         });
@@ -263,15 +276,9 @@ const Doing = ({ history, match, pcIdx }) => {
                 }
 
                 )}
-
-            </>
-        );
-    }
-
-
-    const CommentOpen = () => {
-
-    }
+        </>
+                )
+                }
 
 
     const CommentList = () => {

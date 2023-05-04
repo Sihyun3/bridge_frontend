@@ -15,7 +15,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
             // 팝업창으로 로그인을 진행할 것인지?           
             isPopup: false,
             // 버튼 타입 ( 색상, 타입, 크기 변경 가능 )
-            loginButton: { color: 'green', type: 3, height: 58 },
+            loginButton: { color: 'green', type: 2, height: 58, float:'left'},
             callbackHandle: true
         })
         naverLogin.init()
@@ -40,7 +40,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
                 sessionStorage.setItem('userName', naverLogin.user.name);
                 sessionStorage.setItem('userEmail', naverLogin.user.email);
 
-                axios.post(`http://localhost:8080/api/bridge/pass/login`, { "userNickName": naverLogin.user.name })
+                axios.post(`http://localhost:8080/api/bridge/pass/login`, { "userNickName": naverLogin.user.name,'userEmail':naverLogin.user.email })
                     .then((response) => {
                         if (response.data) {
                             sessionStorage.setItem("token", response.data);

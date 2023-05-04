@@ -37,7 +37,7 @@ const Charge = () => {
 
     const handleCharge = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/doCharge/${userId}`, { userId, "userPoint": willPoint })
+        axios.post(`http://localhost:8080/api/doCharge/${userId}`, { userId, "money": chargePoint })
             .then(response => {
                 console.log(response.data);
             })
@@ -67,7 +67,9 @@ const Charge = () => {
     //카카오페이 버튼 클릭 핸들러
     const handleKakaopay = (e) => {
         e.preventDefault();
-        axios.get(`http://localhost:8080/order/pay?total_amount=10000`)
+        
+        sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
+        axios.get(`http://localhost:8080/order/pay/${chargePoint}/${userId}`)
             .then(response => {
                 console.log(response);
                 console.log("==============" + response.data)
@@ -82,7 +84,12 @@ const Charge = () => {
             })
     }
 
-
+    const test = ()=>{
+        axios.get("http://localhost:8080/test",{ header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        .then(r=>{
+            console.log(r);
+        })
+    }
 
     return (
         <>
@@ -108,13 +115,13 @@ const Charge = () => {
                         </div>
                     </div>
                     <div className={style.regist}>
-                        <button className={style.registButton} onClick={handleCharge}>충전하기</button>
+                        <button className={style.registButton} onClick={handleKakaopay}>카카오페이</button>
                     </div>
 
-                    <div>
+                    {/* <div>
                         <button onClick={handleKakaopay}>카카오페이</button>
                     </div>
-
+                    <button onClick={test}>asddddddddd</button> */}
 
                 </div>
             </div>

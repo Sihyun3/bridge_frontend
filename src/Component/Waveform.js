@@ -1,7 +1,11 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
+import play from '../Jam/play.png';
+import JamBack from "../Jam/Rectangle 49.png";
 // import style from "./wave.module.css";
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
+import style from './Waveform.module.css'
+import image from '../Jam/musical-note.png'
 
 const formWaveSurferOptions = ref => ({
   container: ref,
@@ -11,7 +15,7 @@ const formWaveSurferOptions = ref => ({
   barWidth: 6,
   barRadius: 3,
   responsive: true,
-  height: 150,
+  height: 120,
   normalize: true,
   partialRender: true,
   interact: true,
@@ -25,7 +29,7 @@ const formWaveSurferOptions = ref => ({
         padding: '2px',
         'font-size': '10px'
       }
-  })
+    })
   ]
 });
 
@@ -136,32 +140,34 @@ const Waveform = forwardRef((props, ref) => {
   // const handleMouseOut = () => {
   //   setIsHovering(false);
   // };
-  const test = () => {
-    console.log(waveformRef.current)
-  }
+
   return (
     <>
       <div>
 
         {/* <span className={style.pauseTime}> {a}</span> */}
-
-        <div id="waveform" ref={waveformRef} /><div><span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div>
-        {/* <p className ={style.explain} >{a}</p>  */}
-        <div className="controls">
-          <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-          {/* <button onClick={test}>asdasd</button> */}
-          <input
-            type="range"
-            id="volume"
-            name="volume"
-            min="0.01"
-            max="1"
-            step=".025"
-            onChange={onVolumeChange}
-            defaultValue={volume}
-          />
-          <label htmlFor="volume">Volume</label>
+        <img style={{float:"left", marginTop:20 }}  src={image}/>
+        <div style={{ marginLeft: 10 ,width: 60, height: 60, float: "left" ,marginTop:37.5}}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play}/> : <img className={style.button} src={JamBack}/>}</button></div>
+        <div style={{ paddingLeft: 130 }}>
+          <div style={{ width: 850 ,marginLeft:20}}>
+            <div id="waveform" ref={waveformRef} />
+          </div>
         </div>
+        <div><span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div>
+        {/* <p className ={style.explain} >{a}</p>  */}
+        {/* <button onClick={test}>asdasd</button> */}
+        <label htmlFor="volume">Volume</label>
+        <input
+          type="range"
+          id="volume"
+          name="volume"
+          min="0.01"
+          max="1"
+          step=".025"
+          onChange={onVolumeChange}
+          defaultValue={volume}
+        />
+
       </div>
 
     </>

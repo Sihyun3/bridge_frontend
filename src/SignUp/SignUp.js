@@ -1,9 +1,9 @@
 import style from './SignUp.module.css';
 import { Link } from 'react-router-dom';
-import KakaoLogo from '../Login/KakaoLogo.png';
-import NaverLogo from '../Login/NaverLogo.png';
 import axios from "axios";
 import { useState } from "react";
+import KakaoLogin from '../Login/KaKaoLogin';
+import NaverLogin from '../Login/NaverLogin';
 
 const SignUp = ({ history }) => {
     //이름
@@ -36,7 +36,7 @@ const SignUp = ({ history }) => {
 
                 })
                 .catch(error => {
-                    alert('aaaaaaaid, pw가 일치하지 않습니다')
+                    alert('id, pw가 일치하지 않습니다')
                     console.log(error)
                     sessionStorage.clear();
                 })
@@ -113,8 +113,8 @@ const SignUp = ({ history }) => {
                     <br />
                     <button className={style.loginbutton} onClick={handlerOnClick}>회원 가입</button>
                     <p className={style.loginsns}>SNS로 가입하기</p>
-                    <img className={style.logo} src={KakaoLogo} />
-                    <img className={style.logo} src={NaverLogo} />
+                  <div className={style.kakao}>  <KakaoLogin/></div>
+                    <div className={style.naver}><NaverLogin/></div>
                 </div>
             </div>
         </>

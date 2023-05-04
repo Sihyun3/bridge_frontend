@@ -110,19 +110,24 @@
     margin-left: 88px;
     margin-right: 48px;
     font-size: 16px;
-    /* height: 40px; */
-    position: relative;
+    height: 40px;
+    /* position: relative; */
     top:12px;
     
 }
 
 /* 사진 첨부하는 칸 */
 .potofile {
+
+
     width: 760px;
     height: 40px;
     background-color: #D2B9FB;
     border-radius: 8px;
-    color: transparent;
+
+    bottom: 67px;
+    left: 164px;
+    line-height: 40px;
 }
 
 /* 사진 첨부 버튼 */
@@ -147,12 +152,22 @@ input[type=file]::file-selector-button {
 
 /* 악기선택창 이동 칸 */
 .SelectBox {
-    width:760px;
+    /* width:760px;
     height: 40px;
     margin-left: 164px;
     background-color: #D2B9FB;
     border-radius: 8px;
-    margin-top:28px;
+    margin-top:28px; */
+    width: 760px;
+    height: 40px;
+    background-color: #D2B9FB;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    margin-top:40px;
+    float:left;
+    margin-left:26px;
+    
 }
 .Select {
     font-size: 16px;
@@ -165,7 +180,8 @@ input[type=file]::file-selector-button {
 /* 음표 이미지 */
 .musicImg {
     margin-left: 60px;
-    position: relative;
+    float: left;
+    margin-top: 60px;
     bottom: 30px;
 }
 
@@ -185,10 +201,13 @@ input[type=file]::file-selector-button {
     height: 40px;
     background-color: #D2B9FB;
     border-radius: 8px;
-    color: transparent;
-    position: relative;
     bottom: 67px;
     left: 164px;
+    margin-left:26px;
+    margin-top:20px;
+    text-align: center;
+    line-height: 40px;
+
 }
 
 /* 음악파일 첨부 버튼 */
@@ -209,6 +228,7 @@ input[type=file]::file-selector-button {
 /* 사진 첨부랑 악기선택 이동 사이에 선 */
 .hr {
     margin-left: 50px;
+    margin-top: 20px;
 }
 
 /* 등록버튼 */
@@ -219,8 +239,8 @@ input[type=file]::file-selector-button {
     font-size: 16px;
     background-color: #c19df0;
     border-radius: 12px;
-    margin-left: 740px;
-    position: relative;
+    margin-left: 870px;
+    margin-top: 20px;
     bottom: 110px;
     left: 196px;
 }

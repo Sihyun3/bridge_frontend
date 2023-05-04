@@ -62,7 +62,6 @@ function Content({ pdIdx, uploadClick, setUploadClick }) {
             alert("업로드 중 오류가 발생했습니다.");
         });
     };
-
     return (
         <>
             <div className={style.contentbox}>
