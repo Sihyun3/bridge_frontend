@@ -6,7 +6,10 @@ import NaverLogin from './NaverLogin'
 import { useState } from "react";
 import axios from "axios";
 // // import {KAKAO_AUTH_URL} from '../Login/KaKaoLogin';
+<<<<<<< HEAD
+=======
 import { useHistory } from 'react-router-dom';
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
 
 
 const Login = ({ setIsLogin}) => {
@@ -22,7 +25,10 @@ const Login = ({ setIsLogin}) => {
                 if(response.data){
                     alert('정상적으로 로그인되었습니다');
                     console.log(response);
+<<<<<<< HEAD
+=======
                     console.log(history)
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
                     sessionStorage.setItem("token",response.data);
                     setIsLogin(true);
                     history.push('/');
@@ -57,7 +63,13 @@ const Login = ({ setIsLogin}) => {
                 <button className={style.loginbutton} onClick={handlerOnClick}>로그인</button>
                 <Link to="/5"><p className={style.signup}>회원가입</p></Link>
                 <p className={style.loginsns}>SNS계정 간편 로그인</p>
+<<<<<<< HEAD
+                <img className={style.logo} src={KakaoLogo}/>
+                <KakaoLogin />
+                <img className={style.logo} src={NaverLogo}/>
+=======
                <div className={style.kakao}> <KakaoLogin /></div>
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
                 <div className={style.naver}><NaverLogin /></div>
             </div>
             </div>

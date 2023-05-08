@@ -110,8 +110,13 @@ const KakaoLogin = ({ }) => {
                         });
                 })
                 .catch(error => console.log(error));
+<<<<<<< HEAD
+        }
+    }, []);
+=======
             }
         },[]);
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
 
 
 
@@ -119,8 +124,13 @@ const KakaoLogin = ({ }) => {
         <>
             {/* https://developers.kakao.com/tool/resource/login */}
             {!accessToken &&
+<<<<<<< HEAD
+                <img style={{ width: 277, height: 60, cursor: 'pointer' }}
+                    src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png"
+=======
                 <img className={style.logo} style={{ width: 120, height: 60, cursor: 'pointer' }}
                     src={kakaoLogo}
+>>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
                     onClick={handlerLogin} />
             }
         </>

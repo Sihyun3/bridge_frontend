@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../Doing/Content.module.css"
+import jwt_decode from "jwt-decode";
 
-const ContentUpdate = () => {
-    // const { pcIdx } = match.params;
-    // const { pdIdx } = match.params;
-    const pcIdx = 1;
-    const pdIdx = 2; 
-    
+const ContentUpdate = ({ pcIdx, index, editClick, setEditClick, setVariable, variable, setIsClick}) => {
 
     const [ContentList, setContentList] = useState({
-        content : '',
-        date : '',
-        file : '',
-        writer:''
+        content: '',
+        date: '',
+        file: '',
+        writer: ''
     });
     const [pcContent, setPcContent] = useState('');
-    const [pcImg, setPcImg] = useState('');
+    const [pcFile, setPcFile] = useState('');
     const [pdcComment, setPdcComment] = useState('');
     const [pcWriter, setPcWriter] = useState('');
-    // const [pdIdx, setPdIdx] = useState('');
     const [test, setTest] = useState(0);
 
     const fd = new FormData();
@@ -33,10 +28,10 @@ const ContentUpdate = () => {
                 // console.log(pcIdx);
                 // console.log(response.data);
                 setContentList({
-                    content : response.data.pcContent.pcContent,
-                    date : response.data.pcContent.pcDate,
-                    file : response.data.pcContent.pcFile,
-                    writer : response.data.pcContent.pcWriter
+                    content: response.data.pcContent,
+                    date: response.data.pcDate,
+                    file: response.data.pcFile,
+                    writer: response.data.pcWriter
                 })
                 setTest(response.data.pcContent.pcIdx);
                 console.log("111111111" + test);
@@ -50,7 +45,7 @@ const ContentUpdate = () => {
             .catch(error => console.log(error));
     }, []);
 
-    const handlerChangePcImg = e => {
+    const handlerChangePcFile = e => {
         if (!e.target.files[0]) {
             alert("업로드 불가능한 파일 형식입니다.");
             return;
@@ -58,7 +53,7 @@ const ContentUpdate = () => {
             alert("파일 크기는 50MB를 초과할 수 없습니다.");
             return;
         }
-        setPcImg(e.target.files);
+        setPcFile(e.target.files);
     };
 
     const handlerChangePcContent = e => setPcContent(e.target.value);
@@ -66,36 +61,46 @@ const ContentUpdate = () => {
     const handlerChangePcWriter = (e) => setPcWriter(e.target.value);
 
 
-
     const handlerSubmit = (e) => {
         e.preventDefault();
-        let files = pcImg;
+        let files = pcFile;
         let formData = new FormData();
+
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        let tempPcWriter = decode_token.name;
 
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
         }
-        formData.append("Data", new Blob([JSON.stringify({ pcContent, pcWriter, pdIdx })], { type: "application/json" }))
-        // formData.append("Data", {PartnerContentDto:{pcContent,pcWriter}})
-        console.log(formData)
+        formData.append("Data", new Blob([JSON.stringify({ pcContent, tempPcWriter, pcIdx })], { type: "application/json" }))
+
+        // /* key 확인하기 */
+        // for (let key of formData.keys()) {
+        //     console.log(key);
+        // }
+
+        // /* value 확인하기 */
+        // for (let value of formData.values()) {
+        //     console.log(value);
+        // }
+
+        console.log(pcIdx);
 
         axios({
             method: 'PUT',
             url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/update/${test}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
-        }).then((response) => {
-            console.log(">>>>>>>>>>>" + response.data.pcContent);
-            console.log("=========" + response.data);
-            setPcContent(pcContent);
-            setPcImg(pcImg);
-            console.log("333333333333" + pcImg);
-
-
-            alert("업로드가 성공했습니다.")
-        }).catch(() => {
-            alert("업로드 중 오류가 발생했습니다.");
-        });
+        })
+            .then((response) => {
+                console.log(response);
+                alert("업로드가 성공했습니다.");
+                setEditClick([false])
+            })
+            .catch((error) => {
+                alert("업로드 중 오류가 발생했습니다.");
+            });
     }
     const handlerClickDelete = (pcContent, pcImg, pcWriter) => {
         // if (pcWriter != userNickname) {
@@ -127,24 +132,23 @@ const ContentUpdate = () => {
         <>
             {/* {
                 ContentList.map(ContentList => ( */}
-                    <div className={style.contentbox}>
+            <div className={style.contentbox}>
 
-                        <form onSubmit={handlerSubmit}>
-                            {console.log(ContentList)}
-                            
-                            {ContentList.writer}
+                <form onSubmit={handlerSubmit}>
 
-                            <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder={ContentList.content}>
-                                {ContentList.content}
-                            </textarea>
+                    {ContentList.writer}
 
-                            <input className={style.file} type="file" id="pcImg"  name="a" multiple="multiple" onChange={handlerChangePcImg} placeholder="클릭시 파일을 등록합니다." />
-                            <input type="button" id="submit" className={style.delete} onClick={() => handlerClickDelete(pcContent, pcImg, pcWriter)} value="삭제" />
-                            <button className={style.done} type="submit" onClick={handlerSubmit}>등록</button>
-                        </form>
-                    </div>
-                {/* ) */}
-                {/* )} */}
+                    <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder={ContentList.content}>
+                        {/* {ContentList.content} */}
+                    </textarea>
+
+                    <input className={style.file} type="file" id="pcFile" name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder= {ContentList.file} />
+                    <input type="button" id="submit" className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제" />
+                    <button className={style.done} type="submit">등록</button>
+                </form>
+            </div>
+            {/* ) */}
+            {/* )} */}
         </>
 
     )

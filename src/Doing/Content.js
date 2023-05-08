@@ -4,22 +4,20 @@ import style from "../Doing/Content.module.css"
 import jwt_decode from "jwt-decode";
 
 
-function Content({ match }) {
-    // const {pdIdx} = match.params
-    const pdIdx = 1;
-
+function Content({ pdIdx, uploadClick, setUploadClick }) {
 
     const [ContentList, setContentList] = useState([]);
     const [pcContent, setPcContent] = useState('');
-    const [pcImg, setPcImg] = useState('');
+    const [pcFile, setPcFile] = useState('');
     const [pdcComment, setPdcComment] = useState('');
     const [pcWriter, setPcWriter] = useState('');
+    
     // const [pdIdx, setPdIdx] = useState('');
     const fd = new FormData();
 
     const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
-    const handlerChangePcImg = e => {
+    const handlerChangePcFile = e => {
         if (!e.target.files[0]) {
             alert("업로드 불가능한 파일 형식입니다.");
             return;
@@ -27,7 +25,7 @@ function Content({ match }) {
             alert("파일 크기는 50MB를 초과할 수 없습니다.");
             return;
         }
-        setPcImg(e.target.files);
+        setPcFile(e.target.files);
     };
 
     const handlerChangePcContent = e => setPcContent(e.target.value);
@@ -36,7 +34,7 @@ function Content({ match }) {
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        let files = pcImg;
+        let files = pcFile;
         let formData = new FormData();
 
         const token = sessionStorage.getItem('token');
@@ -58,6 +56,8 @@ function Content({ match }) {
             console.log("축 성공");
 
             alert("업로드가 성공했습니다.")
+            setUploadClick(!uploadClick);
+
         }).catch(() => {
             alert("업로드 중 오류가 발생했습니다.");
         });
@@ -69,7 +69,7 @@ function Content({ match }) {
                     
                             <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder="글 내용을 입력해주세요" />
                             
-                            <input className={style.file} type="file" id="pcImg" name="a" multiple="multiple" onChange={handlerChangePcImg} placeholder="클릭시 파일을 등록합니다." />
+                            <input className={style.file} type="file" id="pcFile" name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder="클릭시 파일을 등록합니다." />
                             {/* <input type="file"  name="profile_files"  multiple="multiple"/> */}
                         {/* <li>
                             댓글:{" "}
@@ -82,7 +82,6 @@ function Content({ match }) {
                     <button className={style.done} type="submit">등록</button>
                 </form>
             </div>
-
         </>
     )
 }

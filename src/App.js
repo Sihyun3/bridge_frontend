@@ -9,6 +9,7 @@ import Login from './Login/Login';
 import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
+import ReportDetail from './Admin-Report/ReportDetail';
 import ProfileDetail from './Profile/ProfileDetail';
 import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
@@ -20,6 +21,7 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
+
 import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
@@ -39,9 +41,14 @@ function App() {
     //  useEffect(()=>{
     //   sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
     //  },[])
+
      
+    
   return (
     <>
+
+=======
+
 
       {/* <Header2 /> */}
       <Route path="/1" component={LoginStart} exact={true} />
@@ -97,6 +104,7 @@ function App() {
       <Route path="/24" component={Doing} exact={true}/>
       <Route path="/25" component={Charge} exact={true}/>
       {/*  */}
+
       <Footer />
     </>
   )
