@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const JamList = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8080/api/jam')
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam`)
             .then(r => {
                 setData(r.data)
                 console.log(r.data)
@@ -24,15 +24,15 @@ const JamList = () => {
                 <h1>게시판</h1>
             </div>
             <div className='container clearfix'>
-                <Link to="/9"><img className={style.playbutton} src={img}></img></Link>
+                <Link to="/jam/write"><img className={style.playbutton} src={img}></img></Link>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
                         data.map((data) => {
                             return (
                                 <>
                                     <div className={style.block}>
-                                        <Link to={`/11/${data.cidx}`}>
-                                        <img className={style.img} src={`http://localhost:8080/api/getMusic/${data.cphoto}.jpg`}></img>
+                                        <Link to={`/jam/detail/${data.cidx}`}>
+                                        <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
                                         <p className={style.title}>{data.ctitle}</p>
                                         </Link>
                                     </div>

@@ -36,21 +36,21 @@ import { Route } from 'react-router-dom';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-     useEffect(()=>{
-      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-     },[])
+    //  useEffect(()=>{
+    //   sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+    //  },[])
      
   return (
     <>
 
       {/* <Header2 /> */}
-      <Route path="/" component={LoginStart} exact={true} />
+      <Route path="/1" component={LoginStart} exact={true} />
 
       {/* 메인*/}
-      <Route path="/1" component={Main} exact={true} />
+      <Route path="/" component={Main} exact={true} />
 
       {/* 공지사항 */}
-      <Route path="/2" component={Notice} exact={true} />
+      <Route path="/notice" component={Notice} exact={true} />
       <Route path="/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
@@ -70,16 +70,16 @@ function App() {
 
 
       {/* 잼 */}
-      <Route path="/8" component={JamList} exact={true} />
-      <Route path="/9" component={JamWrite} exact={true} />
+      <Route path="/jam" component={JamList} exact={true} />
+      <Route path="/jam/write" component={JamWrite} exact={true} />
       <Route path="/10" component={JamDetail2} exact={true} />
-      <Route path="/11/:cIdx" component={JamDetail} exact={true} />
+      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
       {/* 팁게시판 */}
-      <Route path="/13" component={TipList} exact={true} />
-      <Route path="/14/:tbIdx" component={TipEdit} excat = {true}/>
-      <Route path="/15/:tbIdx" component={TipDetail} exact={true} />
-      <Route path="/16" component={TipWrite} exact={true} />
+      <Route path="/tip" component={TipList} exact={true} />
+      <Route path="/tip/edit/:tbIdx" component={TipEdit} excat = {true}/>
+      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} />
+      <Route path="/tip/write" component={TipWrite} exact={true} />
 
       {/* 음원 분리 */}
       <Route path="/17" component={MusicSplit} exact={true} />

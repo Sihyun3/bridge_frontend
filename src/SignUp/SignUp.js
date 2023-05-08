@@ -27,7 +27,7 @@ const SignUp = ({ history }) => {
 
     const handlerOnClick = e => {
         if (confrimMessage == null && Pmessage == null && Emassage == null && userId != null) {
-            axios.post(`http://localhost:8080/api/regist`, { "userId" : userId, "userPassword": userPassword, "userPhoneNumber": userPhoneNumber, 
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, { "userId" : userId, "userPassword": userPassword, "userPhoneNumber": userPhoneNumber, 
             "userEmail": userEmail, "userName" : userName, "userNickname" : userNickname })
                 .then(response => {
 

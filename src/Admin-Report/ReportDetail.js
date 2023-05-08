@@ -14,19 +14,19 @@ function ReportDetail({ match }) {
   const [reportCount, setReportCount] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/openReportDetail/${reportIdx}`)
+    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportDetail/${reportIdx}`)
       .then(response => {
         setReportReason(response.data.reportReason);
         setReportReasonDetail(response.data.reportReasonDetail);
         setUserId(response.data.userId);
         setReportedUserId(response.data.reportedUserId);
         
-        axios.get(`http://localhost:8080/api/reportCount/${response.data.reportedUserId}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/reportCount/${response.data.reportedUserId}`)
           .then(response => {
             setReportCount(response.data);
           })
           .catch(error => {
-            // console.log(`http://localhost:8080/api/reportCount/${reportedUserId}`);
+            // console.log(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/reportCount/${reportedUserId}`);
             console.log(error);
           })
       })
@@ -36,7 +36,7 @@ function ReportDetail({ match }) {
   },[]);
 
   const handleReport = () => {
-    axios.put(`http://localhost:8080/api/handleReport/${userId}`, {"userId":reportedUserId})
+    axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/handleReport/${userId}`, {"userId":reportedUserId})
           .then(response => {
             alert('영구정지 처리되었습니다.')
             console.log(response.data);

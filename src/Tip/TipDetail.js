@@ -4,14 +4,17 @@ import back_button from './back-button.png'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
+import jwtDecode from 'jwt-decode';
+import { useHistory } from 'react-router-dom';
 
 const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
     const [comments, setComments] = useState([]);
     const tb_idx = match.params.tbIdx;
     const [temp, setTemp] = useState()
+    const history = useHistory();
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/tipdetail/${tb_idx}/1`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
             .then(r => {
                 setData(r.data.tipDetail);
                 setComments(r.data.commentsList);
@@ -22,12 +25,12 @@ const TipDetail = ({ match }) => {
 
     const insert = (e)=>{
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/comment`,
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
         { "tbIdx": tb_idx, "tbcComments" : temp},
         { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
         ).then(()=>{
             console.log("asdasdasd")
-            axios.get(`http://localhost:8080/api/comments/${tb_idx}`)
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
             .then(r=>{
                 console.log(r.data)
                 setComments(r.data)
@@ -36,6 +39,28 @@ const TipDetail = ({ match }) => {
         )
         setTemp("");
     }
+
+    const handlerdelete = ()=>{
+        const token = sessionStorage.getItem('token')
+        const decode = jwtDecode(token);
+        
+        if (decode.sub != data.userId) {
+            alert('잘못된 접근 입니다.');
+            history.push('/')
+          }
+
+        console.log(decode.sub);
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`, 
+        { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
+        .then(()=>{
+            alert("성공적으로 삭제 되었습니다.")
+            history.push('/tip')
+        })
+        .catch(()=>{
+            alert("삭제에 실패했습니다.")
+        })
+    }
+
     return (
         <div className='container clearfix' >
             <div className={style.back}>
@@ -55,8 +80,8 @@ const TipDetail = ({ match }) => {
             </div>
             <div className={style.editbox}>
                 <ul>
-                    <li><Link to={`/7/${data.tbIdx}`}>삭제</Link></li>
-                    <li>수정</li>
+                    <li onClick={handlerdelete}> 삭제</li>
+                    <li><Link to={`/tip/edit/${data.tbIdx}`}></Link>수정</li>
                 </ul>
             </div>
             <div className={style.line}></div>

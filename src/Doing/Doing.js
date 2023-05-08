@@ -56,7 +56,7 @@ const Doing = ({ history, match, pcIdx }) => {
         setUserId1(userId);
         console.log(decode_token);
 
-        axios.get(`http://localhost:8080/api/bridge/partnerDetail/projectList/${userId}`,
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/projectList/${userId}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -85,7 +85,7 @@ const Doing = ({ history, match, pcIdx }) => {
         console.log(userId1);
         console.log(userId2);
 
-        axios.get(`http://localhost:8080/api/bridge/partnerDetail/paylist/${userId1}/${userId22}`,
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/paylist/${userId1}/${userId22}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -103,7 +103,7 @@ const Doing = ({ history, match, pcIdx }) => {
         setPdIdx(index);
         const pdIdx1 = index;
         console.log(pdIdx);
-        axios.get(`http://localhost:8080/api/bridge/partnerdetail/${pdIdx1}`
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdIdx1}`
         )
             .then(response => {
                 console.log(response);
@@ -165,7 +165,7 @@ const Doing = ({ history, match, pcIdx }) => {
 
             visible[index] = !visible[index];
 
-            axios.get(`http://localhost:8080/api/bridge/partnerDetail/comment/${pcIdx}`,
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/comment/${pcIdx}`,
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
                 .then((response) => {
                     console.log(response);

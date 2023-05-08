@@ -28,7 +28,7 @@ export default function JamDetail2() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/openComments/1`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openComments/1`)
             .then(response => {
                 setCommentsList(response.data.selectCommentsList)
                 const token = sessionStorage.getItem('token');
@@ -46,7 +46,7 @@ export default function JamDetail2() {
     const handleCommentSubmit = (e) => {
         e.preventDefault();
         //cIdx 부분 1번으로 하드코딩==> 수정 필요
-        axios.post(`http://localhost:8080/api/insertComments/1`, { "userId": writer, "ccComments": comment })
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/1`, { "userId": writer, "ccComments": comment })
             .then(response => {
                 console.log(response);
                 setInsert(insert + 1);
@@ -61,7 +61,7 @@ export default function JamDetail2() {
 
     // 코멘트 삭제 핸들러
     const handlerClickDelete = (ccIdx) => {
-        axios.delete(`http://localhost:8080/api/CommentsDelete/${ccIdx}`)
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${ccIdx}`)
             .then(response => {
                 console.log(response);
                 if (response.data === 1) {
@@ -90,7 +90,7 @@ export default function JamDetail2() {
         axios({
             method: 'POST',
             //cIdx 1번으로 하드코딩
-            url: `http://localhost:8080/api/insertmusic/1`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/1`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         }).then((response) => {
@@ -150,7 +150,7 @@ export default function JamDetail2() {
                         <Waveform
                             data={data}
                             key={musicInfo.musicUUID}
-                            src={`http://localhost:8080/api/insertmusic/rkskek.mp3`}
+                            src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/rkskek.mp3`}
                             ref={(elem) => (child.current[index] = elem)}
                         />
                         {/* 노래제목 */}

@@ -18,8 +18,9 @@ function NoticeWrite({history}) {
     const handlerChangeTitle = e => setTitle(e.target.value);
     const handlerChangeContents = e => setContents(e.target.value);
     const save = () => {
-        axios.post(`http://localhost:8080/api/notice/write`,
-        { title, contents })              // 요청 본문을 통해서 서버로 전달할 값
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/write`,
+        { title, contents },  {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
+        )              // 요청 본문을 통해서 서버로 전달할 값
             .then(response => {
                 console.log(response);                             // 수정 결과에 대한 메시지 처리
                     alert(response.data);

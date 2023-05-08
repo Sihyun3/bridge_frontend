@@ -31,7 +31,7 @@ const JamWrite = () => {
 
         axios({
             method: 'POST',
-            url: `http://localhost:8080/api/insertjam`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertjam`,
             headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
             data: formData
         }).then((r) => {
@@ -39,7 +39,7 @@ const JamWrite = () => {
             console.log(r.data)
             axios({
                 method: 'POST',
-                url: `http://localhost:8080/api/insertmusic/${r.data}`,
+                url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${r.data}`,
                 headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
                 data: formData1
             })

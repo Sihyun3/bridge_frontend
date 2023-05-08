@@ -8,7 +8,7 @@ const ReportList = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/openReportList`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
             .then(response => {
                 console.log(response.data);
                 setData(response.data);

@@ -27,7 +27,7 @@ const ContentUpdate = () => {
     const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/bridge/partnerdetail/content/${pcIdx}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/content/${pcIdx}`)
             .then(response => {
                 console.log(response);
                 // console.log(pcIdx);
@@ -81,7 +81,7 @@ const ContentUpdate = () => {
 
         axios({
             method: 'PUT',
-            url: `http://localhost:8080/api/bridge/partnerdetail/update/${test}`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/update/${test}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         }).then((response) => {
@@ -104,7 +104,7 @@ const ContentUpdate = () => {
 
         //     return;
         // }
-        axios.put(`http://localhost:8080/api/bridge/partnerdetail/delete/${pcIdx}`)
+        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/delete/${pcIdx}`)
             .then(response => {
                 console.log(response);
                 if (response.data === "Y") {
