@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from "react";
-import kakaoLogo from '../Login/kakao_login_large.png';
+// import kakaoLogo from '../Login/kakao_login_large.png';
 import style from '../Login/Login.module.css'
+import KakaotalkLogo from '../Login/KakaotalkLogo.png';
 
 // const KakaoLogin = ({history}) => {
 
@@ -112,15 +113,35 @@ const KakaoLogin = ({ }) => {
                 .catch(error => console.log(error));
             }
         },[]);
-
+        
+        const sns = {
+            width: "40px",
+            height: "40px",
+            display: "inline-flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "0 5px",
+            borderRadius: "50%",
+            // boxShadow: "-5px -5px 10px #ffffff, 5px 5px 8px #babebc",
+            cursor: "pointer",
+            // marginTop: "10%",
+            // marginBottom:"20%",
+            cursor: 'pointer'
+        }
 
 
     return (
         <>
             {/* https://developers.kakao.com/tool/resource/login */}
-            {!accessToken &&
+            {/* {!accessToken &&
                 <img className={style.logo} style={{ width: 120, height: 60, cursor: 'pointer' }}
                     src={kakaoLogo}
+                    onClick={handlerLogin} />
+            } */}
+
+            {!accessToken &&
+                <img className={style.logo} style={sns}
+                src={KakaotalkLogo}
                     onClick={handlerLogin} />
             }
         </>

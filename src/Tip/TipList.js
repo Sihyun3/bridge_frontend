@@ -16,6 +16,14 @@ const TipList = () => {
                 setData(r.data);
             })
     }, [])
+
+    const [filteredDatas, setFilteredDatas] = useState([]);
+
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
+    const [value, setValue] = useState([]);
+
     return (
         <>
             <Header1 />
@@ -49,7 +57,48 @@ const TipList = () => {
 
                     })
                 }
+                <div className={style.page}>
+
+                    <nav className="pageNum" >
+                        <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+                            &lt;
+                        </button>
+                        {
+                            filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => setPage(i + 1)}
+                                    aria-current={page === i + 1 ? "page" : null}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+
+                        {
+                            filteredDatas == "" && Array(Math.ceil(data.length / limit)).fill().map((page, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => setPage(i + 1)}
+                                    aria-current={page === i + 1 ? "page" : null}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+
+                        {
+                            filteredDatas == "" && data ?
+                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(data.length / limit)}>
+                                    &gt;
+                                </button>
+                                :
+                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
+                                    &gt;
+                                </button>
+                        }
+                    </nav>
+                </div>
             </div>
+
         </>
     )
 }

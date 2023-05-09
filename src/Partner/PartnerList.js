@@ -15,6 +15,7 @@ const PartnerList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
 
+
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = (partnerList) => {
@@ -66,6 +67,7 @@ const PartnerList = () => {
   const clearRadio = () => {
     setTag('');
   };
+
 
   return (
     <>
