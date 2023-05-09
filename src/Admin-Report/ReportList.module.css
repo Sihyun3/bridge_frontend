@@ -4,7 +4,7 @@
     width: 100%;
     background-color: #ffffff;
     text-align: center;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #1f1f1f;
 }
 
 .box1 h1 {
@@ -39,12 +39,12 @@
     margin-top: 80px;
     margin-bottom: 60px;
     /* border-top: 2px solid black; */
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #1f1f1f;
     float: left;
     width:1168px;
 }
 .info {
-    border-top: 3px solid black;
+    border-top: 3px solid #1f1f1f;
 }
 
 /*신고번호 등 */

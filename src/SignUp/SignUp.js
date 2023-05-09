@@ -27,7 +27,7 @@ const SignUp = ({ history }) => {
 
     const handlerOnClick = e => {
         if (confrimMessage == null && Pmessage == null && Emassage == null && userId != null) {
-            axios.post(`http://localhost:8080/api/regist`, { "userId" : userId, "userPassword": userPassword, "userPhoneNumber": userPhoneNumber, 
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, { "userId" : userId, "userPassword": userPassword, "userPhoneNumber": userPhoneNumber, 
             "userEmail": userEmail, "userName" : userName, "userNickname" : userNickname })
                 .then(response => {
 
@@ -89,6 +89,23 @@ const SignUp = ({ history }) => {
 
     };
 
+    //ID 중복체크
+    const userIdCheck = () => {
+        axios.post(`http://localhost:8080/api/idlist/${userId}`, )
+            .then(response => {
+                const data = response.data;
+                if (data === 1) {
+                    alert("이미 사용중인 아이디입니다.");
+
+                } else if (data === 0) {
+                    
+                    alert("사용 가능한 아이디입니다.")
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
 
 
@@ -101,6 +118,7 @@ const SignUp = ({ history }) => {
                     <input className={style.signupinput} onChange={handlerChangeName} placeholder="이름을 입력해주세요." />
                     <input className={style.signupinput} onChange={handlerChangeNickName} placeholder="닉네임을 입력해주세요." />
                     <input className={style.signupinput} onChange={handlerChangeUserId} placeholder="아이디를 입력해주세요." />
+                    <button className={style.idcheck} onClick={userIdCheck}>ID확인</button>
                     <input className={style.signupinput} onChange={handlerChangeEmail} placeholder="이메일을 입력해주세요." />
                     <div>{Emassage}</div>
 
@@ -115,6 +133,7 @@ const SignUp = ({ history }) => {
                     <p className={style.loginsns}>SNS로 가입하기</p>
                   <div className={style.kakao}>  <KakaoLogin/></div>
                     <div className={style.naver}><NaverLogin/></div>
+                    
                 </div>
             </div>
         </>

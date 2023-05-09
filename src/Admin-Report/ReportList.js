@@ -9,7 +9,7 @@ const ReportList = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/openReportList`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
             .then(response => {
                 console.log(response.data);
                 setData(response.data);
@@ -19,10 +19,10 @@ const ReportList = () => {
 
 
     return (
-        <> 
-        <div className={style.box1}>
-            <h1>신고 관리</h1>
-        </div>
+        <>
+            <div className={style.box1}>
+                <h1>신고 관리</h1>
+            </div>
             <div className='container clearfix'>
                 <div className={style.reportbox}>
 
@@ -39,7 +39,7 @@ const ReportList = () => {
                                 <>
 
                                     <div className={style.list}>
-                                        <Link to={`/7/${reportList.reportIdx}`} className={style.num}> {reportList.reportIdx} </Link>
+                                        <Link to={`/report/detail/${reportList.reportIdx}`} className={style.num}> {reportList.reportIdx} </Link>
                                         <span>
                                             {reportList.reportReason}
                                         </span>
@@ -58,8 +58,8 @@ const ReportList = () => {
                     }
                 </div>
             </div>
-        </>
-    )
+</>
+            )
 }
 
-export default ReportList;
+            export default ReportList;

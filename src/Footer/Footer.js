@@ -9,6 +9,7 @@ import BridgeBlackLogo from './FooterIcons/BridgeBlackLogo.png';
 
 
 
+
     const Footer = () => {
         return (
             <>

@@ -15,7 +15,7 @@ article, aside, footer, header, nav, section {
 box-sizing: inherit;
 }
 footer .container {
-
+/* margin-bottom: 30px; */
 padding: 10px 0 0 0;
 }
 

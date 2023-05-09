@@ -8,7 +8,7 @@ import searchImg from './searchImg.png'
 // import { Link } from 'react-router-dom'
 
 
-function Notice({ history, noticeIdx, title }) {
+function Notice({ history, noticeIdx, title, writer }) {
 
     const [datas, setDatas] = useState([]);
     const [searchInput, setSearchInput] = useState('');
@@ -22,7 +22,7 @@ function Notice({ history, noticeIdx, title }) {
     const [check, setCheck] = useState(false);
 
     // const [checkBox, setCheckBox] = useState();
-    const checkedData = [noticeIdx, title]
+    const checkedData = [noticeIdx, title, writer]
     const [checkedArray, setCheckedArray] = useState([]);
     const [checkedList, setCheckedLists] = useState([]);
     const [isChecked, setIsChecked] = useState();
@@ -30,7 +30,7 @@ function Notice({ history, noticeIdx, title }) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/notice')
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
@@ -56,10 +56,6 @@ function Notice({ history, noticeIdx, title }) {
 
         }
     }
-
-
-
-
     const handlerSerchInput = (e) => {
         setSearchInput(e.target.value);
     }
@@ -79,7 +75,7 @@ function Notice({ history, noticeIdx, title }) {
 
 
     const handlerClickDelete = () => {
-        axios.delete('http://localhost:8080/api/notice', { noticeIdx })
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`, { noticeIdx })
 
             .then(response => {
                 console.log(response);
@@ -106,10 +102,11 @@ function Notice({ history, noticeIdx, title }) {
 
 
 
+
     return (
         <>
 
-          
+
             <div className={style.box1}>
                 <h1>공지사항</h1>
             </div>
@@ -150,117 +147,120 @@ function Notice({ history, noticeIdx, title }) {
 
                     <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
 
+</div>
 
+
+
+              
+
+
+
+
+                        <div className={style.noticebox}>
+                            {
+                                filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
+                                    <div className={style.list}>
+                                        <input className={style.checkbox}
+                                            type="checkbox"
+                                            checked={value.includes(notice.noticeIdx)}
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setValue([...value, notice.noticeIdx]);
+                                                } else {
+                                                    setValue(value.filter((v) => v !== notice.noticeIdx));
+                                                }
+                                            }}
+
+                                        />
+
+                                        <Link to={`/notice/detail/${notice.noticeIdx}`}>
+                                            <span className={style.title}>{notice.title}</span>
+                                            <span className={style.writer}>{notice.userId}</span>
+                                        </Link>
+
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
+
+                            {
+                                filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
+                                    <div className={style.list}>
+                                        <input className={style.checkbox}
+                                            type="checkbox"
+                                            checked={value.includes(notice.noticeIdx)}
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setValue([...value, notice.noticeIdx]);
+                                                } else {
+                                                    setValue(value.filter((v) => v !== notice.noticeIdx));
+                                                }
+                                            }}
+                                        />
+
+                                        <Link to={`/notice/detail/${notice.noticeIdx}`}>
+                                            <span className={style.title}>{notice.title}</span>
+                                            <span className={style.writer}>{notice.userId}</span>
+                                        </Link>
+
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
+
+                        <div className={style.page}>
+
+                            <nav className="pageNum" >
+                                <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+                                    &lt;
+                                </button>
+                                {
+                                    filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
+                                        <button
+                                            key={i + 1}
+                                            onClick={() => setPage(i + 1)}
+                                            aria-current={page === i + 1 ? "page" : null}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+
+                                {
+                                    filteredDatas == "" && Array(Math.ceil(datas.length / limit)).fill().map((page, i) => (
+                                        <button
+                                            key={i + 1}
+                                            onClick={() => setPage(i + 1)}
+                                            aria-current={page === i + 1 ? "page" : null}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+
+                                {
+                                    filteredDatas == "" && datas ?
+                                        <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(datas.length / limit)}>
+                                            &gt;
+                                        </button>
+                                        :
+                                        <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
+                                            &gt;
+                                        </button>
+                                }
+
+                            </nav>
+                   
                 </div>
-
-
-
-
-                <div className={style.noticebox}>
-                    {
-                        filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
-                            <div className={style.list}>
-                                <input className={style.checkbox}
-                                    type="checkbox"
-                                    checked={value.includes(notice.noticeIdx)}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            setValue([...value, notice.noticeIdx]);
-                                        } else {
-                                            setValue(value.filter((v) => v !== notice.noticeIdx));
-                                        }
-                                    }}
-
-                                />
-
-                                <Link to={`/notice/detail/${notice.noticeIdx}`}>
-                                    <span className={style.title}>{notice.title}</span>
-                                    <span className={style.writer}>{notice.userId}</span>
-                                </Link>
-
-                                <div>
-
-                                </div>
-                            </div>
-                        ))
-                    }
-
-
-                    {
-                        filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
-                            <div className={style.list}>
-                                <input className={style.checkbox}
-                                    type="checkbox"
-                                    checked={value.includes(notice.noticeIdx)}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            setValue([...value, notice.noticeIdx]);
-                                        } else {
-                                            setValue(value.filter((v) => v !== notice.noticeIdx));
-                                        }
-                                    }}
-                                />
-
-                                <Link to={`/notice/detail/${notice.noticeIdx}`}>
-                                    <span className={style.title}>{notice.title}</span>
-                                    <span className={style.writer}>{notice.userId}</span>
-                                </Link>
-
-                                <div>
-
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
-
-
-                <div className={style.page}>
-
-                    <nav className="pageNum" >
-                        <button onClick={() => setPage(page - 1)} disabled={page === 1} >
-                            &lt;
-                        </button>
-                        {
-                            filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
-                                <button
-                                    key={i + 1}
-                                    onClick={() => setPage(i + 1)}
-                                    aria-current={page === i + 1 ? "page" : null}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-
-                        {
-                            filteredDatas == "" && Array(Math.ceil(datas.length / limit)).fill().map((page, i) => (
-                                <button
-                                    key={i + 1}
-                                    onClick={() => setPage(i + 1)}
-                                    aria-current={page === i + 1 ? "page" : null}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-
-                        {
-                            filteredDatas == "" && datas ?
-                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(datas.length / limit)}>
-                                    &gt;
-                                </button>
-                                :
-                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
-                                    &gt;
-                                </button>
-                        }
-
-                    </nav>
-                </div>
-
             </div>
-
         </>
     );
+
 }
 
 

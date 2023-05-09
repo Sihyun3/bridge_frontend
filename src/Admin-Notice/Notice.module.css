@@ -151,7 +151,7 @@
 }
 /*게시글 리스트*/
 .list {
-    /* margin:4px; */
+
     border-top:1px solid #acacac;
     width:1168px;
     height:44px;
@@ -159,8 +159,7 @@
     padding-top:4px;
     padding-bottom:5px;
     margin-right:32px;
-    /* border-radius: 0.4rem; */
-    /* text-align: center; */
+ 
     
 }
 /* .list:nth-child(even) {
