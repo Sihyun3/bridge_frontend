@@ -43,12 +43,10 @@ const TipDetail = ({ match }) => {
     const handlerdelete = ()=>{
         const token = sessionStorage.getItem('token')
         const decode = jwtDecode(token);
-        
         if (decode.sub != data.userId) {
-            alert('잘못된 접근 입니다.');
+            alert('작성자만 삭제 가능합니다.');
             history.push('/')
           }
-
         console.log(decode.sub);
         axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`, 
         { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})

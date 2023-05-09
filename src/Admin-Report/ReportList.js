@@ -24,7 +24,7 @@ const ReportList = () => {
                     return (
                         <>
                             <div >
-                            <Link to={`/7/${reportList.reportIdx}`}> 신고 번호 : {reportList.reportIdx} </Link>
+                            <Link to={`/report/detail/${reportList.reportIdx}`}> 신고 번호 : {reportList.reportIdx} </Link>
                                 <span>
                                 신고 사유 : {reportList.reportReason}
                                 </span>

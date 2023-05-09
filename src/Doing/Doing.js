@@ -10,7 +10,7 @@ import ContentUpdate from './ContentUpdate';
 import ContentDetail from './ContentDetail';
 
 import ProjectListPage from './ProjectListPage';
-import Content from './Content';
+
 
 
 
@@ -116,7 +116,7 @@ const Doing = ({ history, match, pcIdx }) => {
         setPdIdx(pdNumber);
         const partnerDetailIdx = pdNumber;
         console.log(pdIdx);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdIdx1}`
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdIdx}`
         )
             .then(response => {
                 console.log(response);
