@@ -31,19 +31,20 @@ import ReportDetail from './Admin-Report/ReportDetail';
 import TipEdit from './Tip/TipEdit'
 import TipDetail from './Tip/TipDetail'
 
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
+import Header4 from './Header/Header4';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-     useEffect(()=>{
-      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiYzE0NzhlZC05ZjE5LTRkMGUtOGEyMi05ZmRmYmI3NjVlODgiLCJpYXQiOjE2ODI1NjAzOTAsImV4cCI6MTY4MjY0Njc5MH0.dkSCzKTF-wXRfyvtYit_MScEPgDJPFDOehHY1I8Tdt8");
-     },[])
-     
+  useEffect(() => {
+    sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiYzE0NzhlZC05ZjE5LTRkMGUtOGEyMi05ZmRmYmI3NjVlODgiLCJpYXQiOjE2ODI1NjAzOTAsImV4cCI6MTY4MjY0Njc5MH0.dkSCzKTF-wXRfyvtYit_MScEPgDJPFDOehHY1I8Tdt8");
+  }, [])
+
   return (
     <>
 
-      {/* <Header2 /> */}
+      <Header4 />
       <Route path="/" component={LoginStart} exact={true} />
 
       {/* 메인*/}
@@ -62,10 +63,10 @@ function App() {
 
       {/* 신고 */}
       <Route path="/5" component={ReportPage} exact={true} />
-            {/* 리포트 리스트 페이지 없음 */}
+      {/* 리포트 리스트 페이지 */}
       <Route path="/6" component={ReportList} exact={true} />
 
-      <Route path="/7/:reportIdx" component={ReportDetail} exact={true} /> 
+      <Route path="/7/:reportIdx" component={ReportDetail} exact={true} />
       {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
 
 
@@ -77,7 +78,7 @@ function App() {
 
       {/* 팁게시판 */}
       <Route path="/13" component={TipList} exact={true} />
-      <Route path="/14/:tbIdx" component={TipEdit} excat = {true}/>
+      <Route path="/14/:tbIdx" component={TipEdit} excat={true} />
       <Route path="/15/:tbIdx" component={TipDetail} exact={true} />
       <Route path="/16" component={TipWrite} exact={true} />
 
@@ -85,18 +86,18 @@ function App() {
       <Route path="/17" component={MusicSplit} exact={true} />
 
       {/* 채팅 */}
-      <Route path="/18" component={Chatting} exact={true}/>
+      <Route path="/18" component={Chatting} exact={true} />
 
       {/* 프로필 */}
       <Route path="/19" component={ProfileDetail} exact={true} />
       <Route path="/20" component={ProfileWrite} exact={true} />
-     
+
       {/* 파트너 구인 */}
-      <Route path="/21" component={PartnerWrite} exact={true}/>
-      <Route path="/23" component={Payment} exact={true}/>
-      <Route path="/24" component={Doing} exact={true}/>
-      <Route path="/25" component={Charge} exact={true}/>
-      
+      <Route path="/21" component={PartnerWrite} exact={true} />
+      <Route path="/23" component={Payment} exact={true} />
+      <Route path="/24" component={Doing} exact={true} />
+      <Route path="/25" component={Charge} exact={true} />
+
       <Footer />
     </>
   )
