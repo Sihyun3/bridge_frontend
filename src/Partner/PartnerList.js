@@ -138,6 +138,10 @@ const PartnerList = () => {
             })}
         </div>
 
+        <div className={style.buttonbox}>
+        <Link to={`/21`}><button > 파트너 찾기 </button></Link>
+        </div>
+
         <div style={{margin:"0 auto"}} className='clearfix'>
           <Pagination
             className={style.page}
