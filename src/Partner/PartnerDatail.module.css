@@ -46,10 +46,8 @@
 }
 /*이미지(div안에 이미지 가운데정렬 해야함)*/
 .imgbox img {
-    margin:auto;
-    width:600px;
-    height:auto;
-    
+    width:100%;
+    height:100%;
 }
 /*내용 div*/
 .content {

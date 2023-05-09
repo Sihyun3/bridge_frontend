@@ -33,6 +33,8 @@ import TipDetail from './Tip/TipDetail'
 
 import { useEffect,useState } from 'react';
 import { Route } from 'react-router-dom';
+import PartnerList from './Partner/PartnerList';
+import PartnerDatail from './Partner/PartnerDatail';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -96,6 +98,8 @@ function App() {
       <Route path="/23" component={Payment} exact={true}/>
       <Route path="/24" component={Doing} exact={true}/>
       <Route path="/25" component={Charge} exact={true}/>
+      <Route path="/26" component={PartnerList} exact={true}/>
+      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
       
       <Footer />
     </>
