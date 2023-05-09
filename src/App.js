@@ -21,7 +21,6 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
-
 import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
@@ -29,10 +28,8 @@ import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import ReportList from './Admin-Report/ReportList';
-import ReportDetail from './Admin-Report/ReportDetail';
 import TipEdit from './Tip/TipEdit'
 import TipDetail from './Tip/TipDetail'
-
 import { useEffect,useState } from 'react';
 import { Route } from 'react-router-dom';
 
@@ -46,10 +43,11 @@ function App() {
     
   return (
     <>
+    {/* 완성된 페이지 */}
 
-=======
 
 
+    {/* 미 완성 페이지 */}
       {/* <Header2 /> */}
       <Route path="/1" component={LoginStart} exact={true} />
 
@@ -68,12 +66,11 @@ function App() {
       <Route path="/4" component={SignUp} exact={true} />
 
       {/* 신고 */}
-      <Route path="/5" component={ReportPage} exact={true} />
-            {/* 리포트 리스트 페이지 없음 */}
-      <Route path="/6" component={ReportList} exact={true} />
+      <Route path="/report" component={ReportPage} exact={true} />
+      {/* 리포트 리스트 페이지 없음 */}
+      <Route path="/report/list" component={ReportList} exact={true} />
 
-      <Route path="/7/:reportIdx" component={ReportDetail} exact={true} /> 
-      {/* <Route path="/7" component={ReportDetail} exact={true} /> */}
+      <Route path="/report/detail/:reportIdx" component={ReportDetail} exact={true} /> 
 
 
       {/* 잼 */}
@@ -92,7 +89,7 @@ function App() {
       <Route path="/17" component={MusicSplit} exact={true} />
 
       {/* 채팅 */}
-      <Route path="/18" component={Chatting} exact={true}/>
+      <Route path="/chatting" component={Chatting} exact={true}/>
 
       {/* 프로필 */}
       <Route path="/19" component={ProfileDetail} exact={true} />
@@ -103,8 +100,10 @@ function App() {
       <Route path="/23" component={Payment} exact={true}/>
       <Route path="/24" component={Doing} exact={true}/>
       <Route path="/25" component={Charge} exact={true}/>
-      {/*  */}
-
+      {/* 거래내역 */}
+      <Route path="/26" component={DealListAd} exact={true}/>
+      {/* 어드민 메인 페이지 */}
+      <Route path="/27" component={MainAd} exact={true}/>
       <Footer />
     </>
   )
