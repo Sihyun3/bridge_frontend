@@ -160,4 +160,3 @@ function NoticeDetail({match, history}) {
 // }
 
 export default NoticeDetail;
-

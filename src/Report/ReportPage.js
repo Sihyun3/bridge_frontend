@@ -48,7 +48,7 @@ function ReportPage() {
             <div className={style.Box}>
                 {/* <label for="target">신고대상</label> */}
                 {/* value={reportedUserId} */}
-                <div id="target" className={style.Target}>{reportedUserId}</div>
+                <div id="target" className={style.Target}>신고대상: {reportedUserId}</div>
                 <select className={style.Select} onChange={handleSelect} value={select}>
                     <option value="" disabled selected>신고 사유 선택</option>
                     <option value="스팸/홍보성 글" >스팸/홍보성 글</option>

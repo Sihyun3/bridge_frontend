@@ -49,23 +49,24 @@ function ReportDetail({ match }) {
 
   return (
     <>
+    <div className='container clearfix'>
       <div className={style.grayBox}>
         <h1 className={style.boxTitle}>사용자 신고 상세내역</h1>
         <div className={style.box}>
-          <h5 className={style.boxText1}>신고 대상 :</h5>
-          <div className={style.inputBox1}>{reportedUserId} </div>
+          <h5 className={style.boxText1}>신고 대상 </h5>
+          <div className={style.inputBox1}>:  &nbsp;{reportedUserId} </div>
         </div>
         <div className={style.box}>
-          <h5 className={style.boxText1}>신고자 :</h5>
-          <div className={style.inputBox1} >{userId}</div>
+          <h5 className={style.boxText1}>신고자 </h5>
+          <div className={style.inputBox1} >: &nbsp;{userId}</div>
         </div>
         <div className={style.box2}>
-          <h5 className={style.boxText2}>사유 :</h5>
-          <div className={style.inputBox2}>{reportReason}</div>
+          <h5 className={style.boxText2}>사유 </h5>
+          <div className={style.inputBox2}>: &nbsp;{reportReason}</div>
         </div>
         <div className={style.box3}>
-          <h5 className={style.boxText3}>상세내용 :</h5>
-          <div className={style.inputBox3}>{reportReasonDetail}</div>
+          <h5 className={style.boxText3}>상세내용 </h5>
+          <div className={style.inputBox3}>: &nbsp;{reportReasonDetail}</div>
         </div>
         <div className={style.box4}>
         신고 당한 횟수 : {reportCount}
@@ -74,6 +75,7 @@ function ReportDetail({ match }) {
         {/* 영구정지 처리시 1로 값 바뀜 => 스프링 로그인에서 if문 사용해서 제재 필요 */}
         <button className={style.button1} onClick={handleReport}>영구정지</button>
         <button className={style.button1}>목록</button>
+      </div>
       </div>
     </>
   );
