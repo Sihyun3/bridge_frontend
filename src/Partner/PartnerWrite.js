@@ -3,6 +3,7 @@ import "../reset.css";
 import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const PartnerWrite = () => {
 
@@ -14,6 +15,8 @@ const PartnerWrite = () => {
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState('');
     const [inputImg, setInputImg] = useState([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
@@ -113,6 +116,7 @@ const PartnerWrite = () => {
             .then(response => {
                 console.log(response);
                 alert(`정상적으로 업로드했습니다.`);
+                history.push('/26')
             })
             .catch(error => {
                 console.log(error);
@@ -121,23 +125,11 @@ const PartnerWrite = () => {
         
     };
 
-    const test = () => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/test/1`, { "crtTag": checkedList })
-            .then(response => {
-                console.log("333333333" + checkedList);
-                console.log("111111111111" + response);
-                console.log("222222222222" + response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-
     return (
         <>
             <div className={style.mainBox}>
                 <h1 className={style.mainText}>파트너 모집 작성</h1>
+                
                 <div className={style.content}>
                     <div className={style.title}>
                         <span className={style.titleText}>제목: </span> <input type="text" value={title} onChange={handleTitle} className={style.titleInput}></input>
@@ -155,20 +147,17 @@ const PartnerWrite = () => {
                     <div className={style.tag}>
                         <span className={style.tagText}>태그: </span>
                         {partnerTag.map((tag, idx) => {
-                            // onChange={}
                             return (
                                 <>
                                     <div key={idx}>
                                         <input className={style.tagInput} type="checkbox" id={tag.name} onChange={(e) =>
                                             handleCheck(e.currentTarget.checked, tag.name)
                                         } />
-                                        {/* {console.log(">>>>>>>>>>>>" + checkedList)} */}
                                         <label htmlFor={tag.name}>{tag.name}</label>
                                     </div>
                                 </>
                             )
                         })}
-                        <button onClick={test}>테스트 버튼</button>
                     </div>
                     <div className={style.image}>
                         <span className={style.imageText}>이미지: </span>
@@ -177,7 +166,7 @@ const PartnerWrite = () => {
                     </div>
                     <div className={style.intro}>
                         <span className={style.introText}>소개글: </span>
-                        <input type="text" value={content} onChange={handleContent} className={style.introInput}></input>
+                        <input type="text" value={content} onChange={handleContent} className={style.introInput} placeholder="※ 사이트 정책상 수정이 불가하오니, 신중히 작성해주시길 부탁드립니다."></input>
                     </div>
                     <div className={style.regist}>
                         <button onClick={handleSumit} className={style.registButton}>등록</button>
