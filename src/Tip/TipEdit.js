@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
 import ToastEditor from "../Component/ToastEditor";
+import jwtDecode from 'jwt-decode';
+import { useHistory } from 'react-router-dom';
+
 export default function TipEdit({ match }) {
     // const tb_idx = match.params.tbIdx;
     const tb_idx = 2;
     const [data, setData] = useState({});
     const [title, setTitle] = useState("");
+    const history = useHistory();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/tipdetail/${tb_idx}/0`)
+        const token = sessionStorage.getItem('token')
+        const decode = jwtDecode(token);
+        if (decode.sub != data.userId) {
+            alert('작성자만 삭제 가능합니다.');
+            history.push('/')
+        }
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/0`)
             .then(r => {
                 setData(r.data.tipDetail);
                 console.log(r.data.tipDetail)

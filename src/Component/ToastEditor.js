@@ -19,7 +19,7 @@ const ToastEditor = ({title,data}) => {
         console.log(files);
         console.log(typeof(title)) 
         if(!data){
-            axios.post(`http://localhost:8080/api/inserttip`,
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/inserttip`,
             { "tbTitle": title, "tbContents" :files },
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
         )
@@ -31,7 +31,7 @@ const ToastEditor = ({title,data}) => {
                 alert("오류가 발생하였습니다.");
             })
         }else if(data){
-            axios.put(`http://localhost:8080/api/update/tip` , {"tbTitle":title,"tbContents":files,"tbIdx":data.tbIdx},
+            axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/update/tip` , {"tbTitle":title,"tbContents":files,"tbIdx":data.tbIdx},
             ).then(()=>{
                 alert("정상 처리 되었습니다.")
             }).catch(()=>{

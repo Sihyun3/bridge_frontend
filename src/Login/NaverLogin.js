@@ -40,7 +40,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
                 sessionStorage.setItem('userName', naverLogin.user.name);
                 sessionStorage.setItem('userEmail', naverLogin.user.email);
 
-                axios.post(`http://localhost:8080/api/bridge/pass/login`, { "userNickName": naverLogin.user.name,'userEmail':naverLogin.user.email })
+                axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userNickName": naverLogin.user.name,'userEmail':naverLogin.user.email })
                     .then((response) => {
                         if (response.data) {
                             sessionStorage.setItem("token", response.data);

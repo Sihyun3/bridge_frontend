@@ -2,8 +2,22 @@ import style from './ProfileDetail.module.css'
 import '../reset.css';
 import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 
 function ProfileDetail(){
+    const [data,setData] = useState('');
+    const [user,setUser] = useState('');
+    const userId = "test"
+    useEffect(()=>{
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userId}`)
+        .then((response)=>{
+            console.log(response.data)
+            setData(response.data.profile[response.data.profile.length -1])
+            setUser(response.data.userDto);
+        })
+    },[])
     let a = 0;
     return(
         <>
@@ -14,16 +28,18 @@ function ProfileDetail(){
             <div className='container clearfix'>
                 <div className={style.profile}>
                     <img className={style.img} src={img}/>
-                    <span className={style.name}>JAY PARK</span>
+                    <span className={style.name}>{user.userId}</span>
                     {
                         a == 0 && 
                         <img src={img} className={style.certi}></img>
                     }
-                    <p style={{marginTop:"10px",marginBottom:"10px"}}>Producer</p>
-                    <p className={style.comment}>한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur. 
-                        Aliquam mattis nam rutrum platea lectus lobortis consectetur.
+                    <p style={{marginTop:"10px",marginBottom:"10px"}}>{data.userPosition}</p>
+                    <p className={style.comment}>
+                        {data.userIntroduction}
+                        {/* 한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur. 
+                        Aliquam mattis nam rutrum platea lectus lobortis consectetur. */}
                     </p>
-                    <p className={style.link} onClick={()=>{window.open('https://google.co.kr','_blank')}}>https://JayPark.com</p>
+                    <p className={style.link} onClick={()=>{window.open('https://google.co.kr','_blank')}}>{data.userSite}</p>
                     <img src={img} className={style.icon}></img>
                     <img src={img} className={style.icon}></img>
                     <img src={img} className={style.icon}></img>

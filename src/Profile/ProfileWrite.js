@@ -11,10 +11,11 @@ const ProfileWrite = () => {
     const [userSite, setUserSite] = useState('');
     const [profileImg, setProfileImg] = useState([]);
     const [select, setSelect] = useState('');
-    const [tag1, setTag1] = useState('');
-    const [tag2, setTag2] = useState('');
-    const [tag3, setTag3] = useState('');
-
+    const [music,setMusic] = useState('');
+    // const [tag1, setTag1] = useState('');
+    // const [tag2, setTag2] = useState('');
+    // const [tag3, setTag3] = useState('');
+    const [tag, setTag] = useState([]);
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
@@ -25,7 +26,6 @@ const ProfileWrite = () => {
     // 파일 선택창의 값을 직접 제어하기 위해서 사용  
     // const inputFiles = useRef();
     // 파일 크기 및 개수 제한
-    const MAX_FILE_SIZE = 1 * 1024 * 1024; //1MB
     const MAX_FILE_COUNT = 1;
 
     // 파일 종류, 크기, 개수 제한을 벗어나는 경우 메시지를 보여주고, 
@@ -46,10 +46,7 @@ const ProfileWrite = () => {
             if (!files[i].type.match("image/.*")) {
                 isNotValid("이미지 파일만 업로드 가능합니다.");
                 return;
-            } else if (files[i].size > MAX_FILE_SIZE) {
-                isNotValid("이미지 크기는 1MB를 초과할 수 없습니다.");
-                return;
-            }
+            } 
         }
         setProfileImg([...files]);
     }
@@ -58,9 +55,9 @@ const ProfileWrite = () => {
     const handleIntroduction = (e) => { setIntroduction(e.target.value); } //소개
     const handleSite = (e) => { setUserSite(e.target.value); } //사이트
     const handleSelect = (e) => {setSelect(e.target.value);};
-    const handleTag1 = (e) => { setTag1(e.target.value); }
-    const handleTag2 = (e) => { setTag2(e.target.value); }
-    const handleTag3 = (e) => { setTag3(e.target.value); }
+    // const handleTag1 = (e) => { setTag1(e.target.value); }
+    // const handleTag2 = (e) => { setTag2(e.target.value); }
+    // const handleTag3 = (e) => { setTag3(e.target.value); }
 
     // FORM DATA를 저장할 상태 변수를 변수 이름: 값 형식으로 설정
     let datas = {
@@ -68,23 +65,30 @@ const ProfileWrite = () => {
         userSite,
         "userIntroduction": introduction,
         "userPosition": select,
-        "userTag1":tag1,
-        "userTag2":tag2,
-        "userTag3":tag3
     };
 
+    const handlerInstrument = (e) =>{
+        setTag([...tag, e.target.value])
+    }
+
     // 서버로 전달할 폼 데이터를 작성
-    const formData = new FormData();
-    formData.append(
-        'data',
-        new Blob([JSON.stringify(datas)], { type: 'application/json' })
-    );
-    Object.values(profileImg).forEach(file => formData.append('files', file));
 
     const handleSubmit = () => {
+        const formData = new FormData();
+        formData.append(
+            'data',
+            new Blob([JSON.stringify(datas)], { type: 'application/json' })
+        );
+        formData.append(
+            'tag',
+            new Blob([JSON.stringify({tag:tag})], { type: 'application/json' })
+        );
+        Object.values(profileImg).forEach(file => formData.append('files', file));
+        Object.values(music).forEach(file => formData.append('music', file));
+
         axios({
             method: 'POST',
-            url: `http://localhost:8080/api/insertProfile/${userId}`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertProfile/${userId}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         })
@@ -109,8 +113,14 @@ const ProfileWrite = () => {
                         <input type="button" className={style.photo} value="사진 첨부" />
                     </div> */}
                     <div className={style.button}>
+                        <div> 프로필 사진을 첨부해주세요</div>
                         <input type='file' className={style.signupinput} onChange={handleProfile} ref={profileImg} multiple accept="image/*" placeholder="프로필 사진을 첨부해주세요." />
-                        <input type="button" className={style.photo} value="사진 첨부" />
+                        {/* <input type="button" className={style.photo} value="사진 첨부" /> */}
+                    </div>
+                    <div className={style.button}>
+                        <div> 프로필 음악을 첨부해주세요</div>
+                        <input type='file' className={style.signupinput} onChange={(e)=>{setMusic(e.target.files)}} multiple  placeholder="프로필 음악을 첨부해주세요." />
+                        {/* <input type="button" className={style.photo} value="사진 첨부" /> */}
                     </div>
                     <select className={style.signupinput} onChange={handleSelect}>
                         <option value="" disabled selected>포지션 선택</option>
@@ -121,9 +131,25 @@ const ProfileWrite = () => {
 
                     <input className={style.signupinput} value={userSite} onChange={handleSite} placeholder="본인을 소개할 수 있는 링크를 입력해주세요." />
                     <input className={style.signupinput} value={introduction} onChange={handleIntroduction} placeholder="한줄소개를 입력해주세요." />
-                    <input className={style.signupinput} value={tag1} onChange={handleTag1} placeholder="다룰 수 있는 악기 종류를 입력해주세요" />
+                    <select className={style.signupinput} onChange={handlerInstrument}>
+                        <option value="" disabled selected>악기 선택</option>
+                        <option value="성악">성악</option>
+                        <option value="보컬">보컬</option>
+                        <option value="바이올린">바이올린</option>
+                        <option value="베이스">베이스</option>
+                        <option value="일렉 기타">일렉 기타</option>
+                        <option value="건반">건반</option>
+                    </select>
+                    <div className={style.button}>
+                        {
+                            tag.map((d)=>{
+                                return(<span> {d} </span>)
+                            })
+                        }
+                    </div>
+                    {/* <input className={style.signupinput} value={tag1} onChange={handleTag1} placeholder="다룰 수 있는 악기 종류를 입력해주세요" />
                     <input className={style.signupinput} value={tag2} onChange={handleTag2} placeholder="다룰 수 있는 악기 종류를 입력해주세요 (선택)" />
-                    <input className={style.signupinput} value={tag3} onChange={handleTag3} placeholder="다룰 수 있는 악기 종류를 입력해주세요 (선택)" />
+                    <input className={style.signupinput} value={tag3} onChange={handleTag3} placeholder="다룰 수 있는 악기 종류를 입력해주세요 (선택)" /> */}
                     <br />
                     <button className={style.loginbutton} onClick={handleSubmit}>저장하기</button>
                 </div>

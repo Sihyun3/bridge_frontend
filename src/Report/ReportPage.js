@@ -29,7 +29,7 @@ function ReportPage() {
     //신고 제출 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail ,"reportReason":select})
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail ,"reportReason":select})
             .then(response => {
                 console.log(response);
                 alert('정상적으로 신고되었습니다');
@@ -48,7 +48,7 @@ function ReportPage() {
             <div className={style.Box}>
                 {/* <label for="target">신고대상</label> */}
                 {/* value={reportedUserId} */}
-                <div id="target" className={style.Target}>{reportedUserId}</div>
+                <div id="target" className={style.Target}>신고대상: {reportedUserId}</div>
                 <select className={style.Select} onChange={handleSelect} value={select}>
                     <option value="" disabled selected>신고 사유 선택</option>
                     <option value="스팸/홍보성 글" >스팸/홍보성 글</option>
