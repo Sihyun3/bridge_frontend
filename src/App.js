@@ -51,12 +51,16 @@ function App() {
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
       {/* 완성된 페이지 */}
 
-      <Route path="/notice" component={Notice} exact={true} />
+   
       <Route path="/report/list" component={ReportList} exact={true} />
+      <Route path="/tip" component={TipList} exact={true} />
+      <Route path="/tip/write" component={TipWrite} exact={true} />
+      <Route path="/notice/write" component={NoticeWrite} exact={true} />
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/report/detail/:reportIdx" component={ReportDetail} exact={true} />
       <Route path="/report" component={ReportPage} exact={true} />
+      <Route path="/notice" component={Notice} exact={true} />
 
       {/* 미 완성 페이지 */}
       {/* <Header2 /> */}
@@ -66,7 +70,7 @@ function App() {
       <Route path="/" component={Main} exact={true} />
 
       {/* 공지사항 */}
-      <Route path="/notice/write" component={NoticeWrite} exact={true} />
+    
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
       {/* 로그인 */}
@@ -89,10 +93,10 @@ function App() {
       <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
       {/* 팁게시판 */}
-      <Route path="/tip" component={TipList} exact={true} />
+    
       <Route path="/tip/edit/:tbIdx" component={TipEdit} excat={true} />
       <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} />
-      <Route path="/tip/write" component={TipWrite} exact={true} />
+      
 
       {/* 음원 분리 */}
       <Route path="/17" component={MusicSplit} exact={true} />

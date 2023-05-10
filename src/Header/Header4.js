@@ -49,9 +49,9 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-                            <li><a><button className={style.logout} onClick={handlerOnLogoutClick}>LOGOUT</button></a></li>
+                            <li><a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a></li>
                             <div className={style.box}>
-                                <li> <a className={style.nickname}>{userNickname}님 </a></li>
+                                <li> <a className={style.nickname}>{userNickname}님</a></li>
                                 <div className={style.drop}>
                                     <Link to="/19">프로필</Link>
                                     <Link to="28">작업페이지</Link>
@@ -91,7 +91,7 @@ function Header4({ isLogin, setIsLogin }) {
 
 
                             <Link className={style.Login} to="/29">로그인</Link>
-                            <Link className={style.regist} to="/4">회원가입</Link>
+                            <Link className={style.regist} to="/30">회원가입</Link>
 
                         </ul>
                     </div>
