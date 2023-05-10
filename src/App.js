@@ -32,13 +32,16 @@ import TipEdit from './Tip/TipEdit'
 import TipDetail from './Tip/TipDetail'
 import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
+import PartnerList from './Partner/PartnerList';
+import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
+import LoginTest from './Login/LoginTest';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  //  useEffect(()=>{
-  //   sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-  //  },[])
+   useEffect(()=>{
+    sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+   },[])
 
 
 
@@ -67,6 +70,9 @@ function App() {
 
       {/* 로그인 */}
       <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
+      {/* 로그인 테스트 */}
+      <Route path="/29" component={LoginTest} exact={true} />
+
 
       {/* 회원 가입 */}
       <Route path="/4" component={SignUp} exact={true} />
@@ -100,17 +106,22 @@ function App() {
       <Route path="/20" component={ProfileWrite} exact={true} />
 
       {/* 파트너 구인 */}
-      <Route path="/21" component={PartnerWrite} exact={true} />
-      <Route path="/23" component={Payment} exact={true} />
-      <Route path="/24" component={Doing} exact={true} />
-      <Route path="/25" component={Charge} exact={true} />
+      <Route path="/21" component={PartnerWrite} exact={true}/>
+      <Route path="/23" component={Payment} exact={true}/>
+      <Route path="/24" component={Doing} exact={true}/>
+      <Route path="/25" component={Charge} exact={true}/>
+      <Route path="/26" component={PartnerList} exact={true}/>
+      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
+      
       {/* 거래내역 */}
-      <Route path="/26" component={DealListAd} exact={true} />
+      <Route path="/27" component={DealListAd} exact={true} />
       {/* 어드민 메인 페이지 */}
       <Route path="/27" component={MainAd} exact={true} />
 
-      {/* 협업페이지 */}
-      <Route path="/28" component={Doing} exact={true} />
+      <Route path="/28" component={MainAd} exact={true} />
+        {/* 협업페이지 */}
+        <Route path="/29" component={Doing} exact={true} />
+
       <Footer />
     </>
   )

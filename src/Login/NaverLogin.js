@@ -1,7 +1,12 @@
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect,useRef } from 'react'
+import NaverLogo from '../Login/NaverLogo.png';
+import styled from 'styled-components'
+import './Naver.css'
+import style from './LoginTest.module.css';
 
 const NaverLogin = ({ setGetToken, setUserInfo }) => {
+    const naverRef = useRef()
 
 
     const { naver } = window
@@ -18,6 +23,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
             loginButton: { color: 'green', type: 2, height: 58, float:'left'},
             callbackHandle: true
         })
+        console.log(naverLogin)
         naverLogin.init()
 
         // 선언된 naverLogin 을 이용하여 유저 (사용자) 정보를 불러오는데  
@@ -94,6 +100,20 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
         initializeNaverLogin()
         userAccessToken()
     }, [])
+
+    const sns = {
+        width: "40px",
+        height: "40px",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "0 5px",
+        borderRadius: "50%",
+        cursor: "pointer",
+        marginTop: "10%",
+        marginBottom:"20%",
+        cursor: 'pointer'
+    }
 
 
     return (
