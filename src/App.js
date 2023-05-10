@@ -108,6 +108,8 @@ function App() {
       <Route path="/24" component={Doing} exact={true}/>
       <Route path="/25" component={Charge} exact={true}/>
       <Route path="/26" component={PartnerList} exact={true}/>
+
+      
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
       
       {/* 거래내역 */}
