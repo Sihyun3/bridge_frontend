@@ -88,8 +88,8 @@
 }
 
 /* 메뉴들 */
-.Lefts:nth-child(2) {
-    margin-left: 230px;
+.Lefts:nth-child(1) {
+    margin-left: 140px;
 }              
 /* 로그인 글씨 */
 .Login {
@@ -124,26 +124,28 @@
     font-size:18px;
    
 }
+.leftMenu li:nth-child(4) {
+    margin-left: 640px;
+}
 /*로그인시 닉네임*/
 .nickname {
-    margin-left:580px;
+    min-width: 70px;
     display : inline-block;
 
 }
 /*드롭다운 */
 .drop {
-    /* display : none; */
+    display : none;
     position : absolute;
     z-index : 1; /*다른 요소들보다 앞에 배치*/
     font-weight: 400;
     background-color: #212121;
     /* width : 130px;  */
-    left:1300px;
+    left:1420px;
     text-align: center;
     vertical-align: center;
-    
 }
-.nickname:hover .drop {
+.box:hover .drop {
     display: block;
   }
 .drop a{
@@ -155,12 +157,21 @@
     height:32px;
     line-height: 30px; 
   }
-
-  .drop p:hover{
+/* 
+  .drop a:hover{
     background-color : #686868;
     
-  }
+  } */
   .box {
     display: inline-block;
-    width: auto;
+    /* margin-left:580px; */
+  }
+
+  /*로고 */
+  .Header img {
+    display: inline-block;
+    height: 80px;
+    margin-left:40px;
+    
+
   }
