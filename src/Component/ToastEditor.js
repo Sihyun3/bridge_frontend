@@ -3,6 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { useRef } from 'react';
 import axios from 'axios';
+import style from '../Admin-Notice/NoticeWrite.module.css'
 
 const ToastEditor = ({title,data}) => {
 
@@ -48,7 +49,7 @@ const ToastEditor = ({title,data}) => {
              // 미리보기 스타일 지정
              previewStyle="vertical"
              // 에디터 창 높이
-             height="300px"
+             height="500px"
              //초기 입력모드 설정
              initialEditType="wysiwyg"
              //입력모드 변경 안보이게
@@ -66,7 +67,7 @@ const ToastEditor = ({title,data}) => {
             // 미리보기 스타일 지정
             previewStyle="vertical"
             // 에디터 창 높이
-            height="300px"
+            height="500px"
             //초기 입력모드 설정
             initialEditType="wysiwyg"
             //입력모드 변경 안보이게
@@ -82,7 +83,7 @@ const ToastEditor = ({title,data}) => {
 
             
             {/* <button onClick={showContent}>작성</button> */}
-            <button onClick={submit}>디비에 넣기</button>
+            <button className={style.btn} onClick={submit}>작성</button>
 
         </>
     )

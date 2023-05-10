@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import ToastEditor from '../Component/ToastEditor'
 import '../reset.css'
+import style from '../Admin-Notice/NoticeWrite.module.css'
 
-export default function TipWrite(){
-    const [title,setTitle] = useState("");
-    return(
+export default function TipWrite() {
+    const [title, setTitle] = useState("");
+    return (
         <div className="container">
-            <div><span>제목 : </span><input value={title} onChange={(e)=>{setTitle(e.target.value)}} type='text'></input></div>
-        <ToastEditor title={title}></ToastEditor>
+            <div className={style.topbox}><input className={style.titlebox} value={title} onChange={(e) => { setTitle(e.target.value) }} type='text' placeholder='제목'></input>
+            </div>
+            <div className={style.writebox}>
+            <ToastEditor title={title}/>
+            </div>
         </div>
     );
 };

@@ -26,7 +26,7 @@ const TipList = () => {
 
     return (
         <>
-            <Header1 />
+            
             <div className={style.box1}>
                 <h1>게시판</h1>
             </div>
