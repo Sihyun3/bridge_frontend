@@ -4,7 +4,7 @@ import { Component, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 
 function Header4({ isLogin, setIsLogin }) {
-    
+
     const [state, setState] = useState(false);
     const [userNickname, setUserNickname] = useState('');
 
@@ -75,7 +75,7 @@ function Header4({ isLogin, setIsLogin }) {
                             <li className={style.Lefts}>
                                 <Link to="/13">    <a>팁</a></Link>
                             </li>
-                            <Link className={style.Login} to="/3">로그인</Link>
+                            <Link className={style.Login} to="/login">로그인</Link>
                             <Link className={style.regist} to="/4">회원가입</Link>
 
                         </ul>

@@ -36,6 +36,7 @@ import PartnerList from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
+import Finduser from './Login/Finduser';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -52,6 +53,7 @@ function App() {
 
       <Route path="/notice" component={Notice} exact={true} />
       <Route path="/report/list" component={ReportList} exact={true} />
+      <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/report/detail/:reportIdx" component={ReportDetail} exact={true} />
@@ -69,19 +71,15 @@ function App() {
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
       {/* 로그인 */}
-      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트 */}
-      <Route path="/29" component={LoginTest} exact={true} />
+      {/* <Route path="/29" component={} exact={true} /> */}
 
-
+    <Route path="/find/:idx" component={Finduser} exact={true}/>
       {/* 회원 가입 */}
       <Route path="/4" component={SignUp} exact={true} />
 
       {/* 신고 */}
       <Route path="/report" component={ReportPage} exact={true} />
-
-
-
 
 
       {/* 잼 */}
@@ -113,14 +111,12 @@ function App() {
       <Route path="/25" component={Charge} exact={true}/>
       <Route path="/26" component={PartnerList} exact={true}/>
 
-      
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
       
       {/* 거래내역 */}
       <Route path="/27" component={DealListAd} exact={true} />
       {/* 어드민 메인 페이지 */}
       <Route path="/28" component={MainAd} exact={true} />
-
       <Footer />
     </>
   )

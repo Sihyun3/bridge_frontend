@@ -10,27 +10,6 @@ import { useHistory } from 'react-router-dom';
 
 
 const LoginTest = ({ setIsLogin }) => {
-
-    //이름
-    const [userName, setName] = useState();
-    //아이디
-    // const [userId, setUserId] = useState();
-    //닉네임
-    const [userNickname, setNickName] = useState();
-    //비밀번호
-    const [user1Password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-    //연락처
-    const [userPhoneNumber, setPhone] = useState();
-    //이메일
-    const [userEmail, setEmail] = useState();
-
-    const [confrimMessage, setConfrimMessage] = useState();
-    const [Pmessage, setPmassage] = useState();
-    const [Emassage, setEmassage] = useState();
-
-
-
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const history = useHistory();
@@ -56,7 +35,7 @@ const LoginTest = ({ setIsLogin }) => {
     };
 
     const handlerOnClick2 = () => {
-        history.push('/27');
+        history.push('/4');
     };
 
     return (
@@ -73,8 +52,8 @@ const LoginTest = ({ setIsLogin }) => {
                                 <button className={style.loginButton} onClick={handlerOnClick}>로그인</button>
 
                                 <div className={style.find}>
-                                    <button className={style.registration} onClick={''}>아이디찾기</button>
-                                    <button className={style.registration} onClick={''}>비밀번호 찾기</button>
+                                    <Link className={style.registration} to="/find/0">아이디찾기</Link>
+                                    <Link className={style.registration} to="/find/1" >비밀번호 찾기</Link>
                                 </div>
 
                                 <div className={style.line_or}>
@@ -103,28 +82,6 @@ const LoginTest = ({ setIsLogin }) => {
                     </div>
                 </div>
             </div>
-
-
-
-
-            {/* 
-
-            <div className='container clearfix' >
-                <div className={style.loginbackg}>
-                    <h1 className={style.login}>로그인</h1>
-
-                <p className={style.loginp}>아이디</p>
-                <input type="text" className={style.logininput} placeholder="아이디를 입력하세요" value={userId} onChange={(e)=>setUserId(e.target.value)}/>
-                <p className={style.loginp}>비밀번호</p>
-                <input type="password" className={style.logininput} placeholder="비밀번호를 입력하세요" value={userPassword} onChange={(e)=>setUserPassword(e.target.value)}/>
-                <br />
-                <button className={style.loginbutton} onClick={handlerOnClick}>로그인</button>
-                <Link to="/5"><p className={style.signup}>회원가입</p></Link>
-                <p className={style.loginsns}>SNS계정 간편 로그인</p>
-               <div className={style.kakao}> <KakaoLogin /></div>
-                <div className={style.naver}><NaverLogin /></div>
-            </div>
-            </div> */}
         </>
     );
 }
