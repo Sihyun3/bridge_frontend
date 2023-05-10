@@ -90,7 +90,7 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-                            <Link className={style.Login} to="/3">로그인</Link>
+                            <Link className={style.Login} to="/29">로그인</Link>
                             <Link className={style.regist} to="/4">회원가입</Link>
 
                         </ul>

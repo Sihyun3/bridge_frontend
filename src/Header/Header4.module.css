@@ -55,16 +55,16 @@
 .lefts a {
     color:white;
 }
-.leftMenu a:nth-child(-n+4):hover {
+.leftMenu a:nth-child(-n+3):hover {
    
 }
-.leftMenu a:nth-child(-n+4):hover:after {
+.leftMenu a:nth-child(-n+3):hover:after {
     width: 50%
 }
-.leftMenu a:nth-child(-n+4):hover:before {
+.leftMenu a:nth-child(-n+3):hover:before {
     width: 50%
 }
-.leftMenu a:nth-child(-n+4):after {
+.leftMenu a:nth-child(-n+3):after {
     content:"";
     position: absolute;
     left: 50%;
@@ -75,7 +75,7 @@
     background-color: #5b78ac;
     transition: all .3s;
 }
-.leftMenu a:nth-child(-n+4):before {
+.leftMenu a:nth-child(-n+3):before {
     content:"";
     position: absolute;
     right: 50%;
