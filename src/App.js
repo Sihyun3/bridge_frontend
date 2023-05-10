@@ -118,8 +118,7 @@ function App() {
       <Route path="/27" component={MainAd} exact={true} />
 
       <Route path="/28" component={MainAd} exact={true} />
-        {/* 협업페이지 */}
-        <Route path="/29" component={Doing} exact={true} />
+      
 
       <Footer />
     </>

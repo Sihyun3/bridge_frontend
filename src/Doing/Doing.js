@@ -323,7 +323,7 @@ const Doing = ({ history, match, pcIdx }) => {
 
         const handlerClickComment = (pcIdx, index) => {
 
-            visible[index] = !visible[index];
+            // visible[index] = !visible[index];
 
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/comment/${pcIdx}`,
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
