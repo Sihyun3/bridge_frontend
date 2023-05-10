@@ -36,6 +36,7 @@ import PartnerList from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
+import SignUpTest from './SignUp/SignUpTest';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -76,11 +77,9 @@ function App() {
 
       {/* 회원 가입 */}
       <Route path="/4" component={SignUp} exact={true} />
+      <Route path="/30" component={SignUpTest} exact={true} />
 
       {/* 신고 */}
-
-
-
 
 
       {/* 잼 */}
