@@ -61,7 +61,7 @@ const Doing = ({ history, match, pcIdx }) => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
 
-        let userId = decode_token.name;
+        let userId = decode_token.sub;
         setUserId1(userId);
         console.log(decode_token);
         console.log(userId);
@@ -204,7 +204,7 @@ const Doing = ({ history, match, pcIdx }) => {
             setVariable(!variable)
         }
 
-        axios.get(`http://localhost:8080/api/bridge/partnerdetail/comment/${pcIdx}`,
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/${pcIdx}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -247,7 +247,7 @@ const Doing = ({ history, match, pcIdx }) => {
         //     return;
         // }
 
-        axios.delete(`http://localhost:8080/api/bridge/partnerdetail/delete/${pcIdx}`)
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/delete/${pcIdx}`)
             .then(response => {
                 console.log(response);
                 if (response.data === "Y") {
@@ -265,7 +265,7 @@ const Doing = ({ history, match, pcIdx }) => {
     }
 
     const handlerCommentDelete = (pdcIdx) => {
-        axios.delete(`http://localhost:8080/api/bridge/partnerdetail/comment/delete/${pdcIdx}`)
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/delete/${pdcIdx}`)
             .then(response => {
                 if (response.data == 1) {
                     alert("정상적으로 삭제되었습니다.")
