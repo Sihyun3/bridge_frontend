@@ -9,7 +9,6 @@ import searchImg from './searchImg.png'
 
 
 function Notice({ history, noticeIdx, title, writer }) {
-
     const [datas, setDatas] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [filteredDatas, setFilteredDatas] = useState([]);

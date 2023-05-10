@@ -44,7 +44,7 @@ function App() {
 
   return (
     <>
-    <Header4 isLogin={isLogin} setIsLogin={setIsLogin}/>
+      <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
       {/* 완성된 페이지 */}
 
       <Route path="/notice" component={Notice} exact={true} />
@@ -52,7 +52,7 @@ function App() {
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/report/detail/:reportIdx" component={ReportDetail} exact={true} />
-
+      <Route path="/report" component={ReportPage} exact={true} />
 
       {/* 미 완성 페이지 */}
       {/* <Header2 /> */}
@@ -72,7 +72,6 @@ function App() {
       <Route path="/4" component={SignUp} exact={true} />
 
       {/* 신고 */}
-      <Route path="/report" component={ReportPage} exact={true} />
 
 
 
@@ -109,6 +108,9 @@ function App() {
       <Route path="/26" component={DealListAd} exact={true} />
       {/* 어드민 메인 페이지 */}
       <Route path="/27" component={MainAd} exact={true} />
+
+      {/* 협업페이지 */}
+      <Route path="/28" component={Doing} exact={true} />
       <Footer />
     </>
   )
