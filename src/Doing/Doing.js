@@ -8,25 +8,23 @@ import jwt_decode from "jwt-decode";
 import Content from './Content';
 import ContentUpdate from './ContentUpdate';
 import ContentDetail from './ContentDetail';
-
-import ProjectListPage from './ProjectListPage';
-import Content from './Content';
+import CommentWrite from './CommentWrite';
 
 
 
 const Doing = ({ history, match, pcIdx }) => {
-    const a = 0;
 
     const [userId1, setUserId1] = useState('');
     const [userId2, setUserId2] = useState('');
     const [pdIdx, setPdIdx] = useState('');
-    const [comment, setComment] = useState('');
-    const [visible, setVisible] = useState([]);
     const [uploadClick, setUploadClick] = useState(true);
     const [editClick, setEditClick] = useState('');
-    let [isClick, setIsClick] = useState(false);
+    const [isClick, setIsClick] = useState(false);
+    const [isClick1, setIsClick1] = useState(false);
     const [detailClick, setDetailClick] = useState([]);
-    const [variable, setVariable] = useState(true);
+    const [commentOpen, setCommentOpen] = useState([]);
+    const [commentUpload, setCommentUpload] = useState([]);
+    const [variable, setVariable] = useState(false);
     const [contentList, setContentList] = useState([
         {
             pcNumber: '',
@@ -52,6 +50,7 @@ const Doing = ({ history, match, pcIdx }) => {
         }
     );
     const [commentList, setCommentList] = useState([{
+        pdcNumber: '',
         writer: '',
         content: ''
     }])
@@ -65,8 +64,9 @@ const Doing = ({ history, match, pcIdx }) => {
         let userId = decode_token.name;
         setUserId1(userId);
         console.log(decode_token);
+        console.log(userId);
 
-        axios.get(`http://localhost:8080/api/bridge/partnerDetail/projectList/${userId}`,
+        axios.get(`http://localhost:8080/api/bridge/partnerdetail/projectList/${userId}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -83,9 +83,9 @@ const Doing = ({ history, match, pcIdx }) => {
             })
             .catch((error) => {
                 console.log(error);
+                console.log(userId)
                 return;
             })
-
 
     }, []);
 
@@ -98,7 +98,7 @@ const Doing = ({ history, match, pcIdx }) => {
         console.log(userId1);
         console.log(userId2);
 
-        axios.get(`http://localhost:8080/api/bridge/partnerDetail/paylist/${userId1}/${userId22}`,
+        axios.get(`http://localhost:8080/api/bridge/partnerdetail/paylist/${userId1}/${userId22}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -150,11 +150,11 @@ const Doing = ({ history, match, pcIdx }) => {
         console.log("ccccccccccccccccccc")
         console.log(isClick);
         console.log(editClick);
-     
-        
 
-        if(isClick == false){
-     
+
+
+        if (isClick == false) {
+
             console.log("bbbbbbbbbbbbbbbbbbbbbb")
             setIsClick(true);
             setEditClick(index);
@@ -163,7 +163,8 @@ const Doing = ({ history, match, pcIdx }) => {
         }
 
         if (isClick == true) {
-            if(editClick !== index){
+            if (editClick !== index) {
+                alert("수정 중인 게시글이 있습니다.")
                 return;
             }
             console.log("aaaaaaaaaaaaaaaaaaaaaaaa")
@@ -172,32 +173,46 @@ const Doing = ({ history, match, pcIdx }) => {
             // setVariable(!variable);
             // editClick[index] = variable
             return;
-        } 
+        }
     }
-    useEffect(()=>{
-        console.log("바뀐후 >>>>>>>>>>>>>>>>>>" +editClick);
-        console.log('' == 0);
-    },[editClick])
+    // useEffect(() => {
+    //     console.log("바뀐후 >>>>>>>>>>>>>>>>>>" + editClick);
+    //     console.log('' == 0);
+    // }, [editClick])
+
 
     const handlerDetailClick = (index) => {
-        setVariable(!variable)
-        detailClick[index] = variable
+
+        if (detailClick[index] == true) {
+            detailClick[index] = false;
+            setVariable(!variable)
+        } else {
+            detailClick[index] = true;
+            setVariable(!variable)
+        }
+        console.log("detailClick[index] :" + detailClick[index])
     };
 
 
     const handlerClickComment = (pcIdx, index) => {
 
-        setVariable(!variable);
-        visible[index] = variable;
+        if (commentOpen[index] == true) {
+            commentOpen[index] = false;
+            setVariable(!variable)
+        } else {
+            commentOpen[index] = true;
+            setVariable(!variable)
+        }
 
-        axios.get(`http://localhost:8080/api/bridge/partnerDetail/comment/${pcIdx}`,
+        axios.get(`http://localhost:8080/api/bridge/partnerdetail/comment/${pcIdx}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
                 setCommentList(response.data.map((data) => {
                     return ({
                         writer: data.userId,
-                        content: data.pdcComment
+                        content: data.pdcComment,
+                        pdcNumber: data.pdcIdx
                     })
                 })
                 )
@@ -209,30 +224,93 @@ const Doing = ({ history, match, pcIdx }) => {
 
     }
 
+    const handlerCommentUpload = (index) => {
+        if (isClick1 == true) {
+            if (commentUpload != index) {
+                alert("작성 중인 댓글이 있습니다.")
+                return
+            }
+            setIsClick1(false)
+            setCommentUpload('');
+        } else {
+            setIsClick1(true);
+            setCommentUpload(index);
+        }
+    }
+
+    const handlerContentDelete = (pcIdx) => {
+
+        // if (pcWriter != userId1) {
+        //     alert('작성자만 삭제할 수 있습니다.');
+        //     console.log(userId1);
+
+        //     return;
+        // }
+
+        axios.delete(`http://localhost:8080/api/bridge/partnerdetail/delete/${pcIdx}`)
+            .then(response => {
+                console.log(response);
+                if (response.data === "Y") {
+                    alert('정상적으로 삭제되었습니다.');
+                } else {
+                    alert('삭제에 실패했습니다.');
+                    return;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert(`삭제에 실패했습니다. (${error.message})`);
+                return;
+            });
+    }
+
+    const handlerCommentDelete = (pdcIdx) => {
+        axios.delete(`http://localhost:8080/api/bridge/partnerdetail/comment/delete/${pdcIdx}`)
+            .then(response => {
+                if (response.data == 1) {
+                    alert("정상적으로 삭제되었습니다.")
+                } else {
+                    alert("삭제에 실패했습니다.");
+                    return;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("삭제에 실패했습니다.");
+                return;
+            })
+    }
+
+    const handlerProjectComplete = () => {
+        alert("정말 완료 하셨나요?")
+    }
+
     const ProjectList = () => {
         // console.log(listArray);
 
         return listArray && listArray.map((value, index) => {
             return (
                 <>
-                    <div key={index}>
+                    <div key={index} className={style.doinglist}>
                         <button onClick={() => handlerClickSelect(value.pdNumber, value.receiver)}>
-                            상대 닉네임 : {value.receiver} <br />
-                            상대 프로필이미지 : {value.photo} <br />
-                            상대 악기태그: {value.tag1} {value.tag2} {value.tag3} <br /> <br />
+                            <p className={style.img}> {value.photo}</p> 
+                            <p className={style.p1}>{value.receiver}</p> 
+                            <p className={style.p2}>{value.tag1} {value.tag2} {value.tag3}</p> 
                         </button>
                     </div>
                     {/* {console.log(pdIdx)} */}
 
-                    <div className={style.doinglist} key={index}>
+                    {/* <div className={style.doinglist} key={index}>
                         <button onClick={() => setPdIdx(handlerClickSelect(index + 1, value.receiver))}>
                             <div className={style.img}>{value.photo}</div>
                             <p className={style.p1}>{value.receiver} </p>
-                            <p className={style.p2}>{value.tag}</p>
+                            <p className={style.p2}>{value.tag1}</p>
+                            <p className={style.p2}>{value.tag2}</p>
+                            <p className={style.p2}>{value.tag3}</p>
                         </button>
 
                         {console.log(pdIdx)}
-                    </div>
+                    </div> */}
                 </>
             );
         });
@@ -260,33 +338,42 @@ const Doing = ({ history, match, pcIdx }) => {
                             게시글 인덱스: {value.pcNumber} <br />
                             게시글 내용: {value.content} <br />
                             게시글 작성자: {value.writer} <br />
-                            <button key={value.pcNumber} onClick={() => handlerEditClick(index)}>{editClick === index?   "수정취소" : "수정"}</button>
+                            <button key={value.pcNumber} onClick={() => handlerEditClick(index)}>{editClick === index ? "게시글 수정취소" : "게시글 수정"}</button> <br />
                             {/* {console.log(editClick)} */}
-                            
-                            {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} index={index} editClick={editClick} setEditClick={setEditClick} setVariable={setVariable} variable={variable} /> : <></>}
-     
 
-                            <button onClick={() => handlerDetailClick(index)} >{!detailClick[index] ? "상세" : "접기"}</button>
+                            {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} /> : <></>}
+
+                            {/* {console.log(detailClick[index])} */}
+                            <button onClick={() => handlerDetailClick(index)} >{detailClick[index] == false || detailClick[index] == undefined ? "게시글 상세" : "게시글 접기"}</button> <br />
                             {/* {console.log(detailClick)} */}
-                            {detailClick[index] ? <ContentDetail pcIdx={value.pcNumber} /> : <></>}
-                            <button onClick={() => handlerClickComment(value.pcNumber, index)}>{!visible[index] || visible[index] == null ? '펼치기' : '접기'}</button><br /><br />
-                            {visible[index] && CommentList()}
+                            {detailClick[index] == true ? <ContentDetail pcIdx={value.pcNumber} /> : <></>}
+                            <button onClick={() => handlerClickComment(value.pcNumber, index)}>{commentOpen[index] == false || commentOpen[index] == undefined ? '댓글펼치기' : '댓글접기'}</button> <br />
+                            {commentOpen[index] == true && CommentList()}
+                            <button onClick={() => handlerCommentUpload(index)}>댓글 작성</button> {commentUpload === index ? <CommentWrite pcIdx={value.pcNumber} setCommentUpload={setCommentUpload} setIsClick1={setIsClick1} /> : <> </>} <br />
+                            <button onClick={() => handlerContentDelete(value.pcNumber)}> 게시글 삭제 </button> <br />
+                            <br /> <br /> <br />
                         </div>
                     )
                 }
 
                 )}
-        </>
-                )
-                }
+            </>
+        )
+    }
 
 
     const CommentList = () => {
         return commentList && commentList.map((data) => {
             return (
                 <div>
-                    <p className={style.commentsname}>게시글 작성자: {data.writer}</p>
-                    <p className={style.commentscontents}>게시글 내용: {data.content}</p>
+                    {data.content != "" ? <p className={style.commentsname}>게시글 작성자: {data.writer}</p> : <p> 댓글이 없습니다. </p>}
+                    {/* {console.log(">>>>>>>>>" + data.content)}
+                    {console.log("========" + commentList)} */}
+                    {data.content != "" && <p className={style.commentscontents}>게시글 내용: {data.content}</p>}
+                    <button onClick={() => handlerCommentDelete(data.pdcNumber)}>댓글 삭제</button>
+                    <br />
+                    <br />
+                    <br />
                 </div>
             );
         })
@@ -303,10 +390,11 @@ const Doing = ({ history, match, pcIdx }) => {
                     {/* hanlerClickUpload () -> 함수를 호출. 밑 구문을 읽을 때 Click이 되지 않아도 바로 함수 호출.
                                     함수가 호출되면서 상태변수가 바뀌니깐 return문이 rerendering. 그래서 무한루프
                     handlerClickUpload -> 함수 정의를 전달. 즉 Click했을 때만 실행 */}
-                    <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : <></>}</button>
+                    <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : "업로드 취소"}</button> <br />
                     {/* {console.log(pdIdx)} */}
                     {uploadClick ? <></> : <Content pdIdx={pdIdx} uploadClick={uploadClick} setUploadClick={setUploadClick}
                         contentList={contentList} setContentList={setContentList} />}
+                    <button> 작업 완료 </button>
                 </div>
 
             </div>

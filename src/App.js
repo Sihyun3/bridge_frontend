@@ -21,43 +21,6 @@ import Payment from './Payment/Payment';
 import Chatting from './Chatting/Chatting';
 import ProfileWrite from './Profile/ProfileWrite';
 import JamWrite from './Jam/JamWrite';
-<<<<<<< HEAD
-import { useState } from 'react';
-// import { Routes } from 'react-router-dom';
-// import Header2 from './Header/Header2';
-import { Route } from 'react-router-dom';
-import KakaoLogin from './Login/KaKaoLogin';
-import JamDetail from './Jam/JamDetail';
-import Content from './Doing/Content.js';
-import ContentUpdate from './Doing/ContentUpdate';
-// import ContentUpdate from './Doing/ContentUpdate';
-
-function App() {
-  const [isLogin, setIsLogin] = useState(false);
-  // 로그인 페이지로 이동
-  const handlerLogin = (e) => {
-    e.preventDefault();
-    window.location.href = '/3';
-  };
-
-    // 로그아웃 처리 
-  // 로그아웃 처리 
-  // 로컬 스토리지 내용 삭제 후 홈(/)으로 이동
-  const handlerLogout = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    window.location.href = '/';
-  };
-
-    // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
-  // 로그인 페이지가 아닌 경우 로그인/로그아웃 버튼을 제공
-  // 로그인 상태인 경우 로그인 정보와 로그아웃 버튼을 
-  // 로그아웃 상태인 경우 로그인 버튼을 제공
-  const isNotLoginPage = window.location.pathname === '/3' ? false : true;
-  // const isLogin = !!window.localStorage.getItem('userName');
-
-
-=======
 import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
@@ -65,7 +28,6 @@ import JamDetail from './Jam/JamDetail';
 import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import ReportList from './Admin-Report/ReportList';
-import ReportDetail from './Admin-Report/ReportDetail';
 import TipEdit from './Tip/TipEdit'
 import TipDetail from './Tip/TipDetail'
 
@@ -74,31 +36,13 @@ import { Route } from 'react-router-dom';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-     useEffect(()=>{
-      sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-     },[])
->>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
+    //  useEffect(()=>{
+    //   sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+    //  },[])
      
     
   return (
     <>
-<<<<<<< HEAD
-      {/* <Header2 /> */}
-     
-    {/* { isNotLoginPage && isLogin && 
-          <> 
-            { window.localStorage.getItem('userName') }님 환영합니다.
-            &nbsp;
-            <button onClick={handlerLogout}>Logout</button>
-          </> 
-        }
-    { isNotLoginPage && !isLogin && 
-          <>
-            <button onClick={handlerLogin}>Login</button>
-          </>
-        }    */}
-=======
->>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
 
       {/* <Header2 /> */}
       <Route path="/" component={LoginStart} exact={true} />
@@ -108,32 +52,6 @@ function App() {
 
       {/* 공지사항 */}
       <Route path="/2" component={Notice} exact={true} />
-<<<<<<< HEAD
-      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
-      <Route path="/4" component={ReportPage} exact={true} />
-      <Route path="/5" component={SignUp} exact={true} />
-      <Route path="/6" component={TipList} exact={true} />
-      <Route path="/7" component={ReportDetail} exact={true} />
-      <Route path="/8" component={Notice} exact={true} />
-      <Route path="/9" component={Notice} exact={true} />
-      <Route path="/10" component={ProfileDetail} exact={true} /> 
-      {/* 팁 */}
-      <Route path="/11" component={TipList} exact={true} />
-      {/* 잼 */}
-      <Route path="/12" component={JamList} exact={true} />
-      <Route path="/13" component={JamWrite} exact={true} />
-      {/* 파트너 구인 */}
-      <Route path="/14" component={PartnerWrite} exact={true}/>
-      <Route path="/15" component={Chatting} exact={true}/>
-      <Route path="/16" component={Payment} exact={true}/>
-      <Route path="/17" component={Doing} exact={true}/>
-      <Route path="/17/:pcIdx" component={ContentUpdate} exact={true} />
-      <Route path="/18" component={Charge} exact={true}/>
-
-      {/* 비었음 사용할 것 */}
-      <Route path="/19" component={JamDetail} exact={true} />
-      <Route path="/20" component={Notice} exact={true} />
-=======
       <Route path="/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
@@ -180,7 +98,6 @@ function App() {
       <Route path="/24" component={Doing} exact={true}/>
       <Route path="/25" component={Charge} exact={true}/>
       {/*  */}
->>>>>>> b7ba2cdb6019baca0a57afcb019b3cd69641535f
       <Footer />
     </>
   )

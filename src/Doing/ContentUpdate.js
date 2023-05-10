@@ -3,7 +3,7 @@ import axios from "axios";
 import style from "../Doing/Content.module.css"
 import jwt_decode from "jwt-decode";
 
-const ContentUpdate = ({ pcIdx, index, editClick, setEditClick, setVariable, variable, setIsClick}) => {
+const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
 
     const [ContentList, setContentList] = useState({
         content: '',
@@ -95,8 +95,13 @@ const ContentUpdate = ({ pcIdx, index, editClick, setEditClick, setVariable, var
         })
             .then((response) => {
                 console.log(response);
-                alert("업로드가 성공했습니다.");
-                setEditClick([false])
+                if (response.data.count == 0) {
+                    alert("수정된 내용이 없습니다.");
+                } else {
+                    alert("수정되었습니다.");
+                    setEditClick(false)
+                    setIsClick(false);
+                }   
             })
             .catch((error) => {
                 alert("업로드 중 오류가 발생했습니다.");
@@ -142,8 +147,8 @@ const ContentUpdate = ({ pcIdx, index, editClick, setEditClick, setVariable, var
                         {/* {ContentList.content} */}
                     </textarea>
 
-                    <input className={style.file} type="file" id="pcFile" name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder= {ContentList.file} />
-                    <input type="button" id="submit" className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제" />
+                    <input className={style.file} type="file" id="pcFile" name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder={ContentList.file} />
+                    <button className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제"> 삭제 </button>
                     <button className={style.done} type="submit">등록</button>
                 </form>
             </div>
