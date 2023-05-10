@@ -8,7 +8,7 @@ const CommentList = ({pcIdx}) => {
         content: ''
     }]);
 
-    axios.get(`http://localhost:8080/api/bridge/partnerdetail/comment/${pcIdx}`,
+    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/${pcIdx}`,
         { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
         .then((response) => {
             console.log(response);
