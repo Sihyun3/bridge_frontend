@@ -29,3 +29,49 @@
     margin-top: 10px;
     font-size: 20px;
 }
+
+/*검색창을 묶는 큰박스*/
+.serchbox {
+    float: right;
+    height: 20px;
+    width: 800px;
+    margin-bottom: 10px;
+}
+
+/*검색창*/
+.search {
+    float: right;
+    margin-top: 30px;
+    height: 30px;
+    border: none;
+    border-bottom: 3px solid #1f1f1f;
+    width: 220px;
+    display: inline;
+    margin-right: 32px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    /* position: absolute; */
+}
+
+/*검색창 돋보기 이미지*/
+.searchImg {
+    /* margin-top:24px; */
+    float: right;
+    width: 24px;
+    height: 24px;
+    margin-top: 58px;
+    margin-right: 35px;
+    position: relative;
+}
+
+
+/*페이지*/
+.page {
+    float: left;
+    padding: 40px 48%;
+}
+
+.pageButton {
+    font-size: 18px;
+}

@@ -3,26 +3,29 @@ import { useEffect, useState } from 'react';
 import style from './NoticeWrite.module.css';
 // import style from './Notice.module.css';
 import '../reset.css';
+import { Viewer } from '@toast-ui/react-editor';
+import { useHistory } from 'react-router-dom';
 
 
-
-function NoticeDetail({match, history}) {
+function NoticeDetail({match}) {
+    //수정기능 넣기 
 
     const {noticeIdx} = match.params;
 
-    const [datas, setDatas] = useState([]);
+    const [data, setData] = useState([]);
     const [notice, setNotice] = useState({});
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
-    
+    const history = useHistory();
     const handlerChangeTitle = e => setTitle(e.target.value);
     const handlerChangeContents = e => setContents(e.target.value);
 
     
 
     useEffect(() => {
-        sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiY2FyIiwiZW1haWwiOiJhYWFAYWFhLmFhYSIsInN1YiI6ImFkbWluIiwianRpIjoiNWI5NjRiNjUtYTFjZC00ZTg2LTk1ZWUtYjBiZjExZDU1ZGM1IiwiaWF0IjoxNjgyNjY5NDA3LCJleHAiOjEwMzIyNjY5NDA3fQ.2Wmjibk8x_wdkaUyt28vETqI3E2zbQQDTSqF9BFkSjk');
-        axios.get(`http://localhost:8080/api/notice/detail/${noticeIdx}` , {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
+        //
+        sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6ImFkbWluIiwianRpIjoiN2I4MTY2Y2UtY2IzZC00NWU1LWExZDEtNjRhOGMzZGU0NWJhIiwiaWF0IjoxNjgzNTMwMTA4LCJleHAiOjg2NDAxNjgzNTMwMTA4fQ.0Ky3pPm61VOXna1rLOlI2KEUxTtxiPKxPwRDE5xSDko');
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/detail/${noticeIdx}` )
         .then(reponse => {
             console.log(reponse);
             setNotice(reponse.data);
@@ -38,8 +41,8 @@ function NoticeDetail({match, history}) {
     };
 
     const handlerClickUpdate = () => {
-        axios.put(`http://localhost:8080/api/notice/update/${noticeIdx}`,
-        { "title": title, "contents": contents }) 
+        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/update/${noticeIdx}`,
+        { "title": title, "contents": contents } , {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}) 
         .then(response => {
             console.log(response);
             if(response.data === 1) {
@@ -58,13 +61,15 @@ function NoticeDetail({match, history}) {
     };
 
     const handlerClickDelete = () => {
-        axios.delete(`http://localhost:8080/api/notice/delete/${noticeIdx}`)
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/delete/${noticeIdx}` , 
+        {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
         .then(response => {
             console.log(response);
-            if(response.data === 1) {
+            
+            if(response.data) {
                 alert('해당 글이 정상적으로 삭제되었습니다.');
                 history.push('/notice');
-            } else {
+            } else if (!response.data ) {
                 alert('삭제에 실패했습니다. 다시 시도해주세요.');
                 return;
             }
@@ -79,22 +84,27 @@ function NoticeDetail({match, history}) {
   
     return (
         <>
-        <h1 className={style.Notice}>공지사항 등록</h1>
+        <h1 className={style.Notice}>공지사항 내용</h1>
         <div className={style.Box}>
 
           <h1 className={style.Title}>제목</h1>
           {/* <input type="text" id="title" name="title" value={notice.title} onChange={handlerChangeTitle}/> */}
-            <input className={style.TitleBox} value={notice.title} onChange={handlerChangeTitle}/>
+          <div className={style.TitleBox} > {notice.title}</div>
+            {/* <input  value=} onChange={handlerChangeTitle}/> */}
           {/* <div className={style.TitleBox}>{notice.title}</div> */}
           <h1 className={style.Contents}>내용</h1>
-          <input className={style.ContentsBox} value={notice.contents} onChange={handlerChangeContents}/>
+       
+         
+    
+          <div className={style.ContentsBox}>  { data.contents && <Viewer initialValue={data.contents}></Viewer>} </div>  
+          {/* value= onChange={handlerChangeContents}/> */}
           {/* <textarea className={style.TitleBox} value={notice.contents} onChange={handlerChangeContents}></textarea> */}
           <button className={style.Button2} onClick={handlerClickUpdate}>수정</button>
           <button className={style.Button3} onClick={handlerClickDelete}>삭제</button>
           <button className={style.Button3} onClick={handlerClickList}>목록으로</button>
         </div>
 
-        { datas && datas.map(notice => (
+        {/* { datas && datas.map(notice => (
                 <div className={style.TitleBox}>
                     <div key={notice.title}>
                         <div>{notice.title}</div>
@@ -105,7 +115,10 @@ function NoticeDetail({match, history}) {
                         
                         </div>
                         ))
-        }
+        } */}
+
+
+
                         {/* <div className="title">
                             <Link to={`/notice/detail/${notice.noticeIdx}`}>{notice.title}</Link></td> */}
                            {/* <Link to={`/notice/detail/${notice.noticeIdx}`}>{notice.title}</Link></div> */}
@@ -124,7 +137,7 @@ function NoticeDetail({match, history}) {
 
 //   useEffect(() => {
 //     // setAIdx(1);
-//     axios.get(`http://localhost:8080/api/announcementDetail/${aIdx}`)
+//     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/announcementDetail/${aIdx}`)
 //       .then(response => {
 //         console.log("+++++" + response.data);
 //         setTitle(response.data.atitle);
@@ -160,4 +173,3 @@ function NoticeDetail({match, history}) {
 // }
 
 export default NoticeDetail;
-

@@ -38,7 +38,7 @@ const JamDetail = ({match}) => {
         formData.append("data", new Blob([JSON.stringify(datas)], { type: "application/json" }))
         axios({
             method: 'POST',
-            url: `http://localhost:8080/api/insertmusic/${cIdx}`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${cIdx}`,
             headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
             data: formData
         }).then((response) => {
@@ -51,7 +51,7 @@ const JamDetail = ({match}) => {
         window.location.reload();
     }
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/jam/${cIdx}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
                 setData(response.data.music);
                 setInfo(response.data.data)
@@ -81,7 +81,7 @@ const JamDetail = ({match}) => {
             return;
         }
         //cIdx 부분 1번으로 하드코딩==> 수정 필요
-        axios.post(`http://localhost:8080/api/insertComments/${cIdx}`, {  "ccComments": comment },
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, {  "ccComments": comment },
         { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
             .then(response => {
                 console.log(response);
@@ -97,7 +97,7 @@ const JamDetail = ({match}) => {
     // 코멘트 삭제 핸들러
     const handlerClickDelete = (e) => {
         e.preventDefault();
-                axios.delete(`http://localhost:8080/api/CommentsDelete/${e.target.value}`)
+                axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
             .then(response => {
                 console.log(response);
                 if (response.data === 1) {
@@ -160,7 +160,7 @@ const JamDetail = ({match}) => {
                                     <Waveform
                                         data={data}
                                         key={musicInfo.musicUUID}
-                                        src={`http://localhost:8080/api/getMusic/${musicInfo.cmMusic}.mp3`}
+                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}.mp3`}
                                         ref={(elem) => (child.current[index] = elem)}
                                     />
                                     {/* 노래제목 */}

@@ -66,7 +66,7 @@ const Doing = ({ history, match, pcIdx }) => {
         console.log(decode_token);
         console.log(userId);
 
-        axios.get(`http://localhost:8080/api/bridge/partnerdetail/projectList/${userId}`,
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${userId}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -98,7 +98,7 @@ const Doing = ({ history, match, pcIdx }) => {
         console.log(userId1);
         console.log(userId2);
 
-        axios.get(`http://localhost:8080/api/bridge/partnerdetail/paylist/${userId1}/${userId22}`,
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${userId22}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -116,8 +116,8 @@ const Doing = ({ history, match, pcIdx }) => {
         setPdIdx(pdNumber);
         const partnerDetailIdx = pdNumber;
         console.log(pdIdx);
-        axios.get(`http://localhost:8080/api/bridge/partnerdetail/${partnerDetailIdx}`,
-            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdIdx}`
+        )
             .then(response => {
                 console.log(response);
                 setContentList(response.data.map((data) => {
@@ -321,6 +321,33 @@ const Doing = ({ history, match, pcIdx }) => {
         // console.log(payList);
         // console.log(contentList);
 
+        const handlerClickComment = (pcIdx, index) => {
+
+            visible[index] = !visible[index];
+
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/comment/${pcIdx}`,
+                { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+                .then((response) => {
+                    console.log(response);
+                    setCommentList(response.data.map((data) => {
+                        return ({
+                            writer: data.userId,
+                            content: data.pdcComment
+                        })
+                    })
+                    )
+                    console.log(commentList);
+
+                }).catch((error) => {
+                    return;
+                })
+
+        }
+        const handleEditClick = (pcIdx) => {
+            // history.push(`/21/${pcIdx}`);
+            history.push(`/17/${pcIdx}`);
+            // console.log(">>>>>>>>>>>>>>>>>>>");
+        };
         return (
             <>
                 <div>

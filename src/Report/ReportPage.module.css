@@ -1,20 +1,21 @@
 .Box{
     width:645px;
     height: 579px;
-    background-color: #b4abab;
+    /* background-color: #dfdfdf; */
     margin:100px auto;
-    border: 1px solid rgb(217,217,217,0.1);
-    border-radius: 0.5rem;
+  
+    border-bottom: 3px solid #9e9e9e;
+    border-top: 3px solid #9e9e9e;
     margin-top: 180px;
 }
 .Target{
     width:500px;
     height: 54px;
-    background-color: blue;
+ 
     margin:0 auto;
     margin-top: 54px;
-    border-radius: 0.5rem;
-    font-size: 30px;
+    border-bottom: 2px solid #9e9e9e;
+    font-size: 24px;
     text-align: center;
     line-height: 54px;
 }
@@ -36,9 +37,8 @@
     width:500px;
     height: 54px;
     margin: 0 auto;
-    background-color: red;
-    border-radius: 0.5rem;
-    font-size: 30px;
+    border-bottom: 2px solid #9e9e9e;
+    font-size: 20px;
     margin-top:30px;
     margin-bottom:30px;
     text-align: center;

@@ -1,26 +1,162 @@
-import style from '../Partner/PartnerList.module.css'
-import Header1 from '../Header/Header1'
+import style from '../Partner/PartnerList.module.css';
+import Header1 from '../Header/Header1';
+import img from '../img/checkbox.png';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Pagination from '../Pagination';
+import { Link } from 'react-router-dom';
 
-const Partner = () => {
-    return (
-        <>
-            <Header1 />
-            <div className={style.box1}>
-                <h1>파트너 모집</h1>
-            </div>
-            <div className='container clearfix' >
-                <div className={style.tagbox}>
-                    <div className={style.tag}><h2>#태그</h2></div>
-                    <div className={style.taglist}>
-                        <a>#여성보컬</a>
-                        <a>#베이스기타</a>
-                        <a>#플룻</a>
-                    </div>
+const PartnerList = () => {
+  const [partnerList, setPartnerList] = useState([]);
+  const [partnerTag, setPartnerTag] = useState([]);
+  const [tag, setTag] = useState('');
+
+  //페이징
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+
+
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (partnerList) => {
+    let currentPosts = 0;
+    currentPosts = partnerList.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
+
+
+  const tags = [
+    { name: '여성보컬' },
+    { name: '남성보컬' },
+    { name: '일렉기타' },
+    { name: '어쿠스틱기타' },
+    { name: '베이스기타' },
+    { name: '드럼' },
+    { name: '퍼커션' },
+    { name: '브라스' },
+    { name: '바이올린' },
+    { name: '첼로' },
+    { name: '콘트라베이스' },
+    { name: '피아노' },
+    { name: '신디사이저' }
+  ];
+
+  useEffect(() => {
+    axios
+      .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
+      .then((response) => {
+        setPartnerList(response.data.partnerList);
+        axios
+          .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)
+          .then((response) => {
+            setPartnerTag(response.data.partnerTag);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleRadio = (e) => {
+    setTag(e.target.value);
+  };
+
+  const clearRadio = () => {
+    setTag('');
+  };
+
+
+  return (
+    <>
+      <Header1 />
+      <div className={style.box1}>
+        <h1>파트너 모집</h1>
+      </div>
+      <div className="container clearfix">
+        <div className={style.tagbox}>
+          <div className={style.tag}>
+            <h2>#태그</h2>
+          </div>
+          {tags.map((tags, index) => {
+            if (index % 5 == 0) {
+              return (<><br />   <label className={style.tags} for={`tagRadio-${index}`}>
+              <button
+              key={index}
+                className={style.taglists}
+                id={`tagRadio-${index}`}
+                value={tags.name}
+                onClick={handleRadio}
+              />
+             #{tags.name}</label></>)
+            }
+            return (
+              // <span className={style.taglist} key={index}>
+              <label className={style.tags} for={`tagRadio-${index}`}>
+                <button
+                key={index}
+                  className={style.taglists}
+                  id={`tagRadio-${index}`}
+                  value={tags.name}
+                  onClick={handleRadio}
+                />
+               #{tags.name}</label>
+              // </span>
+            );
+          })}
+          <button className={style.tags} onClick={clearRadio}>#전체</button>
+        </div>
+        <div className="clearfix" style={{ margin: '50px 0' }}>
+          {
+          currentPosts(partnerList) && currentPosts(partnerList)
+            .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
+            .map((partnerList, index) => {
+              return (
+                <div key={index} className={style.block}>
+                  <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
+                  {/* <p className={style.title}>{partnerList.userId}</p> */}
+                  <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
+                  <div>
+                    {partnerTag
+                      .filter((tag) => partnerList.crIdx === tag.crIdx)
+                      .map((tag, tagIndex) => {
+                        // console.log(3%3)
+                        if (tagIndex % 3 == 0) {
+                          return (<><br /><span key={tagIndex}>#{tag.crtTag} </span> </>)
+                        }
+                        return (<span key={tagIndex}>#{tag.crtTag} </span>);
+                      }
+
+
+                      )}
+                  </div>
+                  <p className={style.title}>
+                    {partnerList.crStartDate} ~ {partnerList.crEndDate}
+                  </p>
                 </div>
+              );
+            })}
+        </div>
 
-            </div>
-        </>
-    )
-}
+        <div className={style.buttonbox}>
+        <Link to={`/21`}><button > 파트너 찾기 </button></Link>
+        </div>
 
-export default Partner;
+        <div style={{margin:"0 auto"}} className='clearfix'>
+          <Pagination
+            className={style.page}
+            postsPerPage={postsPerPage}
+            totalPosts={partnerList.length}
+            paginate={setCurrentPage}
+          ></Pagination>
+        </div>
+
+
+      </div>
+    </>
+  );
+};
+
+export default PartnerList;

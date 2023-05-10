@@ -49,7 +49,7 @@ function Content({ pdIdx, uploadClick, setUploadClick }) {
         console.log(formData)
         axios({
             method: 'POST',
-            url: `http://localhost:8080/api/bridge/partnerdetail/write/${pdIdx}`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/write/${pdIdx}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         }).then((response) => {

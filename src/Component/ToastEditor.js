@@ -3,6 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { useRef } from 'react';
 import axios from 'axios';
+import style from '../Admin-Notice/NoticeWrite.module.css'
 
 const ToastEditor = ({title,data}) => {
 
@@ -19,7 +20,7 @@ const ToastEditor = ({title,data}) => {
         console.log(files);
         console.log(typeof(title)) 
         if(!data){
-            axios.post(`http://localhost:8080/api/inserttip`,
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/inserttip`,
             { "tbTitle": title, "tbContents" :files },
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
         )
@@ -31,7 +32,7 @@ const ToastEditor = ({title,data}) => {
                 alert("오류가 발생하였습니다.");
             })
         }else if(data){
-            axios.put(`http://localhost:8080/api/update/tip` , {"tbTitle":title,"tbContents":files,"tbIdx":data.tbIdx},
+            axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/update/tip` , {"tbTitle":title,"tbContents":files,"tbIdx":data.tbIdx},
             ).then(()=>{
                 alert("정상 처리 되었습니다.")
             }).catch(()=>{
@@ -48,7 +49,7 @@ const ToastEditor = ({title,data}) => {
              // 미리보기 스타일 지정
              previewStyle="vertical"
              // 에디터 창 높이
-             height="300px"
+             height="500px"
              //초기 입력모드 설정
              initialEditType="wysiwyg"
              //입력모드 변경 안보이게
@@ -66,7 +67,7 @@ const ToastEditor = ({title,data}) => {
             // 미리보기 스타일 지정
             previewStyle="vertical"
             // 에디터 창 높이
-            height="300px"
+            height="500px"
             //초기 입력모드 설정
             initialEditType="wysiwyg"
             //입력모드 변경 안보이게
@@ -82,7 +83,7 @@ const ToastEditor = ({title,data}) => {
 
             
             {/* <button onClick={showContent}>작성</button> */}
-            <button onClick={submit}>디비에 넣기</button>
+            <button className={style.btn} onClick={submit}>작성</button>
 
         </>
     )

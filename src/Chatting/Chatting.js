@@ -32,7 +32,7 @@ const Chatting = () => {
     useEffect(() => {
         sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
         connect();
-        axios.get('http://localhost:8080/chatroom', { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(r => {
                 setChatList(r.data.chatting)
                 setSender(r.data.sender)
@@ -41,7 +41,7 @@ const Chatting = () => {
 
     const connect = () => {
         client.current = new StompJs.Client({
-            brokerURL: 'ws://localhost:8080/ws',
+            brokerURL: `ws://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/ws`,
             onConnect: () => {
                 console.log('success');
             },
@@ -50,7 +50,7 @@ const Chatting = () => {
     };
 
     const chatroom = (props) => {
-        axios.get(`http://localhost:8080/chat/${props}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chat/${props}`)
             .then(response => {
                 console.log(response.data.messagelist)
                 setMessage(response.data.messagelist);
