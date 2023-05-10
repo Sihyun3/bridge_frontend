@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 // import {KAKAO_AUTH_URL} from './LoginTest/KaKaoLogin';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 
 
 const LoginTest = ({ setIsLogin }) => {
@@ -30,13 +31,12 @@ const LoginTest = ({ setIsLogin }) => {
     const [Emassage, setEmassage] = useState();
 
 
-
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const history = useHistory();
     const handlerOnClick = e => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/login`,
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`,
             { "userId": userId, "userPassword": userPassword })
             .then(response => {
                 if (response.data) {
@@ -55,8 +55,32 @@ const LoginTest = ({ setIsLogin }) => {
             })
     };
 
+    const [isChecked, setIsChecked] = useState(false);
+    const [idInputBox, setIdInpuBox] = useState('');
+    const [inputBox, setInputBox] = useState('');
+
+    const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
+    const [isRemember, setIsRemember] = useState(false);
+
+    /*페이지가 최초 렌더링 될 경우*/
+    useEffect(() => {
+        /*저장된 쿠키값이 있으면, CheckBox TRUE 및 UserID에 값 셋팅*/
+        if (cookies.rememberUserId !== undefined) {
+            setUserId(cookies.rememberUserId);
+            setIsRemember(true);
+        }
+
+    }, []);
+
+    const handleOnChange = (e) => {
+        setIsRemember(e.target.checked);
+        if (!e.target.checked) {
+            removeCookie("rememberUserId");
+        }
+    };
+
     const handlerOnClick2 = () => {
-        history.push('/27');
+        history.push('/4');
     };
 
     return (
@@ -70,6 +94,13 @@ const LoginTest = ({ setIsLogin }) => {
                                 <h1 className={style.formH1}>Login</h1>
                                 <input className={style.formInput} type="Id" placeholder="아이디" value={userId} onChange={(e) => setUserId(e.target.value)} />
                                 <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
+
+                                <div className={style.saveBox}>
+                                    <input className={style.idCheckBox} type='checkbox' checked={isRemember} id="saveId" name="saveId" value="saveId"  onChange={(e) => {handleOnChange(e);}} />
+                                    <label for="saveId" className={style.saveId}>아이디 저장</label>
+                                    {/* <span className={style.saveId}>아이디 저장</span> */}
+                                </div>
+
                                 <button className={style.loginButton} onClick={handlerOnClick}>로그인</button>
 
                                 <div className={style.find}>
