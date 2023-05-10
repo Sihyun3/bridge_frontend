@@ -35,6 +35,7 @@ import { Route } from 'react-router-dom';
 import PartnerList from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
+import LoginTest from './Login/LoginTest';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -69,6 +70,9 @@ function App() {
 
       {/* 로그인 */}
       <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
+      {/* 로그인 테스트 */}
+      <Route path="/29" component={LoginTest} exact={true} />
+
 
       {/* 회원 가입 */}
       <Route path="/4" component={SignUp} exact={true} />
@@ -116,6 +120,7 @@ function App() {
       <Route path="/27" component={DealListAd} exact={true} />
       {/* 어드민 메인 페이지 */}
       <Route path="/28" component={MainAd} exact={true} />
+
       <Footer />
     </>
   )

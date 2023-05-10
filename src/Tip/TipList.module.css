@@ -106,3 +106,13 @@
 .heart{
     margin-left:760px;
 }
+
+/*페이지*/
+.page {
+    float: left;
+    padding: 40px 48%;
+}
+
+.pageButton {
+    font-size: 18px;
+}

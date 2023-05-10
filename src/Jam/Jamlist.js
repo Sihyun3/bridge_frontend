@@ -17,12 +17,51 @@ const JamList = () => {
             })
     }, [])
 
+
+    const [searchInput, setSearchInput] = useState('');
+    const [filteredDatas, setFilteredDatas] = useState([]);
+
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
+    const [value, setValue] = useState([]);
+
+
+    const handlerSerchInput = (e) => {
+        setSearchInput(e.target.value);
+    }
+
+    const handlerSerchSubmit = (e) => {
+        e.preventDefault();
+        const filtered = data.filter(notice => {
+            console.log(`>${searchInput}<`)
+            console.log(notice.title.includes(searchInput))
+            return notice.title.includes(searchInput)
+        }
+        );
+        console.log(filtered);
+        setFilteredDatas(filtered);
+        setPage(1);
+    }
+
+
+
     return (
         <>
             <div className={style.box1}>
                 <h1>게시판</h1>
             </div>
             <div className='container clearfix'>
+
+            <form onSubmit={handlerSerchSubmit}>
+                    <div className={style.serchbox}>
+                        <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
+                    </div>
+                    <div className={style.serchbox}>
+                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
+                    </div>
+                </form>
+                
                 <Link to="/jam/write"><img className={style.playbutton} src={img}></img></Link>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
@@ -53,6 +92,47 @@ const JamList = () => {
                         <p className={style.title}>즐겁게 합주해요</p>
                     </div> */}
 
+                </div>
+
+                <div className={style.page}>
+
+                    <nav className="pageNum" >
+                        <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+                            &lt;
+                        </button>
+                        {
+                            filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => setPage(i + 1)}
+                                    aria-current={page === i + 1 ? "page" : null}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+
+                        {
+                            filteredDatas == "" && Array(Math.ceil(data.length / limit)).fill().map((page, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => setPage(i + 1)}
+                                    aria-current={page === i + 1 ? "page" : null}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+
+                        {
+                            filteredDatas == "" && data ?
+                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(data.length / limit)}>
+                                    &gt;
+                                </button>
+                                :
+                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
+                                    &gt;
+                                </button>
+                        }
+                    </nav>
                 </div>
             </div>
         </>
