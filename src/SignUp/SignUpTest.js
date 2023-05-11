@@ -10,8 +10,7 @@ import style from './SignUpTest.module.css';
 // import KakaotalkLogo from './KakaotalkLogo.png';
 // import GoogleLogo from './GoogleLogo.png';
 import { useRef} from 'react';
-import useDetectClose from '../useDetectClose';
-// import { PhoneDropDown } from '../components/PhoneDropDown';
+
 
 
 const SignUpTest = ({ history }) => {
@@ -115,22 +114,13 @@ const SignUpTest = ({ history }) => {
     };
 
 
-    const dropDownRef = useRef();
-    const [mailIdentify, setMailIdentify] = useState('');
-    const mailAddress = ['naver.com' , 'daum.net', 'google.com']  // ['010', '011', '017', ...]
+    // const dropDownRef = useRef();
+    // const [mailIdentify, setMailIdentify] = useState('');
+    // const mailAddress = ['naver.com' , 'daum.net', 'google.com']  // ['010', '011', '017', ...]
 
-    const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
+    // const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
 
-    const PhoneDropDown = ({ value, setPhoneIdentify, setIsOpen, isOpen }) => {
-        const ValueClick = () => {
-            setMailIdentify(value)
-            setIsOpen(!isOpen)
-        }
-        return(
-            <li onClick={ValueClick}>{value}</li>
-        )
-    }
-
+    
 
 //     <select className={style.signupinput} onChange={handleSelect}>
 //                         <option value="" disabled selected>포지션 선택</option>
@@ -163,17 +153,17 @@ const SignUpTest = ({ history }) => {
                                     <div>
                                         <input className={style.formInput} type="email" placeholder="이메일" onChange={handlerChangeEmail} />
                                         <button className={style.registrationButton} onClick={handlerOnClickForVerification}>인증번호 받기</button>
-                                        <div ref={dropDownRef}>
-                                            <input onClick={() => setIsOpen(!isOpen)} type='button' value={phoneIdentify} />
+                                        {/* <div ref={dropDownRef}>
+                                            <input onClick={() => setIsOpen(!isOpen)} type='button' value={mailIdentify} />
                                             
                                             {isOpen &&
                                                 <ul>
-                                                    {phoneList.map((value, index) => (
-                                                        <PhoneDropDown key={index} value={value} setIsOpen={setIsOpen} setPhoneIdentify={setPhoneIdentify} isOpen={isOpen} />
+                                                    {mailAddress.map((value, index) => (
+                                                        <MailDropDown key={index} value={value} setIsOpen={setIsOpen} setMailIdentify={setMailIdentify} isOpen={isOpen} />
                                                     ))}
                                                 </ul>
 	                                        }
-                                        </div>
+                                        </div> */}
                                         <button className={style.registrationButton} onClick={handlerOnClickForVerification}>인증번호 받기</button>
                                     </div>
                                     <input className={style.formInput} type="PINCODE" placeholder="인증번호를 입력하세요" onChange={changePhone} />

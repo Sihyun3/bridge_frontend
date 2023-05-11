@@ -1,9 +1,9 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 
-* {
+/* * {
     box-sizing: border-box;
   }
-  
+   */
   .body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
@@ -45,7 +45,7 @@
     /* opacity: 0.7; */
     padding: 16px;
     margin: 5px 0;
-    width: 70%;
+    width: 65%;
     border: 1px;
     outline: none;
     border-radius: 5px;
@@ -68,25 +68,32 @@
     align-items: center;
   }
   
+  .loginButtonBox{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 50px;
+  }
+
   .loginButton{
-    width: 315px;
+    /* width: 315px; */
     font-size: 14px;
     font-weight: bold;
     color :#ffffff;
     background: #739eee;
     /* opacity: 0.9; */
-    width: 70%;
+    width: 65%;
     border-radius: 5px;
     outline: none;
-    padding: 15px 45px;
-    margin: 14px;
+    padding: 16px ;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     cursor: pointer;
-    transition: transform 80ms ease-in;
-    margin-top: 25px;
+    /* transition: transform 80ms ease-in; */
+    margin-top: 15px;
     margin-bottom: 3px;
-  
     /* background-image: linear-gradient(to right, #ed85ff, #61c7d4); */
   }
   
@@ -96,7 +103,7 @@
     font-size: 12px;
     font-weight: 600;
     margin-top: 10px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     /* margin-bottom: 30px; */
   }
   
@@ -105,20 +112,20 @@
   }
   
   .registrationButton{
-    width: 315px;
-    font-size: 13px;
+    
     color :#ffffff;
     background: #000000;
     opacity: 0.4;
-    width: 70%;
+    font-size: 14px;
+    font-weight: bold;
+    width: 65%;
     border-radius: 5px;
     outline: none;
-    padding: 15px 45px;
-    margin: 14px;
+    padding: 16px ;
     letter-spacing: 1px;
-    text-transform: uppercase;
     cursor: pointer;
-    transition: transform 80ms ease-in;
+    margin-top: 25px;
+    margin-bottom: 3px;
     
   }
   
@@ -337,23 +344,21 @@
 }
 
 .saveBox{
-
-  width:  69%;
-  height: 15px;
-  margin-top: 5px;
+    width:72%;
+    display: flex;
+    justify-content: left;
+    align-items:flex-start;
+    flex-direction:row;
+    margin-top: 5px;
+    padding: 0 55px;
 }
 
 .idCheckBox{
-  float: left;
-  justify-content: left;
-  align-items: left;
   background: #eeeeee;
-  /* opacity: 0.7; */
   border: 1px;
-  outline: none;
   border-radius: 5px;
   margin-right: 3px;
-
+  margin-left: 2px;
 }
 
 .saveId{
