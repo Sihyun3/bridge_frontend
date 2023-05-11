@@ -116,20 +116,29 @@ const SignUpTest = ({ history }) => {
 
 
     const dropDownRef = useRef();
-    const [phoneIdentify, setPhoneIdentify] = useState('');
-    const phoneList = []  // ['010', '011', '017', ...]
+    const [mailIdentify, setMailIdentify] = useState('');
+    const mailAddress = ['naver.com' , 'daum.net', 'google.com']  // ['010', '011', '017', ...]
 
     const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
 
     const PhoneDropDown = ({ value, setPhoneIdentify, setIsOpen, isOpen }) => {
         const ValueClick = () => {
-            setPhoneIdentify(value)
+            setMailIdentify(value)
             setIsOpen(!isOpen)
         }
         return(
             <li onClick={ValueClick}>{value}</li>
         )
     }
+
+
+//     <select className={style.signupinput} onChange={handleSelect}>
+//                         <option value="" disabled selected>포지션 선택</option>
+//                         <option value="작곡가">작곡가</option>
+//                         <option value="연주자">연주자</option>
+//                         <option value="작곡가 겸 연주자">작곡가 겸 연주자</option>
+//                     </select>
+// const handleSelect = (e) => {setSelect(e.target.value);};
 
     return (
         <>

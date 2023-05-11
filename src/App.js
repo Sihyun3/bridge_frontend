@@ -37,6 +37,7 @@ import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
 import SignUpTest from './SignUp/SignUpTest';
+import PaymentTest2 from './Payment/PaymentTest2';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -108,7 +109,7 @@ function App() {
       <Route path="/21" component={PartnerWrite} exact={true}/>
       <Route path="/23" component={Payment} exact={true}/>
       <Route path="/24" component={Doing} exact={true}/>
-      <Route path="/25" component={Charge} exact={true}/>
+      <Route path="/25:total" component={Charge} exact={true}/>
       <Route path="/26" component={PartnerList} exact={true}/>
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
       
@@ -121,6 +122,8 @@ function App() {
         {/* 협업페이지 */}
         <Route path="/29" component={Doing} exact={true} />
 
+      {/* 테스트 페이지 */}
+      <Route path="/30" component={PaymentTest2} exact={true}/>
       <Footer />
     </>
   )

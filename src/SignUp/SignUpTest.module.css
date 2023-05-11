@@ -49,6 +49,8 @@
     border: 1px;
     outline: none;
     border-radius: 5px;
+    align-items: center;
+    margin-left: 60px;
   }
   
   /* .formInput2 {
