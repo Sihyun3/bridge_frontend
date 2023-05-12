@@ -116,9 +116,9 @@ const PartnerList = () => {
             .map((partnerList, index) => {
               return (
                 <div key={index} className={style.block}>
-                  <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
+                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
                   {/* <p className={style.title}>{partnerList.userId}</p> */}
-                  <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
+                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                   <div>
                     {partnerTag
                       .filter((tag) => partnerList.crIdx === tag.crIdx)
@@ -142,7 +142,7 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-        <Link to={`/21`}><button > 파트너 찾기 </button></Link>
+        <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
         </div>
 
         <div style={{margin:"0 auto"}} className='clearfix'>

@@ -46,24 +46,6 @@ const Charge = () => {
             })
     }
 
-
-
-    //추가
-    // const handleKakaopay = (e) => {
-    //     e.preventDefault();
-    //     axios({
-    //         method: 'GET',
-    //         url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay`,
-    //         data: {
-    //             total_amount:chargePoint
-    //         }
-    //     }).then((response) => {
-    //         console.log("++++++++++++" + response.data);
-    //     })
-    // }
-
-    // const [tid, setTid] = useState('');
-
     //카카오페이 버튼 클릭 핸들러
     const handleKakaopay = (e) => {
         e.preventDefault();
@@ -73,10 +55,7 @@ const Charge = () => {
                 console.log(response);
                 console.log("==============" + response.data)
                 console.log("++++++++++++++" + response.data.next_redirect_pc_url);
-                window.location.href = response.data.next_redirect_pc_url;
-                // setTid(response.data.tid);
-                // console.log("33333333333333" + tid);
-                
+                window.location.href = response.data.next_redirect_pc_url;     
             })
             .catch(error => {
                 console.log(error);
@@ -116,11 +95,6 @@ const Charge = () => {
                     <div className={style.regist}>
                         <button className={style.registButton} onClick={handleKakaopay}>카카오페이</button>
                     </div>
-
-                    {/* <div>
-                        <button onClick={handleKakaopay}>카카오페이</button>
-                    </div>
-                    <button onClick={test}>asddddddddd</button> */}
 
                 </div>
             </div>

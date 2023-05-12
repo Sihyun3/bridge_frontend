@@ -40,14 +40,14 @@ const TipList = () => {
                 </div>
                 <div className={style.write}>
                     <button className={style.writebutton} onClick={() => {
-                        history.push('/tip/write')
+                        history.push('/bridge/tip/write')
                     }}>작성</button>
                 </div>
                 {
                     data.map((data) => {
                         console.log(data.tbIdx)
                         return (
-                            <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
+                            <Link to={`/bridge/tip/detail/${data.tbIdx}`} className={style.list}>
                                 <a className={style.title}>{data.tbTitle}</a>
                                 <a className={style.heart}>♡</a>
                                 <a className={style.count}>{data.tbHeart}</a>
