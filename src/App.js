@@ -37,9 +37,11 @@ import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
 import SignUpTest from './SignUp/SignUpTest';
+import PaymentTest from './Payment/PaymentTest';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  
    useEffect(()=>{
     sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
    },[])
@@ -120,6 +122,9 @@ function App() {
       <Route path="/28" component={MainAd} exact={true} />
         {/* 협업페이지 */}
         <Route path="/29" component={Doing} exact={true} />
+
+
+        <Route path="/31" component={PaymentTest} exact={true} />
 
       <Footer />
     </>

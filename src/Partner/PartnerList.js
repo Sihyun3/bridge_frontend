@@ -13,7 +13,7 @@ const PartnerList = () => {
 
   //페이징
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(9);
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -45,6 +45,7 @@ const PartnerList = () => {
     axios
       .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
+        console.log(response.data);
         setPartnerList(response.data.partnerList);
         axios
           .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)
