@@ -38,7 +38,7 @@ import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
 import SignUpTest from './SignUp/SignUpTest';
 import PaymentTest from './Payment/PaymentTest';
-
+import PaymentTest2 from './Payment/PaymentTest2';
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
@@ -53,17 +53,16 @@ function App() {
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
       {/* 완성된 페이지 */}
 
-<<<<<<< HEAD
    
       <Route path="/report/list" component={ReportList} exact={true} />
       <Route path="/tip" component={TipList} exact={true} />
       <Route path="/tip/write" component={TipWrite} exact={true} />
       <Route path="/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/jam" component={JamList} exact={true} />
-=======
       <Route path="/bridge/admin/notice/list" component={Notice} exact={true} />
       <Route path="/bridge/admin/report/list" component={ReportList} exact={true} />
->>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
+      <Route path="/bridge/admin/notice/write" component={NoticeWrite} exact={true} />
+      <Route path="/bridge/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
@@ -77,9 +76,7 @@ function App() {
       <Route path="/" component={Main} exact={true} />
 
       {/* 공지사항 */}
-      <Route path="/bridge/admin/notice/write" component={NoticeWrite} exact={true} />
-      <Route path="/bridge/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
-
+     
       {/* 로그인 */}
       <Route path="/bridge/login" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
@@ -93,16 +90,9 @@ function App() {
       <Route path="/30" component={SignUpTest} exact={true} />
 
       {/* 잼 */}
-<<<<<<< HEAD
-     
-      <Route path="/jam/write" component={JamWrite} exact={true} />
-      <Route path="/10" component={JamDetail2} exact={true} />
-      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
-=======
       <Route path="/bridge/jam/list" component={JamList} exact={true} />
       <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
       <Route path="/bridge/jam/detail/:cIdx" component={JamDetail} exact={true} />
->>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
 
       {/* 팁게시판 */}
       <Route path="/bridge/tip/list" component={TipList} exact={true} />

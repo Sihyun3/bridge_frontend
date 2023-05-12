@@ -118,16 +118,11 @@ const PartnerList = () => {
                 <div key={index} className={style.block}>
                   <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
                   {/* <p className={style.title}>{partnerList.userId}</p> */}
-<<<<<<< HEAD
                   <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                   <p className={style.date}>
                     {partnerList.crStartDate} ~ {partnerList.crEndDate}
                   </p>
                   <div className={style.tagblock}>
-=======
-                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
-                  <div>
->>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
                     {partnerTag
                       .filter((tag) => partnerList.crIdx === tag.crIdx)
                       .map((tag, tagIndex) => {

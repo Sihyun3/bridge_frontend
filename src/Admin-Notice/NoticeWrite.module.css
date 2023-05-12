@@ -27,8 +27,8 @@
     min-height: 456px;
     height:auto;
     margin: 80px auto 40px auto;
-   border-top: 2px solid #616161;
-   border-bottom: 2px solid #616161;
+   border-top: 2px solid #999999;
+   border-bottom: 2px solid #999999;
    }
    
    /* 제목 텍스트 */
@@ -93,23 +93,23 @@
    /* 수정 버튼 */
    .Button2{
     float: right;     
-    width: 65px;
+    width: 48px;
     height: 25px;
-    margin: 20px auto;
+    margin: 40px auto;
     margin-right: 23px;
-    border:1px solid #212121;
-    border-radius: 0.2rem;
+    border-bottom:2px solid #a7a7a7;
+    
    }
    
    /* 삭제 버튼 */
    .Button3{
     float: right;     
-    width: 65px;
+    width: 48px;
     height: 25px;
-    margin: 20px auto;
+    margin: 40px auto;
     margin-right: 15px;
-    border:1px solid #212121;
-    border-radius: 0.2rem;
+    border-bottom:2px solid #a7a7a7;
+ 
    }
    /*목록으로 버튼*/
    .Button4 {
@@ -119,6 +119,8 @@
     border:1px solid #212121;
     border-radius: 0.4rem;
     margin-left: 550px;
+    margin-bottom: 40px;
+    margin-top:20px;
    }
 
    /*제목 입력칸 */
