@@ -75,9 +75,9 @@ function App() {
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
       {/* 로그인 */}
-      <Route path="/3" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트 */}
-      <Route path="/29" component={LoginTest} exact={true} />
+      {/* <Route path="/login" component={} exact={true} /> */}
 
 
       {/* 회원 가입 */}
@@ -113,7 +113,7 @@ function App() {
       <Route path="/21" component={PartnerWrite} exact={true}/>
       <Route path="/23" component={Payment} exact={true}/>
       <Route path="/24" component={Doing} exact={true}/>
-      <Route path="/25:total" component={Charge} exact={true}/>
+      <Route path="/25/:total" component={Charge} exact={true}/>
       <Route path="/26" component={PartnerList} exact={true}/>
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
       
@@ -126,7 +126,7 @@ function App() {
       
 
       {/* 테스트 페이지 */}
-      <Route path="/30" component={PaymentTest2} exact={true}/>
+      <Route path="/31" component={PaymentTest2} exact={true}/>
       <Footer />
     </>
   )

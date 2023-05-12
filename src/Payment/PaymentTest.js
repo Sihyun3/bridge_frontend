@@ -1,4 +1,4 @@
-import style from './PaymentTest.module.css';
+import style from './Payment.module.css';
 import user from './user.png';
 import arrow from './PaymentImg.png';
 import { useState, useEffect } from 'react';
@@ -36,16 +36,20 @@ function PaymentTest({ match, history }) {
 
 
     useEffect(() => {
+        if(sessionStorage.getItem('token') == null){
+            history.push('/login')
+            return;
+        }
+        
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setPayment(decode_token.sub);
-        axios.get('http://localhost:8080/api/payment/detail/1') //백엔드도 여기처럼 다시 바꿔야함
+        axios.get(`http://localhost:8080/api/payment/detail/${payment}`) //백엔드도 여기처럼 다시 바꿔야함
             // ,(`http://localhost:8080/api/payment/${userProducer}`)
             .then(response => {
                 console.log(response.data);
-                setUsepoint(response.data.usepoint);
-                setClients(response.data.clients);
-                setProducer(response.data.producer);
+                setUsepoint(response.data);
+
 
                 // setWillPoint(currentPoint);
             })
