@@ -60,27 +60,41 @@ const JamList = () => {
                         <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
                     </div>
                 </form>
+<<<<<<< HEAD
                 <div className={style.pbox}>
                     <Link to="/jam/write"><input type="button" className={style.playbutton} value="Play" /></Link>
                 </div>
+=======
+                
+                <Link to="/bridge/jam/write"><img className={style.playbutton} src={img}></img></Link>
+>>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
                         data.map((data) => {
                             return (
                                 <>
                                     <div className={style.block}>
+<<<<<<< HEAD
                                         <Link to={`/jam/detail/${data.cidx}`}>
                                             <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
                                             <p className={style.title}>{data.ctitle}</p>
+=======
+                                        <Link to={`/bridge/jam/detail/${data.cidx}`}>
+                                        <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                        <p className={style.title}>{data.ctitle}</p>
+>>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
                                         </Link>
                                     </div>
                                 </>
                             );
                         })
                     }
+<<<<<<< HEAD
 
             
 
+=======
+>>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
                 </div>
 
                 <div className={style.page}>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function ReportPage() {
 
@@ -11,6 +12,8 @@ function ReportPage() {
     const [reportReasonDetail, setReportReasonDetail] = useState('')
     const [reportedUserId, setReportedUserId] = useState('');
     const [userId, setUserId] = useState('');
+
+    const history = useHistory();
 
     //신고사유 선택
     const handleSelect = (e) => {
@@ -33,6 +36,8 @@ function ReportPage() {
             .then(response => {
                 console.log(response);
                 alert('정상적으로 신고되었습니다');
+                // 어디로 보낼지 고민
+                history.push(`/`)
             })
             .catch(error => {
                 console.log(error);

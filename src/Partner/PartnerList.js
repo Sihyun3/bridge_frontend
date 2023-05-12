@@ -13,7 +13,7 @@ const PartnerList = () => {
 
   //페이징
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(9);
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -45,6 +45,7 @@ const PartnerList = () => {
     axios
       .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
+        console.log(response.data);
         setPartnerList(response.data.partnerList);
         axios
           .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)
@@ -115,13 +116,18 @@ const PartnerList = () => {
             .map((partnerList, index) => {
               return (
                 <div key={index} className={style.block}>
-                  <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
+                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
                   {/* <p className={style.title}>{partnerList.userId}</p> */}
+<<<<<<< HEAD
                   <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                   <p className={style.date}>
                     {partnerList.crStartDate} ~ {partnerList.crEndDate}
                   </p>
                   <div className={style.tagblock}>
+=======
+                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
+                  <div>
+>>>>>>> 624be135895caffb5c17cce21ceb14d596130fdd
                     {partnerTag
                       .filter((tag) => partnerList.crIdx === tag.crIdx)
                       .map((tag, tagIndex) => {
@@ -142,7 +148,7 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-        <Link to={`/21`}><button > 파트너 찾기 </button></Link>
+        <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
         </div>
 
         <div style={{margin:"0 auto"}} className='clearfix'>
