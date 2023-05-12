@@ -55,16 +55,16 @@
 .lefts a {
     color:white;
 }
-.leftMenu a:nth-child(-n+4):hover {
+.leftMenu a:nth-child(-n+3):hover {
    
 }
-.leftMenu a:nth-child(-n+4):hover:after {
+.leftMenu a:nth-child(-n+3):hover:after {
     width: 50%
 }
-.leftMenu a:nth-child(-n+4):hover:before {
+.leftMenu a:nth-child(-n+3):hover:before {
     width: 50%
 }
-.leftMenu a:nth-child(-n+4):after {
+.leftMenu a:nth-child(-n+3):after {
     content:"";
     position: absolute;
     left: 50%;
@@ -75,7 +75,7 @@
     background-color: #5b78ac;
     transition: all .3s;
 }
-.leftMenu a:nth-child(-n+4):before {
+.leftMenu a:nth-child(-n+3):before {
     content:"";
     position: absolute;
     right: 50%;
@@ -88,8 +88,8 @@
 }
 
 /* 메뉴들 */
-.Lefts:nth-child(2) {
-    margin-left: 230px;
+.Lefts:nth-child(1) {
+    margin-left: 140px;
 }              
 /* 로그인 글씨 */
 .Login {
@@ -124,26 +124,34 @@
     font-size:18px;
    
 }
+.leftMenu li:nth-child(4) {
+    margin-left: 640px;
+}
 /*로그인시 닉네임*/
 .nickname {
-    margin-left:580px;
+    min-width: 70px;
     display : inline-block;
 
 }
 /*드롭다운 */
 .drop {
-    /* display : none; */
+    display : none;
     position : absolute;
     z-index : 1; /*다른 요소들보다 앞에 배치*/
     font-weight: 400;
     background-color: #212121;
     /* width : 130px;  */
-    left:1300px;
+    left:1420px;
     text-align: center;
     vertical-align: center;
-    
+    animation: fadein 0.6s;
+    /* border-radius: 0.1rem; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 2px #3d3d3d;
 }
-.nickname:hover .drop {
+
+.box:hover .drop {
     display: block;
   }
 .drop a{
@@ -154,13 +162,25 @@
     width:130px;
     height:32px;
     line-height: 30px; 
+    border-bottom: 1px solid #3d3d3d;
+   
+   
   }
-
-  .drop p:hover{
+/* 
+  .drop a:hover{
     background-color : #686868;
     
-  }
+  } */
   .box {
     display: inline-block;
-    width: auto;
+    /* margin-left:580px; */
+  }
+
+  /*로고 */
+  .Header img {
+    display: inline-block;
+    height: 80px;
+    margin-left:40px;
+    
+
   }

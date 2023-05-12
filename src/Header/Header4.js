@@ -2,6 +2,7 @@ import style from './Header4.module.css'
 import { Route, Link } from 'react-router-dom';
 import { Component, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
+import BridgeWhiteLogo from '../Header/BridgeWhiteLogo.png'
 
 function Header4({ isLogin, setIsLogin }) {
     // const [isLogin, setIsLogin] = useState('false');
@@ -16,29 +17,25 @@ function Header4({ isLogin, setIsLogin }) {
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
             //   setIsLogin(false);
-
         } else {
-
             const token = sessionStorage.getItem('token');
             const decodedToken = jwt_decode(token);
-            setUserNickname(decodedToken.userNickname);
-            console.log(userNickname);
+            console.log(decodedToken);
+            setUserNickname(decodedToken.name);
+            console.log(userNickname.name);
             // setIsLogin(true);
-
-
-
         }
 
     }, [isLogin])
     if (isLogin) {
         return (
             <div className={style.Header}>
+                <Link to="/1">   <img src={BridgeWhiteLogo}/> </Link>
                 <div className={style.navContainer}>
+                   
                     <div className={style.leftContents}>
                         <ul className={style.leftMenu}>
-                            <li className={style.Lefts}>
-                                <Link to="/1">   <a>LOGO</a></Link>
-                            </li>
+
                             <li className={style.Lefts}>
                                 <Link to="/">  <a>음원 분리</a></Link>
                             </li>
@@ -52,17 +49,17 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-
+                            <li><a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a></li>
                             <div className={style.box}>
-                                <li> <a className={style.nickname}>{userNickname}dsasdad님 </a></li>
+                                <li> <a className={style.nickname}>{userNickname}님</a></li>
                                 <div className={style.drop}>
-                                    <Link to ="/19">프로필</Link>
-                                    <Link to ="28">작업페이지</Link>
+                                    <Link to="/19">프로필</Link>
+                                    <Link to="28">작업페이지</Link>
                                     <Link to="chatting">채팅</Link>
-                                   
+
                                 </div>
-                                </div>
-                            <li><a><button className={style.logout} onClick={handlerOnLogoutClick}>LOGOUT</button></a></li>
+                            </div>
+
 
                         </ul>
                     </div>
@@ -73,12 +70,11 @@ function Header4({ isLogin, setIsLogin }) {
     } else {
         return (
             <div className={style.Header}>
+                 <Link to="/1">   <img src={BridgeWhiteLogo}/> </Link>
                 <div className={style.navContainer}>
                     <div className={style.leftContents}>
                         <ul className={style.leftMenu}>
-                            <li className={style.Lefts}>
-                                <Link to="/1">   <a>LOGO</a></Link>
-                            </li>
+                         
                             <li className={style.Lefts}>
                                 <Link to="/">  <a>음원 분리</a></Link>
                             </li>
@@ -94,8 +90,8 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-                            <Link className={style.Login} to="/3">로그인</Link>
-                            <Link className={style.regist} to="/4">회원가입</Link>
+                            <Link className={style.Login} to="/29">로그인</Link>
+                            <Link className={style.regist} to="/30">회원가입</Link>
 
                         </ul>
                     </div>

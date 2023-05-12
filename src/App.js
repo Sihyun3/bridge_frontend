@@ -123,6 +123,8 @@ function App() {
 
       {/* <Route path="/bridge/jam/detail" component={JamDetail2} exact={true} /> */}
 
+      {/* 테스트 페이지 */}
+      <Route path="/30" component={PaymentTest2} exact={true}/>
       <Footer />
     </>
   )
