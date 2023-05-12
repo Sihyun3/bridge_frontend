@@ -1,4 +1,113 @@
-.Doing {
+
+.list {
+    background-color: #6a6a6a;
+    width: 250px;
+    margin-top: 80px;
+    margin-left: 50px;
+    float: left;
+    height: 600px;
+}
+
+.listTitle {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.partnerProfile{
+    /* border: 3px solid aqua; */
+    margin-top: 15px;
+    height: 70px;
+}
+
+.partnerProfile .img {
+    /* border: 3px solid; */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    float: left;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+.partnerProfile .profileBox {
+    width: 150px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 75px;
+    margin-top: 7px;
+}
+
+
+.partnerProfile .nickname {
+    text-align: left;
+    /* border: 3px solid; */
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    /* margin-bottom: 3px; */
+}
+
+.partnerProfile .tag {
+    text-align: left;
+    /* border: 3px solid; */
+    margin-top: 3px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+.doing {
+    background-color: #d9d9d9;
+    width: 1200px;
+    margin-top: 80px;
+    margin-left: 30px;
+    height: 800px;
+    float: left;
+}
+
+.doingTitle {
+    font-size: 40px;
+    font-weight: bold;
+    /* border: 3px solid; */
+    text-align: center;
+    padding-top: 30px;
+    height: 90px;
+}
+
+.doingProgress {
+    font-size: 18px;
+    text-align: center;
+    /* border: 3px solid; */
+    /* margin-top: 5px; */
+    height: 25px;
+}
+
+.doingTag {
+    font-size: 15px;
+    text-align: center;
+    /* border: 3px solid; */
+    height: 20px;
+}
+
+.payDate {
+    font-size: 12px;
+    /* border: 3px solid; */
+    width: 995px;
+    margin: 25px auto 0px;
+}
+
+.payList {
+    /* border: 3px solid; */
+    height: 50px;
+    background-color: #848484;
+    border-radius: 3px;
+    width: 995px;
+    margin: auto;
+}
+
+/* .Doing {
     background-color: #e2e2e2;
     width: 1200px;
     margin-top: 60px;
@@ -35,10 +144,10 @@
     margin-top: 20px;
     margin-bottom: 60px;
 
-}
+} */
 
 /*게시글 내용*/
-.contents {
+/* .contents {
     margin-left: 40px;
     float: left;
     line-height: 24px;
@@ -87,10 +196,10 @@
     display: block;
     clear: both;
     content: "";
-}
+} */
 
-.button {
-    /* margin-left: 40px; */
+/* .button {
+    margin-left: 40px;
     float: right;
     line-height: 60px;
     margin-right: 12px;
@@ -123,7 +232,6 @@
     border-radius: 0.5rem;
     margin: 0 auto;
     border: 1px solid black;
-    /* margin-bottom: ; */
 }
 
 .commentsbox::after {
@@ -166,10 +274,9 @@
 
 .commentsclearfix {
     margin-left: 818px;
-}
+} */
 
-.commentsbutton {
-    /* margin-left: 40px; */
+/* .commentsbutton {
     float: left;
     line-height: 44px;
 }
@@ -205,10 +312,6 @@
     display: inline-block;
     width: 262px;
     margin: 12px 0px;
-    /* border: 2px solid white; */
-    /* padding: 4px; */
-    /* height:80px; */
-
 }
 
 .list h2 {
@@ -255,4 +358,4 @@
 
 .cbox {
     margin: 0 auto;
-}
+} */

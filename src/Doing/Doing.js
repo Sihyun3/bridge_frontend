@@ -9,6 +9,7 @@ import Content from './Content';
 import ContentUpdate from './ContentUpdate';
 import ContentDetail from './ContentDetail';
 import CommentWrite from './CommentWrite';
+import Complete from './Complete';
 
 
 
@@ -25,6 +26,8 @@ const Doing = ({ history, match, pcIdx }) => {
     const [commentOpen, setCommentOpen] = useState([]);
     const [commentUpload, setCommentUpload] = useState([]);
     const [variable, setVariable] = useState(false);
+    const [progress, setProgress] = useState([]);
+    const [tagList, setTagList] = useState([]);
     const [contentList, setContentList] = useState([
         {
             pcNumber: '',
@@ -38,7 +41,8 @@ const Doing = ({ history, match, pcIdx }) => {
             photo: '',
             tag1: '',
             tag2: '',
-            tag3: ''
+            tag3: '',
+            progress: ''
         }
     ]);
     const [payList, setPayList] = useState(
@@ -77,7 +81,8 @@ const Doing = ({ history, match, pcIdx }) => {
                         photo: data.profileImg,
                         tag1: data.userTag1,
                         tag2: data.userTag2,
-                        tag3: data.userTag3
+                        tag3: data.userTag3,
+                        progress: data.progress
                     })
                 }))
             })
@@ -91,12 +96,16 @@ const Doing = ({ history, match, pcIdx }) => {
 
 
 
-    const handlerClickSelect = (pdNumber, receiver) => {
+    const handlerClickSelect = (pdNumber, receiver, progress, tag1, tag2, tag3) => {
 
         setUserId2(receiver);
         const userId22 = receiver;
         console.log(userId1);
         console.log(userId2);
+        setProgress(progress);
+        tagList[0] = tag1;
+        tagList[1] = tag2;
+        tagList[2] = tag3;
 
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${userId22}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
@@ -112,11 +121,13 @@ const Doing = ({ history, match, pcIdx }) => {
                 return;
             }
             )
+        
+
 
         setPdIdx(pdNumber);
         const partnerDetailIdx = pdNumber;
         console.log(pdIdx);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdIdx}`
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${partnerDetailIdx}`
         )
             .then(response => {
                 console.log(response);
@@ -281,21 +292,19 @@ const Doing = ({ history, match, pcIdx }) => {
             })
     }
 
-    const handlerProjectComplete = () => {
-        alert("정말 완료 하셨나요?")
-    }
-
     const ProjectList = () => {
         // console.log(listArray);
 
         return listArray && listArray.map((value, index) => {
             return (
                 <>
-                    <div key={index} className={style.doinglist}>
-                        <button onClick={() => handlerClickSelect(value.pdNumber, value.receiver)}>
-                            <p className={style.img}> {value.photo}</p> 
-                            <p className={style.p1}>{value.receiver}</p> 
-                            <p className={style.p2}>{value.tag1} {value.tag2} {value.tag3}</p> 
+                    <div key={index} className={style.partnerProfile}>
+                        <button onClick={() => handlerClickSelect(value.pdNumber, value.receiver, value.progress, value.tag1, value.tag2, value.tag3)}>
+                            <p className={style.img}> {value.photo}</p>
+                            <div className={style.profileBox}>
+                                <span className={style.nickname}>{value.receiver}</span>
+                                <span className={style.tag}> {'#' + value.tag1} {'#' + value.tag2} {'#' + value.tag3}</span>
+                            </div>
                         </button>
                     </div>
                     {/* {console.log(pdIdx)} */}
@@ -318,41 +327,15 @@ const Doing = ({ history, match, pcIdx }) => {
 
 
     const ProjectPage = () => {
-        // console.log(payList);
-        // console.log(contentList);
 
-        const handlerClickComment = (pcIdx, index) => {
-
-            // visible[index] = !visible[index];
-
-            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/comment/${pcIdx}`,
-                { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-                .then((response) => {
-                    console.log(response);
-                    setCommentList(response.data.map((data) => {
-                        return ({
-                            writer: data.userId,
-                            content: data.pdcComment
-                        })
-                    })
-                    )
-                    console.log(commentList);
-
-                }).catch((error) => {
-                    return;
-                })
-
-        }
-        const handleEditClick = (pcIdx) => {
-            // history.push(`/21/${pcIdx}`);
-            history.push(`/17/${pcIdx}`);
-            // console.log(">>>>>>>>>>>>>>>>>>>");
-        };
         return (
             <>
                 <div>
-                    {payList.sender}가 {payList.receiver}에게
-                    {payList.money}를 {payList.date}에 주었습니다.
+                    <div className={style.payDate}> {payList.date} </div>
+                    <div className={style.payList}>
+                        <span>{payList.sender}</span>
+                        <span>예치금 {payList.money}가 결제되었습니다.</span>
+                    </div>
                     <br />
                     <br />
                     <br />
@@ -410,20 +393,27 @@ const Doing = ({ history, match, pcIdx }) => {
     return (
 
         <>
-            <div className={style.list}>{ProjectList()}</div>
-            <div className={style.Doing}>
-                <div>
-                    {ProjectPage()}
-                    {/* hanlerClickUpload () -> 함수를 호출. 밑 구문을 읽을 때 Click이 되지 않아도 바로 함수 호출.
-                                    함수가 호출되면서 상태변수가 바뀌니깐 return문이 rerendering. 그래서 무한루프
-                    handlerClickUpload -> 함수 정의를 전달. 즉 Click했을 때만 실행 */}
-                    <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : "업로드 취소"}</button> <br />
-                    {/* {console.log(pdIdx)} */}
-                    {uploadClick ? <></> : <Content pdIdx={pdIdx} uploadClick={uploadClick} setUploadClick={setUploadClick}
-                        contentList={contentList} setContentList={setContentList} />}
-                    <button> 작업 완료 </button>
+            <div className={style.MainBox}>
+                <div className={style.list}>
+                    <div className={style.listTitle}> 작업 목록 </div>
+                    {ProjectList()}
                 </div>
-
+                <div className={style.doing}>
+                    <div className={style.doingTitle}> {userId2} </div>
+                    <div className={style.doingProgress}>{progress == '0' ?
+                        <>현재 작업이 <span style={{fontWeight: 'bold'}}>진행 중</span>입니다. </>
+                        :
+                        <>완료된 작업입니다.</>}</div>
+                    <div>
+                    <div className={style.doingTag}>{'#' + tagList[0]} {'#' + tagList[1]} {'#' + tagList[2]}</div>
+                        {ProjectPage()}
+                        <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : "업로드 취소"}</button> <br />
+                        {/* {console.log(pdIdx)} */}
+                        {uploadClick ? <></> : <Content pdIdx={pdIdx} uploadClick={uploadClick} setUploadClick={setUploadClick}
+                            contentList={contentList} setContentList={setContentList} />}
+                        <Complete pdIdx={pdIdx} setProgress={setProgress} />
+                    </div>
+                </div>
             </div>
         </>
 
