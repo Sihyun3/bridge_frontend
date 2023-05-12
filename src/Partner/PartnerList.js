@@ -71,7 +71,6 @@ const PartnerList = () => {
 
   return (
     <>
-      <Header1 />
       <div className={style.box1}>
         <h1>파트너 모집</h1>
       </div>

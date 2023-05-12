@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import jwt_decode from "jwt-decode";
 import axios from 'axios'
 import Waveform from '../Component/Waveform';
-const JamDetail = ({match}) => {
+const JamDetail = ({ match }) => {
     //잼소개 부분
     const [info, setInfo] = useState({});
     const [value, setvalue] = useState([]);
@@ -17,7 +17,7 @@ const JamDetail = ({match}) => {
     const [comment, setComment] = useState('');
     const [commentsList, setCommentsList] = useState([]);
     const cIdx = match.params.cIdx;
-    
+
     //추가
     const [insert, setInsert] = useState(0);
     const [data, setData] = useState([]);
@@ -76,13 +76,13 @@ const JamDetail = ({match}) => {
     }
     const handleCommentSubmit = (e) => {
         e.preventDefault();
-        if(comment == ""){
+        if (comment == "") {
             alert('작성된 내용이 없습니다')
             return;
         }
         //cIdx 부분 1번으로 하드코딩==> 수정 필요
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, {  "ccComments": comment },
-        { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
                 console.log(response);
                 setInsert(insert + 1);
@@ -90,14 +90,14 @@ const JamDetail = ({match}) => {
 
             })
             .catch(error => {
-                alert("로그인 해주세요"); 
+                alert("로그인 해주세요");
             });
     };
 
     // 코멘트 삭제 핸들러
     const handlerClickDelete = (e) => {
         e.preventDefault();
-                axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
             .then(response => {
                 console.log(response);
                 if (response.data === 1) {
@@ -113,7 +113,7 @@ const JamDetail = ({match}) => {
                 alert(`삭제에 실패했습니다. (${error.message})`);
                 return;
             });
-            window.location.reload();
+        window.location.reload();
 
     };
 
@@ -128,13 +128,12 @@ const JamDetail = ({match}) => {
 
                 <div className={style.playbox}>
                     <img className={style.playbutton} src={play} onClick={allplay} />
-                    <div>
-                        <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
-                        <span>전체 선택</span>
-                    </div>  
                     {/* 여기에 플레이 바 추가해야함 */}
                     {/* <button onClick={allplay}>All Play/Pause</button> */}
-
+                </div>
+                <div style={{ marginLeft: "40px" }}>
+                    <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
+                    <span style={{ marginLeft: "10px", position: "relative", bottom: "5px" }}>전체 선택</span>
                 </div>
                 <div className={style.jam}>
                     <div>
@@ -144,10 +143,10 @@ const JamDetail = ({match}) => {
                                 <div key={musicInfo.musicUUID}>
                                     {/* <img className={style.instrument} src={play} /> */}
                                     {/* 체크박스 */}
+                                    {/* <label className={style.label}> */}
                                     <input
                                         type="checkbox"
                                         checked={value.includes(index)}
-
                                         onChange={(e) => {
                                             if (e.target.checked) {
                                                 setvalue([...value, index]);
@@ -156,6 +155,7 @@ const JamDetail = ({match}) => {
                                             }
                                         }}
                                     />
+                                    {/* </label> */}
                                     {/* 파형 */}
                                     <Waveform
                                         data={data}
@@ -172,34 +172,41 @@ const JamDetail = ({match}) => {
                     </div>
                     <div className={style.input}>
                         {/* <img className={style.singlenote} src={note} onclick /> */}
-                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ outlineStyle: "none",marginBottom: 21 , verticalAlign:"bottom", marginRight: 20 }} >
+                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "20px", outlineStyle: "none", marginBottom: 21, marginRight: 20, border: 0 }} >
                             <option value="" disabled selected>악기 선택</option>
                             <option value="베이스">베이스  </option>
                         </select>
 
                         {/* <input tyep="file" className={style.music} /> */}
-                        <input type="file" className={style.musicinput } multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} />
+                        <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} />
                         <input type="button" className={style.music} onClick={onSubmit} value="등록" />
                     </div>
                 </div>
-                <div className={style.jam}>
-                        <input type="text" value={comment} onChange={handleChangeComment}  ></input>
-                        <button onClick={handleCommentSubmit} >등록</button>
-                        {
-                            commentsList.map((comment)=>{
-                                return(
-                                    <>
-                                <div>{comment.userId}</div>
-                                <div>{comment.cdate}</div>
-                                <div>{comment.ccComments}</div>
-                                <button value={comment.ccIdx} onClick={handlerClickDelete}>삭제</button>
+                <div className={style.line}></div>
+                <div className={style.comment}><h2>댓글</h2></div>
+
+                <div className={style.com}>
+                    {
+                        commentsList.map((comment) => {
+                            return (
+                                <>
+                                    <div className={style.comments} style={{ width: 1000, marginLeft: 80, height: 40, float: "left", lineHeight: "40px" }}  >
+                                        <div style={{ width: "100px", float: "left" }} > {comment.userId} </div>
+                                        <div style={{ float: 'left', width: "850px " }}> {comment.ccComments}</div>
+                                        <button value={comment.ccIdx} onClick={handlerClickDelete}>삭제</button>
+                                    </div>
                                 </>
 
-                                )
-                            })
-                        }
+                            )
+                        })
+                    }
+                </div>
+                <div style={{ margin: "0 auto", width: "900px" }}>
+                    <input type="text" value={comment} onChange={handleChangeComment} className={style.writeComment}></input>
+                    <button onClick={handleCommentSubmit} className={style.finish} >등록</button>
                 </div>
             </div>
+
         </>
     )
 }

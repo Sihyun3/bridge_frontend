@@ -9,7 +9,6 @@ import '../reset.css';
 function NoticeDetail({match, history}) {
 
     const {noticeIdx} = match.params;
-
     const [datas, setDatas] = useState([]);
     const [notice, setNotice] = useState({});
     const [title, setTitle] = useState('');

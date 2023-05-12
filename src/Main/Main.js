@@ -31,7 +31,7 @@ const Main = () => {
                             <p>온라인 합주</p>
                         </button>
                     </Link>
-                    <Link to={`/#`}>
+                    <Link to={`/26`}>
                         <button className={style.offline}>
                             <p>작곡가 요청 </p>
                         </button>

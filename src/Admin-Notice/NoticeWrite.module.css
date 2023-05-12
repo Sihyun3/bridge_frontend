@@ -1,13 +1,4 @@
 
-*{
-    font-family: 'Noto Sans KR', sans-serif;
-    list-style: none;
-    text-decoration: none;
-    border-collapse: collapse;
-    margin: 0px;
-    padding: 0px;
-    color: #000;
-   }
    
    /* 공지사항 상단 텍스트 */
    .Notice{

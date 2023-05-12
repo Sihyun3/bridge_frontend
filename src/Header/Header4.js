@@ -19,7 +19,8 @@ function Header4({ isLogin, setIsLogin }) {
             console.log("aaaaaaaaaaaaaa");
             const token = sessionStorage.getItem('token');
             const decodedToken = jwt_decode(token);
-            setUserNickname(decodedToken.userNickname);
+            console.log(decodedToken)
+            setUserNickname(decodedToken.name);
             console.log(userNickname);
             setIsLogin(true);
         } 
@@ -49,7 +50,7 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-                            <li> <a>{userNickname}님  <button style={{ color: 'white' }} className={style.logout} onClick={handlerOnLogoutClick}>LOGOUT</button></a></li>
+                            <li> <a style={{color:'white'}}>{userNickname}님  <button style={{ color: 'white' }} className={style.logout} onClick={handlerOnLogoutClick}>LOGOUT</button></a></li>
 
                         </ul>
                     </div>
