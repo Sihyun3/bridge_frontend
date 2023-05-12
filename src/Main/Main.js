@@ -22,9 +22,12 @@ const Main = () => {
     }, [])
 
     return (
-        <div className="container">
-            <div className={style.mainBox}>
-                <h1 className={style.mainText}>Lorem ipsum dolor sit amet consectetur.</h1>
+        <div className={style.container}>
+            <div className={style.textBox}>
+                <h1 className={style.mainText}>Your favorite songs, 
+                <br/>like never heard before</h1>
+                </div>
+                
                 <div className={style.firstLine}>
                     <Link to={`/bridge/jam/list`}>
                         <button className={style.online}>
@@ -85,7 +88,7 @@ const Main = () => {
                 </Swiper>
                 </div>
             </div>
-        </div>
+       
     );
 }
 
