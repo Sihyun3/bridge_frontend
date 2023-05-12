@@ -156,17 +156,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                             {
                                 filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
                                     <div className={style.list}>
-                                        <input className={style.checkbox}
-                                            type="checkbox"
-                                            checked={value.includes(notice.noticeIdx)}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    setValue([...value, notice.noticeIdx]);
-                                                } else {
-                                                    setValue(value.filter((v) => v !== notice.noticeIdx));
-                                                }
-                                            }}
-                                        />
+                                       
 
                                         <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                             <span className={style.title}>{notice.title}</span>

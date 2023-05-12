@@ -56,6 +56,7 @@ function App() {
       <Route path="/tip" component={TipList} exact={true} />
       <Route path="/tip/write" component={TipWrite} exact={true} />
       <Route path="/notice/write" component={NoticeWrite} exact={true} />
+      <Route path="/jam" component={JamList} exact={true} />
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/report/detail/:reportIdx" component={ReportDetail} exact={true} />
@@ -87,7 +88,7 @@ function App() {
 
 
       {/* 잼 */}
-      <Route path="/jam" component={JamList} exact={true} />
+     
       <Route path="/jam/write" component={JamWrite} exact={true} />
       <Route path="/10" component={JamDetail2} exact={true} />
       <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
