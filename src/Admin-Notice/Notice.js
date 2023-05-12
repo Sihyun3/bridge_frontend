@@ -121,108 +121,105 @@ function Notice({ history, noticeIdx, title, writer }) {
                     <div className={style.write}>
 
                         <button className={style.writebutton} onClick={handlerOnclick} >작성</button>
+
+
+
+
+
+
                     </div>
                     <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
 
                     <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
 
-</div>
-
-
-
-              
+                </div>
 
 
 
 
-                        <div className={style.noticebox}>
-                            {
-                                filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
-                                    <div className={style.list}>
-                                       
-                                        
-
-                                        <Link to={`/notice/detail/${notice.noticeIdx}`}>
-                                            <span className={style.title}>{notice.title}</span>
-                                            <span className={style.writer}>{notice.userId}</span>
-                                        </Link>
-
-                                     
-                                    </div>
-                                ))
-                            }
 
 
-                            {
-                                filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
-                                    <div className={style.list}>
-                                        <input className={style.checkbox}
-                                            type="checkbox"
-                                            checked={value.includes(notice.noticeIdx)}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    setValue([...value, notice.noticeIdx]);
-                                                } else {
-                                                    setValue(value.filter((v) => v !== notice.noticeIdx));
-                                                }
-                                            }}
-                                        />
-
-                                        <Link to={`/notice/detail/${notice.noticeIdx}`}>
-                                            <span className={style.title}>{notice.title}</span>
-                                            <span className={style.writer}>{notice.userId}</span>
-                                        </Link>
-
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
 
 
-                        <div className={style.page}>
+                <div className={style.noticebox}>
+                    {
+                        filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
+                            <div className={style.list}>
+                               
 
-                            <nav className="pageNum" >
-                                <button onClick={() => setPage(page - 1)} disabled={page === 1} >
-                                    &lt;
+                                <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
+                                    <span className={style.title}>{notice.title}</span>
+                                    <span className={style.writer}>{notice.userId}</span>
+                                </Link>
+
+                                <div>
+
+                                </div>
+                            </div>
+                        ))
+                    }
+
+
+                    {
+                        filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
+                            <div className={style.list}>
+                                
+
+                                <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
+                                    <span className={style.title}>{notice.title}</span>
+                                    <span className={style.writer}>{notice.userId}</span>
+                                </Link>
+
+                                <div>
+
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+
+
+                <div className={style.page}>
+
+                    <nav className="pageNum" >
+                        <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+                            &lt;
+                        </button>
+                        {
+                            filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => setPage(i + 1)}
+                                    aria-current={page === i + 1 ? "page" : null}
+                                >
+                                    {i + 1}
                                 </button>
-                                {
-                                    filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
-                                        <button
-                                            key={i + 1}
-                                            onClick={() => setPage(i + 1)}
-                                            aria-current={page === i + 1 ? "page" : null}
-                                        >
-                                            {i + 1}
-                                        </button>
-                                    ))}
+                            ))}
 
-                                {
-                                    filteredDatas == "" && Array(Math.ceil(datas.length / limit)).fill().map((page, i) => (
-                                        <button
-                                            key={i + 1}
-                                            onClick={() => setPage(i + 1)}
-                                            aria-current={page === i + 1 ? "page" : null}
-                                        >
-                                            {i + 1}
-                                        </button>
-                                    ))}
+                        {
+                            filteredDatas == "" && Array(Math.ceil(datas.length / limit)).fill().map((page, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => setPage(i + 1)}
+                                    aria-current={page === i + 1 ? "page" : null}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
 
-                                {
-                                    filteredDatas == "" && datas ?
-                                        <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(datas.length / limit)}>
-                                            &gt;
-                                        </button>
-                                        :
-                                        <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
-                                            &gt;
-                                        </button>
-                                }
+                        {
+                            filteredDatas == "" && datas ?
+                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(datas.length / limit)}>
+                                    &gt;
+                                </button>
+                                :
+                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
+                                    &gt;
+                                </button>
+                        }
 
-                            </nav>
-                   
+                    </nav>
+
                 </div>
             </div>
         </>

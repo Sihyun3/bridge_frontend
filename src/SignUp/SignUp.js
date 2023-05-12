@@ -32,7 +32,7 @@ const SignUp = ({ history }) => {
                 .then(response => {
 
                     alert('정상적으로 등록 되었습니다.')
-                    history.push('/login')
+                    history.push('/bridge/login')
 
                 })
                 .catch(error => {
@@ -116,17 +116,18 @@ const SignUp = ({ history }) => {
                     <h1 className={style.login}>회원 가입</h1>
 
                     <input className={style.signupinput} onChange={handlerChangeName} placeholder="이름을 입력해주세요." />
+                    {/* 저희 닉네임 사용하나요? */}
                     <input className={style.signupinput} onChange={handlerChangeNickName} placeholder="닉네임을 입력해주세요." />
                     <input className={style.signupinput} onChange={handlerChangeUserId} placeholder="아이디를 입력해주세요." />
                     <button className={style.idcheck} onClick={userIdCheck}>ID확인</button>
-                    <input className={style.signupinput} onChange={handlerChangeEmail} placeholder="이메일을 입력해주세요." />
+                    <input className={style.signupinput} onChange={handlerChangeEmail} placeholder="bridge@gmail.com" />
                     <div>{Emassage}</div>
 
                     <input className={style.signupinput2} onChange={handlerChangePassword} placeholder="비밀번호를 8자 이상 입력해주세요." />
 
                     <input className={style.signupinput2} onChange={handlerChangeConfrimPassword} placeholder="비밀번호를 재입력해주세요." />
                     <div >{confrimMessage}</div>
-                    <input className={style.signupinput2} onChange={changePhone} placeholder="전화번호를 입력해주세요." />
+                    <input className={style.signupinput2} onChange={changePhone} placeholder="010-0000-0000" />
                     <div>{Pmessage}</div>
                     <br />
                     <button className={style.loginbutton} onClick={handlerOnClick}>회원 가입</button>

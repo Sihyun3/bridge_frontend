@@ -13,7 +13,7 @@ const PartnerList = () => {
 
   //페이징
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(9);
 
 
   const indexOfLast = currentPage * postsPerPage;
@@ -45,6 +45,7 @@ const PartnerList = () => {
     axios
       .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
+        console.log(response.data);
         setPartnerList(response.data.partnerList);
         axios
           .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)
@@ -71,18 +72,18 @@ const PartnerList = () => {
 
   return (
     <>
-      <Header1 />
+      
       <div className={style.box1}>
         <h1>파트너 모집</h1>
       </div>
       <div className="container clearfix">
         <div className={style.tagbox}>
-          <div className={style.tag}>
+          
             <h2>#태그</h2>
-          </div>
+          
           {tags.map((tags, index) => {
             if (index % 5 == 0) {
-              return (<><br />   <label className={style.tags} for={`tagRadio-${index}`}>
+              return (<>   <label className={style.tags} for={`tagRadio-${index}`}>
               <button
               key={index}
                 className={style.taglists}
@@ -115,33 +116,34 @@ const PartnerList = () => {
             .map((partnerList, index) => {
               return (
                 <div key={index} className={style.block}>
-                  <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
+                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
                   {/* <p className={style.title}>{partnerList.userId}</p> */}
                   <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
-                  <div>
+                  <p className={style.date}>
+                    {partnerList.crStartDate} ~ {partnerList.crEndDate}
+                  </p>
+                  <div className={style.tagblock}>
                     {partnerTag
                       .filter((tag) => partnerList.crIdx === tag.crIdx)
                       .map((tag, tagIndex) => {
                         // console.log(3%3)
                         if (tagIndex % 3 == 0) {
-                          return (<><br /><span key={tagIndex}>#{tag.crtTag} </span> </>)
+                          return (<><br /><span className={style.tag} key={tagIndex}>#{tag.crtTag} </span> </>)
                         }
-                        return (<span key={tagIndex}>#{tag.crtTag} </span>);
+                        return (<span className={style.tag} key={tagIndex}>#{tag.crtTag} </span>);
                       }
 
 
                       )}
                   </div>
-                  <p className={style.title}>
-                    {partnerList.crStartDate} ~ {partnerList.crEndDate}
-                  </p>
+              
                 </div>
               );
             })}
         </div>
 
         <div className={style.buttonbox}>
-        <Link to={`/21`}><button > 파트너 찾기 </button></Link>
+        <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
         </div>
 
         <div style={{margin:"0 auto"}} className='clearfix'>

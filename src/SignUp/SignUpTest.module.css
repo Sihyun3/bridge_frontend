@@ -1,8 +1,8 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 
-* {
+/* * {
     box-sizing: border-box;
-  }
+  } */
   
   .body {
     font-family: "Montserrat", sans-serif;
@@ -49,6 +49,8 @@
     border: 1px;
     outline: none;
     border-radius: 5px;
+    align-items: center;
+    margin-left: 60px;
   }
   
   /* .formInput2 {

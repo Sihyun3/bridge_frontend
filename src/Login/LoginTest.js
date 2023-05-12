@@ -100,9 +100,9 @@ const LoginTest = ({ setIsLogin }) => {
                                     <label for="saveId" className={style.saveId}>아이디 저장</label>
                                     {/* <span className={style.saveId}>아이디 저장</span> */}
                                 </div>
-
+                                <div className={style.loginButtonBox}>
                                 <button className={style.loginButton} onClick={handlerOnClick}>로그인</button>
-
+                                </div>
                                 <div className={style.find}>
                                     <button className={style.registration} onClick={''}>아이디찾기</button>
                                     <button className={style.registration} onClick={''}>비밀번호 찾기</button>

@@ -24,6 +24,7 @@ const MainAd = () => {
                     <img src={coin} className={style.dealIcon}></img> <p>거래 내역</p>
                     <img src={arrow} className={style.dealArrow}></img></div>
 
+                {/* 인증 빼면 이 공간은 무엇으로 사용..? */}
                 <div className={style.certification}><img src={checkbox} className={style.certificationIcon}></img> <p>인증 관리 </p>
                     <img src={arrow} className={style.certificationArrow}></img></div>
             </div>

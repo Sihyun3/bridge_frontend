@@ -1,6 +1,7 @@
 import style from './ReportDetail.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 // import Page from 'react';
 // import '../reset.css';
 
@@ -12,6 +13,8 @@ function ReportDetail({ match }) {
   const [userId, setUserId] = useState('');
   const [reportedUserId, setReportedUserId] = useState('');
   const [reportCount, setReportCount] = useState('');
+
+  const history = useHistory();
 
   useEffect(() => {
     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportDetail/${reportIdx}`)
@@ -40,6 +43,7 @@ function ReportDetail({ match }) {
           .then(response => {
             alert('영구정지 처리되었습니다.')
             console.log(response.data);
+            history.push(`/bridge/admin/report/list`)
           })
           .catch(error => {
             console.log(error);

@@ -1,4 +1,4 @@
-import style from './Payment.module.css';
+import style from '../Payment/Payment.module.css';
 import user from './user.png';
 import arrow from './PaymentImg.png';
 import { useState, useEffect } from 'react';
@@ -11,7 +11,10 @@ function PaymentTest({ match, history }) {
     // const [userId, setUserId] = useState('');
     // const [currentPoint, setCurrentPoint] = useState(0);
 
-    const [payment, setPayment] = useState({});
+    // const [payment, setPayment] = useState({});
+    const [user1, setUser1] = useState('');     //페이먼트를 변경
+
+
     const [downpayment, setDownpayment] = useState('');     //결제금액
     // const [deposit, setDeposit] = useState('');
     const [usepoint, setUsepoint] = useState('');   
@@ -24,10 +27,10 @@ function PaymentTest({ match, history }) {
     // const [pointBox, setPointBox] = useState('');   //사용할 포인트
     const [warningMessage, setWarningMessage] = useState('');
 
-    let [pointBox,setPointBox] = useState(0);
+    let [pointBox,setPointBox] = useState('');
 
     //추가
-    let [total, setTotal] = useState(0);
+    const [total, setTotal] = useState('');
     let a = 0;
 
    
@@ -38,7 +41,8 @@ function PaymentTest({ match, history }) {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        setPayment(decode_token.sub);
+        console.log(">>>>>>>>>>>>>>>>>>" + decode_token.sub);
+        setUser1(decode_token.sub);
         axios.get('http://localhost:8080/api/payment/detail/1') //백엔드도 여기처럼 다시 바꿔야함
             // ,(`http://localhost:8080/api/payment/${userProducer}`)
             .then(response => {
@@ -52,7 +56,12 @@ function PaymentTest({ match, history }) {
             .catch(error => {
                 console.log(error);
             })
-    }, [payment, a]);
+    }, [user1]);
+
+    useEffect(() => {
+        a = Number(downpayment) -  Number(pointBox);
+        setTotal(a);
+    }, [pointBox])
 
 
 
@@ -68,12 +77,13 @@ function PaymentTest({ match, history }) {
 
 
     const handlerOnClickToPay = (e) => {
-        setProducer(e.target.target);
-        if (e.target.target) {
-          setUsepoint(usepoint);
+        // setProducer(e.target.target);
+        if (total == 0 ) {
+        axios.post(``)
+        alert(`축 성공`);
         } else {
             alert('결제에 실패했습니다. 포인트를 충전해주세요.');
-            history.push('/25');
+            // history.push('/25');
 
         }
     }
@@ -115,15 +125,8 @@ function PaymentTest({ match, history }) {
     //     setTotal(downpayment - pointBox)
     // }
 
-    
     const handleusePoint = (e) => {
-        e.preventDefault()
-        setPointBox(e.target.value);
-        a = Number(downpayment) -  Number(pointBox);
-        total = setTotal(a);
-        console.log("=========" + (Number(downpayment) -  Number(pointBox)));
-        console.log(">>>>>>>>>>>>" + total);
-        
+        setPointBox(e.target.value);     
     }
 
 
@@ -157,7 +160,10 @@ function PaymentTest({ match, history }) {
     //         })
     // }, [userId]);
 
-    
+    const test = (e) => {
+        setDownpayment(e.target.value);
+    }
+
 
     return (
         <>
@@ -180,7 +186,7 @@ function PaymentTest({ match, history }) {
                     
                     <div>
                         <span className={style.willPayment}>의뢰 완료시 결제될 금액</span>
-                        <input type="number" value={downpayment} name="downpayment" className={style.willPaymentAm} placeholder='ex)  100,000' onChange={e => setDownpayment(e.target.value)}></input>
+                        <input type="number" value={downpayment} name="downpayment" className={style.willPaymentAm} placeholder='ex)  100,000' onChange={test}/>
                         {/* Number( */}
                     </div>
                     <div className={style.hr}>
@@ -188,6 +194,7 @@ function PaymentTest({ match, history }) {
                     </div>
                     <div className={style.total}> 총 결제 금액
                         <span className={style.totalPayment} name="total"> {total} 원</span>
+                        {/* {(Number(downpayment) -  Number(pointBox))} */}
                         {/* {calculateSum().toLocaleString()} */}
                         
                     </div>

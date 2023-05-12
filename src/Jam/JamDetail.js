@@ -80,7 +80,7 @@ const JamDetail = ({match}) => {
             alert('작성된 내용이 없습니다')
             return;
         }
-        //cIdx 부분 1번으로 하드코딩==> 수정 필요
+    
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, {  "ccComments": comment },
         { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
             .then(response => {

@@ -11,6 +11,7 @@
     display: flex;
     height: 80px;
     background-color: #212121;
+    overflow: hidden;
     
 
 }
@@ -144,7 +145,13 @@
     left:1420px;
     text-align: center;
     vertical-align: center;
+    animation: fadein 0.6s;
+    /* border-radius: 0.1rem; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 2px #3d3d3d;
 }
+
 .box:hover .drop {
     display: block;
   }
@@ -156,6 +163,9 @@
     width:130px;
     height:32px;
     line-height: 30px; 
+    border-bottom: 1px solid #3d3d3d;
+   
+   
   }
 /* 
   .drop a:hover{

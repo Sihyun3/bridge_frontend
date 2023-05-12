@@ -3,7 +3,12 @@ import style from './Charge.module.css';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-const Charge = () => {
+const Charge = ({ match }) => {
+
+    const { total } = match.params;
+    const { usepoint } = match.params;
+
+
 
     const [userId, setUserId] = useState('');
     const [currentPoint, setCurrentPoint] = useState(0);
@@ -33,7 +38,14 @@ const Charge = () => {
         setChargePoint(e.target.value);
     }
 
-  
+
+
+    useEffect(() =>{
+        console.log(total);
+        console.log(usepoint);
+        setChargePoint(total);
+    },[]);
+
 
     const handleCharge = (e) => {
         e.preventDefault();
@@ -46,48 +58,27 @@ const Charge = () => {
             })
     }
 
-
-
-    //추가
-    // const handleKakaopay = (e) => {
-    //     e.preventDefault();
-    //     axios({
-    //         method: 'GET',
-    //         url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay`,
-    //         data: {
-    //             total_amount:chargePoint
-    //         }
-    //     }).then((response) => {
-    //         console.log("++++++++++++" + response.data);
-    //     })
-    // }
-
-    // const [tid, setTid] = useState('');
-
     //카카오페이 버튼 클릭 핸들러
     const handleKakaopay = (e) => {
         e.preventDefault();
-        sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
+        sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
                 console.log(response);
                 console.log("==============" + response.data)
                 console.log("++++++++++++++" + response.data.next_redirect_pc_url);
-                window.location.href = response.data.next_redirect_pc_url;
-                // setTid(response.data.tid);
-                // console.log("33333333333333" + tid);
-                
+                window.location.href = response.data.next_redirect_pc_url;     
             })
             .catch(error => {
                 console.log(error);
             })
     }
 
-    const test = ()=>{
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`,{ header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-        .then(r=>{
-            console.log(r);
-        })
+    const test = () => {
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`, { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then(r => {
+                console.log(r);
+            })
     }
 
     return (
@@ -116,11 +107,6 @@ const Charge = () => {
                     <div className={style.regist}>
                         <button className={style.registButton} onClick={handleKakaopay}>카카오페이</button>
                     </div>
-
-                    {/* <div>
-                        <button onClick={handleKakaopay}>카카오페이</button>
-                    </div>
-                    <button onClick={test}>asddddddddd</button> */}
 
                 </div>
             </div>

@@ -40,7 +40,7 @@ const TipList = () => {
 
                     <div className={style.write}>
                         <button className={style.writebutton} onClick={() => {
-                            history.push('/tip/write')
+                            history.push('/bridge/tip/write')
                         }}>작성</button>
                     </div>
                     <input type="text" className={style.search} placeholder="검색어를 입력하세요"/>
@@ -53,7 +53,7 @@ const TipList = () => {
                             console.log(data.tbIdx)
                             return (
 
-                                <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
+                                <Link to={`/bridge/tip/detail/${data.tbIdx}`} className={style.list}>
                                     <a className={style.title}>{data.tbTitle}</a>
                                     <a className={style.writer}>{data.userId}</a>
                                     <a className={style.heart}>♡</a>
