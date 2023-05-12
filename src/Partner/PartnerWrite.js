@@ -116,7 +116,7 @@ const PartnerWrite = () => {
             .then(response => {
                 console.log(response);
                 alert(`정상적으로 업로드했습니다.`);
-                history.push('/26')
+                history.push('/bridge/partner/list')
             })
             .catch(error => {
                 console.log(error);

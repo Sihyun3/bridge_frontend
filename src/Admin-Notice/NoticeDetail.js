@@ -37,7 +37,7 @@ function NoticeDetail({match}) {
 
     const handlerClickList = () => {
         console.log(history);
-        history.push('/notice');
+        history.push('/bridge/admin/notice/list');
     };
 
     const handlerClickUpdate = () => {
@@ -68,7 +68,7 @@ function NoticeDetail({match}) {
             
             if(response.data) {
                 alert('해당 글이 정상적으로 삭제되었습니다.');
-                history.push('/notice');
+                history.push('/bridge/admin/notice/list');
             } else if (!response.data ) {
                 alert('삭제에 실패했습니다. 다시 시도해주세요.');
                 return;
@@ -84,7 +84,7 @@ function NoticeDetail({match}) {
   
     return (
         <>
-        <h1 className={style.Notice}>공지사항 내용</h1>
+        <h1 className={style.Notice}>공지사항</h1>
         <div className={style.Box}>
 
           {/* <input type="text" id="title" name="title" value={notice.title} onChange={handlerChangeTitle}/> */}

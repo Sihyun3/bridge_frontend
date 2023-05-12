@@ -55,9 +55,6 @@ const ProfileWrite = () => {
     const handleIntroduction = (e) => { setIntroduction(e.target.value); } //소개
     const handleSite = (e) => { setUserSite(e.target.value); } //사이트
     const handleSelect = (e) => {setSelect(e.target.value);};
-    // const handleTag1 = (e) => { setTag1(e.target.value); }
-    // const handleTag2 = (e) => { setTag2(e.target.value); }
-    // const handleTag3 = (e) => { setTag3(e.target.value); }
 
     // FORM DATA를 저장할 상태 변수를 변수 이름: 값 형식으로 설정
     let datas = {

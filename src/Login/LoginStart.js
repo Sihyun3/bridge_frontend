@@ -14,7 +14,7 @@ function LoginStart() {
             <img src={BridgeWhiteMainLogo} 
             alt="MainBridgeLOGO"/>
             {/* <a href={accessUrl}>LOGIN TO BRIDGE</a> */}
-            <NavLink exact activeClassName="active" to="/3">LOGIN TO BRIDGE</NavLink>
+            <NavLink exact activeClassName="active" to="/bridge/login">LOGIN TO BRIDGE</NavLink>
             {/* <button type="button" onClick={goLogin}>LOGIN TO BRIDGE</button> */}
             {/* <Link to="/3"></Link> */}
         </div>
