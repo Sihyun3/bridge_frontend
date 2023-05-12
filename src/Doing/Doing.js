@@ -33,7 +33,10 @@ const Doing = ({ history, match, pcIdx }) => {
             pcNumber: '',
             content: '',
             writer: '',
-            pdNumber: ''
+            pdNumber: '',
+            date: '',
+            file: '',
+            img: ''
         }])
     const [listArray, setListArray] = useState([
         {
@@ -51,6 +54,7 @@ const Doing = ({ history, match, pcIdx }) => {
             receiver: '',
             money: '',
             date: '',
+            img: ''
         }
     );
     const [commentList, setCommentList] = useState([{
@@ -115,19 +119,19 @@ const Doing = ({ history, match, pcIdx }) => {
                     sender: response.data.userId1,
                     receiver: response.data.userId2,
                     money: response.data.plMoney,
-                    date: response.data.plDate
+                    date: response.data.plDate,
+                    img: response.data.profileImg
                 })
             }).catch((error) => {
                 return;
             }
             )
-        
+
 
 
         setPdIdx(pdNumber);
-        const partnerDetailIdx = pdNumber;
         console.log(pdIdx);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${partnerDetailIdx}`
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdNumber}`
         )
             .then(response => {
                 console.log(response);
@@ -136,7 +140,10 @@ const Doing = ({ history, match, pcIdx }) => {
                         pcNumber: data.pcIdx,
                         content: data.pcContent,
                         writer: data.pcWriter,
-                        pdNumber: data.pdIdx
+                        pdNumber: data.pdIdx,
+                        date: data.pcDate,
+                        file: data.pcFile,
+                        img: data.profileImg
                     });
                 }));
             })
@@ -330,38 +337,41 @@ const Doing = ({ history, match, pcIdx }) => {
 
         return (
             <>
-                <div>
+
+                <div className={style.payBox}>
                     <div className={style.payDate}> {payList.date} </div>
                     <div className={style.payList}>
-                        <span>{payList.sender}</span>
-                        <span>예치금 {payList.money}가 결제되었습니다.</span>
+                        <div className={style.img}>{payList.img}</div>
+                        <div className={style.sender}>{payList.sender}</div>
+                        <div className={style.money}>예치금 {payList.money}원이 결제되었습니다.</div>
                     </div>
-                    <br />
-                    <br />
-                    <br />
                 </div>
                 {/* {console.log(contentList)} */}
 
                 {contentList && contentList.map((value, index) => {
                     return (
-                        <div>
-                            게시글 인덱스: {value.pcNumber} <br />
-                            게시글 내용: {value.content} <br />
-                            게시글 작성자: {value.writer} <br />
-                            <button key={value.pcNumber} onClick={() => handlerEditClick(index)}>{editClick === index ? "게시글 수정취소" : "게시글 수정"}</button> <br />
-                            {/* {console.log(editClick)} */}
+                        <div className={style.contentBox}>
+                            <div className={style.contentDate}>{value.date}</div>
+                            {/* 게시글 인덱스: {value.pcNumber} <br /> */}
+                            <div className={style.content}>
+                                <div className={style.img}>{value.img}</div>
+                                <div className={style.writer}>{value.writer}</div>
+                                <div className={style.main}>{value.content}</div>
+                                <div className={style.file}>{value.file}</div>
+                                <button key={value.pcNumber} onClick={() => handlerEditClick(index)}>{editClick === index ? "게시글 수정취소" : "게시글 수정"}</button>
+                                {/* {console.log(editClick)} */}
 
-                            {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} /> : <></>}
+                                {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} /> : <></>}
 
-                            {/* {console.log(detailClick[index])} */}
-                            <button onClick={() => handlerDetailClick(index)} >{detailClick[index] == false || detailClick[index] == undefined ? "게시글 상세" : "게시글 접기"}</button> <br />
-                            {/* {console.log(detailClick)} */}
-                            {detailClick[index] == true ? <ContentDetail pcIdx={value.pcNumber} /> : <></>}
-                            <button onClick={() => handlerClickComment(value.pcNumber, index)}>{commentOpen[index] == false || commentOpen[index] == undefined ? '댓글펼치기' : '댓글접기'}</button> <br />
-                            {commentOpen[index] == true && CommentList()}
-                            <button onClick={() => handlerCommentUpload(index)}>댓글 작성</button> {commentUpload === index ? <CommentWrite pcIdx={value.pcNumber} setCommentUpload={setCommentUpload} setIsClick1={setIsClick1} /> : <> </>} <br />
-                            <button onClick={() => handlerContentDelete(value.pcNumber)}> 게시글 삭제 </button> <br />
-                            <br /> <br /> <br />
+                                {/* {console.log(detailClick[index])} */}
+                                <button onClick={() => handlerDetailClick(index)} >{detailClick[index] == false || detailClick[index] == undefined ? "게시글 상세" : "게시글 접기"}</button>
+                                {/* {console.log(detailClick)} */}
+                                {detailClick[index] == true ? <ContentDetail pcIdx={value.pcNumber} /> : <></>}
+                                <button onClick={() => handlerClickComment(value.pcNumber, index)}>{commentOpen[index] == false || commentOpen[index] == undefined ? '댓글펼치기' : '댓글접기'}</button>
+                                {commentOpen[index] == true && CommentList()}
+                                <button onClick={() => handlerCommentUpload(index)}>댓글 작성</button> {commentUpload === index ? <CommentWrite pcIdx={value.pcNumber} setCommentUpload={setCommentUpload} setIsClick1={setIsClick1} /> : <> </>}
+                                <button onClick={() => handlerContentDelete(value.pcNumber)}> 게시글 삭제 </button>
+                            </div>
                         </div>
                     )
                 }
@@ -398,14 +408,16 @@ const Doing = ({ history, match, pcIdx }) => {
                     <div className={style.listTitle}> 작업 목록 </div>
                     {ProjectList()}
                 </div>
+            </div>
+            <div className='container clearfix' >
                 <div className={style.doing}>
                     <div className={style.doingTitle}> {userId2} </div>
                     <div className={style.doingProgress}>{progress == '0' ?
-                        <>현재 작업이 <span style={{fontWeight: 'bold'}}>진행 중</span>입니다. </>
+                        <>현재 작업이 <span style={{ fontWeight: 'bold' }}>진행 중</span>입니다. </>
                         :
                         <>완료된 작업입니다.</>}</div>
                     <div>
-                    <div className={style.doingTag}>{'#' + tagList[0]} {'#' + tagList[1]} {'#' + tagList[2]}</div>
+                        <div className={style.doingTag}>{'#' + tagList[0]} {'#' + tagList[1]} {'#' + tagList[2]}</div>
                         {ProjectPage()}
                         <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : "업로드 취소"}</button> <br />
                         {/* {console.log(pdIdx)} */}
