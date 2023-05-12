@@ -81,7 +81,7 @@ function App() {
       <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
       {/* 왓 이즈 디스..? */}
-      <Route path="/29" component={LoginTest} exact={true} />
+      {/* <Route path="/29" component={LoginTest} exact={true} /> */}
 
 
       {/* 회원 가입 */}
@@ -115,7 +115,7 @@ function App() {
       <Route path="/bridge/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/bridge/partner/payment" component={Payment} exact={true} />
       <Route path="/bridge/partner/doing" component={Doing} exact={true} />
-      <Route path="/bridge/partner/charge" component={Charge} exact={true} />
+      <Route path="/bridge/partner/charge/:total" component={Charge} exact={true} />
       <Route path="/bridge/partner/list" component={PartnerList} exact={true} />
       <Route path="/bridge/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
 

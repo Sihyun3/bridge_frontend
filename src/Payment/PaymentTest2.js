@@ -11,7 +11,7 @@ function PaymentTest2({ match, history }) {
 
     const  producer  = "test1"; //제작자 (돈 받을 사람 우선 하드코딩 해뒀던 거)
 
-    const [user1, setUser1] = useState({});         //로그인한 유저 
+    const [user1, setUser1] = useState([]);         //로그인한 유저 
     const [clients, setClients] = useState('');     //의뢰인(주는사람)
     // const [producer, setProducer] = useState('');   //제작자(받는사람)
 
@@ -36,7 +36,8 @@ function PaymentTest2({ match, history }) {
                 console.log(response.data);
                 //얘네가 뭔지 모르겟어요
                 setUsepoint(response.data);
-                // setClients(response.data.clients);
+                // setClients(response.data.clients);   
+                setClients(decode_token.sub);
                 // setProducer(response.data.producer);
 
                 // setWillPoint(currentPoint);
@@ -78,7 +79,7 @@ function PaymentTest2({ match, history }) {
             setTotal(downpayment);
         } else {
             alert('보유 포인트가 부족합니다. 포인트를 충전해주세요.');
-            history.push(`/25/${total}`); //충전 페이지 링크
+            history.push(`/bridge/partner/charge/${total}`); //충전 페이지 링크
 
         }
     }
