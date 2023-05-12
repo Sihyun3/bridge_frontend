@@ -89,7 +89,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
 
         axios({
             method: 'PUT',
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/update/${test}`,
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/update/${pcIdx}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         })
