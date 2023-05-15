@@ -25,7 +25,7 @@ import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
 import JamDetail from './Jam/JamDetail';
-import JamDetail2 from './Jam/JamDetail2';
+// import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import ReportList from './Admin-Report/ReportList';
 import TipEdit from './Tip/TipEdit'
@@ -36,15 +36,18 @@ import PartnerList from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
+import Finduser from './Login/Finduser';
 import SignUpTest from './SignUp/SignUpTest';
 import PaymentTest from './Payment/PaymentTest';
 import PaymentTest2 from './Payment/PaymentTest2';
+import Portfolio from './Profile/Portfolio';
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  useEffect(() => {
-    sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-  }, [])
+  // useEffect(() => {
+  //   sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+  // }, [])
 
 
 
@@ -79,12 +82,13 @@ function App() {
       {/* 공지사항 */}
      
       {/* 로그인 */}
-      <Route path="/bridge/login" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
       {/* 왓 이즈 디스..? */}
-      <Route path="/29" component={LoginTest} exact={true} />
+      {/* <Route path="/29" component={LoginTest} exact={true} /> */}
 
 
+    <Route path="/find/:idx" component={Finduser} exact={true}/>
       {/* 회원 가입 */}
       <Route path="/bridge/signup" component={SignUp} exact={true} />
       {/* 왓 이즈 디스...? */}
@@ -125,12 +129,12 @@ function App() {
      
 
       {/* 왓 이즈 디스....? */}
-      <Route path="/bridge/payment" component={PaymentTest} exact={true} />
+      {/* <Route path="/bridge/payment" component={PaymentTest} exact={true} /> */}
 
       {/* <Route path="/bridge/jam/detail" component={JamDetail2} exact={true} /> */}
 
       {/* 테스트 페이지 */}
-      <Route path="/30" component={PaymentTest2} exact={true}/>
+      <Route path="/bridge/payment" component={PaymentTest2} exact={true}/>
       <Footer />
     </>
   )

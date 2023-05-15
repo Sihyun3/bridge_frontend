@@ -11,6 +11,7 @@ function NoticeDetail({match}) {
     //수정기능 넣기 
 
     const {noticeIdx} = match.params;
+    const [datas, setDatas] = useState([]);
 
     const [data, setData] = useState([]);
     const [notice, setNotice] = useState({});

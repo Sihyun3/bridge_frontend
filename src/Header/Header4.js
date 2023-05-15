@@ -5,7 +5,8 @@ import jwt_decode from "jwt-decode";
 import BridgeWhiteLogo from '../Header/BridgeWhiteLogo.png'
 
 function Header4({ isLogin, setIsLogin }) {
-    // const [isLogin, setIsLogin] = useState('false');
+
+    const [state, setState] = useState(false);
     const [userNickname, setUserNickname] = useState('');
 
     const handlerOnLogoutClick = () => {
@@ -15,18 +16,17 @@ function Header4({ isLogin, setIsLogin }) {
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem('token') == null) {
-            //   setIsLogin(false);
-        } else {
+        if (sessionStorage.getItem('token') != null) {
+            console.log("aaaaaaaaaaaaaa");
             const token = sessionStorage.getItem('token');
             const decodedToken = jwt_decode(token);
-            console.log(decodedToken);
+            console.log(decodedToken)
             setUserNickname(decodedToken.name);
-            console.log(userNickname.name);
-            // setIsLogin(true);
-        }
-
+            console.log(userNickname);
+            setIsLogin(true);
+        } 
     }, [isLogin])
+
     if (isLogin) {
         return (
             <div className={style.Header}>
@@ -90,7 +90,7 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-                            <Link className={style.Login} to="/29">로그인</Link>
+                            <Link className={style.Login} to="/login">로그인</Link>
                             <Link className={style.regist} to="/30">회원가입</Link>
 
                         </ul>

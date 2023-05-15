@@ -39,7 +39,8 @@ function NoticeWrite({history}) {
     return (
         <>
            <div className="container">
-            <div className={style.topbox}><input className={style.titlebox} value={title} onChange={(e) => { setTitle(e.target.value) }} type='text' placeholder='제목'></input>
+            <div className={style.topbox}>
+                <input className={style.titlebox} value={title} onChange={(e) => { setTitle(e.target.value) }} type='text' placeholder='제목'></input>
             </div>
             <div className={style.writebox}>
             <NoticeToastEditor title={title}/>

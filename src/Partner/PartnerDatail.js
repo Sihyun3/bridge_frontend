@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom'
 const PartnerDatail = ({ match }) => {
 
     const { crIdx } = match.params;
-
+    
     const [data, setData] = useState('');
     const [tag, setTag] = useState([]);
     const history = useHistory();

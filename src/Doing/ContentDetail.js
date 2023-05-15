@@ -9,7 +9,7 @@ const ContentDetail = ({pcIdx}) => {
         content: '',
         writer: '',
         pdNumber: '',
-        pcFile : ''
+        file : ''
     });
 
     useEffect(()=> {

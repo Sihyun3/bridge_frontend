@@ -48,7 +48,6 @@ const JamList = () => {
 
     return (
         <>
-
             <div className={style.box1}>
                 <h1>Play</h1>
             </div>
