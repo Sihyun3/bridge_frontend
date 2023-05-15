@@ -73,8 +73,8 @@ const Doing = ({ history, match, pcIdx }) => {
         setUserId1(userId);
         console.log(decode_token);
         console.log(userId);
-
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${userId}`,
+        // ${userId}
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${decode_token.sub}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);

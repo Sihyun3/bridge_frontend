@@ -76,7 +76,7 @@ function Header4({ isLogin, setIsLogin }) {
                         <ul className={style.leftMenu}>
                          
                             <li className={style.Lefts}>
-                                <Link to="/">  <a>음원 분리</a></Link>
+                                <Link to="/split">  <a>음원 분리</a></Link>
                             </li>
                             <li className={style.Lefts}>
                                 <Link to="/8">   <a>합주</a></Link>
@@ -90,8 +90,11 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
+
                             <Link className={style.Login} to="/bridge/login">로그인</Link>
-                            <Link className={style.regist} to="/30">회원가입</Link>
+                            <Link className={style.regist} to="/signup">회원가입</Link>
+         
+
 
                         </ul>
                     </div>

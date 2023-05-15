@@ -82,7 +82,7 @@ function App() {
       {/* 공지사항 */}
      
       {/* 로그인 */}
-      <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
       {/* 왓 이즈 디스..? */}
       {/* <Route path="/29" component={LoginTest} exact={true} /> */}
@@ -90,7 +90,7 @@ function App() {
 
     <Route path="/find/:idx" component={Finduser} exact={true}/>
       {/* 회원 가입 */}
-      <Route path="/bridge/signup" component={SignUp} exact={true} />
+      <Route path="/signup" component={SignUp} exact={true} />
       {/* 왓 이즈 디스...? */}
       <Route path="/30" component={SignUpTest} exact={true} />
 
@@ -106,7 +106,7 @@ function App() {
      
 
       {/* 음원 분리 */}
-      <Route path="/bridge/split" component={MusicSplit} exact={true} />
+      <Route path="/split" component={MusicSplit} exact={true} />
 
       {/* 채팅 */}
       {/* 엔터 눌러도 채팅 전송되게 수정해주세요 */}
