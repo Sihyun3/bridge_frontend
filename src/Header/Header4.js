@@ -30,20 +30,20 @@ function Header4({ isLogin, setIsLogin }) {
     if (isLogin) {
         return (
             <div className={style.Header}>
-                <Link to="/1">   <img src={BridgeWhiteLogo}/> </Link>
+                <Link to="/">   <img src={BridgeWhiteLogo}/> </Link>
                 <div className={style.navContainer}>
                    
                     <div className={style.leftContents}>
                         <ul className={style.leftMenu}>
 
                             <li className={style.Lefts}>
-                                <Link to="/">  <a>음원 분리</a></Link>
+                                <Link to="/bridge/split">  <a>음원 분리</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/8">   <a>합주</a></Link>
+                                <Link to="/bridge/jam/list">   <a>합주</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/13">    <a>팁</a></Link>
+                                <Link to="/bridge/tip/list">    <a>팁</a></Link>
                             </li>
 
 
@@ -53,9 +53,9 @@ function Header4({ isLogin, setIsLogin }) {
                             <div className={style.box}>
                                 <li> <a className={style.nickname}>{userNickname}님</a></li>
                                 <div className={style.drop}>
-                                    <Link to="/19">프로필</Link>
-                                    <Link to="28">작업페이지</Link>
-                                    <Link to="chatting">채팅</Link>
+                                    <Link to="/bridge/profile/detail">프로필</Link>
+                                    <Link to="/bridge/partner/doing">작업페이지</Link>
+                                    <Link to="/bridge/chatting">채팅</Link>
 
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ function Header4({ isLogin, setIsLogin }) {
 
 
 
-                            <Link className={style.Login} to="/login">로그인</Link>
+                            <Link className={style.Login} to="/bridge/login">로그인</Link>
                             <Link className={style.regist} to="/30">회원가입</Link>
 
                         </ul>

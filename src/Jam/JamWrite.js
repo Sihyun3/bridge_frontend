@@ -55,37 +55,27 @@ const JamWrite = () => {
                 <div>
                     <div className={style.title1}>
                         <p className={style.titleName}>Jam</p>
-                        <img src={JamBack} className={style.JamBack}></img>
-                        <img src={JamIcon} className={style.JamIcon}></img>
                     </div>
+                    
                     <div className={style.box}>
                         <div className={style.titleBox}>
-                            <label for="title2" className={style.title2}> 제목 </label>
-                            <input type="text" id="title2" values={title} onChange={(e) => { setTitle(e.target.value) }} className={style.titleInput} />
+                            {/* <label for="title2" className={style.title2}> 제목 </label> */}
+                            <textarea id="title2" values={title} onChange={(e) => { setTitle(e.target.value) }} className={style.titleInput} placeholder="제목을 입력해주세요." />
                         </div>
+                        <label for="introduce" className={style.introduce}>소개글</label>
                         <div className={style.introduceBox}>
-                            <label for="introduce" className={style.introduce}>소개글</label>
-                            <input type="text" id="introduce" values={content} onChange={(e) => { setContent(e.target.value) }} className={style.introduceInput} />
+                            <textarea  id="introduce" values={content} onChange={(e) => { setContent(e.target.value) }} className={style.introduceInput} placeholder="코드진행 등 이 잼에 대해 알려주세요~♪" />
                         </div>
-                        <div className={style.potoBox}>
-                            <label for="poto" className={style.poto}>사진</label>
-                            <input type="file" id="poto" placeholder="사진을 첨부해주세요" multiple="multiple" onChange={(e) => {
+                        <label for="photo" className={style.photo}>사진</label>
+                        <div className={style.photoBox}>
+                            <input type="file" id="photo" placeholder="사진을 첨부해주세요" multiple="multiple" onChange={(e) => {
                                 setPhoto(e.target.files)
-                            }} className={style.potofile} ></input>
+                            }} className={style.photofile} ></input>
                         </div>
                         <div className={style.hr}>
-                            <hr width="1000px" color='#d9d9d9' size="1.8" />
-                        </div>
-                        <img src={musicfile} className={style.musicImg}></img>
-                        <div className={style.SelectBox}>
-                            <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ outlineStyle: "none" }} >
-                                <option value="" disabled selected>악기 선택</option>
-                                <option value="베이스">베이스  </option>
-                            </select>
-                        </div>
-                        <div className={style.musicBox}>
-                            <input type="file" id="musicfile" multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} className={style.musicInput}></input>
-                        </div>
+                            <hr width="800px" color='#d9d9d9' size="1.8" />
+                        </div>            
+                       
                         <div>
                             <button className={style.submitBtn} onClick={handlersubmit}>등록</button>
                         </div>

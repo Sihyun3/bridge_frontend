@@ -63,9 +63,9 @@ const TipDetail = ({ match }) => {
 
     return (
         <div className='container clearfix' >
-            <div className={style.back}>
+            <Link to ="/bridge/tip/list"><div className={style.back}>
                 <img className={style.backbutton} src={back_button} />
-            </div>
+            </div></Link>
             <div className={style.title}>
                 <h1>{data.tbTitle}</h1>
                 <br /><br />
@@ -77,7 +77,7 @@ const TipDetail = ({ match }) => {
                 {data.tbContents && <Viewer initialValue={data.tbContents}></Viewer>}
             </div>
             <div className={style.heartbox}>
-                <i onClick={handlerHeart}>{data.tbHeart} ♡</i>
+                {/* <i onClick={handlerHeart}>{data.tbHeart} ♡</i> */}
             </div>
             <div className={style.editbox}>
                 <ul>

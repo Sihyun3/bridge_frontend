@@ -11,6 +11,7 @@ import Waveform from './Waveform';
 function ProfileDetail(){
     const [data,setData] = useState('');
     const [user,setUser] = useState('');
+    const [tag,setTag] = useState('');
     //하드코딩 -> 수정필요 
     const userId = "test"
     useEffect(() => {
