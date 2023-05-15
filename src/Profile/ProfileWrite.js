@@ -19,7 +19,7 @@ const ProfileWrite = () => {
     const [userSite, setUserSite] = useState('');
     const [profileImg, setProfileImg] = useState([]);
     const [select, setSelect] = useState('');
-    const [music, setMusic] = useState('');
+    const [music, setMusic] = useState([]);
     // const [tag1, setTag1] = useState('');
     // const [tag2, setTag2] = useState('');
     // const [tag3, setTag3] = useState('');
@@ -58,6 +58,21 @@ const ProfileWrite = () => {
         }
         setProfileImg([...files]);
     }
+
+    // const handleMusic = (e) => {
+    //     const files = e.target.files;
+    //     if (files.length > MAX_FILE_COUNT) {
+    //         isNotValid("프로필음악은 최대 1개 까지 업로드가 가능합니다.");
+    //         return;
+    //     }
+    //     for (let i = 0; i < files.length; i++) {
+    //         if (!files[i].type.match(".mp3")) {
+    //             isNotValid("midi 파일만 업로드 가능합니다.");
+    //             return;
+    //         }
+    //     }
+    //     setMusic([...files]);
+    // }
 
     // const handlePosition = (e) => { setPosition(e.target.value); } //직군
     const handleIntroduction = (e) => { setIntroduction(e.target.value); } //소개
@@ -127,6 +142,8 @@ const ProfileWrite = () => {
                     <div className={style.button}>
                         <div style={{marginBottom:"10px",marginTop:"10px"}}> 프로필 음악을 첨부해주세요</div>
                         <input type='file' className={style.signupinput} onChange={(e) => { setMusic(e.target.files) }} multiple placeholder="프로필 음악을 첨부해주세요." />
+                        {console.log("music--->" + music)}
+                        {/* (e) => { setMusic(e.target.files) } */}
                     </div>
                     <div className={style.button}>
 
