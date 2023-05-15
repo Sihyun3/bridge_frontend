@@ -4,13 +4,15 @@
   }
 
 .Header {
+ 
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     height: 80px;
-    background-color: #000000;
-    /* float: left; */
+    background-color: #212121;
+    
+
 }
 
 .navContainer {
@@ -50,16 +52,19 @@
     margin:0 0 20 0px;
 }
 /* /메뉴 글씨 마우스오버/ */
-.leftMenu a:nth-child(-n+4):hover {
-    color:#2f81f7;
+.lefts a {
+    color:white;
 }
-.leftMenu a:nth-child(-n+4):hover:after {
+.leftMenu a:nth-child(-n+3):hover {
+   
+}
+.leftMenu a:nth-child(-n+3):hover:after {
     width: 50%
 }
-.leftMenu a:nth-child(-n+4):hover:before {
+.leftMenu a:nth-child(-n+3):hover:before {
     width: 50%
 }
-.leftMenu a:nth-child(-n+4):after {
+.leftMenu a:nth-child(-n+3):after {
     content:"";
     position: absolute;
     left: 50%;
@@ -67,10 +72,10 @@
     top:32px;
     width: 0;
     height: 2px;
-    background-color: #2f81f7;
+    background-color: #5b78ac;
     transition: all .3s;
 }
-.leftMenu a:nth-child(-n+4):before {
+.leftMenu a:nth-child(-n+3):before {
     content:"";
     position: absolute;
     right: 50%;
@@ -78,17 +83,17 @@
     top:32px;
     width: 0;
     height: 2px;
-    background-color: #2f81f7;
+    background-color: #5b78ac;
     transition: all .3s;
 }
 
 /* 메뉴들 */
-.Lefts:nth-child(2) {
-    margin-left: 230px;
-}
+.Lefts:nth-child(1) {
+    margin-left: 140px;
+}              
 /* 로그인 글씨 */
 .Login {
-    margin-left:580px;
+    margin-left:600px;
 }
 .Login {
     border:1px solid #fff;
@@ -97,7 +102,7 @@
 
 }
 .Login:hover {
-    border:1px solid #2f81f7;
+    border:1px solid #5b78ac;
     animation: fadein 0.7s;
 }
 
@@ -110,6 +115,72 @@
     border-radius: 0.5rem;
 }
 .regist:hover {
-    border:1px solid #2f81f7;
+    border:1px solid #5b78ac;
     animation: fadein 0.7s;
 }
+/* 로그아웃 버튼 */
+.logout {
+    color:white;
+    font-size:18px;
+   
+}
+.leftMenu li:nth-child(4) {
+    margin-left: 640px;
+}
+/*로그인시 닉네임*/
+.nickname {
+    min-width: 70px;
+    display : inline-block;
+
+}
+/*드롭다운 */
+.drop {
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #212121;
+    /* width : 130px;  */
+    left:1420px;
+    text-align: center;
+    vertical-align: center;
+    animation: fadein 0.6s;
+    /* border-radius: 0.1rem; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 2px #3d3d3d;
+}
+
+.box:hover .drop {
+    display: block;
+  }
+.drop a{
+    display : block;
+    text-decoration : none;
+    color : rgb(255, 255, 255);
+    font-size: 13px;
+    width:130px;
+    height:32px;
+    line-height: 30px; 
+    border-bottom: 1px solid #3d3d3d;
+   
+   
+  }
+/* 
+  .drop a:hover{
+    background-color : #686868;
+    
+  } */
+  .box {
+    display: inline-block;
+    /* margin-left:580px; */
+  }
+
+  /*로고 */
+  .Header img {
+    display: inline-block;
+    height: 80px;
+    margin-left:40px;
+    
+
+  }

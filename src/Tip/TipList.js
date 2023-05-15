@@ -23,7 +23,7 @@ const TipList = () => {
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);
-
+    
     return (
         <>
             <div className={style.box1}>
@@ -33,73 +33,81 @@ const TipList = () => {
                 <div className={style.leftbox}>
                     <button className={style.good}>좋아요순</button>
                 </div>
+
                 <div className={style.rightbox}>
-                    <input type="text" className={style.search} />
+
+
+                    <div className={style.write}>
+                        <button className={style.writebutton} onClick={() => {
+                            history.push('/tip/write')
+                        }}>작성</button>
+                    </div>
+                    <input type="text" className={style.search} placeholder="검색어를 입력하세요"/>
                     <img className={style.searchImg} src={searchImg} />
                 </div>
-                <div className={style.write}>
-                    <button className={style.writebutton} onClick={() => {
-                        history.push('/tip/write')
-                    }}>작성</button>
+
+                <div className={style.tipbox}>
+                    {
+                        data.map((data) => {
+                            console.log(data.tbIdx)
+                            return (
+
+                                <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
+                                    <a className={style.title}>{data.tbTitle}</a>
+                                    <a className={style.writer}>{data.userId}</a>
+                                    <a className={style.heart}>♡</a>
+                                    <a className={style.count}>{data.tbHeart}</a>
+                                    
+                                </Link>
+                            )
+
+                        })
+                    }
+                    </div>
+                    <div className={style.page}>
+
+                        <nav className="pageNum" >
+                            <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+                                &lt;
+                            </button>
+                            {
+                                filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
+                                    <button
+                                        key={i + 1}
+                                        onClick={() => setPage(i + 1)}
+                                        aria-current={page === i + 1 ? "page" : null}
+                                    >
+                                        {i + 1}
+                                    </button>
+                                ))}
+
+                            {
+                                filteredDatas == "" && Array(Math.ceil(data.length / limit)).fill().map((page, i) => (
+                                    <button
+                                        key={i + 1}
+                                        onClick={() => setPage(i + 1)}
+                                        aria-current={page === i + 1 ? "page" : null}
+                                    >
+                                        {i + 1}
+                                    </button>
+                                ))}
+
+                            {
+                                filteredDatas == "" && data ?
+                                    <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(data.length / limit)}>
+                                        &gt;
+                                    </button>
+                                    :
+                                    <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
+                                        &gt;
+                                    </button>
+                            }
+                        </nav>
+                    </div>
                 </div>
-                {
-                    data.map((data) => {
-                        console.log(data.tbIdx)
-                        return (
-                            <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
-                                <a className={style.title}>{data.tbTitle}</a>
-                                <a className={style.heart}>♡</a>
-                                <a className={style.count}>{data.tbHeart}</a>
-                                <a className={style.writer}>{data.userId}</a>
-                            </Link>
-                        )
 
-                    })
-                }
-                <div className={style.page}>
-
-                    <nav className="pageNum" >
-                        <button onClick={() => setPage(page - 1)} disabled={page === 1} >
-                            &lt;
-                        </button>
-                        {
-                            filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
-                                <button
-                                    key={i + 1}
-                                    onClick={() => setPage(i + 1)}
-                                    aria-current={page === i + 1 ? "page" : null}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-
-                        {
-                            filteredDatas == "" && Array(Math.ceil(data.length / limit)).fill().map((page, i) => (
-                                <button
-                                    key={i + 1}
-                                    onClick={() => setPage(i + 1)}
-                                    aria-current={page === i + 1 ? "page" : null}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-
-                        {
-                            filteredDatas == "" && data ?
-                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(data.length / limit)}>
-                                    &gt;
-                                </button>
-                                :
-                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
-                                    &gt;
-                                </button>
-                        }
-                    </nav>
-                </div>
-            </div>
-
-        </>
-    )
+            </>
+            )
 }
 
-export default TipList;
+            export default TipList;

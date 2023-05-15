@@ -2,8 +2,8 @@
 
 /* * {
     box-sizing: border-box;
-  }
-   */
+  } */
+  
   .body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
@@ -45,10 +45,12 @@
     /* opacity: 0.7; */
     padding: 16px;
     margin: 5px 0;
-    width: 65%;
+    width: 70%;
     border: 1px;
     outline: none;
     border-radius: 5px;
+    align-items: center;
+    margin-left: 60px;
   }
   
   /* .formInput2 {
@@ -68,32 +70,25 @@
     align-items: center;
   }
   
-  .loginButtonBox{
-    width:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 50px;
-  }
-
   .loginButton{
-    /* width: 315px; */
+    width: 315px;
     font-size: 14px;
     font-weight: bold;
     color :#ffffff;
     background: #739eee;
     /* opacity: 0.9; */
-    width: 65%;
+    width: 70%;
     border-radius: 5px;
     outline: none;
-    padding: 16px ;
+    padding: 15px 45px;
+    margin: 14px;
     letter-spacing: 1px;
-    /* text-transform: uppercase; */
+    text-transform: uppercase;
     cursor: pointer;
-    /* transition: transform 80ms ease-in; */
-    margin-top: 15px;
+    transition: transform 80ms ease-in;
+    margin-top: 25px;
     margin-bottom: 3px;
+  
     /* background-image: linear-gradient(to right, #ed85ff, #61c7d4); */
   }
   
@@ -103,7 +98,7 @@
     font-size: 12px;
     font-weight: 600;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     /* margin-bottom: 30px; */
   }
   
@@ -112,20 +107,20 @@
   }
   
   .registrationButton{
-    
+    width: 315px;
+    font-size: 13px;
     color :#ffffff;
     background: #000000;
     opacity: 0.4;
-    font-size: 14px;
-    font-weight: bold;
-    width: 65%;
+    width: 70%;
     border-radius: 5px;
     outline: none;
-    padding: 16px ;
+    padding: 15px 45px;
+    margin: 14px;
     letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
-    margin-top: 25px;
-    margin-bottom: 3px;
+    transition: transform 80ms ease-in;
     
   }
   
@@ -210,6 +205,7 @@
   .social-links {
     margin: 20px 0;
   }
+  
   .form h1 {
     font-size: 35px;
     font-weight: bold;
@@ -336,35 +332,4 @@
     margin-bottom: 20px;
   }
   
-  .selectAll {
-    margin-left: 4px;
-    font-size: 14px;
-    height: 16px;
-    width: 16px;
-}
-
-.saveBox{
-    width:72%;
-    display: flex;
-    justify-content: left;
-    align-items:flex-start;
-    flex-direction:row;
-    margin-top: 5px;
-    padding: 0 55px;
-}
-
-.idCheckBox{
-  background: #eeeeee;
-  border: 1px;
-  border-radius: 5px;
-  margin-right: 3px;
-  margin-left: 2px;
-}
-
-.saveId{
-  color: #636363;
-  font-size: 13px;
-  float: left;
-  width: 100px;
-  height: 20px;
-}
+  

@@ -3,7 +3,12 @@ import style from './Charge.module.css';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-const Charge = () => {
+const Charge = ({ match }) => {
+
+    const { total } = match.params;
+    const { usepoint } = match.params;
+
+
 
     const [userId, setUserId] = useState('');
     const [currentPoint, setCurrentPoint] = useState(0);
@@ -33,7 +38,14 @@ const Charge = () => {
         setChargePoint(e.target.value);
     }
 
-  
+
+
+    useEffect(() =>{
+        console.log(total);
+        console.log(usepoint);
+        setChargePoint(total);
+    },[]);
+
 
     const handleCharge = (e) => {
         e.preventDefault();
@@ -67,7 +79,7 @@ const Charge = () => {
     //카카오페이 버튼 클릭 핸들러
     const handleKakaopay = (e) => {
         e.preventDefault();
-        sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
+        sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
                 console.log(response);
@@ -76,18 +88,18 @@ const Charge = () => {
                 window.location.href = response.data.next_redirect_pc_url;
                 // setTid(response.data.tid);
                 // console.log("33333333333333" + tid);
-                
+
             })
             .catch(error => {
                 console.log(error);
             })
     }
 
-    const test = ()=>{
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`,{ header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-        .then(r=>{
-            console.log(r);
-        })
+    const test = () => {
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`, { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then(r => {
+                console.log(r);
+            })
     }
 
     return (

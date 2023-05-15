@@ -9,7 +9,6 @@ import searchImg from './searchImg.png'
 
 
 function Notice({ history, noticeIdx, title, writer }) {
-
     const [datas, setDatas] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [filteredDatas, setFilteredDatas] = useState([]);
@@ -120,28 +119,8 @@ function Notice({ history, noticeIdx, title, writer }) {
 
 
                     <div className={style.write}>
-                        <div className={style.all}>
-                            <button value={check} onClick={onAllCheckBox}>전체선택</button>
-                            {/* <input className={style.check} type="checkbox" checked={value.length === datas.length} onChange={(e) => onAllCheckBox(e.target.checked)} /> */}
-                            {datas.map((notice, index) => {
-                                return (
-                                    <div key={notice.noticeIdx}>
-                                        {/* 체크박스 */}
 
-                                    </div>
-
-                                )
-                            })
-                            }
-                        </div>
-                        <button className={style.delete} value={noticeIdx} onClick={handlerClickDelete}>선택삭제</button>
                         <button className={style.writebutton} onClick={handlerOnclick} >작성</button>
-
-
-
-
-
-
                     </div>
                     <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
 
@@ -160,27 +139,15 @@ function Notice({ history, noticeIdx, title, writer }) {
                             {
                                 filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
                                     <div className={style.list}>
-                                        <input className={style.checkbox}
-                                            type="checkbox"
-                                            checked={value.includes(notice.noticeIdx)}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    setValue([...value, notice.noticeIdx]);
-                                                } else {
-                                                    setValue(value.filter((v) => v !== notice.noticeIdx));
-                                                }
-                                            }}
-
-                                        />
+                                       
+                                        
 
                                         <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                             <span className={style.title}>{notice.title}</span>
                                             <span className={style.writer}>{notice.userId}</span>
                                         </Link>
 
-                                        <div>
-
-                                        </div>
+                                     
                                     </div>
                                 ))
                             }

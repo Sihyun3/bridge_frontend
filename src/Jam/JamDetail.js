@@ -146,6 +146,7 @@ const JamDetail = ({ match }) => {
                                     {/* <label className={style.label}> */}
                                     <input
                                         type="checkbox"
+                                        className={style.checkbox}
                                         checked={value.includes(index)}
                                         onChange={(e) => {
                                             if (e.target.checked) {

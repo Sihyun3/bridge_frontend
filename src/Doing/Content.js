@@ -54,9 +54,14 @@ function Content({ pdIdx, uploadClick, setUploadClick }) {
             data: formData
         }).then((response) => {
             console.log("축 성공");
+            console.log(response);
 
+            if(response.data.count == 0) {
+                alert("등록된 내용이 없습니다.")
+            } else {
             alert("업로드가 성공했습니다.")
             setUploadClick(!uploadClick);
+            }
 
         }).catch(() => {
             alert("업로드 중 오류가 발생했습니다.");

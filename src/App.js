@@ -37,27 +37,34 @@ import PartnerDatail from './Partner/PartnerDatail';
 import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
 import Finduser from './Login/Finduser';
+import SignUpTest from './SignUp/SignUpTest';
+import PaymentTest2 from './Payment/PaymentTest2';
+import Portfolio from './Profile/Portfolio';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-   useEffect(()=>{
-    sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-   },[])
+  //  useEffect(()=>{
+  //   sessionStorage.setItem("token",	"eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+  //  },[])
 
 
 
   return (
     <>
-    <Header4 isLogin={isLogin} setIsLogin={setIsLogin}/>
+      <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
       {/* 완성된 페이지 */}
 
-      <Route path="/notice" component={Notice} exact={true} />
+   
       <Route path="/report/list" component={ReportList} exact={true} />
       <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/tip" component={TipList} exact={true} />
+      <Route path="/tip/write" component={TipWrite} exact={true} />
+      <Route path="/notice/write" component={NoticeWrite} exact={true} />
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/report/detail/:reportIdx" component={ReportDetail} exact={true} />
-
+      <Route path="/report" component={ReportPage} exact={true} />
+      <Route path="/notice" component={Notice} exact={true} />
 
       {/* 미 완성 페이지 */}
       {/* <Header2 /> */}
@@ -67,7 +74,7 @@ function App() {
       <Route path="/" component={Main} exact={true} />
 
       {/* 공지사항 */}
-      <Route path="/notice/write" component={NoticeWrite} exact={true} />
+    
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
       {/* 로그인 */}
@@ -77,6 +84,7 @@ function App() {
     <Route path="/find/:idx" component={Finduser} exact={true}/>
       {/* 회원 가입 */}
       <Route path="/4" component={SignUp} exact={true} />
+      {/* <Route path="/30" component={SignUpTest} exact={true} /> */}
 
       {/* 신고 */}
       <Route path="/report" component={ReportPage} exact={true} />
@@ -89,10 +97,10 @@ function App() {
       <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
       {/* 팁게시판 */}
-      <Route path="/tip" component={TipList} exact={true} />
+    
       <Route path="/tip/edit/:tbIdx" component={TipEdit} excat={true} />
       <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} />
-      <Route path="/tip/write" component={TipWrite} exact={true} />
+      
 
       {/* 음원 분리 */}
       <Route path="/17" component={MusicSplit} exact={true} />
@@ -108,7 +116,7 @@ function App() {
       <Route path="/21" component={PartnerWrite} exact={true}/>
       <Route path="/23" component={Payment} exact={true}/>
       <Route path="/24" component={Doing} exact={true}/>
-      <Route path="/25" component={Charge} exact={true}/>
+      <Route path="/25:total" component={Charge} exact={true}/>
       <Route path="/26" component={PartnerList} exact={true}/>
 
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true}/>
@@ -117,6 +125,14 @@ function App() {
       <Route path="/27" component={DealListAd} exact={true} />
       {/* 어드민 메인 페이지 */}
       <Route path="/28" component={MainAd} exact={true} />
+      <Route path="/27" component={MainAd} exact={true} />
+
+      <Route path="/28" component={MainAd} exact={true} />
+      
+
+      {/* 테스트 페이지 */}
+      <Route path="/30" component={PaymentTest2} exact={true}/>
+      <Route path="/portfolio/:userId" component={Portfolio}/>
       <Footer />
     </>
   )

@@ -3,17 +3,21 @@ import { useEffect, useState } from 'react';
 import style from './NoticeWrite.module.css';
 // import style from './Notice.module.css';
 import '../reset.css';
+import { Viewer } from '@toast-ui/react-editor';
+import { useHistory } from 'react-router-dom';
 
 
-
-function NoticeDetail({match, history}) {
+function NoticeDetail({match}) {
+    //수정기능 넣기 
 
     const {noticeIdx} = match.params;
     const [datas, setDatas] = useState([]);
+
+    const [data, setData] = useState([]);
     const [notice, setNotice] = useState({});
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
-    
+    const history = useHistory();
     const handlerChangeTitle = e => setTitle(e.target.value);
     const handlerChangeContents = e => setContents(e.target.value);
 
@@ -81,21 +85,22 @@ function NoticeDetail({match, history}) {
   
     return (
         <>
-        <h1 className={style.Notice}>공지사항 등록</h1>
+        <h1 className={style.Notice}>공지사항 내용</h1>
         <div className={style.Box}>
 
-          <h1 className={style.Title}>제목</h1>
           {/* <input type="text" id="title" name="title" value={notice.title} onChange={handlerChangeTitle}/> */}
           <div className={style.TitleBox} > {notice.title}</div>
             {/* <input  value=} onChange={handlerChangeTitle}/> */}
           {/* <div className={style.TitleBox}>{notice.title}</div> */}
-          <h1 className={style.Contents}>내용</h1>
-          <div className={style.ContentsBox}> {notice.contents} </div>  
+       
+         
+    
+          <div className={style.ContentsBox}>  { notice.contents && <Viewer initialValue={notice.contents}></Viewer>} </div>  
           {/* value= onChange={handlerChangeContents}/> */}
           {/* <textarea className={style.TitleBox} value={notice.contents} onChange={handlerChangeContents}></textarea> */}
           <button className={style.Button2} onClick={handlerClickUpdate}>수정</button>
           <button className={style.Button3} onClick={handlerClickDelete}>삭제</button>
-          <button className={style.Button3} onClick={handlerClickList}>목록으로</button>
+          <button className={style.Button4} onClick={handlerClickList}>목록으로</button>
         </div>
 
         {/* { datas && datas.map(notice => (
