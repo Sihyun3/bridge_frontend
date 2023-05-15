@@ -41,6 +41,7 @@ import SignUpTest from './SignUp/SignUpTest';
 import PaymentTest from './Payment/PaymentTest';
 import PaymentTest2 from './Payment/PaymentTest2';
 import Portfolio from './Profile/Portfolio';
+import PaymentList from './Payment/PaymentList';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -125,6 +126,8 @@ function App() {
 
       {/* 거래내역 */}
       <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
+      <Route path="/deal/list" component={PaymentList} exact={true} />
+
       {/* 어드민 메인 페이지 */}
      
 

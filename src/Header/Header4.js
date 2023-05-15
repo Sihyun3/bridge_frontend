@@ -91,11 +91,7 @@ function Header4({ isLogin, setIsLogin }) {
 
 
                             <Link className={style.Login} to="/login">로그인</Link>
-<<<<<<< HEAD
                             <Link className={style.regist} to="/signup">회원가입</Link>
-=======
-                            <Link className={style.regist} to="/30">회원가입</Link>
->>>>>>> 3efa5614f04c618a0ac0e746e4cdd3afea6117f2
 
                         </ul>
                     </div>

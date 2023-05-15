@@ -1,19 +1,19 @@
+
 import style from './DealListAd.module.css';
-import plus from './plus.png';
-import minus from './minus.png';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
+import jwt_decode from "jwt-decode";
 
-const DealListAd = () => {
-
+const PaymentList = () => {
+    const [userId, setUserId] = useState('');
     const [data, setData] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
     const [filteredDatas, setFilteredDatas] = useState([]);
+    let [currentDate, setCurrentDate] = useState('');
     const [date1, setDate1] = useState('');
     const [date2, setDate2] = useState('');
-    let [currentDate, setCurrentDate] = useState('');
+    const [searchInput, setSearchInput] = useState('');
 
+    //페이징
     const [limit, setLimit] = useState(8);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
@@ -23,21 +23,23 @@ const DealListAd = () => {
     const handleDate2 = (e) => { setDate2(e.target.value) }
 
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        setUserId(decode_token.sub);
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/${decode_token.sub}`)
             .then(res => {
+                // console.log(">>>>" + res.data);
                 setData(res.data);
                 setCurrentDate(new Date());
-                console.log(new Date());
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [])
-
+    }, [userId]);
 
     const handleAll = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/${userId}`)
             .then(res => {
                 setData(res.data);
                 setFilteredDatas(res.data);
@@ -49,7 +51,7 @@ const DealListAd = () => {
 
     const handleDeal = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/deal`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/pay/deal/${userId}`)
             .then(res => {
                 console.log(`거래내역`);
                 setData(res.data);
@@ -62,7 +64,7 @@ const DealListAd = () => {
 
     const handleCharge = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/charge`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/pay/charge/${userId}`)
             .then(res => {
                 console.log(`충전내역`);
                 setData(res.data);
@@ -126,13 +128,11 @@ const DealListAd = () => {
         ))
     }
 
-
-
     return (
         <>
             <div className='container clearfix'></div>
             <div className={style.mainBox}>
-                <h1 className={style.mainText}>포인트 내역 조회</h1>
+            <h1 className={style.mainText}>포인트 내역 조회</h1>
                 <div className={style.dealDate}>
                     <p>거래 일자</p>
                     <input className={style.dealInput1} type='date' value={date1} onChange={handleDate1} /> - <input type='date' className={style.dealInput2} value={date2} onChange={handleDate2}></input>
@@ -149,7 +149,7 @@ const DealListAd = () => {
                     <button onClick={handleCharge} className={style.searchButton}>충전내역</button>
                 </div>
                 <div className={style.contentBox}>
-                    <div className={style.tableText}>{filteredDatas == "" ? <p>총 {data.length}건 </p> : <p> 총 {filteredDatas.length} 건 </p>} </div>
+                <div className={style.tableText}>{filteredDatas == "" ? <p>총 {data.length}건 </p> : <p> 총 {filteredDatas.length} 건 </p>} </div>
                     <table>
                         <colgroup className={style.tableCol}>
                             <col width="30%" />
@@ -166,7 +166,7 @@ const DealListAd = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {
+                        {
                                 filteredDatas == "" && data.slice(offset, offset + limit).map((data) => {
                                     return (
                                         <tr>
@@ -235,9 +235,10 @@ const DealListAd = () => {
                         }
                     </nav>
                 </div>
+
             </div>
         </>
     );
 };
 
-export default DealListAd;
+export default PaymentList;
