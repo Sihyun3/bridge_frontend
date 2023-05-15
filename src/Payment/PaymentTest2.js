@@ -4,8 +4,10 @@ import arrow from './PaymentImg.png';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom';
 
-function PaymentTest2({ match, history }) {
+function PaymentTest2({ match }) {
+    const history = useHistory();
 
     //나중에 네이밍 변경해도 될까요? - 당연하쥐....
 
@@ -26,14 +28,19 @@ function PaymentTest2({ match, history }) {
 
 
     useEffect(() => {
+        if(sessionStorage.getItem('token') == null){
+            history.push('/login')
+            return;
+        }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUser1(decode_token.sub);
         console.log(">>>>>>>>>>>>");
         axios.get(`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
+        // (`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
             // ,(`http://localhost:8080/api/payment/${userProducer}`)
             .then(response => {
-                console.log(response.data);
+                console.log("=========> " + response);
                 //얘네가 뭔지 모르겟어요
                 setUsepoint(response.data);
                 // setClients(response.data.clients);   
@@ -56,12 +63,12 @@ function PaymentTest2({ match, history }) {
         if (total == 0 && usepoint >= total) {
             console.log(producer , total);
             //어드민으로 ${producer} 하드코딩 추후 수정 필요
-            axios.post(`http://localhost:8080/api/doPayment`,
-                { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total }) 
+            axios.post(`http://localhost:8080/api/doPayment/${producer}`,
+                { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total , downpayment}) 
                 .then(response => {
                     console.log(response.data);
                     alert('결제가 완료되었습니다.');
-                    history.push('/27'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
+                    history.push('/bridge/admin/deal/list'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
                 })
                 .catch(err => {
                     console.log(err);
@@ -134,6 +141,15 @@ function PaymentTest2({ match, history }) {
 
     return (
         <>
+        {/* {
+            usepoint.map((d) => {
+                return(
+                    <>
+                <p>{d.userPonint}</p>
+                </>
+                )
+            })
+        } */}
             <div className='container clearfix' >
                 <div className={style.mainBox}>
                     <div className={style.mainText}>결제</div>

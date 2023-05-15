@@ -23,10 +23,9 @@ const TipList = () => {
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);
-
+    
     return (
         <>
-
             <div className={style.box1}>
                 <h1>게시판</h1>
             </div>

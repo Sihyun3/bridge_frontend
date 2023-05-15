@@ -61,7 +61,7 @@ margin-top:40px;
 .editbox {
     float:left;
     margin-top:30px;
-    width:560px;
+    width:520px;
     
 }
 .editbox ul li {
@@ -87,7 +87,7 @@ margin-top:40px;
     float:left;
     width:auto;
     display: block;
-    background-color: #D9D9D9;
+    /* background-color: #D9D9D9; */
     padding:12px;
     border-radius: 0.5rem;
     margin-top:8px;
@@ -102,25 +102,37 @@ margin-top:40px;
 }
 /*덧글 작성 인풋칸*/
 .writeComment {
-    width:1100px;
+    width:800px;
     height:40px;
     border-radius: 0.5rem;
-    background-color: #d9d9d9;
-    border:none;
-    margin-left:40px;
+    /* background-color: #d9d9d9; */
+    border:1px solid black;
+    margin: 0 auto;
 }
 /* 덧글 작성 버튼 */
 .finish {
-    height:30px;
+    height:40px;
     width:60px;
-    position: relative;
-    right:100px;
+    /* position: relative; */
+    /* right:100px; */
     border-radius: 0.5rem;
     border:none;
     background-color: #ae6fff;
     font-size:16px;
     color:white;
+    margin-left: 30px;
 }
 .finish:hover {
     cursor: pointer;
+}
+
+.comments {
+    border-top: solid black 1px
+}
+/* .comments :first-of-type{
+    border-top: none;
+    height: 100px;
+} */
+.com div:first-child{
+    border-top:none;
 }

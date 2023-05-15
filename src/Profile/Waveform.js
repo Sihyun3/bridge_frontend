@@ -4,9 +4,9 @@ import play from '../Jam/play.png';
 import JamBack from "../Jam/Rectangle 49.png";
 // import style from "./wave.module.css";
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
-import style from './Waveform.module.css'
+import style from '../Component/Waveform.module.css'
 import image from '../Jam/musical-note.png'
-import base from './base.png'
+// import base from './base.png'
 
 const formWaveSurferOptions = ref => ({
     container: ref,
@@ -16,7 +16,7 @@ const formWaveSurferOptions = ref => ({
     barWidth: 6,
     barRadius: 3,
     responsive: true,
-    height: 120,
+    height: 80,
     normalize: true,
     partialRender: true,
     interact: true,
@@ -34,7 +34,7 @@ const formWaveSurferOptions = ref => ({
     ]
 });
 
-const Waveform = forwardRef((props, ref) => {
+const Waveform = forwardRef((props) => {
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
@@ -56,16 +56,16 @@ const Waveform = forwardRef((props, ref) => {
     // let [pSec, setPSec] = useState(0);
 
     //import 해서 사용 //.current.함수 로 사용하기 위해 선언
-    useImperativeHandle(ref, () => ({
-        // 부모 컴포넌트에서 사용할 함수를 선언
-        PlayAll
-    }))
+    // useImperativeHandle(ref, () => ({
+    //     // 부모 컴포넌트에서 사용할 함수를 선언
+    //     PlayAll
+    // }))
 
 
-    function PlayAll() {
-        setPlay(!playing);
-        wavesurfer.current.playPause();
-    }
+    // function PlayAll() {
+    //     setPlay(!playing);
+    //     wavesurfer.current.playPause();
+    // }
 
     useEffect(() => {
         // setPlay(false);
@@ -147,11 +147,14 @@ const Waveform = forwardRef((props, ref) => {
             <div style={{marginBottom: "40px"}}>
 {/* style={{ marginTop: 20 }} */}
                 {/* <span className={style.pauseTime}> {a}</span> */}
-                <div style={ {float:"left"}} className="clearfix">
-                    <img alt="악기 이미지" src={base}/>
+                <div style={ {float:"left",marginTop:30}} className="clearfix">
+                    {/* <img alt="악기 이미지" src={base}/> */}
                     <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play} /> : <img className={style.button} src={JamBack} />}</button></span>
                     <div >
-                        <label htmlFor="volume">Volume</label>
+                
+                    </div>
+                </div>
+                <label htmlFor="volume">Volume</label>
                         <input
                             type="range"
                             id="volume"
@@ -162,13 +165,10 @@ const Waveform = forwardRef((props, ref) => {
                             onChange={onVolumeChange}
                             defaultValue={volume}
                         />
-                    </div>
-                </div>
-
-                <div style={{ width: 800, marginLeft: 220 }}>
+                <div style={{ width: 650, marginLeft: 80 }}>
                     <div id="waveform" ref={waveformRef} />
                 </div>
-                <div style={{marginLeft: "220px"}}>
+                <div style={{marginLeft: "80px"}}>
                     <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span>
                 </div>
                 {/* <p className ={style.explain} >{a}</p>  */}
