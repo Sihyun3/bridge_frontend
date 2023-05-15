@@ -68,7 +68,7 @@ const JamList = () => {
                             return (
                                 <>
                                     <div className={style.block}>
-                                        <Link to={`/jam/detail/${data.cidx}`}>
+                                        <Link to={`/bridge/jam/detail/${data.cidx}`}>
                                         <div className={style.imgbox}>
                                             <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
                                            </div>

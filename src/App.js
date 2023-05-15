@@ -68,13 +68,13 @@ function App() {
       <Route path="/bridge/tip/write" component={TipWrite} exact={true} />
       <Route path="/bridge/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
       <Route path="/bridge/jam/list" component={JamList} exact={true} />
-
+      <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
+      <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
       <Route path="/bridge/report/write" component={ReportPage} exact={true} />
 
       {/* 미 완성 페이지 */}
-      {/* <Header2 /> */}
       <Route path="/bridge/login/start" component={LoginStart} exact={true} />
 
       {/* 메인*/}
@@ -96,8 +96,6 @@ function App() {
       <Route path="/30" component={SignUpTest} exact={true} />
 
       {/* 잼 */}
-
-      <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
       <Route path="/bridge/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
       {/* 팁게시판 */}
@@ -128,6 +126,7 @@ function App() {
       <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
       <Route path="/deal/list" component={PaymentList} exact={true} />
 
+   
       {/* 어드민 메인 페이지 */}
      
 
