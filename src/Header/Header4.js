@@ -24,15 +24,15 @@ function Header4({ isLogin, setIsLogin }) {
             setUserNickname(decodedToken.name);
             console.log(userNickname);
             setIsLogin(true);
-        } 
+        }
     }, [isLogin])
 
     if (isLogin) {
         return (
             <div className={style.Header}>
-                <Link to="/">   <img src={BridgeWhiteLogo}/> </Link>
+                <Link to="/">   <img src={BridgeWhiteLogo} /> </Link>
                 <div className={style.navContainer}>
-                   
+
                     <div className={style.leftContents}>
                         <ul className={style.leftMenu}>
 
@@ -45,6 +45,9 @@ function Header4({ isLogin, setIsLogin }) {
                             <li className={style.Lefts}>
                                 <Link to="/bridge/tip/list">    <a>팁</a></Link>
                             </li>
+                            {/* <li className={style.Lefts}>
+                                <Link to="/bridge/tip/list">    <a>파트너</a></Link>
+                            </li> */}
 
 
 
@@ -70,30 +73,23 @@ function Header4({ isLogin, setIsLogin }) {
     } else {
         return (
             <div className={style.Header}>
-                 <Link to="/1">   <img src={BridgeWhiteLogo}/> </Link>
+                <Link to="/1">   <img src={BridgeWhiteLogo} /> </Link>
                 <div className={style.navContainer}>
                     <div className={style.leftContents}>
                         <ul className={style.leftMenu}>
-                         
+
                             <li className={style.Lefts}>
-                                <Link to="/split">  <a>음원 분리</a></Link>
+                                <Link to="/bridge/split">  <a>음원 분리</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/8">   <a>합주</a></Link>
+                                <Link to="/bridge/jam/list">   <a>합주</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/13">    <a>팁</a></Link>
+                                <Link to="/bridge/tip/list">    <a>팁</a></Link>
                             </li>
-
-
-
-
-
-
-
                             <Link className={style.Login} to="/bridge/login">로그인</Link>
                             <Link className={style.regist} to="/signup">회원가입</Link>
-         
+
 
 
                         </ul>
