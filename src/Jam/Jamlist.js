@@ -3,7 +3,7 @@ import style from './JamList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
 import Header1 from '../Header/Header1'
-import img from "./checkbox.png"
+import img from "../Jam/PlayButton.png"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from "react-router-dom";
@@ -48,37 +48,39 @@ const JamList = () => {
 
     return (
         <>
-            <Header1 />
+
             <div className={style.box1}>
-                <h1>게시판</h1>
+                <h1>Play</h1>
             </div>
             <div className='container clearfix'>
 
-            <form onSubmit={handlerSerchSubmit}>
+                <form onSubmit={handlerSerchSubmit}>
                     <div className={style.serchbox}>
                         <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
-                    </div>
-                    <div className={style.serchbox}>
                         <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
                     </div>
                 </form>
-                
-                <Link to="/bridge/jam/write"><img className={style.playbutton} src={img}></img></Link>
+                <div className={style.pbox}>
+                    <Link to="/jam/write"><input type="button" className={style.playbutton} value="Play" /></Link>
+                </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
                         data.map((data) => {
                             return (
                                 <>
                                     <div className={style.block}>
-                                        <Link to={`/bridge/jam/detail/${data.cidx}`}>
-                                        <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
-                                        <p className={style.title}>{data.ctitle}</p>
+                                        <Link to={`/jam/detail/${data.cidx}`}>
+                                            <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                            <p className={style.title}>{data.ctitle}</p>
                                         </Link>
                                     </div>
                                 </>
                             );
                         })
                     }
+
+            
+
                 </div>
 
                 <div className={style.page}>

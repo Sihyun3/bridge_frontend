@@ -44,6 +44,7 @@ const Charge = ({ match }) => {
         console.log(total);
         console.log(usepoint);
         setChargePoint(total);
+        setCurrentPoint(usepoint);
     },[]);
 
 

@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
+// import style from './Notice.module.css'
 import style from './Notice.module.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+// import style from './Notice.module.css'
 import searchImg from './searchImg.png'
-
+// import { Link } from 'react-router-dom'
 
 
 function Notice({ history, noticeIdx, title, writer }) {
@@ -78,7 +80,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                 console.log(response);
                 if (response.data.length === noticeIdx.length) {
                     alert('해당 글이 정상적으로 삭제되었습니다.');
-                    history.push('/bridge/admin/notice/list');
+                    history.push('/notice');
                 } else {
                     alert('삭제에 실패했습니다. 다시 시도해주세요.');
                     return;
@@ -94,7 +96,7 @@ function Notice({ history, noticeIdx, title, writer }) {
 
 
     const handlerOnclick = () => {
-        history.push('/bridge/admin/notice/write');
+        history.push('/notice/write');
     };
 
 
@@ -119,6 +121,12 @@ function Notice({ history, noticeIdx, title, writer }) {
                     <div className={style.write}>
 
                         <button className={style.writebutton} onClick={handlerOnclick} >작성</button>
+
+
+
+
+
+
                     </div>
                     <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
 
@@ -128,23 +136,7 @@ function Notice({ history, noticeIdx, title, writer }) {
 
 
 
-{/* 
-                        <div className={style.noticebox}>
-                            {
-                                filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
-                                    <div className={style.list}>
-                                       
-                                        
 
-                                        <Link to={`/notice/detail/${notice.noticeIdx}`}>
-                                            <span className={style.title}>{notice.title}</span>
-                                            <span className={style.writer}>{notice.userId}</span>
-                                        </Link>
-
-                                     
-                                    </div>
-                                ))
-                            } */}
 
 
 
@@ -153,18 +145,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-                                <input className={style.checkbox}
-                                    type="checkbox"
-                                    checked={value.includes(notice.noticeIdx)}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            setValue([...value, notice.noticeIdx]);
-                                        } else {
-                                            setValue(value.filter((v) => v !== notice.noticeIdx));
-                                        }
-                                    }}
-
-                                />
+                               
 
                                 <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
@@ -182,17 +163,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-                                <input className={style.checkbox}
-                                    type="checkbox"
-                                    checked={value.includes(notice.noticeIdx)}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            setValue([...value, notice.noticeIdx]);
-                                        } else {
-                                            setValue(value.filter((v) => v !== notice.noticeIdx));
-                                        }
-                                    }}
-                                />
+                                
 
                                 <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>

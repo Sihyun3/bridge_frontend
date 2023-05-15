@@ -84,7 +84,7 @@ function NoticeDetail({match}) {
   
     return (
         <>
-        <h1 className={style.Notice}>공지사항 내용</h1>
+        <h1 className={style.Notice}>공지사항</h1>
         <div className={style.Box}>
 
           {/* <input type="text" id="title" name="title" value={notice.title} onChange={handlerChangeTitle}/> */}

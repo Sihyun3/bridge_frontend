@@ -2,8 +2,8 @@
 
 /* * {
     box-sizing: border-box;
-  } */
-  
+  }
+   */
   .body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
@@ -45,13 +45,12 @@
     /* opacity: 0.7; */
     padding: 16px;
     margin: 5px 0;
-    width: 70%;
+    width: 65%;
     border: 1px;
     outline: none;
     border-radius: 5px;
-    align-items: center;
-    margin-left: 60px;
   }
+
   
   /* .formInput2 {
     background: #eee;
@@ -70,27 +69,118 @@
     align-items: center;
   }
   
-  .loginButton{
-    width: 315px;
+  .infoBox{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 50px;
+    margin-bottom: 15px;
+  }
+
+  .infoBox2{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 50px;
+  }
+
+  .mailBox{
+    width:73%;
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    flex-direction:row;
+    margin-top: 15px;
+    padding: 0 55px;
+  }
+
+  .mailInput{
+    background: #eeeeee;
+    /* opacity: 0.7; */
+    padding: 16px;
+    margin: 5px 0;
+    width: 70%;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+    /* display: flex; */
+    /* justify-content: left; */
+    /* align-items: left; */
+  }
+  .mailInput:first-child{
+    margin-right: 10px;
+  }
+
+  .codeInput{
+    background: #eeeeee81;
+    /* opacity: 0.7; */
+    padding: 16px;
+    margin: 5px 0;
+    width: 65%;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+
+  .registrationButton{
+    
+    color :#ffffff;
+    background: #000000;
+    opacity: 0.4;
     font-size: 14px;
+    font-weight: bold;
+    width: 65%;
+    border-radius: 5px;
+    outline: none;
+    padding: 16px ;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 25px;
+    margin-bottom: 40px;
+    
+  }
+  
+
+  .loginButton{
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 500;
+    background: #739eee;
+    /* opacity: 0.7; */
+    /* padding: 16px 7px; */
+    margin: 5px 0;
+    height: 50px;
+    width: 30%;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+    /* display: flex; */
+    /* justify-content: left; */
+    /* align-items: left; */
+  }
+
+
+  /* .loginButton{
+   
+    font-size: 12px;
     font-weight: bold;
     color :#ffffff;
     background: #739eee;
-    /* opacity: 0.9; */
-    width: 70%;
-    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    width: 30%;
+    border: 1px;
     outline: none;
-    padding: 15px 45px;
-    margin: 14px;
+    border-radius: 5px;
     letter-spacing: 1px;
-    text-transform: uppercase;
     cursor: pointer;
-    transition: transform 80ms ease-in;
-    margin-top: 25px;
     margin-bottom: 3px;
-  
-    /* background-image: linear-gradient(to right, #ed85ff, #61c7d4); */
-  }
+  } */
   
   
   .registration{
@@ -98,7 +188,7 @@
     font-size: 12px;
     font-weight: 600;
     margin-top: 10px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     /* margin-bottom: 30px; */
   }
   
@@ -106,23 +196,7 @@
     margin-right: 15px;
   }
   
-  .registrationButton{
-    width: 315px;
-    font-size: 13px;
-    color :#ffffff;
-    background: #000000;
-    opacity: 0.4;
-    width: 70%;
-    border-radius: 5px;
-    outline: none;
-    padding: 15px 45px;
-    margin: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 80ms ease-in;
-    
-  }
+ 
   
   .button {
     color :#1b0f1f;
@@ -205,7 +279,6 @@
   .social-links {
     margin: 20px 0;
   }
-  
   .form h1 {
     font-size: 35px;
     font-weight: bold;
@@ -332,4 +405,85 @@
     margin-bottom: 20px;
   }
   
-  
+  .selectAll {
+    margin-left: 4px;
+    font-size: 14px;
+    height: 16px;
+    width: 16px;
+}
+
+.saveBox{
+    width:72%;
+    display: flex;
+    justify-content: left;
+    align-items:flex-start;
+    flex-direction:row;
+    margin-top: 5px;
+    padding: 0 55px;
+}
+
+.idCheckBox{
+  background: #eeeeee;
+  border: 1px;
+  border-radius: 5px;
+  margin-right: 3px;
+  margin-left: 2px;
+}
+
+.saveId{
+  color: #636363;
+  font-size: 13px;
+  float: left;
+  width: 100px;
+  height: 20px;
+}
+
+
+/* dropdown css */
+.container1111 {
+  min-width: 150px;
+  box-shadow: 0 4px 5px 0 #00000026;
+  position: relative;
+}
+
+.dropdown {
+  left: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.dropdownLabel {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 4px 5px 0 #00000026;
+}
+
+.dropdown:checked + label + div {
+  display: block;
+  border-top: 1px solid #00000026;
+}
+
+.caretIcon {
+  transition: transform 250ms ease-out;
+}
+#dropdown:checked + label > .caretIcon {
+  transform: rotate(-180deg);
+}
+
+.content ul {
+  list-style-type: none;
+  padding: 12px;
+  margin: 0;
+}
+.content ul li {
+  margin: 0.8rem 0;
+}

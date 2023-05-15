@@ -10,19 +10,36 @@
 }
 
 /* 컨텐츠 모두 묶는 박스 */
-.mainBox {
+  .Container {
     width: 1200px;
     margin: 100px auto;
+  }
+
+/* 상단 글자  */
+.textBox {
+    width: 100%;
+    margin: 1.75rem auto;
+    max-width: 1320px;
+    padding-inline: 1rem;
 }
 
 /* 컨텐츠 텍스트 */
 .mainText {
-    font-size: 50px;
+    line-height: 1.25;
+    font-size: 4.25rem;
+
+    font-weight: 700;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 2.25rem;
+    letter-spacing: -1px;
 }
 
 /* 버튼 첫 줄 */
 .firstLine {
-    margin-top: 30px;
+    width: 1200px;
+    margin: 50px auto;
 }
 
 /* 온라인 합주 버튼 */
@@ -36,18 +53,27 @@
     text-align: left;
     vertical-align: bottom;
     background-color: rgba(217, 217, 217, 0.8);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1522870389523-7e83c0065eaf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-size: 530px;
 
 }
 
 /* 온라인 합주 버튼 클릭 */
 .online:hover {
-    background-color: rgba(217, 217, 217, 0.5);
+    opacity: 0.8;
 }
 
 /* 온라인 합주 텍스트 */
 .online p {
     margin-top: 180px;
     margin-left: 20px;
+    color: #f6f6f6;
+}
+
+.online p:hover {
+    color: #FCFCFC;
 }
 
 /* 오프라인 합주 버튼 */
@@ -60,11 +86,15 @@
     font-weight: bold;
     text-align: left;
     background-color: rgba(217, 217, 217, 0.8);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-size: 530px;
 }
 
 /* 오프라인 합주 버튼 클릭 */
 .offline:hover {
-    background-color: rgba(217, 217, 217, 0.5);
+    opacity: 0.8;
 }
 
 
@@ -72,7 +102,19 @@
 .offline p {
     margin-top: 180px;
     margin-left: 20px;
+    color: #f6f6f6;
 }
+
+.offline p:hover {
+    color: #FCFCFC;
+}
+
+.secondLine {
+    width: 1200px;
+    margin: 150px auto;
+    margin-top: -50px;
+}
+
 
 /* 음원분리 버튼 */
 .musicSep {
@@ -84,17 +126,26 @@
     font-weight: bold;
     text-align: left;
     background-color: rgba(217, 217, 217, 0.8);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1445375011782-2384686778a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-size: 550px 245px;
 }
 
 /* 음원분리 버튼 클릭 */
 .musicSep:hover {
-    background-color: rgba(217, 217, 217, 0.5);
+    opacity: 0.8;
 }
 
 /* 음원분리 텍스트 */
 .musicSep p {
     margin-top: 110px;
     margin-left: 20px;
+    color: #f6f6f6;
+}
+
+.musicSep p:hover {
+    color: #FCFCFC;
 }
 
 /* 커뮤니티 버튼 */
@@ -107,11 +158,15 @@
     font-weight: bold;
     text-align: left;
     background-color: rgba(217, 217, 217, 0.8);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-size: 550px 250px;
 }
 
 /* 커뮤니티 버튼 클릭 */
 .communnity:hover {
-    background-color: rgba(217, 217, 217, 0.5);
+    opacity: 0.8;
 }
 
 
@@ -119,6 +174,11 @@
 .community p {
     margin-top: 110px;
     margin-left: 20px;
+    color: #f6f6f6;
+}
+
+.community p:hover {
+    color: #FCFCFC;
 }
 
 /* 공지사항 */
