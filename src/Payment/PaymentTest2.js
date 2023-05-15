@@ -31,9 +31,10 @@ function PaymentTest2({ match, history }) {
         setUser1(decode_token.sub);
         console.log(">>>>>>>>>>>>");
         axios.get(`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
+        // (`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
             // ,(`http://localhost:8080/api/payment/${userProducer}`)
             .then(response => {
-                console.log(response.data);
+                console.log("=========> " + response);
                 //얘네가 뭔지 모르겟어요
                 setUsepoint(response.data);
                 // setClients(response.data.clients);   
@@ -56,12 +57,12 @@ function PaymentTest2({ match, history }) {
         if (total == 0 && usepoint >= total) {
             console.log(producer , total);
             //어드민으로 ${producer} 하드코딩 추후 수정 필요
-            axios.post(`http://localhost:8080/api/doPayment`,
-                { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total }) 
+            axios.post(`http://localhost:8080/api/doPayment/${producer}`,
+                { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total , downpayment}) 
                 .then(response => {
                     console.log(response.data);
                     alert('결제가 완료되었습니다.');
-                    history.push('/27'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
+                    history.push('/bridge/admin/deal/list'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
                 })
                 .catch(err => {
                     console.log(err);
@@ -134,6 +135,15 @@ function PaymentTest2({ match, history }) {
 
     return (
         <>
+        {/* {
+            usepoint.map((d) => {
+                return(
+                    <>
+                <p>{d.userPonint}</p>
+                </>
+                )
+            })
+        } */}
             <div className='container clearfix' >
                 <div className={style.mainBox}>
                     <div className={style.mainText}>결제</div>
