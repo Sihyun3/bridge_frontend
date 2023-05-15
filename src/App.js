@@ -25,7 +25,7 @@ import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
 import JamDetail from './Jam/JamDetail';
-import JamDetail2 from './Jam/JamDetail2';
+// import JamDetail2 from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import ReportList from './Admin-Report/ReportList';
 import TipEdit from './Tip/TipEdit'
@@ -124,7 +124,7 @@ function App() {
       {/* <Route path="/bridge/jam/detail" component={JamDetail2} exact={true} /> */}
 
       {/* 테스트 페이지 */}
-      <Route path="/30" component={PaymentTest2} exact={true}/>
+      {/* <Route path="/30" component={PaymentTest2} exact={true}/> */}
       <Footer />
     </>
   )

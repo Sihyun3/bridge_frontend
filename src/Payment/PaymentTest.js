@@ -1,4 +1,4 @@
-import style from './PaymentTest.module.css';
+import style from './Payment.module.css';
 import user from './user.png';
 import arrow from './PaymentImg.png';
 import { useState, useEffect } from 'react';
