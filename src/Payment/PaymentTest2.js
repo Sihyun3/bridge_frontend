@@ -4,8 +4,10 @@ import arrow from './PaymentImg.png';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom';
 
-function PaymentTest2({ match, history }) {
+function PaymentTest2({ match }) {
+    const history = useHistory();
 
     //나중에 네이밍 변경해도 될까요? - 당연하쥐....
 
@@ -26,6 +28,10 @@ function PaymentTest2({ match, history }) {
 
 
     useEffect(() => {
+        if(sessionStorage.getItem('token') == null){
+            history.push('/login')
+            return;
+        }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUser1(decode_token.sub);

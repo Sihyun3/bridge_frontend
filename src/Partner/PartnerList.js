@@ -72,38 +72,37 @@ const PartnerList = () => {
 
   return (
     <>
-      
       <div className={style.box1}>
         <h1>파트너 모집</h1>
       </div>
-      <div className="container clearfix">
+      <div className="container clearfix" >
         <div className={style.tagbox}>
-          
-            <h2>#태그</h2>
-          
+
+
+
           {tags.map((tags, index) => {
             if (index % 5 == 0) {
               return (<>   <label className={style.tags} for={`tagRadio-${index}`}>
-              <button
-              key={index}
-                className={style.taglists}
-                id={`tagRadio-${index}`}
-                value={tags.name}
-                onClick={handleRadio}
-              />
-             #{tags.name}</label></>)
-            }
-            return (
-              // <span className={style.taglist} key={index}>
-              <label className={style.tags} for={`tagRadio-${index}`}>
                 <button
-                key={index}
+                  key={index}
                   className={style.taglists}
                   id={`tagRadio-${index}`}
                   value={tags.name}
                   onClick={handleRadio}
                 />
-               #{tags.name}</label>
+                #{tags.name}</label></>)
+            }
+            return (
+              // <span className={style.taglist} key={index}>
+              <label className={style.tags} for={`tagRadio-${index}`}>
+                <button
+                  key={index}
+                  className={style.taglists}
+                  id={`tagRadio-${index}`}
+                  value={tags.name}
+                  onClick={handleRadio}
+                />
+                #{tags.name}</label>
               // </span>
             );
           })}
@@ -111,42 +110,45 @@ const PartnerList = () => {
         </div>
         <div className="clearfix" style={{ margin: '50px 0' }}>
           {
-          currentPosts(partnerList) && currentPosts(partnerList)
-            .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
-            .map((partnerList, index) => {
-              return (
-                <div key={index} className={style.block}>
-                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
-                  {/* <p className={style.title}>{partnerList.userId}</p> */}
-                  <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
-                  <p className={style.date}>
-                    {partnerList.crStartDate} ~ {partnerList.crEndDate}
-                  </p>
-                  <div className={style.tagblock}>
-                    {partnerTag
-                      .filter((tag) => partnerList.crIdx === tag.crIdx)
-                      .map((tag, tagIndex) => {
-                        // console.log(3%3)
-                        if (tagIndex % 3 == 0) {
-                          return (<><br /><span className={style.tag} key={tagIndex}>#{tag.crtTag} </span> </>)
+            currentPosts(partnerList) && currentPosts(partnerList)
+              .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
+              .map((partnerList, index) => {
+                return (
+                  <div key={index} className={style.block}>
+                    {console.log(">>" + partnerList.crPhoto)}
+                    <div className={style.imgbox}>
+                    <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
+                    {/* <p className={style.title}>{partnerList.userId}</p> */}
+                    </div>
+                    <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
+                    <p className={style.date}>
+                      {partnerList.crStartDate} ~ {partnerList.crEndDate}
+                    </p>
+                    <div className={style.tagblock}>
+                      {partnerTag
+                        .filter((tag) => partnerList.crIdx === tag.crIdx)
+                        .map((tag, tagIndex) => {
+                          // console.log(3%3)
+                          if (tagIndex % 3 == 0) {
+                            return (<><br /><span className={style.tag} key={tagIndex}>#{tag.crtTag} </span> </>)
+                          }
+                          return (<span className={style.tag} key={tagIndex}>#{tag.crtTag} </span>);
                         }
-                        return (<span className={style.tag} key={tagIndex}>#{tag.crtTag} </span>);
-                      }
 
 
-                      )}
+                        )}
+                    </div>
+
                   </div>
-              
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
 
         <div className={style.buttonbox}>
-        <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
+          <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
         </div>
 
-        <div style={{margin:"0 auto"}} className='clearfix'>
+        <div style={{ margin: "0 auto" }} className='clearfix'>
           <Pagination
             className={style.page}
             postsPerPage={postsPerPage}

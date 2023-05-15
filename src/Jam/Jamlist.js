@@ -48,7 +48,6 @@ const JamList = () => {
 
     return (
         <>
-
             <div className={style.box1}>
                 <h1>Play</h1>
             </div>
@@ -61,7 +60,7 @@ const JamList = () => {
                     </div>
                 </form>
                 <div className={style.pbox}>
-                    <Link to="/jam/write"><input type="button" className={style.playbutton} value="Play" /></Link>
+                    <Link to="/bridge/jam/write"><input type="button" className={style.playbutton} value="Play" /></Link>
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
@@ -70,7 +69,9 @@ const JamList = () => {
                                 <>
                                     <div className={style.block}>
                                         <Link to={`/jam/detail/${data.cidx}`}>
+                                        <div className={style.imgbox}>
                                             <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                           </div>
                                             <p className={style.title}>{data.ctitle}</p>
                                         </Link>
                                     </div>
