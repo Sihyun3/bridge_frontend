@@ -1,18 +1,50 @@
+@keyframes fadein {
+    from { opacity: 0.7; }
+    to {  opacity: 1; }
+  }
+
 .box1 {
     height: 280px;
     width: 100%;
-    background-color: #f8dbdb;
+    background-image: url('../Jam/JamBack.jpg');
+    background-repeat : no-repeat;
+    background-size : cover;
     text-align: center;
-    margin-top: 80px;
-}
-.playbutton{
-    width: 44px;
-    height: 44px;
-    object-fit: cover;
-    margin:0 auto;
-    display: block;
-    margin-top: 44px;
 
+}
+/*Play 글씨*/
+.box1 h1 {
+    color:white;
+    margin: 0px auto;
+    font-size: 52px;
+    padding-top: 100px;
+    text-shadow: 5px 2px 2px #1f1f1f;
+}
+.pbox {
+    width:1200px;
+    margin-bottom: 100px;
+    margin-top:20px;
+    
+    
+}
+/*작성 버튼 */
+.playbutton{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-left:556px;
+    display: inline-block;
+    margin-top: 44px;
+    font-size:24px;
+    background-color: white;
+    border-radius: 0.5rem;
+    text-shadow: 1px 1px 1px #c2c2c2;
+    box-shadow: 2px 2px 2px #7e7e7e;
+}
+.playbutton:hover {
+    cursor: pointer;
+    background-color: rgb(91,120,172,0.5);
+    animation: fadein 0.4s;
 }
 .block{
     float: left;
@@ -31,20 +63,21 @@
 }
 
 /*검색창을 묶는 큰박스*/
-.serchbox {
-    float: right;
+/* .serchbox {
+    display: block;
+    float: left;
     height: 20px;
-    width: 800px;
+    width: 1200px;
     margin-bottom: 10px;
-}
+} */
 
 /*검색창*/
 .search {
     float: right;
-    margin-top: 30px;
+    margin-top: 80px;
     height: 30px;
     border: none;
-    border-bottom: 3px solid #1f1f1f;
+    border-bottom: 2px solid #464646;
     width: 220px;
     display: inline;
     margin-right: 32px;
@@ -60,8 +93,8 @@
     float: right;
     width: 24px;
     height: 24px;
-    margin-top: 58px;
-    margin-right: 35px;
+    margin-top: 78px;
+    right: 52px;
     position: relative;
 }
 
@@ -71,7 +104,6 @@
     float: left;
     padding: 40px 48%;
 }
-
-.pageButton {
-    font-size: 18px;
+.page button {
+    font-size:18px;
 }

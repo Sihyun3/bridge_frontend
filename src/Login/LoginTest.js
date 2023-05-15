@@ -25,6 +25,7 @@ const LoginTest = ({ setIsLogin }) => {
                     alert('정상적으로 로그인되었습니다');
                     console.log(response);
                     console.log(history)
+                    console.log(setIsLogin)
                     sessionStorage.setItem("token", response.data);
                     setIsLogin(true);
                     history.push('/');

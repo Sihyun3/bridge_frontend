@@ -29,7 +29,7 @@ const PartnerDatail = ({ match }) => {
         axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
             .then((response) => {
                 alert(`정상적으로 삭제되었습니다`)
-                history.push(`/26`);
+                history.push(`/bridge/partner/list`);
             })
             .catch((err) => {
                 console.log(err);
@@ -72,7 +72,7 @@ const PartnerDatail = ({ match }) => {
                     <button> 신청하기</button>
                 </div>
                 <div className={style.buttonbox2}>
-                    <Link to={`/26`}><button > 목록 </button></Link>
+                    <Link to={`/bridge/partner/list`}><button > 목록 </button></Link>
                     <button onClick={handleDelete}>삭제</button>
                 </div>
                 <div className={style.line}></div>

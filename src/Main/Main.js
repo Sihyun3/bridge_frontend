@@ -22,28 +22,31 @@ const Main = () => {
     }, [])
 
     return (
-        <div className="container">
-            <div className={style.mainBox}>
-                <h1 className={style.mainText}>Lorem ipsum dolor sit amet consectetur.</h1>
+        <div className={style.container}>
+            <div className={style.textBox}>
+                <h1 className={style.mainText}>Your favorite songs, 
+                <br/>like never heard before</h1>
+                </div>
+                
                 <div className={style.firstLine}>
-                    <Link to={`/jam`}>
+                    <Link to={`/bridge/jam/list`}>
                         <button className={style.online}>
                             <p>온라인 합주</p>
                         </button>
                     </Link>
-                    <Link to={`/26`}>
+                    <Link to={`/bridge/partner/list`}>
                         <button className={style.offline}>
                             <p>작곡가 요청 </p>
                         </button>
                     </Link>
                 </div>
                 <div className={style.secondLine}>
-                    <Link to={`/#`}>
+                    <Link to={`/bridge/split`}>
                         <button className={style.musicSep}>
                             <p>음원 분리</p>
                         </button>
                     </Link>
-                    <Link to={`/tip`}>
+                    <Link to={`/bridge/tip/list`}>
                         <button className={style.community}>
                             <p>커뮤니티</p>
                         </button>
@@ -68,13 +71,13 @@ const Main = () => {
                                     <p className={style.tit} style={{ padding: 21}}>공지사항</p>
                                     <p className={style.link} style={{ padding: 21 }}>
                                         {/* 공지사항 링크 */}
-                                        <Link to={`/notice/detail/${n.noticeIdx}`} title="공지사항 상세보기">
+                                        <Link to={`/bridge/notice/detail/${n.noticeIdx}`} title="공지사항 상세보기">
 
                                             {n.title}</Link>
                                     </p>
                                     <div><p className={style.date} style={{ padding: 21, marginRight: '35px' }}>{data.getFullYear() +"년 "+ month + "월 " +data.getDate() +"일"}</p></div>
-                                    <div> <p className={style.more} style={{ padding: 21 ,width:100 }}>
-                                        <Link to="/notice" style={{ color: 'black' }} title="전체공지 더보기">더보기</Link>
+                                    <div> <p className={style.more} style={{ padding: 21 }}>
+                                        <Link to="/bridge/admin/notice/list" style={{ color: 'black' }} title="전체공지 더보기">더보기</Link>
                                     </p></div>
                                 </SwiperSlide>
                             )
@@ -85,7 +88,7 @@ const Main = () => {
                 </Swiper>
                 </div>
             </div>
-        </div>
+       
     );
 }
 

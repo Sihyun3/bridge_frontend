@@ -11,15 +11,15 @@ function PaymentTest2({ match }) {
 
     //나중에 네이밍 변경해도 될까요? - 당연하쥐....
 
-    const { paymentIdx } = match.params;
+    const  producer  = "test1"; //제작자 (돈 받을 사람 우선 하드코딩 해뒀던 거)
 
-    const [user1, setUser1] = useState({});         //로그인한 유저 
+    const [user1, setUser1] = useState([]);         //로그인한 유저 
     const [clients, setClients] = useState('');     //의뢰인(주는사람)
-    const [producer, setProducer] = useState('');   //제작자(받는사람)
+    // const [producer, setProducer] = useState('');   //제작자(받는사람)
 
     const [downpayment, setDownpayment] = useState('');     //결제금액
-    
-    const [usepoint, setUsepoint] = useState(''); 
+
+    const [usepoint, setUsepoint] = useState('');
     const [prevPoint, setPrevPoint] = useState(null);   //보유 포인트
     let [pointBox, setPointBox] = useState('');   //사용할 포인트
     const [total, setTotal] = useState(''); // 결제금액 - 사용할 포인트
@@ -35,22 +35,23 @@ function PaymentTest2({ match }) {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUser1(decode_token.sub);
-
-        axios.get('http://localhost:8080/api/payment/detail/1') //백엔드도 여기처럼 다시 바꿔야함
+        console.log(">>>>>>>>>>>>");
+        axios.get(`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
             // ,(`http://localhost:8080/api/payment/${userProducer}`)
             .then(response => {
                 console.log(response.data);
                 //얘네가 뭔지 모르겟어요
-                setUsepoint(response.data.usepoint);
-                setClients(response.data.clients);
-                setProducer(response.data.producer);
+                setUsepoint(response.data);
+                // setClients(response.data.clients);   
+                setClients(decode_token.sub);
+                // setProducer(response.data.producer);
 
                 // setWillPoint(currentPoint);
             })
             .catch(error => {
                 console.log(error);
             })
-    }, [user1]);
+    }, []);
 
     //조건으로 결제하는 아이 (결제버튼 핸들러)
     //이 조건으로 실행해보고 되는지 알려주세욥
@@ -58,20 +59,23 @@ function PaymentTest2({ match }) {
     //db create 코드는 디스코드에 올려뒀어요
     const handlerOnClickToPay = (e) => {
         // setProducer(e.target.target);
-        if (total == 0 && usepoint >= total ) {
+        if (total == 0 && usepoint >= total) {
+            console.log(producer , total);
             //어드민으로 ${producer} 하드코딩 추후 수정 필요
-            axios.post(`'http://localhost:8080/api/doPayment/admin`, {"client" : user1, downpayment, usepoint, "clientPoint":prevPoint, "totalCost":total})
+            axios.post(`http://localhost:8080/api/doPayment`,
+                { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total }) 
                 .then(response => {
                     console.log(response.data);
+                    alert('결제가 완료되었습니다.');
+                    history.push('/27'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
                 })
                 .catch(err => {
                     console.log(err);
                 })
             // setTemp(usepoint);
             // setUsepoint(temp);
-            alert('결제가 완료되었습니다.');
-            history.push('/24'); //작업목록페이지 링크
-        } else if (total > 0 && usepoint > total && pointBox < total ) {  
+
+        } else if (total > 0 && usepoint > total && pointBox < total) {
             setTemp(usepoint);
             // setUsepoint(usepoint);
             alert('입력하신 금액보다 총 결제금액이 많습니다 \n확인 후 다시 시도하세요.');
@@ -81,12 +85,15 @@ function PaymentTest2({ match }) {
             setTotal(downpayment);
         } else {
             alert('보유 포인트가 부족합니다. 포인트를 충전해주세요.');
-            history.push(`/25/${total}`); //충전 페이지 링크
+            history.push(`/bridge/partner/charge/${total}`); //충전 페이지 링크
 
         }
     }
 
-    //temp가 뭔지 모르겠어요..(소윤)
+    // temp가 뭔지 모르겠어요..(소윤) : 
+    // temp는 모두사용 옆에 체크박스 사용 되었을 때 보유포인트를 0으로 만들어야함
+    // > 기존 보유 포인트 보관할 곳 필요 > 그래서 보관소 개념으로 만들었던 부분같은골..
+     
     const [temp, setTemp] = useState('');
     const handlerusepoint = (e) => {
         setTemp(Number(usepoint) - Number(pointBox));
@@ -94,20 +101,20 @@ function PaymentTest2({ match }) {
     }
 
     const handleCheckBoxChange = (e) => {
-        if(!isChecked && usepoint >= downpayment ){
+        if (!isChecked && usepoint >= downpayment) {
             console.log("결제 금액이 작음")
             setPointBox(downpayment);
             console.log(usepoint - downpayment);
             setTemp(usepoint - downpayment);
             setIsChecked(true);
             setTotal(0);
-        }else if (!isChecked && usepoint < downpayment){
+        } else if (!isChecked && usepoint < downpayment) {
             console.log("결제금액이 큼")
             setPointBox(usepoint);
             setTemp(0);
             setTotal(downpayment - usepoint);
             setIsChecked(true);
-        }else if (isChecked){
+        } else if (isChecked) {
             setTotal(downpayment);
             console.log("체크 안됨")
             setTemp('');
@@ -152,10 +159,11 @@ function PaymentTest2({ match }) {
 
                     <div>
                         <span className={style.willPayment}>의뢰 완료시 결제될 금액</span>
-                        <input type="number" value={downpayment} name="downpayment" className={style.willPaymentAm} placeholder='ex)  100,000' 
-                        onChange={e => {setDownpayment(e.target.value)
-                        setTotal(e.target.value)
-                        }}></input>
+                        <input type="number" value={downpayment} name="downpayment" className={style.willPaymentAm} placeholder='ex)  100,000'
+                            onChange={e => {
+                                setDownpayment(e.target.value)
+                                setTotal(e.target.value)
+                            }}></input>
                         {/* Number( */}
                     </div>
                     <div className={style.hr}>
