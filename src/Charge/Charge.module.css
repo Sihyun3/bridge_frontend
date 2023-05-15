@@ -1,39 +1,44 @@
 /* 전체 속성 reset */
-*{
+* {
     font-family: 'Noto Sans KR', sans-serif;
     list-style: none;
     text-decoration: none;
     border-collapse: collapse;
-    margin:0px;
+    margin: 0px;
     padding: 0px;
     color: #000;
-  }
+}
 
 /* 메인 박스 */
 .mainBox {
     width: 640px;
-    height: 800px;
-    background-color: #E1E5E9;
-    margin: 300px auto;
+    height: 600px;
+    /* background-color: #E1E5E9; */
+    margin: 40px auto 60px auto;
     border-radius: 5px;
-  }
-  
+    border:1px solid #d9d9d9;
+}
+
 /* 메인 텍스트 (포인트 충전) */
 .mainText {
     font-size: 40px;
     font-weight: bold;
     text-align: center;
     padding-top: 80px;
-    padding-bottom: 170px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid #d9d9d9;
+    width: 800px;
+    margin: 0 auto;
 }
 
 /* 첫 줄 박스(현재 보유 포인트, 금액) */
 .possess {
-    width: 450px;   
-    height: 40px;
-    margin: 0 auto;
-    /* background-color: aliceblue; */
-    margin-bottom: 10px;
+    width: 450px;
+    height: 52px;
+    margin: 40px auto 40px 90px;
+    display: inline-block;
+    border-bottom: 1px dotted #d9d9d9;
+
 }
 
 /* 첫 줄 텍스트(현재 보유 포인트) */
@@ -46,9 +51,9 @@
 
 /* 첫 줄 금액 */
 .possessMoney {
-    font-size: 16px;
+    font-size: 18px;
     padding-top: 10px;
-    margin-right: 40px;
+    margin-right: 140px;
     float: right;
 }
 
@@ -62,7 +67,8 @@
 }
 
 /* 두번째 줄 텍스트(충전할 금액, 원) */
-.chargeText1, .chargeText2 {
+.chargeText1,
+.chargeText2 {
     font-size: 16px;
     display: inline-block;
     padding-top: 10px;
@@ -109,7 +115,8 @@
 }
 
 /* 세 번째 줄 텍스트(충전 후 예상 포인트, 금액) */
-.resultText1, .resultText2 {
+.resultText1,
+.resultText2 {
     display: inline-block;
     font-size: 16px;
     padding-top: 10px;

@@ -4,7 +4,7 @@ import minus from './minus.png';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-
+import searchImg from '../Tip/searchImg.png';
 const DealListAd = () => {
 
     const [data, setData] = useState([]);
@@ -133,9 +133,10 @@ const DealListAd = () => {
 
     return (
         <>
-            <div className='container clearfix'></div>
+            <div className='container clearfix'>
+            <h1 className={style.mainText}>포인트 내역 조회</h1>
             <div className={style.mainBox}>
-                <h1 className={style.mainText}>포인트 내역 조회</h1>
+               
                 <div className={style.dealDate}>
                     <p>거래 일자</p>
                     <input className={style.dealInput1} type='date' value={date1} onChange={handleDate1} /> - <input type='date' className={style.dealInput2} value={date2} onChange={handleDate2}></input>
@@ -144,7 +145,8 @@ const DealListAd = () => {
                     <button className={style.dealButton2} onClick={handle6Month}>6개월</button>
                 </div>
                 <div className={style.search}>
-                    <button onClick={handleSearch}>검색하기</button> <input type='text' value={searchInput} onChange={hadleSearchInput} className={style.searchInput} ></input>
+                    <p>검색하기</p> <input type='text' value={searchInput} onChange={hadleSearchInput} className={style.searchInput} ></input>
+                   <button type='button' onClick={handleSearch}><img src={searchImg} className={style.searchImg}/></button> 
                 </div>
                 <div className={style.buttonBox}>
                     <button onClick={handleAll} className={style.initButton}>전체내역</button>
@@ -155,10 +157,10 @@ const DealListAd = () => {
                     <div className={style.tableText}>{filteredDatas == "" ? <p>총 {data.length}건 </p> : <p> 총 {filteredDatas.length} 건 </p>} </div>
                     <table>
                         <colgroup className={style.tableCol}>
-                            <col width="30%" />
-                            <col width="22%" />
-                            <col width="22%" />
-                            <col width="26%" />
+                            <col width="15%" />
+                            <col width="25%" />
+                            <col width="25%" />
+                            <col width="35%" />
                         </colgroup>
                         <thead>
                             <tr>
@@ -238,6 +240,7 @@ const DealListAd = () => {
                         }
                     </nav>
                 </div>
+            </div>
             </div>
         </>
     );
