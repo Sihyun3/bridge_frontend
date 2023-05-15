@@ -23,41 +23,43 @@ const TipDetail = ({ match }) => {
     }, [])
 
 
-    const insert = (e)=>{
+    const insert = (e) => {
         e.preventDefault();
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
-        { "tbIdx": tb_idx, "tbcComments" : temp},
-        { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
-        ).then(()=>{
+            { "tbIdx": tb_idx, "tbcComments": temp },
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
+        ).then(() => {
             console.log("asdasdasd")
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
-            .then(r=>{
-                console.log(r.data)
-                setComments(r.data)
-            })
+                .then(r => {
+                    console.log(r.data)
+                    setComments(r.data)
+                })
         }
         )
         setTemp("");
     }
 
-    const handlerdelete = ()=>{
+    const handlerdelete = () => {
         const token = sessionStorage.getItem('token')
         const decode = jwtDecode(token);
         if (decode.sub != data.userId) {
             alert('작성자만 삭제 가능합니다.');
             history.push('/')
-          }
+        }
         console.log(decode.sub);
-        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`, 
-        { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
-        .then(()=>{
-            alert("성공적으로 삭제 되었습니다.")
-            history.push('/bridge/tip/list')
-        })
-        .catch(()=>{
-            alert("삭제에 실패했습니다.")
-        })
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then(() => {
+                alert("성공적으로 삭제 되었습니다.")
+                history.push('/bridge/tip/list')
+
+            })
+            .catch(() => {
+                alert("삭제에 실패했습니다.")
+            })
     }
+
 
     return (
         <div className='container clearfix' >
@@ -65,16 +67,17 @@ const TipDetail = ({ match }) => {
                 <img className={style.backbutton} src={back_button} />
             </div>
             <div className={style.title}>
-                <h2>{data.tbTitle}</h2>
+                <h1>{data.tbTitle}</h1>
                 <br /><br />
                 <p>조회수:{data.tbViews}</p>
+                <p>작성일:{data.tbCreatedt}</p>
             </div>
             <div className={style.line}></div>
             <div className={style.content}>
-            { data.tbContents && <Viewer initialValue={data.tbContents}></Viewer>}
+                {data.tbContents && <Viewer initialValue={data.tbContents}></Viewer>}
             </div>
             <div className={style.heartbox}>
-                <i>♡</i>
+                <i onClick={handlerHeart}>{data.tbHeart} ♡</i>
             </div>
             <div className={style.editbox}>
                 <ul>
@@ -84,21 +87,22 @@ const TipDetail = ({ match }) => {
             </div>
             <div className={style.line}></div>
             <div className={style.comment}><h2>댓글</h2></div>
-            <div className={style.comments}>
-                {comments.map((data,idx)=>{
-                    return(
-                        <p><span>{data.userId}</span> : <span> {data.tbcComments}</span></p>
-                    )
-                })}
-               
-
-                {/* <p>작성자: 언덕 하나에 거외다. 불러 흙으로 하나에 있습니다. </p>
-                <p>작성자: 인의 다 불러 이웃 무엇인지 봅니다. 아무 그리워 보고, 위에 아직 책상을 헤일 이름과 나의 까닭입니다. 사람들의 멀듯이, 이름과, 버리었습니다.</p> */}
+            <div className={style.com}>
+            {comments.map((data, idx) => {
+                return (
+                    <div className={style.comments} style={{ width: 1000, marginLeft:80 ,height:40, float:"left",lineHeight:"40px"}}  >
+                        <div style={{width:"100px",float:"left"}} > {data.userId} </div>
+                        <div> {data.tbcComments}</div>
+                    </div>
+                )
+            })}
             </div>
             <div className={style.line}></div>
             <div className={style.input}>
-                <input type='text' value={temp} onChange={(e)=>{setTemp(e.target.value)}}className={style.writeComment} />
+                <div style={{margin: "0 auto",width:"900px"}}>
+                <input type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} className={style.writeComment} />
                 <input type="button" className={style.finish} onClick={insert} value="등록" />
+                </div>
             </div>
         </div>
     )

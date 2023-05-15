@@ -58,7 +58,7 @@
     height: 28px;
     width: 72px;
     border: none;
-    border-bottom:3px solid #686868;
+    border-bottom:3px solid #777777;
 }
 
 /*검색창을 묶는 박스*/
@@ -77,7 +77,7 @@
     height:28px;
     border:none;
     /* background-color: #ebebeb; */
-    border-bottom:3px solid #686868;
+    border-bottom:3px solid #777777;
     width:240px;
     display: block;
     margin-left: 60px;
@@ -95,7 +95,7 @@
     margin-top:28px;
    float: right;
    position:relative;
-   bottom: 52px;
+   bottom: 68px;
    right:496px;
 }
 /*작성 버튼 박스 */
@@ -118,14 +118,14 @@
 }
 /*작성 버튼*/
 .writebutton{
-    border-bottom:3px solid #686868 ;
+    border-bottom:3px solid #777777 ;
     color: rgb(0, 0, 0);
 }
 
 /*게시글 묶음 박스*/
 .noticebox {
-    border-top: 2px solid black;
-    border-bottom: 2px solid #686868;
+    border-top: 2px solid #777777;
+    border-bottom: 2px solid #777777;
     float: left;
     width:1168px;
 }
@@ -134,7 +134,7 @@
 
     border-top:1px solid #acacac;
     width:1168px;
-    height:44px;
+    height:36px;
     float: left;
     padding-top:4px;
     padding-bottom:5px;

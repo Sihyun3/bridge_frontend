@@ -53,16 +53,17 @@ function App() {
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
       {/* 완성된 페이지 */}
 
-   
-      <Route path="/report/list" component={ReportList} exact={true} />
-      <Route path="/tip" component={TipList} exact={true} />
-      <Route path="/tip/write" component={TipWrite} exact={true} />
-      <Route path="/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/jam" component={JamList} exact={true} />
       <Route path="/bridge/admin/notice/list" component={Notice} exact={true} />
       <Route path="/bridge/admin/report/list" component={ReportList} exact={true} />
       <Route path="/bridge/admin/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/bridge/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
+      <Route path="/bridge/admin" component={MainAd} exact={true} />
+      <Route path="/bridge/partner/list" component={PartnerList} exact={true} />
+      <Route path="/bridge/tip/list" component={TipList} exact={true} />
+      <Route path="/bridge/tip/write" component={TipWrite} exact={true} />
+      <Route path="/bridge/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
+      <Route path="/bridge/jam/list" component={JamList} exact={true} />
 
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
@@ -90,15 +91,15 @@ function App() {
       <Route path="/30" component={SignUpTest} exact={true} />
 
       {/* 잼 */}
-      <Route path="/bridge/jam/list" component={JamList} exact={true} />
+
       <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
       <Route path="/bridge/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
       {/* 팁게시판 */}
-      <Route path="/bridge/tip/list" component={TipList} exact={true} />
+     
       <Route path="/bridge/tip/edit/:tbIdx" component={TipEdit} excat={true} />
       <Route path="/bridge/tip/detail/:tbIdx" component={TipDetail} exact={true} />
-      <Route path="/bridge/tip/write" component={TipWrite} exact={true} />
+     
 
       {/* 음원 분리 */}
       <Route path="/bridge/split" component={MusicSplit} exact={true} />
@@ -116,13 +117,12 @@ function App() {
       <Route path="/bridge/partner/payment" component={Payment} exact={true} />
       <Route path="/bridge/partner/doing" component={Doing} exact={true} />
       <Route path="/bridge/partner/charge" component={Charge} exact={true} />
-      <Route path="/bridge/partner/list" component={PartnerList} exact={true} />
-      <Route path="/bridge/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
+
 
       {/* 거래내역 */}
       <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
       {/* 어드민 메인 페이지 */}
-      <Route path="/bridge/admin" component={MainAd} exact={true} />
+     
 
       {/* 왓 이즈 디스....? */}
       <Route path="/bridge/payment" component={PaymentTest} exact={true} />
