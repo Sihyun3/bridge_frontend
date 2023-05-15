@@ -51,6 +51,7 @@ const Main = () => {
                             <p>커뮤니티</p>
                         </button>
                     </Link>
+                    
                 </div>
                 <div style={{marginTop:50}}>
                 <Swiper
