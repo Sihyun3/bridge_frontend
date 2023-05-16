@@ -73,7 +73,7 @@ const PartnerList = () => {
   return (
     <>
       <div className={style.box1}>
-        <h1>파트너 모집</h1>
+        <h1>연주자 찾기</h1>
       </div>
       <div className="container clearfix" >
         <div className={style.tagbox}>
@@ -145,7 +145,7 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-          <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
+          <Link to={`/bridge/partner/write`}><button > 나의 연주자 찾기 </button></Link>
         </div>
 
         <div style={{ margin: "0 auto" }} className='clearfix'>

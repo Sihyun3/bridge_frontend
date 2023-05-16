@@ -49,7 +49,7 @@ const JamList = () => {
     return (
         <>
             <div className={style.box1}>
-                <h1>Play</h1>
+                <h1>Jam</h1>
             </div>
             <div className='container clearfix'>
 
@@ -60,7 +60,7 @@ const JamList = () => {
                     </div>
                 </form>
                 <div className={style.pbox}>
-                    <Link to="/bridge/jam/write"><input type="button" className={style.playbutton} value="Play" /></Link>
+                    <Link to="/bridge/jam/write"><input type="button" className={style.playbutton} value="작성하기♬" /></Link>
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {

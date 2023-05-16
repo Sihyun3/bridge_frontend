@@ -54,7 +54,7 @@
     border:2px solid #d9d9d9;
     font-size:14px;
     color:#555c66;
-    margin:8px 8px;
+    margin:8px 12px;
     float: left;
     /* margin: 0 auto; */
     display: inline-block;
@@ -73,6 +73,7 @@
 
 .tagblock {
     margin:0px 0px 24px 0px;
+    padding: 0px 12px;
 }
 .taglists {
     margin: 0 auto;
@@ -87,6 +88,8 @@
     box-shadow:  5px 5px 20px 0 rgba(107, 107, 107, 0.4);
     margin-bottom: 32px;
     height:400px;
+    width:250px;
+    
 }
 
 .imgbox{
@@ -94,10 +97,12 @@
     height: 250px;
     box-shadow:  5px 5px 20px 0 rgba(107, 107, 107, 0.4);
     overflow: hidden;
+   
 }
 .img{
     width: 250px;
     height: auto;
+   
    
 }
 
@@ -123,8 +128,11 @@
     height:56px;
    border-bottom: 2px solid #d9d9d9;
     /* border-radius: 0.7rem; */
-    font-size:24px;
+    font-size:18px;
     
+}
+.buttonbox button:hover {
+    font-weight: bold;
 }
 /*파트너 찾기 버튼 hover*/
 /* .buttonbox:hover:after {

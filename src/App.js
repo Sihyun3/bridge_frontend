@@ -55,9 +55,8 @@ function App() {
   return (
     <>
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
-      {/* 완성된 페이지 */}
+      {/* 페이지가 완성된 페이지 */}
 
-      <Route path="/jam" component={JamList} exact={true} />
       <Route path="/bridge/admin/notice/list" component={Notice} exact={true} />
       <Route path="/bridge/admin/report/list" component={ReportList} exact={true} />
       <Route path="/bridge/admin/notice/write" component={NoticeWrite} exact={true} />
@@ -70,6 +69,7 @@ function App() {
       <Route path="/bridge/jam/list" component={JamList} exact={true} />
       <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
       <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
+      <Route path="/deal/list" component={PaymentList} exact={true} />
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
       <Route path="/bridge/report/write" component={ReportPage} exact={true} />
@@ -83,7 +83,7 @@ function App() {
       {/* 공지사항 */}
      
       {/* 로그인 */}
-      <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
       {/* 왓 이즈 디스..? */}
       {/* <Route path="/29" component={LoginTest} exact={true} /> */}
@@ -123,8 +123,8 @@ function App() {
 
 
       {/* 거래내역 */}
-      <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
-      <Route path="/deal/list" component={PaymentList} exact={true} />
+
+ 
 
    
       {/* 어드민 메인 페이지 */}

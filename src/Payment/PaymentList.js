@@ -1,5 +1,5 @@
 
-import style from './DealListAd.module.css';
+import style from '../Administrator/DealListAd.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
@@ -130,7 +130,7 @@ const PaymentList = () => {
 
     return (
         <>
-            <div className='container clearfix'></div>
+            <div className='container clearfix'>
             <div className={style.mainBox}>
             <h1 className={style.mainText}>포인트 내역 조회</h1>
                 <div className={style.dealDate}>
@@ -236,6 +236,7 @@ const PaymentList = () => {
                     </nav>
                 </div>
 
+            </div>
             </div>
         </>
     );
