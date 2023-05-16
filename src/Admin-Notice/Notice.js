@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 // import style from './Notice.module.css'
 import searchImg from './searchImg.png'
 // import { Link } from 'react-router-dom'
-
+import jwt_decode from "jwt-decode";
 
 function Notice({ history, noticeIdx, title, writer }) {
 
@@ -28,14 +28,28 @@ function Notice({ history, noticeIdx, title, writer }) {
     const [isChecked, setIsChecked] = useState();
     const [checkingBox, setCheckingBoxs] = useState([]);
 
+    const [id, setId] = useState('');
+
 
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
-            .then(response => {
-                console.log(response);
-                setDatas(response.data);
-            })
-            .catch(error => console.log(error));
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+        } else {
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        setId(decode_token.sub);
+        // if (decode_token.sub != 'admin') {
+        //     alert(`관리자만 이용할 수 있습니다`);
+        //     history.push(`/`)} 
+        
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
+                .then(response => {
+                    console.log(response);
+                    setDatas(response.data);
+                })
+                .catch(error => console.log(error));
+        }
     }, []);
 
 
@@ -121,7 +135,7 @@ function Notice({ history, noticeIdx, title, writer }) {
 
                     <div className={style.write}>
 
-                        <button className={style.writebutton} onClick={handlerOnclick} >작성</button>
+                       {  id == 'admin'? <button className={style.writebutton} onClick={handlerOnclick} >작성</button> : ""}
 
 
 
@@ -146,7 +160,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-                               
+
 
                                 <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
@@ -164,7 +178,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-                                
+
 
                                 <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>

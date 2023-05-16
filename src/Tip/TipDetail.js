@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
@@ -14,6 +15,13 @@ const TipDetail = ({ match }) => {
     const [temp, setTemp] = useState()
     const history = useHistory();
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+        }
+        // const token = sessionStorage.getItem('token');
+        // const decode_token = jwt_decode(token);
+
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
             .then(r => {
                 setData(r.data.tipDetail);
@@ -63,7 +71,7 @@ const TipDetail = ({ match }) => {
 
     return (
         <div className='container clearfix' >
-            <Link to ="/tip/list"><div className={style.back}>
+            <Link to="/tip/list"><div className={style.back}>
                 <img className={style.backbutton} src={back_button} />
             </div></Link>
             <div className={style.title}>
@@ -88,20 +96,20 @@ const TipDetail = ({ match }) => {
             <div className={style.line}></div>
             <div className={style.comment}><h2>댓글</h2></div>
             <div className={style.com}>
-            {comments.map((data, idx) => {
-                return (
-                    <div className={style.comments} style={{ width: 1000, marginLeft:80 ,height:40, float:"left",lineHeight:"40px"}}  >
-                        <div style={{width:"100px",float:"left"}} > {data.userId} </div>
-                        <div> {data.tbcComments}</div>
-                    </div>
-                )
-            })}
+                {comments.map((data, idx) => {
+                    return (
+                        <div className={style.comments} style={{ width: 1000, marginLeft: 80, height: 40, float: "left", lineHeight: "40px" }}  >
+                            <div style={{ width: "100px", float: "left" }} > {data.userId} </div>
+                            <div> {data.tbcComments}</div>
+                        </div>
+                    )
+                })}
             </div>
             <div className={style.line}></div>
             <div className={style.input}>
-                <div style={{margin: "0 auto",width:"900px"}}>
-                <input type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} className={style.writeComment} />
-                <input type="button" className={style.finish} onClick={insert} value="등록" />
+                <div style={{ margin: "0 auto", width: "900px" }}>
+                    <input type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} className={style.writeComment} />
+                    <input type="button" className={style.finish} onClick={insert} value="등록" />
                 </div>
             </div>
         </div>

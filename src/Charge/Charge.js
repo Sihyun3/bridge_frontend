@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import style from './Charge.module.css';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Charge = ({ match }) => {
 
     const { total } = match.params;
     const { usepoint } = match.params;
 
-
+    const history = useHistory();
 
     const [userId, setUserId] = useState('');
     const [currentPoint, setCurrentPoint] = useState(0);
@@ -16,6 +17,10 @@ const Charge = ({ match }) => {
     const [willPoint, setWillPoint] = useState(0);
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);

@@ -5,8 +5,9 @@ import send from './send.png';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import * as StompJs from '@stomp/stompjs';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const Chatting = () => {
+const Chatting = ({match}) => {
 
     const client = useRef({});
     const [chatList, setChatList] = useState([]);
@@ -16,6 +17,9 @@ const Chatting = () => {
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
     const [reciver ,setReciver] = useState(''); 
+
+    const history = useHistory();
+    
     const publish = () => {
         if (!client.current.connected) return;
         client.current.publish({
@@ -30,7 +34,12 @@ const Chatting = () => {
     };
 
     useEffect(() => {
-        sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+        //   const token = sessionStorage.getItem('token');
+        // sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
         connect();
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(r => {

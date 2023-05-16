@@ -1,14 +1,7 @@
-// import style from './SignUp.module.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import KakaoLogin from '../Login/KaKaoLogin';
-// import NaverLogin from './NaverLogin';
-// import style from './LoginTest2.module.css';
 import style from './SignUpTest.module.css';
-// import NaverLogo from './NaverLogo.png';
-// import KakaotalkLogo from './KakaotalkLogo.png';
-// import GoogleLogo from './GoogleLogo.png';
 import { useRef } from 'react';
 import React from 'react';
 import { FaAngleDown } from "react-icons/fa";

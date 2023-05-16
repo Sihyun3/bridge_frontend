@@ -64,7 +64,8 @@ export default function Finduser({ match }) {
         if (auth == temp) {
             axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/findPassword/${email}/${password}`)
                 .then((r) => {
-                    alert('비밀번호가 변경 되었습니다.')
+                    alert('비밀번호가 변경 되었습니다.');
+                    history.push(`/login`);
                 })
                 .catch(() => {
                     alert("일치하는 정보가 없습니다.")

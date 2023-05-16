@@ -12,6 +12,10 @@ export default function TipEdit({ match }) {
     const history = useHistory();
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token')
         const decode = jwtDecode(token);
         if (decode.sub != data.userId) {

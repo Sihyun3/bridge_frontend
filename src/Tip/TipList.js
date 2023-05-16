@@ -10,8 +10,14 @@ import { useHistory } from 'react-router-dom';
 const TipList = () => {
     const history = useHistory();
     const [data, setData] = useState([]);
+
+
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist/`)
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
             .then(r => {
                 setData(r.data);
             })

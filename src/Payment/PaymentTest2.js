@@ -37,17 +37,10 @@ function PaymentTest2({ match }) {
         setUser1(decode_token.sub);
         console.log(">>>>>>>>>>>>");
         axios.get(`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
-        // (`http://localhost:8080/api/payment/detail/${decode_token.sub}`)
-            // ,(`http://localhost:8080/api/payment/${userProducer}`)
             .then(response => {
                 console.log("=========> " + response);
-                //얘네가 뭔지 모르겟어요
                 setUsepoint(response.data);
-                // setClients(response.data.clients);   
                 setClients(decode_token.sub);
-                // setProducer(response.data.producer);
-
-                // setWillPoint(currentPoint);
             })
             .catch(error => {
                 console.log(error);
@@ -68,7 +61,8 @@ function PaymentTest2({ match }) {
                 .then(response => {
                     console.log(response.data);
                     alert('결제가 완료되었습니다.');
-                    history.push('/deal/list'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
+                    history.push(`/deal/list`); //거래내역 페이지로 설정해뒀는데 추후 수정 필요 
+                    //(아마 두잉으로 연결)
                 })
                 .catch(err => {
                     console.log(err);

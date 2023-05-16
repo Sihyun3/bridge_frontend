@@ -6,15 +6,23 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
 import Waveform from './Waveform';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-function ProfileDetail(){
+function ProfileDetail({match}){
     const [data,setData] = useState('');
     const [user,setUser] = useState('');
     const [tag,setTag] = useState('');
-    //하드코딩 -> 수정필요 
-    const userId = "test"
+
+    const history = useHistory();
+
+    const userId = match.params;
+  
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userId}`)
             .then((response) => {
                 console.log(response.data)

@@ -4,6 +4,7 @@ import JamIcon from "./Polygon 2.png";
 import musicfile from './musical-note.png';
 import axios from "axios";
 import { useState, useRef } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const JamWrite = () => {
 
     const [title, setTitle] = useState('');
@@ -13,8 +14,18 @@ const JamWrite = () => {
     const [music, setMusic] = useState("");
     const [instrument, setInstrument] = useState("");
     
+
+    const history = useHistory();
+    
     const handlersubmit = () => {
-        sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+        // sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+          const token = sessionStorage.getItem('token');
+        //   const decode_token = jwt_decode(token);
+       
         let formData = new FormData();
 
         // let datas = {"cTitle" : title, "cContents": content}
@@ -31,10 +42,11 @@ const JamWrite = () => {
             formData1.append("files", music[i]);
         }
 
+        // sessionStorage.getItem('token')
         axios({
             method: 'POST',
             url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertjam`,
-            headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
+            headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${token}` },
             data: formData
         }).then((r) => {
             console.log("aaaaaaaaaaaaaaaaaaaa");
@@ -42,9 +54,11 @@ const JamWrite = () => {
             axios({
                 method: 'POST',
                 url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${r.data}`,
-                headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
+                headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${token}` },
                 data: formData1
             })
+                alert(`업로드가 정상적으로 완료되었습니다.`)
+                history.push("/jam/list")
         }).catch(() => {
             alert(`업로드 중 오류가 발생했습니다.`);
         });

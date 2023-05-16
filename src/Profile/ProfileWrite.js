@@ -11,8 +11,8 @@ const ProfileWrite = () => {
 
 
     const editorRef = useRef(null);
-
     const history = useHistory();
+    
     const [userId, setUserId] = useState('');
     const [position, setPosition] = useState('');
     const [introduction, setIntroduction] = useState('');
@@ -23,6 +23,10 @@ const ProfileWrite = () => {
     const [tag, setTag] = useState([]);
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
@@ -98,6 +102,7 @@ const ProfileWrite = () => {
             .then(response => {
                 console.log(response);
                 alert(`정상적으로 업로드했습니다.`);
+                history.push(`/profile/detail/${userId}`)
             })
             .catch(error => {
                 console.log(error);

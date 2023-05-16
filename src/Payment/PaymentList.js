@@ -3,8 +3,9 @@ import style from './DealListAd.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const PaymentList = () => {
+const PaymentList = ({match}) => {
     const [userId, setUserId] = useState('');
     const [data, setData] = useState([]);
     const [filteredDatas, setFilteredDatas] = useState([]);
@@ -12,6 +13,8 @@ const PaymentList = () => {
     const [date1, setDate1] = useState('');
     const [date2, setDate2] = useState('');
     const [searchInput, setSearchInput] = useState('');
+    const history = useHistory();
+    
 
     //페이징
     const [limit, setLimit] = useState(8);
@@ -23,6 +26,10 @@ const PaymentList = () => {
     const handleDate2 = (e) => { setDate2(e.target.value) }
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);

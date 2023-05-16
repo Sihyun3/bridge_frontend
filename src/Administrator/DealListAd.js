@@ -5,6 +5,10 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import searchImg from '../Tip/searchImg.png';
+import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
+
 const DealListAd = () => {
 
     const [data, setData] = useState([]);
@@ -13,6 +17,8 @@ const DealListAd = () => {
     const [date1, setDate1] = useState('');
     const [date2, setDate2] = useState('');
     let [currentDate, setCurrentDate] = useState('');
+
+    const history = useHistory();
 
     const [limit, setLimit] = useState(8);
     const [page, setPage] = useState(1);
@@ -23,6 +29,18 @@ const DealListAd = () => {
     const handleDate2 = (e) => { setDate2(e.target.value) }
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+          const token = sessionStorage.getItem('token');
+          const decode_token = jwt_decode(token);
+          console.log(">>>>>>>>>>>>> " + decode_token);
+
+          if (decode_token.sub != 'admin') {
+            alert(`관리자만 이용할 수 있습니다`);
+            history.push(`/`)
+          }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
             .then(res => {
                 setData(res.data);

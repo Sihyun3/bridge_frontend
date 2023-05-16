@@ -16,9 +16,15 @@ const PartnerWrite = () => {
     const [userId, setUserId] = useState('');
     const [inputImg, setInputImg] = useState([]);
 
+    
+
     const history = useHistory();
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
@@ -106,6 +112,8 @@ const PartnerWrite = () => {
     Object.values(inputImg).forEach(file => formData.append('files', file));
 
     const handleSumit = () => {
+        const result = window.confirm("사이트 정책상 수정이 불가합니다 \n 등록 전 내용을 다시 한 번 확인해주세요.")
+        if (result) {
     
         axios({
             method: 'POST',
@@ -123,7 +131,7 @@ const PartnerWrite = () => {
                 alert(`업로드 중 오류가 발생했습니다.`);
             });
         
-    };
+    }};
 
     return (
         <>
@@ -162,7 +170,7 @@ const PartnerWrite = () => {
                     <div className={style.image}>
                         <span className={style.imageText}>이미지: </span>
                         <input type="file" onChange={handleInputImg} ref={inputImg} multiple accept="image/*" className={style.imageInput}></input>
-                        <button className={style.imageButton}>첨부</button>
+                        {/* <button className={style.imageButton}>첨부</button> */}
                     </div>
                     <div className={style.intro}>
                         <span className={style.introText}>소개글: </span>

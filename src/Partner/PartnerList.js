@@ -5,26 +5,18 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const PartnerList = () => {
   const [partnerList, setPartnerList] = useState([]);
   const [partnerTag, setPartnerTag] = useState([]);
   const [tag, setTag] = useState('');
+  const history = useHistory();
 
   //페이징
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
-
-
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
-
-  const currentPosts = (partnerList) => {
-    let currentPosts = 0;
-    currentPosts = partnerList.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
 
 
   const tags = [
@@ -44,6 +36,10 @@ const PartnerList = () => {
   ];
 
   useEffect(() => {
+    if (sessionStorage.getItem('token') == null) {
+      history.push('/login')
+      return;
+    }
     axios
       .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
@@ -108,7 +104,7 @@ const PartnerList = () => {
         </div>
         <div className="clearfix" style={{ margin: '50px 0' }}>
           {
-            currentPosts(partnerList) && currentPosts(partnerList)
+            partnerList && partnerList
               .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
               .map((partnerList, index) => {
                 return (
@@ -146,14 +142,25 @@ const PartnerList = () => {
           <Link to={`/partner/write`}><button > 파트너 찾기 </button></Link>
         </div>
 
-        <div style={{ margin: "0 auto" }} className='clearfix'>
-          <Pagination
-            className={style.page}
-            postsPerPage={postsPerPage}
-            totalPosts={partnerList.length}
-            paginate={setCurrentPage}
-          ></Pagination>
+        <div className={style.page}>
+
+          <nav className="pageNum" >
+            <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+              &lt;
+            </button>
+            {
+              partnerList && Array(Math.ceil(partnerList.length / limit)).fill().map((page, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setPage(i + 1)}
+                  aria-current={page === i + 1 ? "page" : null}
+                >
+                  {i + 1}
+                </button>
+              ))}
+          </nav>
         </div>
+
 
 
       </div>

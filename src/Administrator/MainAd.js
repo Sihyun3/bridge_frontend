@@ -6,9 +6,30 @@ import megaphone from './megaphone.png';
 import coin from './coin.png';
 import checkbox from './checkbox.png';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import jwt_decode from "jwt-decode";
 
 
 const MainAd = () => {
+
+    const history = useHistory();
+
+    useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+          const token = sessionStorage.getItem('token');
+          const decode_token = jwt_decode(token);
+          console.log(">>>>>>>>>>>>> " + decode_token);
+
+          if (decode_token.sub != 'admin') {
+            alert(`관리자만 이용할 수 있습니다`);
+            history.push(`/`)
+          }
+    }, [])
+
     return (
         <>
             <div className="container clearfix" >

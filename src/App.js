@@ -61,16 +61,16 @@ function App() {
 
       <Route path="/admin" component={MainAd} exact={true} />
       <Route path="/admin/notice/list" component={Notice} exact={true} />
-      <Route path="/admin/notice/write" component={NoticeWrite} exact={true} />
+      <Route path="/admin/notice/write" component={NoticeWrite} exact={true} />     {/* 수정 기능 안됨 */}
       <Route path="/admin/deal/list" component={DealListAd} exact={true} />
       <Route path="/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} /> {/* 영구정지 권한 제어 필요 */}
 
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
-      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
+      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />  {/* 목록 버튼 css 다듬기 부탁해요 */}
       <Route path="/partner/charge" component={Charge} exact={true} />
 
-      <Route path="/tip/list" component={TipList} exact={true} />
+      <Route path="/tip/list" component={TipList} exact={true} />         {/* 리스트가 너무 여러개 뜸 */}
       <Route path="/tip/write" component={TipWrite} exact={true} />
       <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> {/* 디자인 디테일 수정 필요 */}
 
@@ -98,7 +98,7 @@ function App() {
 
       <Route path="/tip/edit/:tbIdx" component={TipEdit} excat={true} /> {/* 수정 안됨 */}
       
-      <Route path="/profile/detail" component={ProfileDetail} exact={true} />
+      <Route path="/profile/detail/:userId" component={ProfileDetail} exact={true} />
       
       <Route path="/partner/doing" component={Doing} exact={true} />
 

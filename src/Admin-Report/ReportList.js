@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from '../Admin-Report/ReportList.module.css'
 import searchImg from './searchImg.png'
+import jwt_decode from "jwt-decode";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const ReportList = () => {
@@ -16,7 +18,21 @@ const ReportList = () => {
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);
 
+    const history = useHistory();
+
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+          const token = sessionStorage.getItem('token');
+          const decode_token = jwt_decode(token);
+          console.log(">>>>>>>>>>>>> " + decode_token);
+
+          if (decode_token.sub != 'admin') {
+            alert(`관리자만 이용할 수 있습니다`);
+            history.push(`/`)
+          }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
             .then(response => {
                 console.log(response.data);

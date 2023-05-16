@@ -24,7 +24,12 @@ function NoticeDetail({match}) {
     
 
     useEffect(() => {
-        sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6ImFkbWluIiwianRpIjoiN2I4MTY2Y2UtY2IzZC00NWU1LWExZDEtNjRhOGMzZGU0NWJhIiwiaWF0IjoxNjgzNTMwMTA4LCJleHAiOjg2NDAxNjgzNTMwMTA4fQ.0Ky3pPm61VOXna1rLOlI2KEUxTtxiPKxPwRDE5xSDko');
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+        // sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6ImFkbWluIiwianRpIjoiN2I4MTY2Y2UtY2IzZC00NWU1LWExZDEtNjRhOGMzZGU0NWJhIiwiaWF0IjoxNjgzNTMwMTA4LCJleHAiOjg2NDAxNjgzNTMwMTA4fQ.0Ky3pPm61VOXna1rLOlI2KEUxTtxiPKxPwRDE5xSDko');
+        const token = sessionStorage.getItem('token');
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/detail/${noticeIdx}` )
         .then(reponse => {
             console.log(reponse);
@@ -46,7 +51,8 @@ function NoticeDetail({match}) {
         .then(response => {
             console.log(response);
             if(response.data === 1) {
-                alert('수정 완료');
+                alert('정상적으로 수정되었습니다');
+                history.push(`/notice/detail/${noticeIdx}`)
             } else {
                 alert('수정 실패');
                 return;

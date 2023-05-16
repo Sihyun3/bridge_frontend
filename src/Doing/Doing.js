@@ -65,7 +65,10 @@ const Doing = ({ history, match, pcIdx }) => {
 
     useEffect(() => {
         console.log(sessionStorage.token);
-
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
 

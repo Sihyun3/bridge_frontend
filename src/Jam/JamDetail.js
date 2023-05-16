@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import jwt_decode from "jwt-decode";
 import axios from 'axios'
 import Waveform from '../Component/Waveform';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 const JamDetail = ({ match }) => {
     //잼소개 부분
     const [info, setInfo] = useState({});
@@ -21,6 +22,7 @@ const JamDetail = ({ match }) => {
     //추가
     const [insert, setInsert] = useState(0);
     const [data, setData] = useState([]);
+    const history = useHistory();
 
     const handleChangeComment = (e) => {
         setComment(e.target.value);
@@ -51,6 +53,10 @@ const JamDetail = ({ match }) => {
         window.location.reload();
     }
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
                 setData(response.data.music);
