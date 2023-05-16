@@ -59,7 +59,7 @@ const JamList = () => {
     return (
         <>
             <div className={style.box1}>
-                <h1>Play</h1>
+                <h1>Jam</h1>
             </div>
             <div className='container clearfix'>
 

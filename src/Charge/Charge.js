@@ -93,7 +93,7 @@ const Charge = ({ match }) => {
                   
                     <div className={style.mainContent}>
                         <div className={style.possess}>
-                            <p className={style.possessText}>현재 보유 포인트:</p>
+                            <p className={style.possessText}>현재 보유 포인트</p>
                             <p className={style.possessMoney} value={currentPoint}>{currentPoint}&nbsp;원</p>
                         </div>
                         <div className={style.charge}>

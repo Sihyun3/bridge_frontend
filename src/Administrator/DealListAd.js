@@ -1,4 +1,4 @@
-import style from './DealListAd.module.css';
+import style from '../Administrator/DealListAd.module.css';
 import plus from './plus.png';
 import minus from './minus.png';
 import { useEffect } from 'react';
@@ -25,7 +25,10 @@ const DealListAd = () => {
     const offset = (page - 1) * limit;
 
     const hadleSearchInput = (e) => { setSearchInput(e.target.value) }
-    const handleDate1 = (e) => { setDate1(e.target.value) }
+    const handleDate1 = (e) => {
+        console.log(e.target.value)
+        setDate1(e.target.value)
+    }
     const handleDate2 = (e) => { setDate2(e.target.value) }
 
     useEffect(() => {

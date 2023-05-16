@@ -29,13 +29,13 @@
 }
 /*작성 버튼 */
 .playbutton{
-    width: 80px;
-    height: 80px;
+    width: 140px;
+    height: 60px;
     object-fit: cover;
-    margin-left:556px;
+    margin-left:520px;
     display: inline-block;
     margin-top: 44px;
-    font-size:24px;
+    font-size:20px;
     background-color: white;
     border-radius: 0.5rem;
     text-shadow: 1px 1px 1px #c2c2c2;

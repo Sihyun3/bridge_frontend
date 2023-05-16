@@ -49,14 +49,36 @@ margin-top:40px;
     line-height : 28px;
 }
 /* 좋아요 하트를 담는 div */
-.heartbox {
+/* .heartbox {
     float:left;
     margin-top:20px;
     margin-left: 560px;
 }
 .heartbox i {
     font-size:40px;
+} */
+
+/*좋아요부분 박스 */
+.likesBox {
+    padding:20px;
+    background-color: rgb(255 238 197 / 30%);
+    border-bottom: 1px dotted #151616;
+} 
+  
+/*좋아요 하트 버튼*/
+.heartSection button {
+    color: #DB124C;
+    border: 0;
+    background-color: transparent;
+    font-size: 48px;
+    line-height: 28px;
 }
+/*Likes 글자 */
+.likes {
+    font-size: 20px;
+}
+
+
 /* 수정&삭제를 담는 div*/
 .editbox {
     float:left;

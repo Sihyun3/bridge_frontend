@@ -43,18 +43,46 @@ import Portfolio from './Profile/Portfolio';
 import PaymentList from './Payment/PaymentList';
 import ProfileDetail from './Profile/ProfileDetail';
 
+import BackToTop from './BackToTop';
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
+      {/* 페이지가 완성된 페이지 */}
 
-      {/* 기능 & 디자인 완성된 페이지 */}
+      <Route path="/bridge/admin/notice/list" component={Notice} exact={true} />
+      <Route path="/bridge/admin/report/list" component={ReportList} exact={true} />
+      <Route path="/bridge/admin/notice/write" component={NoticeWrite} exact={true} />
+      <Route path="/bridge/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
+      <Route path="/bridge/admin" component={MainAd} exact={true} />
+      <Route path="/bridge/partner/list" component={PartnerList} exact={true} />
+      <Route path="/bridge/tip/list" component={TipList} exact={true} />
+      <Route path="/bridge/tip/write" component={TipWrite} exact={true} />
+      <Route path="/bridge/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
+      <Route path="/bridge/jam/list" component={JamList} exact={true} />
+      <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
+      <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
+      <Route path="/deal/list" component={PaymentList} exact={true} />
+      {/* 완성중이나 디자인 수정 조금 필요함 */}
+      <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
+      <Route path="/bridge/report/write" component={ReportPage} exact={true} />
+
+      {/* 미 완성 페이지 */}
+      <Route path="/bridge/login/start" component={LoginStart} exact={true} />
+
+      {/* 메인*/}
       <Route path="/" component={Main} exact={true} />
-      <Route path="/login/start" component={LoginStart} exact={true} />
-      <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
-      <Route path="/signup" component={SignUpTest} exact={true} /> {/* 수정된 디자인으로 변경해주세요*/}
+
+      {/* 공지사항 */}
+     
+      {/* 로그인 */}
+      <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
+      {/* 로그인 테스트  */}
+      {/* 왓 이즈 디스..? */}
+      {/* <Route path="/29" component={LoginTest} exact={true} /> */}
 
       <Route path="/jam/list" component={JamList} exact={true} />
       <Route path="/jam/write" component={JamWrite} exact={true} />
@@ -103,6 +131,8 @@ function App() {
       <Route path="/partner/doing" component={Doing} exact={true} />
 
       <Footer />
+       {/* 위로 가는 버튼 */}
+       <BackToTop/>
     </>
   )
 }

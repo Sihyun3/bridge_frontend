@@ -11,7 +11,7 @@
 
 /* 메인 박스 */
 .mainBox {
-    width: 640px;
+    width: 600px;
     height: 600px;
     /* background-color: #E1E5E9; */
     margin: 40px auto 60px auto;
@@ -34,8 +34,8 @@
 /* 첫 줄 박스(현재 보유 포인트, 금액) */
 .possess {
     width: 450px;
-    height: 52px;
-    margin: 40px auto 40px 90px;
+    height: 80px;
+    margin: 60px auto 60px 90px;
     display: inline-block;
     border-bottom: 1px dotted #d9d9d9;
 
@@ -60,7 +60,7 @@
 /* 두 번째 줄 박스(충전할 금액, 금액) */
 .charge {
     width: 450px;
-    height: 40px;
+    height: 70px;
     margin: 0 auto;
     /* background-color: aliceblue; */
     margin-bottom: 10px;
@@ -94,15 +94,18 @@
 .chargeInput {
     width: 200px;
     border-radius: 5px;
-    height: 20px;
+    height: 32px;
     text-align: center;
+    border-style:none;
+    background-color: #f0f0f07c;
+    font-size: 15px;
 }
 
 /* 수평선 */
 .hr {
     width: 450px;
     margin: 20px auto 15px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(95, 95, 95, 0.3);
 }
 
 /* 세번째 줄 박스 */
@@ -112,6 +115,7 @@
     margin: 0 auto;
     /* background-color: aliceblue; */
     margin-bottom: 20px;
+    margin-top:40px;
 }
 
 /* 세 번째 줄 텍스트(충전 후 예상 포인트, 금액) */
@@ -140,12 +144,12 @@
     text-align: center;
     /* background-color: aliceblue; */
     height: 50px;
-    margin-top: 200px;
+    margin-top: 120px;
 }
 
 /* 충전하기 버튼 */
 .registButton {
-    width: 120px;
+    width: 140px;
     height: 50px;
     background-color: rgb(67, 61, 61, 0.7);
     border-radius: 5px;

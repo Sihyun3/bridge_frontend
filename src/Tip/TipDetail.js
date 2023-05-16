@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
 import jwtDecode from 'jwt-decode';
+// import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
+import { Icon } from '@iconify/react';
 
 const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
@@ -14,6 +15,14 @@ const TipDetail = ({ match }) => {
     const tb_idx = match.params.tbIdx;
     const [temp, setTemp] = useState()
     const history = useHistory();
+
+    // const [likeUpdate, setLikeUpdate] = useState(false)
+    // const [LikeCt, setLikeCt] = useState(0)
+    // const [userNickname, setUserNickname] = useState('');
+    // const tb_heart = match.params.tb_heart;
+
+    
+
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
             history.push('/login')
@@ -29,6 +38,48 @@ const TipDetail = ({ match }) => {
                 console.log(r.data)
             })
     }, [])
+
+    // const token = sessionStorage.getItem('token');
+    //     const decodedToken = jwt_decode(token);
+    //     console.log(decodedToken);
+    //     setUserNickname(decodedToken.userNickname);
+
+    //     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getlike`)
+    //         .then(response => {
+    //             console.log(response);
+    //             setLikeCt(response.data.LikeCt);
+    //         })
+    //         .catch(error => console.log(error));
+    // }, []);
+
+    // const likeUpdateHandler = () => {
+    //     setLikeUpdate(!likeUpdate)
+    //   }
+
+    // const LikeCountHandler = () => {
+    //     likeUpdateHandler()
+        
+    // if (!likeUpdate) {
+    //     setLikeCt(LikeCt +1)
+    //     axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/like/${tb_heart}`, {})
+    //     .then(response => {                           
+    //         console.log(response);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //         return;
+    //     });
+    // } else if (likeUpdate) {
+    //     setLikeCt(LikeCt -1)
+    //     axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/unlike/${tb_heart}`, {})
+    //     .then(response => {                           
+    //         console.log(response);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //         return;
+    //     });
+    // }} 
 
 
     const insert = (e) => {
@@ -53,14 +104,14 @@ const TipDetail = ({ match }) => {
         const decode = jwtDecode(token);
         if (decode.sub != data.userId) {
             alert('작성자만 삭제 가능합니다.');
-            history.push('/tip/list')
+            history.push('/')
         }
         console.log(decode.sub);
         axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(() => {
                 alert("성공적으로 삭제 되었습니다.")
-                history.push('/tip/list')
+                history.push('/bridge/tip/list')
 
             })
             .catch(() => {
@@ -84,13 +135,23 @@ const TipDetail = ({ match }) => {
             <div className={style.content}>
                 {data.tbContents && <Viewer initialValue={data.tbContents}></Viewer>}
             </div>
-            <div className={style.heartbox}>
+            {/* <div className={style.heartbox}> */}
                 {/* <i onClick={handlerHeart}>{data.tbHeart} ♡</i> */}
-            </div>
+            {/* </div> */}
+
+            {/* <div className={style.likesBox}>
+         <h1 className={style.likes}> Likes  {LikeCt} </h1>
+         <br/>
+        {likeUpdate ?
+          <button onClick={LikeCountHandler}><Icon className={style.heart} icon="material-symbols:heart-plus" /></button>:
+          <button onClick={LikeCountHandler}><Icon className={style.heart} icon="material-symbols:heart-minus-outline" /></button>
+        }
+        </div> */}
+
             <div className={style.editbox}>
                 <ul>
                     <li onClick={handlerdelete}> 삭제</li>
-                    <li><Link to={`/tip/edit/${data.tbIdx}`}></Link>수정</li>
+                    <li><Link to={`/bridge/tip/edit/${data.tbIdx}`}></Link>수정</li>
                 </ul>
             </div>
             <div className={style.line}></div>
