@@ -43,6 +43,8 @@ import PaymentTest2 from './Payment/PaymentTest2';
 import Portfolio from './Profile/Portfolio';
 import PaymentList from './Payment/PaymentList';
 
+import BackToTop from './BackToTop';
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
@@ -138,6 +140,8 @@ function App() {
       {/* 테스트 페이지 */}
       <Route path="/bridge/payment" component={PaymentTest2} exact={true}/>
       <Footer />
+       {/* 위로 가는 버튼 */}
+       <BackToTop/>
     </>
   )
 }

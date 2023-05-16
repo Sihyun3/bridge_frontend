@@ -31,24 +31,24 @@ const Main = () => {
                 <div className={style.firstLine}>
                     <Link to={`/bridge/jam/list`}>
                         <button className={style.online}>
-                            <p>온라인 합주</p>
+                            <p>Make Music</p>
                         </button>
                     </Link>
                     <Link to={`/bridge/partner/list`}>
                         <button className={style.offline}>
-                            <p>작곡가 요청 </p>
+                            <p>Commission</p>
                         </button>
                     </Link>
                 </div>
                 <div className={style.secondLine}>
                     <Link to={`/bridge/split`}>
                         <button className={style.musicSep}>
-                            <p>음원 분리</p>
+                            <p>Split Music</p>
                         </button>
                     </Link>
                     <Link to={`/bridge/tip/list`}>
                         <button className={style.community}>
-                            <p>커뮤니티</p>
+                            <p>Community</p>
                         </button>
                     </Link>
                     
