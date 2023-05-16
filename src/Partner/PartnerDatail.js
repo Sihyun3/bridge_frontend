@@ -5,16 +5,25 @@ import writer from '../Partner/note.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
+import jwt_decode from "jwt-decode";
 
 const PartnerDatail = ({ match }) => {
 
     const { crIdx } = match.params;
-    
+
     const [data, setData] = useState('');
     const [tag, setTag] = useState([]);
     const history = useHistory();
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+        }
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        setUserId(decode_token.sub);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerDetail/${crIdx}`)
             .then((response) => {
                 setData(response.data.partnerList);
@@ -26,27 +35,32 @@ const PartnerDatail = ({ match }) => {
     }, [])
 
     const handleDelete = () => {
-        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
-            .then((response) => {
-                alert(`정상적으로 삭제되었습니다`)
-                history.push(`/bridge/partner/list`);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        if (userId != data.userId) {
+            console.log(`+++++++++>` + userId);
+            console.log(`=========> ` + data.userId);
+            alert(`작성자만 삭제가 가능합니다.`)
+        } else {
+            axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
+                .then((response) => {
+                    alert(`정상적으로 삭제되었습니다`)
+                    history.push(`/partner/list`);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
     }
 
 
     return (
         <>
             <div className='container clearfix' >
-                <Link to='/bridge/partner/list'>
+                <Link to='/partner/list'>
                     <div className={style.back}>
                         <img className={style.backbutton} src={back_button} />
                     </div>
                 </Link>
                 <div className={style.writer}>
-                    {/* 유저 프로필 사진 정보 가져오는 것 필요 */}
                     <img className={style.writerimg} src={writer} />
                     <p>{data.userId}</p>
                 </div>
@@ -78,12 +92,13 @@ const PartnerDatail = ({ match }) => {
                     <button> 신청하기</button>
                 </div>
                 <div className={style.buttonbox2}>
-                <button onClick={handleDelete}>삭제하기</button>
+                    <button onClick={handleDelete}>삭제하기</button>
+                    <Link to='/partner/list'> <button> 목록으로 </button> </Link>
                 </div>
-              
+
                 <div className={style.line}></div>
                 <div className={style.detail}>
-                    
+
                     <p>{data.crContents}</p>
                 </div>
                 <div className={style.line}></div>

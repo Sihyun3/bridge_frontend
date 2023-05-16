@@ -140,15 +140,13 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
             <div className={style.contentbox}>
 
                 <form onSubmit={handlerSubmit}>
-
-                    {ContentList.writer}
-
+                    {/* {ContentList.writer} */}
                     <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder={ContentList.content}>
                         {/* {ContentList.content} */}
                     </textarea>
 
                     <input className={style.file} type="file" id="pcFile" name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder={ContentList.file} />
-                    <button className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제"> 삭제 </button>
+                    {/* <button className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제"> 삭제 </button> */}
                     <button className={style.done} type="submit">등록</button>
                 </form>
             </div>

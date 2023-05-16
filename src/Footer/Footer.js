@@ -45,6 +45,9 @@ import BridgeBlackLogo from './FooterIcons/BridgeBlackLogo.png';
                                     <li>
                                         <a href="#">Terms of service</a>
                                     </li>
+                                    {/* <li>
+                                        <a href="#">About Us</a>
+                                    </li> */}
                                 </ul>
 
 

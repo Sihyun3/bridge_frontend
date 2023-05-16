@@ -5,24 +5,18 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const PartnerList = () => {
   const [partnerList, setPartnerList] = useState([]);
   const [partnerTag, setPartnerTag] = useState([]);
   const [tag, setTag] = useState('');
+  const history = useHistory();
 
   //페이징
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
-
-
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = (partnerList) => {
-    let currentPosts = 0;
-    currentPosts = partnerList.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
 
   const tags = [
@@ -42,6 +36,10 @@ const PartnerList = () => {
   ];
 
   useEffect(() => {
+    if (sessionStorage.getItem('token') == null) {
+      history.push('/login')
+      return;
+    }
     axios
       .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
@@ -73,12 +71,10 @@ const PartnerList = () => {
   return (
     <>
       <div className={style.box1}>
-        <h1>파트너 모집</h1>
+        <h1>연주자 찾기</h1>
       </div>
       <div className="container clearfix" >
         <div className={style.tagbox}>
-
-
 
           {tags.map((tags, index) => {
             if (index % 5 == 0) {
@@ -93,7 +89,6 @@ const PartnerList = () => {
                 #{tags.name}</label></>)
             }
             return (
-              // <span className={style.taglist} key={index}>
               <label className={style.tags} for={`tagRadio-${index}`}>
                 <button
                   key={index}
@@ -103,22 +98,21 @@ const PartnerList = () => {
                   onClick={handleRadio}
                 />
                 #{tags.name}</label>
-              // </span>
             );
           })}
           <button className={style.tags} onClick={clearRadio}>#전체</button>
         </div>
         <div className="clearfix" style={{ margin: '50px 0' }}>
           {
-            currentPosts(partnerList) && currentPosts(partnerList)
+            partnerList && partnerList
               .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
               .map((partnerList, index) => {
                 return (
                   <div key={index} className={style.block}>
                     {console.log(">>" + partnerList.crPhoto)}
                     <div className={style.imgbox}>
-                    <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
-                    {/* <p className={style.title}>{partnerList.userId}</p> */}
+                      <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
+                      {/* <p className={style.title}>{partnerList.userId}</p> */}
                     </div>
                     <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                     <p className={style.date}>
@@ -145,17 +139,28 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-          <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
+          <Link to={`/bridge/partner/write`}><button > 나의 연주자 찾기 </button></Link>
         </div>
 
-        <div style={{ margin: "0 auto" }} className='clearfix'>
-          <Pagination
-            className={style.page}
-            postsPerPage={postsPerPage}
-            totalPosts={partnerList.length}
-            paginate={setCurrentPage}
-          ></Pagination>
+        <div className={style.page}>
+
+          <nav className="pageNum" >
+            <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+              &lt;
+            </button>
+            {
+              partnerList && Array(Math.ceil(partnerList.length / limit)).fill().map((page, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setPage(i + 1)}
+                  aria-current={page === i + 1 ? "page" : null}
+                >
+                  {i + 1}
+                </button>
+              ))}
+          </nav>
         </div>
+
 
 
       </div>

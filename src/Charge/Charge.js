@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import style from './Charge.module.css';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Charge = ({ match }) => {
 
     const { total } = match.params;
     const { usepoint } = match.params;
 
-
+    const history = useHistory();
 
     const [userId, setUserId] = useState('');
     const [currentPoint, setCurrentPoint] = useState(0);
@@ -16,6 +17,10 @@ const Charge = ({ match }) => {
     const [willPoint, setWillPoint] = useState(0);
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
@@ -65,9 +70,7 @@ const Charge = ({ match }) => {
         sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
-                console.log(response);
-                console.log("==============" + response.data)
-                console.log("++++++++++++++" + response.data.next_redirect_pc_url);
+                console.log(response.data);
                 window.location.href = response.data.next_redirect_pc_url;     
             })
             .catch(error => {
@@ -90,7 +93,7 @@ const Charge = ({ match }) => {
                   
                     <div className={style.mainContent}>
                         <div className={style.possess}>
-                            <p className={style.possessText}>현재 보유 포인트:</p>
+                            <p className={style.possessText}>현재 보유 포인트</p>
                             <p className={style.possessMoney} value={currentPoint}>{currentPoint}&nbsp;원</p>
                         </div>
                         <div className={style.charge}>

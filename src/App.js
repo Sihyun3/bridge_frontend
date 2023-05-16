@@ -10,7 +10,6 @@ import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
 import ReportDetail from './Admin-Report/ReportDetail';
-import ProfileDetail from './Profile/ProfileDetail';
 import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
 import Charge from './Charge/Charge';
@@ -42,22 +41,18 @@ import PaymentTest from './Payment/PaymentTest';
 import PaymentTest2 from './Payment/PaymentTest2';
 import Portfolio from './Profile/Portfolio';
 import PaymentList from './Payment/PaymentList';
+import ProfileDetail from './Profile/ProfileDetail';
+
+import BackToTop from './BackToTop';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  // useEffect(() => {
-  //   sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-  // }, [])
-
-
-
   return (
     <>
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
-      {/* 완성된 페이지 */}
+      {/* 페이지가 완성된 페이지 */}
 
-      <Route path="/jam" component={JamList} exact={true} />
       <Route path="/bridge/admin/notice/list" component={Notice} exact={true} />
       <Route path="/bridge/admin/report/list" component={ReportList} exact={true} />
       <Route path="/bridge/admin/notice/write" component={NoticeWrite} exact={true} />
@@ -70,6 +65,7 @@ function App() {
       <Route path="/bridge/jam/list" component={JamList} exact={true} />
       <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
       <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
+      <Route path="/deal/list" component={PaymentList} exact={true} />
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
       <Route path="/bridge/report/write" component={ReportPage} exact={true} />
@@ -88,56 +84,55 @@ function App() {
       {/* 왓 이즈 디스..? */}
       {/* <Route path="/29" component={LoginTest} exact={true} /> */}
 
+      <Route path="/jam/list" component={JamList} exact={true} />
+      <Route path="/jam/write" component={JamWrite} exact={true} />
 
-    <Route path="/find/:idx" component={Finduser} exact={true}/>
-      {/* 회원 가입 */}
-      {/* <Route path="/signup" component={SignUp} exact={true} /> */}
-      {/* 왓 이즈 디스...?  - 회원가입 테스트용!(화면 수정중)*/}
-      <Route path="/signup" component={SignUpTest} exact={true} />
+      <Route path="/admin" component={MainAd} exact={true} />
+      <Route path="/admin/notice/list" component={Notice} exact={true} />
+      <Route path="/admin/notice/write" component={NoticeWrite} exact={true} />     {/* 수정 기능 안됨 */}
+      <Route path="/admin/deal/list" component={DealListAd} exact={true} />
+      <Route path="/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} /> {/* 영구정지 권한 제어 필요 */}
 
-      {/* 잼 */}
-      <Route path="/bridge/jam/detail/:cIdx" component={JamDetail} exact={true} />
+      <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
-      {/* 팁게시판 */}
-     
-      <Route path="/bridge/tip/edit/:tbIdx" component={TipEdit} excat={true} />
-      <Route path="/bridge/tip/detail/:tbIdx" component={TipDetail} exact={true} />
-     
+      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />  {/* 목록 버튼 css 다듬기 부탁해요 */}
+      <Route path="/partner/charge" component={Charge} exact={true} />
 
-      {/* 음원 분리 */}
+      <Route path="/tip/list" component={TipList} exact={true} />         {/* 리스트가 너무 여러개 뜸 */}
+      <Route path="/tip/write" component={TipWrite} exact={true} />
+      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> {/* 디자인 디테일 수정 필요 */}
+
       <Route path="/split" component={MusicSplit} exact={true} />
 
-      {/* 채팅 */}
-      {/* 엔터 눌러도 채팅 전송되게 수정해주세요 */}
-      <Route path="/bridge/chatting" component={Chatting} exact={true} />
-
-      {/* 프로필 */}
-      <Route path="/bridge/profile/detail" component={ProfileDetail} exact={true} />
-      <Route path="/bridge/profile/write" component={ProfileWrite} exact={true} />
-
-      {/* 파트너 구인 */}
-      <Route path="/bridge/partner/write" component={PartnerWrite} exact={true} />
-      <Route path="/bridge/partner/payment" component={Payment} exact={true} />
-      <Route path="/bridge/partner/doing" component={Doing} exact={true} />
-      <Route path="/bridge/partner/charge" component={Charge} exact={true} />
+      <Route path="/profile/write" component={ProfileWrite} exact={true} />
+      <Route path="/report/write" component={ReportPage} exact={true} />
 
 
-      {/* 거래내역 */}
-      <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
+      {/* 기능 완성 */}
+      <Route path="/find/:idx" component={Finduser} exact={true}/>
+
+      <Route path="/admin/report/list" component={ReportList} exact={true} /> {/* 디자인 깨짐 */}  
+
+      <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
+      <Route path="/partner/write" component={PartnerWrite} exact={true} />
+      <Route path="/partner/payment" component={PaymentTest2} exact={true} />
+
+      <Route path="/chatting" component={Chatting} exact={true} />
+
       <Route path="/deal/list" component={PaymentList} exact={true} />
 
-   
-      {/* 어드민 메인 페이지 */}
-     
+      {/* 디자인 * 기능 미완 */}
+      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
-      {/* 왓 이즈 디스....? */}
-      {/* <Route path="/bridge/payment" component={PaymentTest} exact={true} /> */}
+      <Route path="/tip/edit/:tbIdx" component={TipEdit} excat={true} /> {/* 수정 안됨 */}
+      
+      <Route path="/profile/detail/:userId" component={ProfileDetail} exact={true} />
+      
+      <Route path="/partner/doing" component={Doing} exact={true} />
 
-      {/* <Route path="/bridge/jam/detail" component={JamDetail2} exact={true} /> */}
-
-      {/* 테스트 페이지 */}
-      <Route path="/bridge/payment" component={PaymentTest2} exact={true}/>
       <Footer />
+       {/* 위로 가는 버튼 */}
+       <BackToTop/>
     </>
   )
 }

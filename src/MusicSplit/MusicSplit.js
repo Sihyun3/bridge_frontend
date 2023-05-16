@@ -100,7 +100,7 @@ const MusicSplit = () => {
     const interval = setInterval(() => {
       axios.get(`http://localhost:8080/api/IsDockerRun`)
         .then(response => {
-          if (response.data === false) {
+          if (response.data == false) {
             clearInterval(interval);
             setIsLoading(false);
             setIsSplitCompleted(true);
