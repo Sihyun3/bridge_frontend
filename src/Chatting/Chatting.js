@@ -15,7 +15,7 @@ const Chatting = () => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-    const [reciver ,setReciver] = useState(''); 
+    const [reciver, setReciver] = useState('');
     const publish = () => {
         if (!client.current.connected) return;
         client.current.publish({
@@ -30,7 +30,7 @@ const Chatting = () => {
     };
 
     useEffect(() => {
-        sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+        sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
         connect();
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(r => {
@@ -56,9 +56,9 @@ const Chatting = () => {
                 setMessage(response.data.messagelist);
                 setRoomIdx(response.data.chatting.roomIdx)
                 subscribe(response.data.chatting.roomIdx);
-               if(sender == response.data.chatting.userId1 ){
+                if (sender == response.data.chatting.userId1) {
                     setReciver(response.data.chatting.userId2)
-                }else if(sender == response.data.chatting.userId2 ){
+                } else if (sender == response.data.chatting.userId2) {
                     setReciver(response.data.chatting.userId1)
                 }
             })
@@ -71,13 +71,13 @@ const Chatting = () => {
         client.current.subscribe('/sub/channel/' + roomIdx, recive)
     }
 
-    const recive = useCallback( (body)=>{
+    const recive = useCallback((body) => {
         const json_body = JSON.parse(body.body);
-        setMessage((message)=>
-            [...message , { roomIdx: json_body.roomIdx, data: json_body.data, writer: json_body.writer }]
+        setMessage((message) =>
+            [...message, { roomIdx: json_body.roomIdx, data: json_body.data, writer: json_body.writer }]
         );
     })
-    
+
     return (
         <>
             <div className='container clearfix'>
@@ -88,18 +88,18 @@ const Chatting = () => {
                         <div className={style.chatListProfile}>
                             {chatList.map((list) => {
                                 var reciver;
-                                if(list.userId1 == sender){
+                                if (list.userId1 == sender) {
                                     reciver = list.userId2;
-                                }else if(list.userId2 == sender){
+                                } else if (list.userId2 == sender) {
                                     reciver = list.userId1
                                 }
                                 return (
-                                    <div className={style.profile}  onClick={()=>chatroom(list.roomIdx)}>
+                                    <div className={style.profile} onClick={() => chatroom(list.roomIdx)}>
                                         <div className={style.profileImg}>
                                             <img src={user} className={style.profileIcon}></img>
                                         </div>
                                         <div className={style.profileContent}>
-                                           
+
                                             <div className={style.profileName}>{reciver}</div>
 
                                             <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div>
@@ -115,23 +115,23 @@ const Chatting = () => {
                         </div>
                         <hr className={style.chatHr}></hr>
                         <div className={style.chat}>
-                            <div className={style.chatbox}>       
-                            {
-                                message.map(d=>{
-                                    // console.log(d.writer);
-                                    if(d.writer == sender) {
-                                        return(<div className={style.chatContent1}>{d.data}</div>)
-                                    }else if(d.writer!= null && d.writer != sender){
-                                        return(<div className={style.chatContent4}>{d.data}</div>)
-                                    }
-                                })
-                            }
+                            <div className={style.chatbox}>
+                                {
+                                    message.map(d => {
+                                        // console.log(d.writer);
+                                        if (d.writer == sender) {
+                                            return (<div className={style.chatContent1}><p>{d.data}</p></div>)
+                                        } else if (d.writer != null && d.writer != sender) {
+                                            return (<div className={style.chatContent4}><p>{d.data}</p></div>)
+                                        }
+                                    })
+                                }
                             </div>
                             <div className={style.chatFoot}>
                                 <button className={style.handButton}>
                                     <img src={hand} className={style.handIcon}></img>
                                 </button>
-                                <input type="text" onChange={(e)=>{setChat(e.target.value)}} value={chat}className={style.chatInput}></input>
+                                <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
                                 <button className={style.sendButton} onClick={publish}>
                                     <img src={send} className={style.sendIcon}></img>
                                 </button>

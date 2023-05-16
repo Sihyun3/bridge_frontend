@@ -15,6 +15,7 @@ const LoginTest = ({ setIsLogin }) => {
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const history = useHistory();
+
     const handlerOnClick = e => {
         e.preventDefault();
         setCookie('rememberUserId',userId);
@@ -59,7 +60,7 @@ const LoginTest = ({ setIsLogin }) => {
     };
 
     const handlerOnClick2 = () => {
-        history.push('/4');
+        history.push('/signup');
     };
 
     return (

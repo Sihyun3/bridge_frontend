@@ -65,9 +65,7 @@ const Charge = ({ match }) => {
         sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
-                console.log(response);
-                console.log("==============" + response.data)
-                console.log("++++++++++++++" + response.data.next_redirect_pc_url);
+                console.log(response.data);
                 window.location.href = response.data.next_redirect_pc_url;     
             })
             .catch(error => {
@@ -90,7 +88,7 @@ const Charge = ({ match }) => {
                   
                     <div className={style.mainContent}>
                         <div className={style.possess}>
-                            <p className={style.possessText}>현재 보유 포인트:</p>
+                            <p className={style.possessText}>현재 보유 포인트</p>
                             <p className={style.possessMoney} value={currentPoint}>{currentPoint}&nbsp;원</p>
                         </div>
                         <div className={style.charge}>

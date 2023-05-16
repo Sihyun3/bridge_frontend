@@ -16,10 +16,10 @@ const TipDetail = ({ match }) => {
     const [temp, setTemp] = useState()
     const history = useHistory();
 
-    const [likeUpdate, setLikeUpdate] = useState(false)
-    const [LikeCt, setLikeCt] = useState(0)
+    // const [likeUpdate, setLikeUpdate] = useState(false)
+    // const [LikeCt, setLikeCt] = useState(0)
     // const [userNickname, setUserNickname] = useState('');
-    const tb_heart = match.params.tb_heart;
+    // const tb_heart = match.params.tb_heart;
 
     
 

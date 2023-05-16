@@ -23,7 +23,6 @@ function ReportPage() {
     useEffect(()=>{
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        console.log("222222222" + decode_token);
         setUserId(decode_token.sub);
         //신고당하는사람 하드코딩 => 나중에 get 해오기 => 수정 필요 !!! 
         setReportedUserId("tester");
@@ -51,8 +50,6 @@ function ReportPage() {
     return (
         <div className="container">
             <div className={style.Box}>
-                {/* <label for="target">신고대상</label> */}
-                {/* value={reportedUserId} */}
                 <div id="target" className={style.Target}>신고대상: {reportedUserId}</div>
                 <select className={style.Select} onChange={handleSelect} value={select}>
                     <option value="" disabled selected>신고 사유 선택</option>

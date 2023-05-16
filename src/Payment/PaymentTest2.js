@@ -68,7 +68,7 @@ function PaymentTest2({ match }) {
                 .then(response => {
                     console.log(response.data);
                     alert('결제가 완료되었습니다.');
-                    history.push('/bridge/admin/deal/list'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
+                    history.push('/deal/list'); //거래내역 페이지로 설정해뒀는데 추후 수정 필용
                 })
                 .catch(err => {
                     console.log(err);
@@ -86,7 +86,7 @@ function PaymentTest2({ match }) {
             setTotal(downpayment);
         } else {
             alert('보유 포인트가 부족합니다. 포인트를 충전해주세요.');
-            history.push(`/bridge/partner/charge/${total}`); //충전 페이지 링크
+            history.push(`/partner/charge/${total}`); //충전 페이지 링크
 
         }
     }
