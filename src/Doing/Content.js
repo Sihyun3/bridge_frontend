@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../Doing/Content.module.css"
 import jwt_decode from "jwt-decode";
+import Waveform from "../Component/Waveform";
 
 
-function Content({ pdIdx, uploadClick, setUploadClick }) {
+function Content({ pdIdx, uploadClick, setUploadClick, state, contentList, setContentList }) {
 
-    const [ContentList, setContentList] = useState([]);
     const [pcContent, setPcContent] = useState('');
     const [pcFile, setPcFile] = useState('');
     const [pdcComment, setPdcComment] = useState('');
@@ -66,6 +66,8 @@ function Content({ pdIdx, uploadClick, setUploadClick }) {
         }).catch(() => {
             alert("업로드 중 오류가 발생했습니다.");
         });
+
+   
     };
     return (
         <>
