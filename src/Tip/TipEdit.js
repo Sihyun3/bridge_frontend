@@ -12,12 +12,15 @@ export default function TipEdit({ match }) {
     const history = useHistory();
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token')
         const decode = jwtDecode(token);
         if (decode.sub != data.userId) {
             alert('작성자만 삭제 가능합니다.');
-            // 왜 메인으로 이동?
-            history.push('/')
+            history.push('/tip/list')
         }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/0`)
             .then(r => {

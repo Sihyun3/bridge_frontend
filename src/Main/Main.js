@@ -29,28 +29,29 @@ const Main = () => {
                 </div>
                 
                 <div className={style.firstLine}>
-                    <Link to={`/bridge/jam/list`}>
+                    <Link to={`/jam/list`}>
                         <button className={style.online}>
-                            <p>온라인 합주</p>
+                            <p>Make Music</p>
                         </button>
                     </Link>
-                    <Link to={`/bridge/partner/list`}>
+                    <Link to={`/partner/list`}>
                         <button className={style.offline}>
-                            <p>작곡가 요청 </p>
+                            <p>Commission</p>
                         </button>
                     </Link>
                 </div>
                 <div className={style.secondLine}>
-                    <Link to={`/bridge/split`}>
+                    <Link to={`/split`}>
                         <button className={style.musicSep}>
-                            <p>음원 분리</p>
+                            <p>Split Music</p>
                         </button>
                     </Link>
-                    <Link to={`/bridge/tip/list`}>
+                    <Link to={`/tip/list`}>
                         <button className={style.community}>
-                            <p>커뮤니티</p>
+                            <p>Community</p>
                         </button>
                     </Link>
+                    
                 </div>
                 <div style={{marginTop:50}}>
                 <Swiper
@@ -71,13 +72,13 @@ const Main = () => {
                                     <p className={style.tit} style={{ padding: 21}}>공지사항</p>
                                     <p className={style.link} style={{ padding: 21 }}>
                                         {/* 공지사항 링크 */}
-                                        <Link to={`/bridge/notice/detail/${n.noticeIdx}`} title="공지사항 상세보기">
+                                        <Link to={`/notice/detail/${n.noticeIdx}`} title="공지사항 상세보기">
 
                                             {n.title}</Link>
                                     </p>
                                     <div><p className={style.date} style={{ padding: 21, marginRight: '35px' }}>{data.getFullYear() +"년 "+ month + "월 " +data.getDate() +"일"}</p></div>
                                     <div> <p className={style.more} style={{ padding: 21 }}>
-                                        <Link to="/bridge/admin/notice/list" style={{ color: 'black' }} title="전체공지 더보기">더보기</Link>
+                                        <Link to="/admin/notice/list" style={{ color: 'black' }} title="전체공지 더보기">더보기</Link>
                                     </p></div>
                                 </SwiperSlide>
                             )

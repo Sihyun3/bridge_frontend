@@ -29,13 +29,13 @@
 }
 /*작성 버튼 */
 .playbutton{
-    width: 80px;
-    height: 80px;
+    width: 140px;
+    height: 60px;
     object-fit: cover;
-    margin-left:556px;
+    margin-left:520px;
     display: inline-block;
     margin-top: 44px;
-    font-size:24px;
+    font-size:20px;
     background-color: white;
     border-radius: 0.5rem;
     text-shadow: 1px 1px 1px #c2c2c2;
@@ -49,17 +49,26 @@
 .block{
     float: left;
     margin-right: 66.66666666666667px;
+    margin-bottom: 60px;
+    
+}
+.imgbox {
+    width: 250px;
+    height: 250px;
+    box-shadow: 5px 5px 20px 0 rgba(107, 107, 107, 0.4);
+    margin-bottom: 24px;
 }
 .img{
     width: 250px;
-    height: 250px;
+    height: auto;
 }
 .block:nth-child(4n){margin-right:0}
 
 .title{
+    margin-top:12px;
     text-align: center;
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 /*검색창을 묶는 큰박스*/

@@ -1,20 +1,16 @@
-// import style from './SignUp.module.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import KakaoLogin from '../Login/KaKaoLogin';
-// import NaverLogin from './NaverLogin';
-// import style from './LoginTest2.module.css';
 import style from './SignUpTest.module.css';
-// import NaverLogo from './NaverLogo.png';
-// import KakaotalkLogo from './KakaotalkLogo.png';
-// import GoogleLogo from './GoogleLogo.png';
 import { useRef } from 'react';
 import React from 'react';
 import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown2 } from "react-icons/fa";
+import BridgeBlackLogo from '../SignUp/BridgeBlackLogo.png';
 
 const SignUpTest = ({ history, props }) => {
     const [dropdownVisibility, setDropdownVisibility] = React.useState(false);
+    const [dropdownVisibility2, setDropdownVisibility2] = React.useState(false);
     //이름
     const [userName, setName] = useState();
     //아이디
@@ -34,6 +30,7 @@ const SignUpTest = ({ history, props }) => {
     const [Emassage, setEmassage] = useState();
     const [verifyCode, setVerifyCode] = useState();
     const [verifyConfirmMessage, setVerifyConfirmMessage] = useState();
+    const [tag, setTag] = useState([]);
 
 
     const handlerOnClick = e => {
@@ -114,6 +111,10 @@ const SignUpTest = ({ history, props }) => {
 
     };
 
+    const handlerInstrument = (e) => {
+        setTag([...tag, e.target.value])
+    }
+
 
     // const dropDownRef = useRef();
     // const [mailIdentify, setMailIdentify] = useState('');
@@ -141,41 +142,60 @@ const SignUpTest = ({ history, props }) => {
                     <div className={style.container}>
                         <div className={style.signUpContainer}>
                             <form className={style.form}>
-                                <h1 className={style.formH1}>회원가입</h1>
+                            <img className={style.BridgeBlackLogo} src={BridgeBlackLogo} alt='브릿지 로고'></img>
 
-                                <div className={style.infoBox}>
+                                <div className={style.basicBox}>
+                                <div className={style.line_or}>
+                                    <span className={style.line_or_before} />
+                                    <span className={style.txt_or}>회원가입</span>
+                                    <span className={style.line_or_after} />
+                                </div>
                                     <input className={style.formInput} type="Id" placeholder="아이디" onChange={handlerChangeUserId} />
                                     <input className={style.formInput} type="password" placeholder="비밀번호" onChange={handlerChangePassword} />
                                     <input className={style.formInput} type="password" placeholder="비밀번호 확인" onChange={handlerChangeConfrimPassword} />
+                            
+                                    {/* <div className={style.line_or}>
+                                    <span className={style.line_or_before} />
+                                    <span className={style.txt_or}>ㅇㅇㅇ</span>
+                                    <span className={style.line_or_after} />
+                                </div> */}
                                 </div>
+                                    <div>
+                                    <input className={style.nameInput} type="text" placeholder="이름" onChange={handlerChangeName} />
+                                    </div>
 
-                                <div className={style.infoBox2}>
-                                    <input className={style.formInput} type="text" placeholder="이름" onChange={handlerChangeName} />
+                                    
                                     {/* <input className={style.formInput} type="text" placeholder="닉네임" onChange={handlerChangeNickName} /> */}
-                                    <input className={style.formInput} type="phoneNumber" placeholder="핸드폰 번호" onChange={changePhone} />
+         
+                                <div className={style.NumberBox}>
+                               
+                                    <select className={style.selectNumberBox} onChange={handlerInstrument}>
+                                        {/* <option value="number" disabled selected>010</option> */}
+                                        <option value="010">010</option>
+                                        <option value="011">011</option>
+                                        <option value="016">016</option>
+                                        <option value="018">018</option>
+                                    </select>
+                                    <input className={style.NumberBoxInput} type="phoneNumber" placeholder="핸드폰 번호" onChange={changePhone} />
+                                </div>
+                                <div className={style.line_or}>
+                                    <span className={style.line_or_before} />
+                                    <span className={style.txt_or}>본인확인 이메일</span>
+                                    <span className={style.line_or_after} />
                                 </div>
 
-                                <div className={style.mailBox}>
-                                <div className="container1111">
-        <input className={style.dropdown} id="dropdown" type="checkbox" />
-        <label className={style.dropdownLabel} for="dropdown">
-          <div>CSS</div>
-          <FaAngleDown className={style.caretIcon} />
-        </label>
-        <div className={style.content}>
-          <ul>
-            <li>Class</li>
-            <li>Selectors</li>
-            <li>Media query</li>
-          </ul>
-        </div>
-      </div>
-                                    <input className={style.mailInput} type="email" placeholder="이메일" onChange={handlerChangeEmail} />
-
-                                    <button className={style.loginButton} onClick={handlerOnClickForVerification}>인증코드 요청</button>
-
+                                <div className={style.MailBox}>
+                                    <input  className={style.mailBoxInput}  type="email" placeholder="이메일" onChange={handlerChangeEmail} />
+                                    <select  className={style.selectMailBox} onChange={handlerInstrument}>
+                                        <option value="mail" disabled selected>e-mail</option>
+                                        <option value="naver">naver.com</option>
+                                        <option value="google">google.com</option>
+                                        <option value="daum">daum.net</option>
+                                    </select>
                                 </div>
-
+                                
+                                <button className={style.CodeButton} onClick={handlerOnClickForVerification}>인증코드 요청</button>
+                                
                                 {/* <div ref={dropDownRef}>
                                             <input onClick={() => setIsOpen(!isOpen)} type='button' value={mailIdentify} />
                                             
@@ -186,12 +206,12 @@ const SignUpTest = ({ history, props }) => {
                                                     ))}
                                                 </ul>
 	                                        }
-                                        </div> */}<div className={style.infoBox2}>
-                                    <input className={style.codeInput} type="email" placeholder="인증코드 확인" onChange={handlerChangeEmail} />
+                                        </div> */}
+                                    <input className={style.formInput} type="email" placeholder="인증코드 확인" onChange={handlerChangeEmail} />
                                     {/* <button className={style.registrationButton} onClick={handlerOnClickForVerification}>확인 </button> */}
-                                </div>
+                                
                                 {/* <input className={style.formInput} type="PINCODE" placeholder="인증번호를 입력하세요" onChange={changePhone} /> */}
-                               
+
                                 <button className={style.registrationButton} onClick={handlerOnClick}>가입하기</button>
 
                                 {/* <span className={style.span} >or use your SNS account for registration</span> */}
@@ -202,16 +222,16 @@ const SignUpTest = ({ history, props }) => {
                                 <img type="button" className={style.sns} src={KakaotalkLogo} value="logo" onClick={KakaoLogin}/> 
                                 <img type="button" className={style.sns} src={NaverLogo} value="logo" onClick={NaverLogin}/> 
                                 </div> */}
-                            
-                            
+
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        
-      
-    
+
+
+
 
             {/* <div className='container clearfix' >
                 <div className={style.loginbackg}>

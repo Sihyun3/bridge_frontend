@@ -10,8 +10,14 @@ import { useHistory } from 'react-router-dom';
 const TipList = () => {
     const history = useHistory();
     const [data, setData] = useState([]);
+
+
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist/`)
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
             .then(r => {
                 setData(r.data);
             })
@@ -23,10 +29,9 @@ const TipList = () => {
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);
-
+    
     return (
         <>
-
             <div className={style.box1}>
                 <h1>게시판</h1>
             </div>
@@ -53,7 +58,7 @@ const TipList = () => {
                             console.log(data.tbIdx)
                             return (
 
-                                <Link to={`/bridge/tip/detail/${data.tbIdx}`} className={style.list}>
+                                <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
                                     <a className={style.title}>{data.tbTitle}</a>
                                     <a className={style.writer}>{data.userId}</a>
                                     <a className={style.heart}>♡</a>

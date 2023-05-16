@@ -7,9 +7,20 @@ import img from "../Jam/PlayButton.png"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 const JamList = () => {
+
     const [data, setData] = useState([]);
+
+    const history = useHistory();
+
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+        }
+        const token = sessionStorage.getItem('token');
+        // const decode_token = jwt_decode(token);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam`)
             .then(r => {
                 setData(r.data)
@@ -37,8 +48,7 @@ const JamList = () => {
             console.log(`>${searchInput}<`)
             console.log(notice.title.includes(searchInput))
             return notice.title.includes(searchInput)
-        }
-        );
+        });
         console.log(filtered);
         setFilteredDatas(filtered);
         setPage(1);
@@ -48,9 +58,8 @@ const JamList = () => {
 
     return (
         <>
-
             <div className={style.box1}>
-                <h1>Play</h1>
+                <h1>Jam</h1>
             </div>
             <div className='container clearfix'>
 
@@ -61,7 +70,7 @@ const JamList = () => {
                     </div>
                 </form>
                 <div className={style.pbox}>
-                    <Link to="/jam/write"><input type="button" className={style.playbutton} value="Play" /></Link>
+                    <Link to="/jam/write"><input type="button" className={style.playbutton} value="Make" /></Link>
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
@@ -70,7 +79,9 @@ const JamList = () => {
                                 <>
                                     <div className={style.block}>
                                         <Link to={`/jam/detail/${data.cidx}`}>
-                                            <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                            <div className={style.imgbox}>
+                                                <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                            </div>
                                             <p className={style.title}>{data.ctitle}</p>
                                         </Link>
                                     </div>
@@ -79,7 +90,7 @@ const JamList = () => {
                         })
                     }
 
-            
+
 
                 </div>
 

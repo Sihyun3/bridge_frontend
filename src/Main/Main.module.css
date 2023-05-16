@@ -19,7 +19,7 @@
 .textBox {
     width: 100%;
     margin: 1.75rem auto;
-    max-width: 1320px;
+    max-width: 1236px;
     padding-inline: 1rem;
 }
 
@@ -55,7 +55,7 @@
     background-color: rgba(217, 217, 217, 0.8);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1522870389523-7e83c0065eaf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1509310202330-aec5af561c6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1509&q=80");
     background-size: 530px;
 
 }
@@ -128,7 +128,7 @@
     background-color: rgba(217, 217, 217, 0.8);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1445375011782-2384686778a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://freequizgames.com/wp-content/uploads/2022/12/what-instrument-am-i-musical-personality-test-instant-results_2022-12-12_270789.jpg");
     background-size: 550px 245px;
 }
 
@@ -165,7 +165,7 @@
 }
 
 /* 커뮤니티 버튼 클릭 */
-.communnity:hover {
+.community:hover {
     opacity: 0.8;
 }
 
@@ -244,7 +244,7 @@
     content: '';
     display: block;
     position: absolute;
-    left: 0;
+    /* left: 0; */
     top: 50%;
     width: 1px;
     height: 14px;

@@ -11,14 +11,14 @@
 
 /* 메인 박스 */
 .mainBox {
-    width: 800px;
+    width: 1200px;
     height: 640px;
-    margin: 300px auto;
+    margin: 100px auto;
 }
 
 /* 채팅 목록 박스 */
 .chatListBox {
-    width: 275px;
+    width: 360px;
     height: 640px;
     background-color: rgb(255, 255, 255);
     border: 1px solid;
@@ -29,7 +29,7 @@
 
 /* 채팅 박스 */
 .chatBox {
-    width: 510px;
+    width: 840px;
     height: 640px;
     background-color: rgb(255, 255, 255);
     display: inline-block;
@@ -41,7 +41,7 @@
 .chatListText {
     font-size: 25px;
     padding-top: 50px;
-    padding-left: 35px;
+    padding-left: 120px;
     margin-bottom: 30px;
 }
 
@@ -53,10 +53,16 @@
     margin-bottom: 40px;
     
 }
-
+/*리스트 프로필*/
+.chatListprofile {
+   
+}
 /* 프로필 박스 */
 .profile {
-    margin: 30px 0px;
+    margin: 16px 0px;
+    height: 68px;
+    border-top:1px solid #ebebeb;
+    padding-top:12px;
 }
 
 /* 프로필 내 이미지 박스 */
@@ -88,7 +94,9 @@
 .topText {
     padding-top: 35px;
     margin-left: 65px;
+    padding-left: 300px;
 }
+
 
 /*  위 텍스트 박스 내 아이콘 */
 .chatProfile {
@@ -115,92 +123,112 @@
 
 /* 실제 채팅 박스 */
 .chat {
-    width: 365px;
+    width: 700px;
     height: 475px;
-    border: 1px solid;
+
     margin: 25px auto;
     border-radius: 5px;
 }
 
-/* 수신자 채팅 내용 */
-.chatContent1, .chatContent2, .chatContent3 {
-    float:left;
-    min-width: 130px;
-    min-height: 20px;
-    background-color: #d9d9d9;
-    margin-left: 35px;
-    margin-top: 20px;
+/* 수신자(발신자인 것 같은데?) 채팅 내용 */
+.chatContent1 p {
+    padding:8px;
+    float:right;
+    min-width: 100px;
+    max-width: 600px;
+    min-height: 32px;
+    height:auto;
+    background-color: #eeeeee;
     border-radius: 10px;
-    margin-right:60px;
+    display: inline-block;
+    border-radius: 14px 14px 0px 14px;
     
 }
-
+.chatContent1 {
+    width:660px;
+    min-height:32px;
+    height:auto;
+    display: inline-block;
+    margin:8px 0px;
+    word-wrap:break-word;
+}
 
 /* 발신자 채팅 박스 */
 .chatRequest {
     float: right;
 }
 
-/* 발신자 채팅 내용 */
-.chatContent4, .chatContent5, .chatContent6 {
-    float:right;
-    min-width: 130px;
-    min-height: 20px;
-    background-color: #d9d9d9;
-    margin-top: 20px;
-    border-radius: 10px;
-    margin-right: 35px;
-    margin-left:60px;
+/* 발신자(수신자인 것 같은데?) 채팅 내용 */
+.chatContent4 p {
+    padding:8px;
+    float:left;
+    min-width: 100px;
+    min-height: 32px;
+    height:auto;
+    background-color: #eeeeee;
+    border-radius: 14px 14px 14px 0px;
+    word-wrap: break-word;
 }
-
+.chatContent4 {
+    width:660px;
+    height:32px;
+    margin:8px 0px;
+    display: inline-block;
+    word-wrap:break-word;
+}
 /* 채팅 칸 박스 */
 .chatFoot {
     display: block;
     content: '';
     clear: both;
-    position: relative;
-    margin-top: 10px; 
-    left: 35px;
+    /* position: relative; */
+    margin-top: 32px; 
+    margin-left:32px;
 }
 
 /* 채팅 칸 박스 내 거래하기 아이콘 버튼 */
 .handButton {
     width: 24px;
     height: 24px;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 /* 채팅 칸 박스 내 거래하기 */
 .handIcon {
-    width: 15px;
-    height: 15px;
+    width: 22px;
+    height: 22px;
 }
 
 /* 채팅 칸 박스 내 전송버튼 */
 .sendButton {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     position: relative;
-    right: 25px;
+    right: 36px;
+    top:9px;
 }
 
 /* 채팅 칸 박스 내 전송 아이콘 */
 .sendIcon {
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
 }
 
 /* 채팅 칸 input 박스 */
 .chatInput {
-    width: 275px;
-    height: 20px;
+    width: 600px;
+    height: 32px;
     border-radius: 5px;
-    background-color: #d9d9d9;
+    background-color: #eeeeee;
     border: none;
     margin: 0 auto;
 }
 .chatbox{
-    overflow:auto;
-    width:363px;
+    overflow-y:auto;
+    /* overflow-x: ; */
+    width:700px;
     height:420px;
+}
+.shortChat {
+    display: block;
 }

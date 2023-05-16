@@ -21,12 +21,15 @@ function ReportPage() {
     };
 
     useEffect(()=>{
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        console.log("222222222" + decode_token);
         setUserId(decode_token.sub);
         //신고당하는사람 하드코딩 => 나중에 get 해오기 => 수정 필요 !!! 
-        setReportedUserId("tester");
+        setReportedUserId("testtest");
     })
 
     //신고 제출 
@@ -36,8 +39,7 @@ function ReportPage() {
             .then(response => {
                 console.log(response);
                 alert('정상적으로 신고되었습니다');
-                // 어디로 보낼지 고민
-                history.push(`/`)
+                history.push(`/profile/detail/${reportedUserId}`)
             })
             .catch(error => {
                 console.log(error);
@@ -51,8 +53,6 @@ function ReportPage() {
     return (
         <div className="container">
             <div className={style.Box}>
-                {/* <label for="target">신고대상</label> */}
-                {/* value={reportedUserId} */}
                 <div id="target" className={style.Target}>신고대상: {reportedUserId}</div>
                 <select className={style.Select} onChange={handleSelect} value={select}>
                     <option value="" disabled selected>신고 사유 선택</option>
@@ -63,7 +63,6 @@ function ReportPage() {
                 </select>
                 <div className={style.input}><textarea className={style.inner} type="text" value={reportReasonDetail} onChange={handleDetail}></textarea></div>
                 <button className={style.button} onClick={handleSubmit}>신고</button>
-
             </div>
         </div>
     )

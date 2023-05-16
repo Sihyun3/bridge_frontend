@@ -10,8 +10,9 @@
     padding: 0;
   }
   .wrapper {
+    /* border: 1px solid rgba(0,0,0,.15); */
     width: 100%;
-    height: 100vh;
+    height: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,11 +21,11 @@
   }
   
   .container {
-    border: 1px solid rgba(0,0,0,.12);
+    border: 1px solid rgba(0,0,0,.15);
     /* border-radius: 10px; */
     /* box-shadow: -5px -5px 10px #fff, 5px 5px 10px #babebc; */
     position: absolute;
-    width: 500px;
+    max-width: 800px;
     min-height: 450px;
     overflow: hidden;
   }
@@ -34,35 +35,219 @@
     background: #ffffff;
     display: flex;
     flex-direction: column;
-    padding: 0 50px;
+    padding: 0 30px;
+    width: 600px;
     height: 100%;
     justify-content: center;
     align-items: center;
   }
   
+  .basicBox{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    /* padding: 0 50px; */
+  }
+
+
   .formInput {
-    background: #eeeeee;
-    /* opacity: 0.7; */
+    background: #F6f6f6;
+    font-size: 14px;
     padding: 16px;
     margin: 5px 0;
+    margin-bottom: 10px;
+    width: 430px;
+    height: 45px;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+
+
+
+  .nameInput {
+    background: #F6f6f6;
+    font-size: 14px;
+    padding: 16px;
+    margin: 5px 0;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    width: 430px;
+    height: 45px;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+
+  .NumberBox{
+    width:100%;
+    display: flex;
+    justify-content:first baseline;
+    align-items:center;
+    /* flex-direction:column; */
+    /* flex-grow: ; */
+    margin-bottom: 30px;
+    margin-right: 2px;
+    padding: 0 55px;
+  }
+
+  .selectNumberBox {
+    color: #6d6d6d;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 600;
+    margin: 5px 0px;
+    width: 35%;
+    height: 45px;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0px 5px;
+    display: flex;
+    /* justify-content: 'center'; */
+    /* align-items: center; */
+    /* position: absolute; */
+    /* width: 100%; */
+    left: 0;
+    background: white;
+    border: 1px solid rgba(0,0,0,.12);
+    /* box-shadow: 0 1px 1px 0 #00000026; */
+  }
+  .selectNumberBox:first-child {
+    margin-right: 10px;
+  }
+  
+  .NumberBoxInput{
+    background: #F6f6f6;
+    /* opacity: 0.7; */
+    font-size: 14px;
+    padding: 16px;
+    margin: 5px 0;
+    height: 45px;
+    width: 100%;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+
+
+   /* 로그인 회원가입 사이에 있는 내용 감싼 박스 */
+   .line_or {
+    position: relative;
+    display: block;
+    padding: 3px 0;
+    font-size: 0;
+    line-height: 0;
+    margin-bottom: 5px;
+  }
+  
+  /* 중앙 실선 (왼쪽) */
+  .line_or_before {
+    display: inline-block;
+    width: 110px;
+    height: 1px;
+    background-color: rgba(0,0,0,.08);
+    vertical-align: top;
+    content: "";
+  }
+  
+  /* 실선 안에 있는 텍스트 */
+  .txt_or {
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    color: #828282;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  /* 중앙 실선 (오른쪽) */
+  .line_or_after {
+  
+    display: inline-block;
+    width: 110px;
+    height: 1px;
+    /* margin: 8px 0; */
+    background-color: rgba(0,0,0,.08);
+    vertical-align: top;
+    content: "";
+  }
+  
+
+
+  .MailBox{
+    width:100%;
+    display: flex;
+    justify-content:left;
+    align-items:center;
+    margin-right: 2px;
+    padding: 0 55px;
+    /* margin-top: 5px; */
+  }
+  
+  
+  .mailBoxInput{
+    background: #F6f6f6;
+    /* opacity: 0.7; */
+    padding: 16px;
+    font-size: 14px;
+    /* margin: 5px 0; */
+    margin-right: 10px;
     width: 65%;
+    height: 45px;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+  
+  .selectMailBox {
+    color: #6d6d6d;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 5px 0px;
+    width: 35%;
+    height: 45px;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0px 5px;
+    border: 1px solid rgba(0,0,0,.12);
+    /* letter-spacing: 0.3px; */
+  }
+
+  .CodeButton{
+    background: #000;
+    border-color: #000;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 16px;
+    margin: 5px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 430px;
+    height: 45px;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+   
+  }
+
+  .codeInput{
+    background: #F1F3F4;
+    /* opacity: 0.7; */
+    font-size: 14px;
+    padding: 0 30px;
+    margin: 5px 0;
+    width: 100%;
     border: 1px;
     outline: none;
     border-radius: 5px;
   }
 
   
-  /* .formInput2 {
-    background: #eee;
-    padding: 16px;
-    margin: 8px 0;
-    width: 55%;
-    border: 0;
-    outline: none;
-    border-radius: 20px;
-    box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
-  } */
-  
+
   .find {
     display: flex;
     justify-content: center;
@@ -91,151 +276,57 @@
   .mailBox{
     width:73%;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items:flex-start;
     flex-direction:row;
     margin-top: 15px;
     padding: 0 55px;
   }
 
-  .mailInput{
-    background: #eeeeee;
-    /* opacity: 0.7; */
-    padding: 16px;
-    margin: 5px 0;
-    width: 70%;
-    border: 1px;
-    outline: none;
-    border-radius: 5px;
-    /* display: flex; */
-    /* justify-content: left; */
-    /* align-items: left; */
-  }
-  .mailInput:first-child{
-    margin-right: 10px;
-  }
-
-  .codeInput{
-    background: #eeeeee81;
-    /* opacity: 0.7; */
-    padding: 16px;
-    margin: 5px 0;
-    width: 65%;
-    border: 1px;
-    outline: none;
-    border-radius: 5px;
-  }
-
   .registrationButton{
     
     color :#ffffff;
-    background: #000000;
-    opacity: 0.4;
-    font-size: 14px;
+    background-color: #1877f2;
+    border-color: #1877f2;
+    font-size: 12px;
     font-weight: bold;
-    width: 65%;
-    border-radius: 5px;
-    outline: none;
-    padding: 16px ;
-    letter-spacing: 1px;
-    cursor: pointer;
-    margin-top: 25px;
+    padding: 16px;
+    margin: 5px 0;
+    margin-top: 30px;
     margin-bottom: 40px;
+    width: 430px;
+    height: 45px;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+  
+  .space {
+    opacity: 0.5;
+    background-color: #9e9e9e;
     
-  }
-  
-
-  .loginButton{
-    color: white;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 500;
-    background: #739eee;
-    /* opacity: 0.7; */
-    /* padding: 16px 7px; */
-    margin: 5px 0;
-    height: 50px;
-    width: 30%;
-    border: 1px;
-    outline: none;
-    border-radius: 5px;
-    /* display: flex; */
-    /* justify-content: left; */
-    /* align-items: left; */
-  }
-
-
-  /* .loginButton{
-   
-    font-size: 12px;
-    font-weight: bold;
-    color :#ffffff;
-    background: #739eee;
-    padding: 10px;
-    margin: 5px 0;
-    width: 30%;
-    border: 1px;
-    outline: none;
-    border-radius: 5px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    margin-bottom: 3px;
-  } */
-  
-  
-  .registration{
-    color: #777777;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    /* margin-bottom: 30px; */
-  }
-  
-  .registration:first-child {
-    margin-right: 15px;
-  }
-  
- 
-  
-  .button {
-    color :#1b0f1f;
-    border-radius: 20px;
     border: none;
-    outline: none;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 15px 45px;
-    margin: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 80ms ease-in;
-    /* box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc; */
-    /* background-color: #b665cf; */
-  }
+    height: 1px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    }
+    
+    .BridgeBlackLogo {
+    height: 28px;
+    /* margin-right: 55px;
+    margin-bottom: 30px; */
+    vertical-align: middle;
+    opacity: 0.85;
+    width: auto;
+    max-width: 100%;
+    border-style: none;
+    width: 182px;
+    height: 72px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   
-  
-  
-  
-  .form_btn {
-    /* box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc; */
-  }
-  .form_btn:active {
-    box-shadow: inset 1px 1px 2px #babebc, inset -1px -1px 2px #fff;
-  }
-  .overlay_btn {
-    background-color: #ff4b2b;
-    color: #fff;
-    /* box-shadow: -5px -5px 10px #ff6b3f, 5px 5px 8px #bf4b2b; */
-  }
-  .sign-in-container {
-    position: absolute;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    transition: all 0.5s;
-  }
+    }
   
   .sign-up-container {
     position: absolute;
@@ -246,181 +337,6 @@
     transition: all 0.5s;
   }
   
-  .overlay-left {
-    display: flex;
-    flex-direction: column;
-    padding: 0 50px;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    opacity: 0;
-    background-color: #ff4b2b;
-    color: #fff;
-    transition: all 0.5s;
-  }
-  .overlay-right {
-    display: flex;
-    flex-direction: column;
-    padding: 0 50px;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background-color: #ff4b2b;
-    color: #fff;
-    transition: all 0.5s;
-  }
-  
-  .social-links {
-    margin: 20px 0;
-  }
-  .form h1 {
-    font-size: 35px;
-    font-weight: bold;
-    margin: 10%;
-    color: #292929;
-  }
-  
-  .p {
-    font-size: 16px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
-  }
-  .span {
-    font-size: 12px;
-    color: #000;
-    letter-spacing: 0.5px;
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
-  
-  .span2 {
-    font-size: 12px;
-    font-weight: 500;
-    color: #6b6b6b;
-    letter-spacing: 0.5px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-  }
-  
-  .span3 {
-    font-size: 12px;
-    color: #686767;
-    letter-spacing: 0.5px;
-  }
-  
-  
-  
-  /* 로그인 회원가입 사이에 있는 내용 감싼 박스 */
-  .line_or {
-    position: relative;
-    display: block;
-    margin-bottom: 5px;
-    padding: 3px 0;
-    font-size: 0;
-    line-height: 0;
-  }
-  
-  
-  
-  /* 중앙 실선 (왼쪽) */
-  .line_or_before {
-    display: inline-block;
-    width: 60px;
-    height: 1px;
-    /* margin: 8px 0; */
-    background-color: rgba(0,0,0,.08);
-    vertical-align: top;
-    content: "";
-  }
-  
-  /* 실선 안에 있는 텍스트 */
-  .txt_or {
-    display: inline-block;
-    font-size: 12px;
-    text-align: center;
-    color: #828282;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  
-  /* 중앙 실선 (오른쪽) */
-  .line_or_after {
-  
-    display: inline-block;
-    width: 60px;
-    height: 1px;
-    /* margin: 8px 0; */
-    background-color: rgba(0,0,0,.08);
-    vertical-align: top;
-    content: "";
-  }
-  
-  .social-links div {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    border-radius: 50%;
-    /* box-shadow: -5px -5px 10px #ffffff, 5px 5px 8px #babebc; */
-    cursor: pointer;
-  }
-  /* .social-links a {
-    color: #000;
-  }
-  .social-links div:active {
-    box-shadow: inset 1px 1px 2px #babebc, inset -1px -1px 2px #fff;
-  } */
-  
-  .sns{
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    border-radius: 50%;
-    /* box-shadow: -5px -5px 10px #ffffff, 5px 5px 8px #babebc; */
-    cursor: pointer;
-    margin-top: 10%;
-    margin-bottom: 20%;
-  }
-  
-  .kakaoBtn {
-    float: left;
-    margin-right: 5px;
-    /* background-color: #b665cf; */
-  }
-  
-  .naverBtn {
-    float: left;
-    margin-bottom: 20px;
-  }
-  
-  .selectAll {
-    margin-left: 4px;
-    font-size: 14px;
-    height: 16px;
-    width: 16px;
-}
-
-.saveBox{
-    width:72%;
-    display: flex;
-    justify-content: left;
-    align-items:flex-start;
-    flex-direction:row;
-    margin-top: 5px;
-    padding: 0 55px;
-}
 
 .idCheckBox{
   background: #eeeeee;
@@ -438,52 +354,3 @@
   height: 20px;
 }
 
-
-/* dropdown css */
-.container1111 {
-  min-width: 150px;
-  box-shadow: 0 4px 5px 0 #00000026;
-  position: relative;
-}
-
-.dropdown {
-  left: 0;
-  visibility: hidden;
-  position: absolute;
-}
-
-.dropdownLabel {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px;
-}
-
-.content {
-  display: none;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  background: white;
-  box-shadow: 0 4px 5px 0 #00000026;
-}
-
-.dropdown:checked + label + div {
-  display: block;
-  border-top: 1px solid #00000026;
-}
-
-.caretIcon {
-  transition: transform 250ms ease-out;
-}
-#dropdown:checked + label > .caretIcon {
-  transform: rotate(-180deg);
-}
-
-.content ul {
-  list-style-type: none;
-  padding: 12px;
-  margin: 0;
-}
-.content ul li {
-  margin: 0.8rem 0;
-}

@@ -5,16 +5,33 @@ import axios from 'axios';
 // import Notice from './notice/NoticePage';
 // import '../reset.css';
 import NoticeToastEditor from '../Component/NoticeToastEditor.js'
+import jwt_decode from "jwt-decode";
 
 
 
 
 function NoticeWrite({history}) {
 
-
-    // const [notice, setNotice] = useState({});
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
+
+    useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            history.push('/login')
+            return;
+          }
+          const token = sessionStorage.getItem('token');
+          const decode_token = jwt_decode(token);
+          console.log(">>>>>>>>>>>>> " + decode_token);
+
+          if (decode_token.sub != 'admin') {
+            alert(`관리자만 이용할 수 있습니다`);
+            history.push(`/`)
+          }
+    }, [])
+
+    // const [notice, setNotice] = useState({});
+  
 
     // const handlerChangeTitle = e => setTitle(e.target.value);
     // const handlerChangeContents = e => setContents(e.target.value);
@@ -39,7 +56,8 @@ function NoticeWrite({history}) {
     return (
         <>
            <div className="container">
-            <div className={style.topbox}><input className={style.titlebox} value={title} onChange={(e) => { setTitle(e.target.value) }} type='text' placeholder='제목'></input>
+            <div className={style.topbox}>
+                <input className={style.titlebox} value={title} onChange={(e) => { setTitle(e.target.value) }} type='text' placeholder='제목'></input>
             </div>
             <div className={style.writebox}>
             <NoticeToastEditor title={title}/>

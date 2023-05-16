@@ -1,3 +1,13 @@
+@keyframes fadein {
+    from {
+        opacity: 0.7;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 /* 전체 속성 reset */
 * {
     font-family: 'Noto Sans KR', sans-serif;
@@ -13,39 +23,35 @@
     width: 1920px;
     height: 0 auto;
     background-color: aliceblue;
+
 }
 
 /* 잼 작성 페이지 전체 */
 .box {
-    width:1200px;
-    height:648px;
-    border:2px solid #d9d9d9;
-    margin-bottom: 120px;
+    width: 1200px;
+    height: 580px;
+ 
+    margin-bottom: 60px;
     border-radius: 12px;
-    padding-left: 80px;
+    /* border-top:1px solid #d9d9d9; */
+    padding: 20px 200px 0 200px;
 }
 
 /* 잼 아이콘 묶음 */
 .title1 {
-    margin-top:80px;
+    margin-top: 80px;
     margin-bottom: 30px;
-    margin-left: 120px;
+    margin-left: 244px;
 
 }
 
-/* 잼 아이콘 */
-.JamIcon {
-    position: relative;
-    display: inline-block;
-    right:60px;
-    bottom: 28px;
-}
+
 
 /* Jam 텍스트 */
 .titleName {
     color: black;
-    position:relative;
-    display:inline-block;
+    position: relative;
+    display: inline-block;
     font-size: 40px;
     bottom: 32px;
     right: 48px;
@@ -54,95 +60,79 @@
 
 /* 제목 전체 묶어줌 */
 .titleBox {
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 /* '제목' 텍스트 */
 .title2 {
     color: black;
-    margin-left: 90px;
+    /* margin-left: 90px; */
     margin-right: 40px;
     font-size: 16px;
 }
 
 /* 제목 입력칸 */
 .titleInput {
-    width: 760px;
-    height: 40px;
-    background-color: #D2B9FB;
-    border-radius: 8px;
-    border: none;
-    text-align: center;
+    width: 800px;
+    height: 36px;
+    /* background-color: #D2B9FB; */
+    border-bottom: 2px solid #d9d9d9;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    text-align: left;
 }
 
 /* 소개글 전체 div */
 .introduceBox {
-    margin-top: 15px;
+    margin-top: 12px;
     margin-bottom: 15px;
 }
 
 /* '소개글' 텍스트 */
 .introduce {
     color: black;
-    margin-left: 76px;
-    margin-right: 44px;
+    display: block;
     font-size: 16px;
+    margin-top: 40px;
 }
 
 /* 소개글 입력창 */
 .introduceInput {
-    width: 760px;
-    height: 120px;
-    background-color: #D2B9FB;
-    border-radius: 8px;  
+    padding: 12px;
+    width: 800px;
+    height: 160px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
     border: none;
-    text-align: center;
+    text-align: left;
 }
 
 /* 사진 부분 div 로 크게 묶은 것 */
-.potoBox {
-    margin-top: 15px;  
-}  
+.photoBox {
+    margin-top: 12px;
+}
 
 /* '사진' 텍스트 */
-.poto {
+.photo {
     color: black;
-    margin-left: 88px;
+    display: block;
+    margin-top: 40px;
     margin-right: 48px;
     font-size: 16px;
-    height: 40px;
     /* position: relative; */
-    top:12px;
-    
+    top: 12px;
+
 }
 
 /* 사진 첨부하는 칸 */
-.potofile {
-
-
-    width: 760px;
+.photofile {
+    width: 800px;
     height: 40px;
-    background-color: #D2B9FB;
-    border-radius: 8px;
-
-    bottom: 67px;
-    left: 164px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    padding: 0 12px;
     line-height: 40px;
-}
-
-/* 사진 첨부 버튼 */
-.potoButton {
-    width: 50px;
-    height: 36px;
-    color: black;
-    font-size: 16px;
-    background-color: #D9D9D9;
-    border-radius: 12px;
-    margin-top: 15px;
-    margin-left: 890px;
-    position: relative;
-    bottom: 50px;
-    left: 50px;
 }
 
 /* input 안에 선택된 파일 없음 안보이게 하는 코드 */
@@ -150,97 +140,24 @@ input[type=file]::file-selector-button {
     display: none;
 }
 
-/* 악기선택창 이동 칸 */
-.SelectBox {
-    /* width:760px;
-    height: 40px;
-    margin-left: 164px;
-    background-color: #D2B9FB;
-    border-radius: 8px;
-    margin-top:28px; */
-    width: 760px;
-    height: 40px;
-    background-color: #D2B9FB;
-    border-radius: 8px;
-    border: none;
-    text-align: center;
-    margin-top:40px;
-    float:left;
-    margin-left:26px;
-    
-}
-.Select {
-    font-size: 16px;
-    text-align: center;
-    color: rgb(87, 87, 87);
-    position: relative;
-    top: 12px;
-}
-
-/* 음표 이미지 */
-.musicImg {
-    margin-left: 60px;
-    float: left;
-    margin-top: 60px;
-    bottom: 30px;
-}
-
-/* '음악파일' 텍스트 */
-.musicfile {
-    color: rgb(87, 87, 87);
-    font-size: 16px;
-    margin-left: 60px;
-    position: relative;
-    bottom: 96px;
-    left: 400px;
-}
-
-/* 음악 파일 첨부하도록 하는 input type file */
-.musicInput {
-    width: 760px;
-    height: 40px;
-    background-color: #D2B9FB;
-    border-radius: 8px;
-    bottom: 67px;
-    left: 164px;
-    margin-left:26px;
-    margin-top:20px;
-    text-align: center;
-    line-height: 40px;
-
-}
-
-/* 음악파일 첨부 버튼 */
-.musicButton {
-    width: 50px;
-    height: 36px;
-    color: black;
-    font-size: 16px;
-    background-color: #D9D9D9;
-    border-radius: 12px;
-    margin-top: 15px;
-    margin-left: 830px;
-    position: relative;
-    bottom: 134px;
-    left: 105px;
-}
-
 /* 사진 첨부랑 악기선택 이동 사이에 선 */
 .hr {
-    margin-left: 50px;
-    margin-top: 20px;
+
+    margin-top: 60px;
 }
 
 /* 등록버튼 */
 .submitBtn {
     width: 60px;
-    height: 50px;
+    height: 40px;
     color: black;
-    font-size: 16px;
-    background-color: #c19df0;
-    border-radius: 12px;
-    margin-left: 870px;
-    margin-top: 20px;
-    bottom: 110px;
-    left: 196px;
+    font-size: 15px;
+    margin-left: 744px;
+    margin-top: 40px;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.submitBtn:hover {
+    border-bottom: 2px solid #727272;
+    animation: fadein 1s;
 }

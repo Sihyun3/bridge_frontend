@@ -25,7 +25,7 @@ const ToastEditor = ({title}) => {
             .then(response => {
                 console.log(response);                             // 수정 결과에 대한 메시지 처리
                     alert(response.data);
-                    history.push('/notice');
+                    history.push('/admin/notice/list');
             })
             .catch(error => {
                 console.log(error);						// 200번대를 제외한 응답코드가 반환되는 경우
