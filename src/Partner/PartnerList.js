@@ -12,12 +12,14 @@ const PartnerList = () => {
   const [tag, setTag] = useState('');
 
   //페이징
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
+  const [limit, setLimit] = useState(8);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
+
   const currentPosts = (partnerList) => {
     let currentPosts = 0;
     currentPosts = partnerList.slice(indexOfFirst, indexOfLast);
@@ -78,8 +80,6 @@ const PartnerList = () => {
       <div className="container clearfix" >
         <div className={style.tagbox}>
 
-
-
           {tags.map((tags, index) => {
             if (index % 5 == 0) {
               return (<>   <label className={style.tags} for={`tagRadio-${index}`}>
@@ -93,7 +93,6 @@ const PartnerList = () => {
                 #{tags.name}</label></>)
             }
             return (
-              // <span className={style.taglist} key={index}>
               <label className={style.tags} for={`tagRadio-${index}`}>
                 <button
                   key={index}
@@ -103,7 +102,6 @@ const PartnerList = () => {
                   onClick={handleRadio}
                 />
                 #{tags.name}</label>
-              // </span>
             );
           })}
           <button className={style.tags} onClick={clearRadio}>#전체</button>
@@ -117,8 +115,8 @@ const PartnerList = () => {
                   <div key={index} className={style.block}>
                     {console.log(">>" + partnerList.crPhoto)}
                     <div className={style.imgbox}>
-                    <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
-                    {/* <p className={style.title}>{partnerList.userId}</p> */}
+                      <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
+                      {/* <p className={style.title}>{partnerList.userId}</p> */}
                     </div>
                     <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                     <p className={style.date}>
@@ -145,7 +143,7 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-          <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
+          <Link to={`/partner/write`}><button > 파트너 찾기 </button></Link>
         </div>
 
         <div style={{ margin: "0 auto" }} className='clearfix'>

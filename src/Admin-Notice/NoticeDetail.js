@@ -24,7 +24,6 @@ function NoticeDetail({match}) {
     
 
     useEffect(() => {
-        //
         sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6ImFkbWluIiwianRpIjoiN2I4MTY2Y2UtY2IzZC00NWU1LWExZDEtNjRhOGMzZGU0NWJhIiwiaWF0IjoxNjgzNTMwMTA4LCJleHAiOjg2NDAxNjgzNTMwMTA4fQ.0Ky3pPm61VOXna1rLOlI2KEUxTtxiPKxPwRDE5xSDko');
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/detail/${noticeIdx}` )
         .then(reponse => {
@@ -38,7 +37,7 @@ function NoticeDetail({match}) {
 
     const handlerClickList = () => {
         console.log(history);
-        history.push('/bridge/admin/notice/list');
+        history.push('/admin/notice/list');
     };
 
     const handlerClickUpdate = () => {
@@ -69,7 +68,7 @@ function NoticeDetail({match}) {
             
             if(response.data) {
                 alert('해당 글이 정상적으로 삭제되었습니다.');
-                history.push('/bridge/admin/notice/list');
+                history.push('/admin/notice/list');
             } else if (!response.data ) {
                 alert('삭제에 실패했습니다. 다시 시도해주세요.');
                 return;

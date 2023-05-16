@@ -75,7 +75,7 @@ const ReportList = () => {
                                 <>
 
                                     <div className={style.list}>
-                                        <Link to={`/bridge/admin/report/detail/${reportList.reportIdx}`} className={style.num}> {reportList.reportIdx} </Link>
+                                        <Link to={`/admin/report/detail/${reportList.reportIdx}`} className={style.num}> {reportList.reportIdx} </Link>
                                         <span>
                                             {reportList.reportReason}
                                         </span>

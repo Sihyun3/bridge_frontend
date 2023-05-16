@@ -9,6 +9,7 @@ import searchImg from './searchImg.png'
 
 
 function Notice({ history, noticeIdx, title, writer }) {
+
     const [datas, setDatas] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [filteredDatas, setFilteredDatas] = useState([]);
@@ -80,7 +81,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                 console.log(response);
                 if (response.data.length === noticeIdx.length) {
                     alert('해당 글이 정상적으로 삭제되었습니다.');
-                    history.push('/notice');
+                    history.push('/admin/notice/list');
                 } else {
                     alert('삭제에 실패했습니다. 다시 시도해주세요.');
                     return;
@@ -96,7 +97,7 @@ function Notice({ history, noticeIdx, title, writer }) {
 
 
     const handlerOnclick = () => {
-        history.push('/notice/write');
+        history.push('/admin/notice/write');
     };
 
 
@@ -147,7 +148,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                             <div className={style.list}>
                                
 
-                                <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
+                                <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>
                                 </Link>
@@ -165,7 +166,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                             <div className={style.list}>
                                 
 
-                                <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
+                                <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>
                                 </Link>
