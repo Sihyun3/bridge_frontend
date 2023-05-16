@@ -147,7 +147,7 @@ const SignUpTest = ({ history, props }) => {
             <div className='container clearfix'>
                 <div className={style.wrapper}>
                     <div className={style.container}>
-                        {/* <div className={style.signUpContainer}> */}
+                        <div className={style.signUpContainer}>
                             <form className={style.form}>
                             <img className={style.BridgeBlackLogo} src={BridgeBlackLogo} alt='브릿지 로고'></img>
 
@@ -160,24 +160,24 @@ const SignUpTest = ({ history, props }) => {
                                     <input className={style.formInput} type="Id" placeholder="아이디" onChange={handlerChangeUserId} />
                                     <input className={style.formInput} type="password" placeholder="비밀번호" onChange={handlerChangePassword} />
                                     <input className={style.formInput} type="password" placeholder="비밀번호 확인" onChange={handlerChangeConfrimPassword} />
-                                    <div className={style.basicBox2}>
+                            
                                     {/* <div className={style.line_or}>
                                     <span className={style.line_or_before} />
                                     <span className={style.txt_or}>ㅇㅇㅇ</span>
                                     <span className={style.line_or_after} />
                                 </div> */}
-                                    <input className={style.formInput} type="text" placeholder="이름" onChange={handlerChangeName} />
-                                    {/* <input className={style.formInput} type="text" placeholder="닉네임" onChange={handlerChangeNickName} /> */}
                                 </div>
-                                
-                                </div>
+                                    <div>
+                                    <input className={style.nameInput} type="text" placeholder="이름" onChange={handlerChangeName} />
+                                    </div>
 
-                                
-                                
-                                <div className={style.NumberBox}>
                                     
+                                    {/* <input className={style.formInput} type="text" placeholder="닉네임" onChange={handlerChangeNickName} /> */}
+         
+                                <div className={style.NumberBox}>
+                               
                                     <select className={style.selectNumberBox} onChange={handlerInstrument}>
-                                        <option value="number" disabled selected>+82</option>
+                                        {/* <option value="number" disabled selected>010</option> */}
                                         <option value="010">010</option>
                                         <option value="011">011</option>
                                         <option value="016">016</option>
@@ -200,7 +200,9 @@ const SignUpTest = ({ history, props }) => {
                                         <option value="daum">daum.net</option>
                                     </select>
                                 </div>
+                                
                                 <button className={style.CodeButton} onClick={handlerOnClickForVerification}>인증코드 요청</button>
+                                
                                 {/* <div ref={dropDownRef}>
                                             <input onClick={() => setIsOpen(!isOpen)} type='button' value={mailIdentify} />
                                             
@@ -230,7 +232,7 @@ const SignUpTest = ({ history, props }) => {
 
 
                             </form>
-                        {/* </div> */}
+                        </div>
                     </div>
                 </div>
             </div>

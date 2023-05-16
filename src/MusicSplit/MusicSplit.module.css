@@ -221,7 +221,7 @@ button {
 
     margin-top: 3px;
     margin-bottom: 3px;
-    background-color: #7F828F;
+    /* background-color: #7F828F; */
 }
 
 .checkSplit {
@@ -233,7 +233,7 @@ button {
     margin-bottom: 3px;
 
     display: grid;
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
     text-align: center;
 }
 
@@ -268,7 +268,8 @@ button {
 .inst_list {
 
     margin-left: 250px; 
-    height: 100px;
+    /* height: 100px; */
+    /* 간격 띄움  */
 
     margin-top: 3px;
     margin-bottom: 3px;
@@ -286,6 +287,8 @@ button {
     display: grid;
     background: #f5f5f5;
     text-align: center;
+
+    margin-top:16px;
 }
 
 .waveSize {

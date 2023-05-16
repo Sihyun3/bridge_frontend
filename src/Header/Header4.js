@@ -45,6 +45,9 @@ function Header4({ isLogin, setIsLogin }) {
                             <li className={style.Lefts}>
                                 <Link to="/tip/list">    <a>팁</a></Link>
                             </li>
+                            {/* <li className={style.Lefts}>
+                                <Link to="/bridge/tip/list">    <a>파트너</a></Link>
+                            </li> */}
 
 
 
