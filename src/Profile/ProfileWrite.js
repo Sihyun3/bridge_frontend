@@ -20,10 +20,8 @@ const ProfileWrite = () => {
     const [profileImg, setProfileImg] = useState([]);
     const [select, setSelect] = useState('');
     const [music, setMusic] = useState([]);
-    // const [tag1, setTag1] = useState('');
-    // const [tag2, setTag2] = useState('');
-    // const [tag3, setTag3] = useState('');
     const [tag, setTag] = useState([]);
+
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
@@ -59,31 +57,10 @@ const ProfileWrite = () => {
         setProfileImg([...files]);
     }
 
-    // const handleMusic = (e) => {
-    //     const files = e.target.files;
-    //     if (files.length > MAX_FILE_COUNT) {
-    //         isNotValid("프로필음악은 최대 1개 까지 업로드가 가능합니다.");
-    //         return;
-    //     }
-    //     for (let i = 0; i < files.length; i++) {
-    //         if (!files[i].type.match(".mp3")) {
-    //             isNotValid("midi 파일만 업로드 가능합니다.");
-    //             return;
-    //         }
-    //     }
-    //     setMusic([...files]);
-    // }
 
-    // const handlePosition = (e) => { setPosition(e.target.value); } //직군
     const handleIntroduction = (e) => { setIntroduction(e.target.value); } //소개
     const handleSite = (e) => { setUserSite(e.target.value); } //사이트
     const handleSelect = (e) => { setSelect(e.target.value); };
-    // const handleTag1 = (e) => { setTag1(e.target.value); }
-    // const handleTag2 = (e) => { setTag2(e.target.value); }
-    // const handleTag3 = (e) => { setTag3(e.target.value); }
-
-    // FORM DATA를 저장할 상태 변수를 변수 이름: 값 형식으로 설정
-  
 
     const handlerInstrument = (e) => {
         setTag([...tag, e.target.value])
@@ -120,7 +97,6 @@ const ProfileWrite = () => {
         })
             .then(response => {
                 console.log(response);
-                // ${response.data}\n
                 alert(`정상적으로 업로드했습니다.`);
             })
             .catch(error => {

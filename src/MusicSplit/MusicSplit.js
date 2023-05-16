@@ -56,7 +56,6 @@ const MusicSplit = () => {
   const handleCheck = (e) => {
     e.preventDefault();
     console.log(musicUUID);
-    //
     axios.get(`http://localhost:8080/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;

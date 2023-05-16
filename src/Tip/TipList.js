@@ -52,7 +52,7 @@ const TipList = () => {
                             console.log(data.tbIdx)
                             return (
 
-                                <Link to={`/bridge/tip/detail/${data.tbIdx}`} className={style.list}>
+                                <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
                                     <a className={style.title}>{data.tbTitle}</a>
                                     <a className={style.writer}>{data.userId}</a>
                                     <a className={style.heart}>♡</a>

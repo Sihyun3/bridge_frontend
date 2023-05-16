@@ -5,12 +5,14 @@ import musicfile from './musical-note.png';
 import axios from "axios";
 import { useState, useRef } from "react";
 const JamWrite = () => {
+
     const [title, setTitle] = useState('');
     const [content, setContent] = useState("");
     // const photoRef = useRef;
     const [photo, setPhoto] = useState("");
     const [music, setMusic] = useState("");
     const [instrument, setInstrument] = useState("");
+    
     const handlersubmit = () => {
         sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
         let formData = new FormData();

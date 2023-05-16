@@ -15,6 +15,7 @@ export default function Finduser({ match }) {
     const [checkPassword, setCheckPassword] = useState('');
     const [temp, setTemp] = useState('');
     const [userId,setUserId] = useState('');
+    
     const handlerAuth = () => {
         if(idx == 1){
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/emailid/${email}/${userId}`)

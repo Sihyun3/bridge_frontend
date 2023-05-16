@@ -73,7 +73,6 @@ const Doing = ({ history, match, pcIdx }) => {
         setUserId1(userId);
         console.log(decode_token);
         console.log(userId);
-        // ${userId}
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${decode_token.sub}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
@@ -151,11 +150,9 @@ const Doing = ({ history, match, pcIdx }) => {
                 console.log(error);
                 if (error.response.status === 403) {
                     alert('접근 권한이 없습니다. 로그인 후 다시 시도하세요');
-                    history.push('/3');
+                    history.push('/login');
                 }
             });
-        // console.log(index);
-        // return (index);
     }
 
     const handlerClickUpload = () => {

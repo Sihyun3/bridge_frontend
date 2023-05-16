@@ -14,17 +14,17 @@ const MainAd = () => {
             <div className="container clearfix" >
                 <div className={style.mainBox}>
                     <h1 className={style.mainText}> 관리자 전용 페이지 </h1>
-                    <Link to={`/bridge/admin/report/list`}>
+                    <Link to={`/admin/report/list`}>
                         <div className={style.report}>
                             <img src={warning} className={style.reportIcon}></img>  <p>신고 관리 </p>
                             <img src={arrow} className={style.reportArrow}></img> </div>
                     </Link>
-                    <Link to={`/bridge/admin/notice/list`}>
+                    <Link to={`/admin/notice/list`}>
                         <div className={style.notify}>
                             <img src={megaphone} className={style.notifyIcon}></img><p>공지 등록</p>
                             <img src={arrow} className={style.notifyArrow}></img></div>
                     </Link>
-                    <Link to={`/bridge/admin/deal/list`}>
+                    <Link to={`/admin/deal/list`}>
                         <div className={style.deal}>
                             <img src={coin} className={style.dealIcon}></img> <p>거래 내역</p>
                             <img src={arrow} className={style.dealArrow}></img></div>

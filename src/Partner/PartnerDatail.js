@@ -29,7 +29,7 @@ const PartnerDatail = ({ match }) => {
         axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
             .then((response) => {
                 alert(`정상적으로 삭제되었습니다`)
-                history.push(`/bridge/partner/list`);
+                history.push(`/partner/list`);
             })
             .catch((err) => {
                 console.log(err);
@@ -40,7 +40,7 @@ const PartnerDatail = ({ match }) => {
     return (
         <>
             <div className='container clearfix' >
-                <Link to='/bridge/partner/list'>
+                <Link to='/partner/list'>
                     <div className={style.back}>
                         <img className={style.backbutton} src={back_button} />
                     </div>

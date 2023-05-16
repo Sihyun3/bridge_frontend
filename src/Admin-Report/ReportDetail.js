@@ -43,7 +43,7 @@ function ReportDetail({ match }) {
           .then(response => {
             alert('영구정지 처리되었습니다.')
             console.log(response.data);
-            history.push(`/bridge/admin/report/list`)
+            history.push(`/admin/report/list`)
           })
           .catch(error => {
             console.log(error);
