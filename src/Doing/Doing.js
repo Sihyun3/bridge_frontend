@@ -44,7 +44,9 @@ const Doing = ({ history, match, pcIdx }) => {
         }])
     const [listArray, setListArray] = useState([
         {
-            receiver: '',
+            pdNumber: '',
+            userId1: '',
+            userId2: '',
             photo: '',
             tag1: '',
             tag2: '',
@@ -74,7 +76,7 @@ const Doing = ({ history, match, pcIdx }) => {
         if (sessionStorage.getItem('token') == null) {
             history.push('/login')
             return;
-          }
+        }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
 
@@ -89,7 +91,8 @@ const Doing = ({ history, match, pcIdx }) => {
                 setListArray(response.data.map((data) => {
                     return ({
                         pdNumber: data.pdIdx,
-                        receiver: data.userId2,
+                        userId1: data.userId1,
+                        userId2: data.userId2,
                         photo: data.profileImg,
                         tag1: data.userTag1,
                         tag2: data.userTag2,
@@ -103,15 +106,14 @@ const Doing = ({ history, match, pcIdx }) => {
                 console.log(userId)
                 return;
             })
-
     }, []);
 
+    const [partner, setPartner] = useState('');
 
 
-    const handlerClickSelect = (pdNumber, receiver, progress, tag1, tag2, tag3) => {
+    const handlerClickSelect = (index, pdNumber, progress, tag1, tag2, tag3) => {
 
-        setUserId2(receiver);
-        const userId22 = receiver;
+        setUserId2(partner);
         console.log(userId1);
         console.log(userId2);
         setProgress(progress);
@@ -119,7 +121,17 @@ const Doing = ({ history, match, pcIdx }) => {
         tagList[1] = tag2;
         tagList[2] = tag3;
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${userId22}`,
+        let partnerLet1;
+        if (userId1 == listArray[index].userId1) {
+            partnerLet1 = listArray[index].userId2
+            setPartner(partnerLet1);
+        } else if (userId1 == listArray[index].userId2) {
+            partnerLet1 = listArray[index].userId1;
+            setPartner(partnerLet1);
+        }
+
+
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${partnerLet1}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
@@ -161,10 +173,6 @@ const Doing = ({ history, match, pcIdx }) => {
                     history.push('/login');
                 }
             });
-<<<<<<< HEAD
-
-=======
->>>>>>> f9500f482d52649cd948aaf24df8cc457b875d7f
     }
 
     // useEffect(() => {
@@ -344,34 +352,30 @@ const Doing = ({ history, match, pcIdx }) => {
             })
     }
 
+
+
+
     const ProjectList = () => {
         // console.log(listArray);
-
+        let partnerLet2;
         return listArray && listArray.map((value, index) => {
+            if (userId1 == value.userId1){
+                partnerLet2 = value.userId2;
+            } else if (userId1 == value.userId2){
+                partnerLet2 = value.userId1;
+            }
             return (
                 <>
                     <div key={index} className={style.partnerProfile}>
-                        <button onClick={() => handlerClickSelect(value.pdNumber, value.receiver, value.progress, value.tag1, value.tag2, value.tag3)}>
+                        <button onClick={() => handlerClickSelect(index, value.pdNumber, value.progress, value.tag1, value.tag2, value.tag3)}>
                             <p className={style.img}> {value.photo}</p>
                             <div className={style.profileBox}>
-                                <span className={style.nickname}>{value.receiver}</span>
+                                <span className={style.nickname}>{partnerLet2}</span>
                                 <span className={style.tag}> {'#' + value.tag1} {'#' + value.tag2} {'#' + value.tag3}</span>
                             </div>
                         </button>
                     </div>
                     {/* {console.log(pdIdx)} */}
-
-                    {/* <div className={style.doinglist} key={index}>
-                        <button onClick={() => setPdIdx(handlerClickSelect(index + 1, value.receiver))}>
-                            <div className={style.img}>{value.photo}</div>
-                            <p className={style.p1}>{value.receiver} </p>
-                            <p className={style.p2}>{value.tag1}</p>
-                            <p className={style.p2}>{value.tag2}</p>
-                            <p className={style.p2}>{value.tag3}</p>
-                        </button>
-
-                        {console.log(pdIdx)}
-                    </div> */}
                 </>
             );
         });
@@ -393,6 +397,7 @@ const Doing = ({ history, match, pcIdx }) => {
                 {/* {console.log(contentList)} */}
 
                 {contentList && contentList.map((value, index) => {
+                    const download = `http://localhost:8080/api/bridge/partnerdetail/download/${value.file}`;
                     return (
                         <div className={style.contentBox}>
                             <div className={style.contentTop}>
@@ -408,7 +413,7 @@ const Doing = ({ history, match, pcIdx }) => {
                                 <div className={style.img}>{value.img}</div>
                                 <div className={style.writer}>{value.writer}</div>
                                 <div className={style.main}>{value.content}</div>
-                                <div className={style.file}>{value.file}</div>
+                                <div className={style.file}><a href={download}>{value.file}</a></div>
                                 <div className={style.commentLetter}>
                                     <button onClick={() => handlerClickComment(value.pcNumber, index)}>{commentOpen === index ? '접기' : '코멘트'}</button>
                                 </div>
@@ -470,7 +475,7 @@ const Doing = ({ history, match, pcIdx }) => {
             </div>
             <div className='container clearfix' >
                 <div className={style.doing}>
-                    <div className={style.doingTitle}> {userId2} </div>
+                    <div className={style.doingTitle}> {partner} </div>
                     <div className={style.doingProgress}>{progress == '0' ?
                         <>현재 작업이 <span style={{ fontWeight: 'bold' }}>진행 중</span>입니다. </>
                         :

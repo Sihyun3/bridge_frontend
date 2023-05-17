@@ -8,6 +8,8 @@ function Header4({ isLogin, setIsLogin }) {
 
     const [state, setState] = useState(false);
     const [userNickname, setUserNickname] = useState('');
+    const [userPoint, setUserPoint] = useState('');
+
 
     const handlerOnLogoutClick = () => {
         alert("로그아웃되었습니다.");
@@ -37,35 +39,34 @@ function Header4({ isLogin, setIsLogin }) {
                         <ul className={style.leftMenu}>
 
                             <li className={style.Lefts}>
-<<<<<<< HEAD
                                 <Link to="/split">  <a>Split Music</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/jam/list">   <a>Make Music</a></Link>
+                                <Link to="/bridge/jam/list">     <a>Make Music</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/partner/list">    <a>Commission</a></Link>
+                                <Link to="/bridge/partner/list"> <a>Commission</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/tip/list">    <a>Community</a></Link>
+                                <Link to="/bridge/tip/list">     <a>Community</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/tip/list">    <a>About Us</a></Link>
-=======
-                                <Link to="/split">  <a>음원 분리</a></Link>
-                            </li>
-                            <li className={style.Lefts}>
-                                <Link to="/jam/list">   <a>합주</a></Link>
-                            </li>
-                            <li className={style.Lefts}>
-                                <Link to="/tip/list">    <a>팁</a></Link>
->>>>>>> 5fb1e9d9fd1122b7d52f248333b45fd533a40de5
+                                <Link to="/bridge/tip/list">     <a>About Us</a></Link>
                             </li>
 
 
+                        {/* <div className={style.rightContents}> */}
+                            <div className={style.pointbox}>
+                                <li> <a className={style.point}>{userPoint}P</a></li>
+                                <div className={style.drop}>
+                                    <Link to="/profile/charge">충전하기</Link>
+                                    <Link to="/partner/bankHistory">거래내역</Link>
+                                </div>
+                            </div>
 
 
-                            <li><a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a></li>
+                            
+                            
                             <div className={style.box}>
                                 <li> <a className={style.nickname}>{userNickname}님</a></li>
                                 <div className={style.drop}>
@@ -74,8 +75,13 @@ function Header4({ isLogin, setIsLogin }) {
                                     {/* 거래내역 추가 부탁해요 */}
                                     <Link to="/chatting">채팅</Link>
 
+                                    <a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a>
+
+
                                 </div>
+                                
                             </div>
+                            {/* </div> */}
 
 
                         </ul>
@@ -92,7 +98,6 @@ function Header4({ isLogin, setIsLogin }) {
                     <div className={style.leftContents}>
                         <ul className={style.leftMenu}>
 
-<<<<<<< HEAD
                         <li className={style.Lefts}>
                                 <Link to="/split">  <a>Split Music</a></Link>
                             </li>
@@ -109,17 +114,6 @@ function Header4({ isLogin, setIsLogin }) {
                                 <Link to="/bridge/aboutUs">    <a>About Us</a></Link>
                             </li>
 
-=======
-                            <li className={style.Lefts}>
-                                <Link to="/split">  <a>음원 분리</a></Link>
-                            </li>
-                            <li className={style.Lefts}>
-                                <Link to="/jam/list">   <a>합주</a></Link>
-                            </li>
-                            <li className={style.Lefts}>
-                                <Link to="/tip/list">    <a>팁</a></Link>
-                            </li>
->>>>>>> 5fb1e9d9fd1122b7d52f248333b45fd533a40de5
                             <Link className={style.Login} to="/login">로그인</Link>
                             <Link className={style.regist} to="/signup">회원가입</Link>
 

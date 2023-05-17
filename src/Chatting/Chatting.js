@@ -16,7 +16,7 @@ const Chatting = ({match}) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-    const [reciver ,setReciver] = useState(''); 
+    // const [reciver ,setReciver] = useState(''); 
 
     const history = useHistory();
     

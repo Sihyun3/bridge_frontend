@@ -80,6 +80,7 @@ function App() {
      
       {/* 로그인 */}
       <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/login" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
       {/* 왓 이즈 디스..? */}
       {/* <Route path="/29" component={LoginTest} exact={true} /> */}
