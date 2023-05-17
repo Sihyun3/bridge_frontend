@@ -35,7 +35,7 @@
     margin-left:520px;
     display: inline-block;
     margin-top: 44px;
-    font-size:20px;
+    font-size:24px;
     background-color: white;
     border-radius: 0.5rem;
     text-shadow: 1px 1px 1px #c2c2c2;
@@ -50,17 +50,20 @@
     float: left;
     margin-right: 66.66666666666667px;
     margin-bottom: 60px;
+    /* box-shadow: 5px 5px 20px 0 rgba(107, 107, 107, 0.4); */
     
 }
 .imgbox {
     width: 250px;
     height: 250px;
-    box-shadow: 5px 5px 20px 0 rgba(107, 107, 107, 0.4);
+    box-shadow:  5px 5px 20px 0 rgba(107, 107, 107, 0.4);
     margin-bottom: 24px;
+    overflow: hidden;
+    border-radius: 4px;
 }
 .img{
-    width: 250px;
-    height: auto;
+    width: auto;
+    height: 250px;
 }
 .block:nth-child(4n){margin-right:0}
 
