@@ -16,7 +16,7 @@ const PartnerWrite = () => {
     const [userId, setUserId] = useState('');
     const [inputImg, setInputImg] = useState([]);
 
-    
+
 
     const history = useHistory();
 
@@ -24,7 +24,7 @@ const PartnerWrite = () => {
         if (sessionStorage.getItem('token') == null) {
             history.push('/login')
             return;
-          }
+        }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
@@ -112,35 +112,38 @@ const PartnerWrite = () => {
     Object.values(inputImg).forEach(file => formData.append('files', file));
 
     const handleSumit = () => {
-        const result = window.confirm("사이트 정책상 수정이 불가합니다 \n 등록 전 내용을 다시 한 번 확인해주세요.")
+        const result = window.confirm("사이트 정책상 수정이 불가합니다. \n등록 전 내용을 다시 한 번 확인해주세요.")
         if (result) {
-    
-        axios({
-            method: 'POST',
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertPartnerWrite`,
-            headers: { 'Content-Type': 'multipart/form-data;' },
-            data: formData
-        })
-            .then(response => {
-                console.log(response);
-                alert(`정상적으로 업로드했습니다.`);
-                history.push('/partner/list')
+
+            axios({
+                method: 'POST',
+                url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertPartnerWrite`,
+                headers: { 'Content-Type': 'multipart/form-data;' },
+                data: formData
             })
-            .catch(error => {
-                console.log(error);
-                alert(`업로드 중 오류가 발생했습니다.`);
-            });
-        
-    }};
+                .then(response => {
+                    console.log(response);
+                    alert(`정상적으로 업로드했습니다.`);
+                    history.push('/partner/list')
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert(`업로드 중 오류가 발생했습니다.`);
+                });
+
+        }
+    };
 
     return (
         <>
-            <div className={style.mainBox}>
+            <div className="container clearfix" >
+
                 <h1 className={style.mainText}>파트너 모집 작성</h1>
-                
+
                 <div className={style.content}>
                     <div className={style.title}>
-                        <span className={style.titleText}>제목: </span> <input type="text" value={title} onChange={handleTitle} className={style.titleInput}></input>
+                    <span className={style.titleText}>제목: </span>
+                        <input type="text" value={title} onChange={handleTitle} className={style.titleInput} placeholder="제목을 입력해주세요."></input>
                     </div>
                     <div className={style.period}>
                         <span className={style.periodText}>기간: </span>
@@ -154,18 +157,20 @@ const PartnerWrite = () => {
                     </div>
                     <div className={style.tag}>
                         <span className={style.tagText}>태그: </span>
-                        {partnerTag.map((tag, idx) => {
-                            return (
-                                <>
-                                    <div key={idx}>
-                                        <input className={style.tagInput} type="checkbox" id={tag.name} onChange={(e) =>
-                                            handleCheck(e.currentTarget.checked, tag.name)
-                                        } />
-                                        <label htmlFor={tag.name}>{tag.name}</label>
-                                    </div>
-                                </>
-                            )
-                        })}
+                        <div className={style.alltags}>
+                            {partnerTag.map((tag, idx) => {
+                                return (
+                                    <>
+                                        <div className={style.tagbox} key={idx}>
+                                            <input className={style.tagInput} type="checkbox" id={tag.name} onChange={(e) =>
+                                                handleCheck(e.currentTarget.checked, tag.name)
+                                            } />
+                                            <label htmlFor={tag.name}>{tag.name}</label>
+                                        </div>
+                                    </>
+                                )
+                            })}
+                        </div>
                     </div>
                     <div className={style.image}>
                         <span className={style.imageText}>이미지: </span>
@@ -174,12 +179,13 @@ const PartnerWrite = () => {
                     </div>
                     <div className={style.intro}>
                         <span className={style.introText}>소개글: </span>
-                        <input type="text" value={content} onChange={handleContent} className={style.introInput} placeholder="※ 사이트 정책상 수정이 불가하오니, 신중히 작성해주시길 부탁드립니다."></input>
+                        <textarea value={content} onChange={handleContent} className={style.introInput} placeholder="※ 사이트 정책상 수정이 불가하오니, 신중히 작성해주시길 부탁드립니다."></textarea>
                     </div>
                     <div className={style.regist}>
                         <button onClick={handleSumit} className={style.registButton}>등록</button>
                     </div>
                 </div>
+
 
             </div>
         </>

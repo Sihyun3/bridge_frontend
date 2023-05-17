@@ -20,7 +20,6 @@ const Chatting = ({match}) => {
 
     const history = useHistory();
     
-    const [reciver, setReciver] = useState('');
     const publish = () => {
         if (!client.current.connected) return;
         client.current.publish({

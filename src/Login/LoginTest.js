@@ -14,7 +14,6 @@ const LoginTest = ({ setIsLogin }) => {
 
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
-
     const history = useHistory();
 
     const handlerOnClick = e => {
@@ -39,9 +38,6 @@ const LoginTest = ({ setIsLogin }) => {
                 sessionStorage.clear();
             })
     };
- 
-
-
 
     const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
     const [isRemember, setIsRemember] = useState(false);
@@ -77,11 +73,7 @@ const LoginTest = ({ setIsLogin }) => {
                             <form className={style.form}>
                                 <h1 className={style.formH1}>Login</h1>
                                 <input className={style.formInput} type="Id" placeholder="아이디" value={userId} onChange={(e) => setUserId(e.target.value)} />
-                                {/* <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} onBlur={handlerWrongPassword} /> */}
-
-                                {/* <input type="number" name="pointBox" value={pointBox} className={style.pointInput} onChange={(e)=>{
-                                setPointBox(e.target.value)
-                            }}onBlur={handlerWrongPassword} />  */}
+                                <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
 
                                 <div className={style.saveBox}>
                                     <input className={style.idCheckBox} type='checkbox' checked={isRemember} id="saveId" name="saveId" value="saveId"  onChange={(e) => {handleOnChange(e);}} />
@@ -128,4 +120,3 @@ const LoginTest = ({ setIsLogin }) => {
 
 
 export default LoginTest;
-
