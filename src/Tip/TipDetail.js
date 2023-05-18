@@ -127,7 +127,7 @@ const TipDetail = ({ match }) => {
             </div></Link>
             <div className={style.title}>
                 <h1>{data.tbTitle}</h1>
-                <br /><br />
+              
                 <p>조회수:{data.tbViews}</p>
                 <p>작성일:{data.tbCreatedt}</p>
             </div>
@@ -151,25 +151,25 @@ const TipDetail = ({ match }) => {
             <div className={style.editbox}>
                 <ul>
                     <li onClick={handlerdelete}> 삭제</li>
-                    <li><Link to={`/bridge/tip/edit/${data.tbIdx}`}></Link>수정</li>
+                    <li><Link to={`/tip/edit/${data.tbIdx}`}>수정</Link></li>
                 </ul>
             </div>
             <div className={style.line}></div>
             <div className={style.comment}><h2>댓글</h2></div>
-            <div className={style.com}>
+            <div className={style.commentall}>
                 {comments.map((data, idx) => {
                     return (
-                        <div className={style.comments} style={{ width: 1000, marginLeft: 80, height: 40, float: "left", lineHeight: "40px" }}  >
+                        <div className={style.comments}  >
                             <div style={{ width: "100px", float: "left" }} > {data.userId} </div>
-                            <div> {data.tbcComments}</div>
+                            <div className={style.text}> {data.tbcComments}</div>
                         </div>
                     )
                 })}
             </div>
             <div className={style.line}></div>
             <div className={style.input}>
-                <div style={{ margin: "0 auto", width: "900px" }}>
-                    <input type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} className={style.writeComment} />
+                <div>
+                    <input className={style.writeComment} type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} />
                     <input type="button" className={style.finish} onClick={insert} value="등록" />
                 </div>
             </div>

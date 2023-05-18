@@ -1,4 +1,4 @@
-import Header1 from '../Header/Header1'
+
 import style from '../Partner/PartnerDatail.module.css'
 import back_button from '../Tip/back-button.png'
 import writer from '../Partner/note.png'
@@ -93,7 +93,7 @@ const PartnerDatail = ({ match }) => {
                 </div>
                 <div className={style.buttonbox2}>
                     <button onClick={handleDelete}>삭제하기</button>
-                    <Link to='/partner/list'> <button> 목록으로 </button> </Link>
+               
                 </div>
 
                 <div className={style.line}></div>

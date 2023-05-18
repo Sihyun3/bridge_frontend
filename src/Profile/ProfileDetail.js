@@ -1,6 +1,5 @@
 import style from './ProfileDetail.module.css'
 import '../reset.css';
-import Header1 from '../Header/Header1';
 import img from "./checkbox.png"
 import { useEffect, useState } from 'react';
 import axios from 'axios';

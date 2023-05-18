@@ -1,5 +1,5 @@
 // 헤더 풋터
-import Header2 from './Header/Header2';
+
 import Footer from './Footer/Footer';
 //페이지 임포트
 import LoginStart from './Login/LoginStart';
@@ -65,7 +65,7 @@ function App() {
       <Route path="/bridge/jam/list" component={JamList} exact={true} />
       <Route path="/bridge/jam/write" component={JamWrite} exact={true} />
       <Route path="/bridge/admin/deal/list" component={DealListAd} exact={true} />
-      <Route path="/deal/list" component={PaymentList} exact={true} />
+
       {/* 완성중이나 디자인 수정 조금 필요함 */}
       <Route path="/bridge/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} />
       <Route path="/bridge/report/write" component={ReportPage} exact={true} />
@@ -80,10 +80,6 @@ function App() {
      
       {/* 로그인 */}
       <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
-      {/* 로그인 테스트  */}
-      <Route path="/login" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
-      {/* 왓 이즈 디스..? */}
-      {/* <Route path="/29" component={LoginTest} exact={true} /> */}
 
       <Route path="/jam/list" component={JamList} exact={true} />
       <Route path="/jam/write" component={JamWrite} exact={true} />
@@ -96,30 +92,29 @@ function App() {
 
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
-      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />  {/* 목록 버튼 css 다듬기 부탁해요 */}
+      <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />  {/* 신청하기 누르면 채팅방 뜨게 */}
       <Route path="/partner/charge" component={Charge} exact={true} />
 
       <Route path="/tip/list" component={TipList} exact={true} />         {/* 리스트가 너무 여러개 뜸 */}
       <Route path="/tip/write" component={TipWrite} exact={true} />
-      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> {/* 디자인 디테일 수정 필요 */}
+      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> {/* 덧글 verchar(100)넘을시 덧글 길다는 안내창 있어야함, 수정 버튼 클릭시 동일 id임에도 작성자만 삭제(?) 가능하다고 뜸 */}
 
       <Route path="/split" component={MusicSplit} exact={true} />
 
-      <Route path="/profile/write" component={ProfileWrite} exact={true} />
+      <Route path="/profile/write" component={ProfileWrite} exact={true} /> {/*악기 선택을 악기 태그와 통일할 필요 있음*/}
       <Route path="/report/write" component={ReportPage} exact={true} />
-      <Route path="/bridge/signup" component={SignUpTest} exact={true} />
-      <Route path="/signup" component={SignUp} exact={true} />
+
 
       {/* 기능 완성 */}
       <Route path="/find/:idx" component={Finduser} exact={true}/>
 
       <Route path="/admin/report/list" component={ReportList} exact={true} /> {/* 디자인 깨짐 */}  
 
-      <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
+      <Route path="/partner/list" component={PartnerList} exact={true} /> 
       <Route path="/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/partner/payment" component={PaymentTest2} exact={true} />
 
-      <Route path="/chatting" component={Chatting} exact={true} />
+      <Route path="/chatting" component={Chatting} exact={true} /> {/*미리보기 기능과 공백일시 전송안되게 해야함*/}
 
       <Route path="/deal/list" component={PaymentList} exact={true} />
 

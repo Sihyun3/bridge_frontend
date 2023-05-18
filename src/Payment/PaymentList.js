@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import searchImg from '../Tip/searchImg.png';
 
 const PaymentList = ({match}) => {
     const [userId, setUserId] = useState('');
@@ -148,7 +149,8 @@ const PaymentList = ({match}) => {
                     <button className={style.dealButton2} onClick={handle6Month}>6개월</button>
                 </div>
                 <div className={style.search}>
-                    <button onClick={handleSearch}>검색하기</button> <input type='text' value={searchInput} onChange={hadleSearchInput} className={style.searchInput} ></input>
+                <p>검색하기</p> <input type='text' value={searchInput} onChange={hadleSearchInput} className={style.searchInput} ></input>
+                   <button type='button' onClick={handleSearch}><img src={searchImg} className={style.searchImg}/></button> 
                 </div>
                 <div className={style.buttonBox}>
                     <button onClick={handleAll} className={style.initButton}>전체내역</button>
