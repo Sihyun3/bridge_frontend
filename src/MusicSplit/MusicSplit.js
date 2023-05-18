@@ -3,6 +3,7 @@ import axios from "axios";
 import Waveform from "../Waveform";
 import style from './MusicSplit.module.css';
 import musicfile_upload from './icons/MusicFileIcon.png'
+import { useHistory } from "react-router";
 
 // import Dropzone from 'react-dropzone';
 
@@ -23,7 +24,15 @@ const MusicSplit = () => {
   const [isSplitCompleted, setIsSplitCompleted] = useState(false);
   const [music, setMusic] = useState('');
 
+  const history = useHistory();
 
+  useEffect(() => {
+    if (sessionStorage.getItem('token') == null) {
+        alert(`로그인이 필요합니다. 로그인해주세요`);
+        history.push('/login')
+        return;
+    }
+  },[]);
  
 
 

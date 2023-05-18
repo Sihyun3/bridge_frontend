@@ -5,7 +5,8 @@ import send from './send.png';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import * as StompJs from '@stomp/stompjs';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router';
+
 
 const Chatting = ({match}) => {
 
@@ -16,7 +17,7 @@ const Chatting = ({match}) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-    // const [reciver ,setReciver] = useState(''); 
+    const [reciver ,setReciver] = useState(''); 
 
     const history = useHistory();
     
@@ -35,6 +36,7 @@ const Chatting = ({match}) => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
+            alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
           }
