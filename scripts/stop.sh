@@ -13,5 +13,5 @@ if [ -z $CURRENT_PID ]; then
 	echo "$TIME_NOW : no process" >> $DEPLOY_LOG
 else
 	echo "$TIME_NOW : stop PID $CURRENT_PID" >> $DEPLOY_LOG
-	kill -15 $CURRENT_PID
+	sudo kill -15 $CURRENT_PID
 fi
