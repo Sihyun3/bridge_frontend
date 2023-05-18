@@ -82,6 +82,8 @@ function App() {
       <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
       {/* 왓 이즈 디스..? */}
+      <Route path="/bridge/signup" component={SignUpTest} exact={true} />
+      {/* <Route path="/signup" component={SignUp} exact={true} /> */}
       {/* <Route path="/29" component={LoginTest} exact={true} /> */}
 
       <Route path="/jam/list" component={JamList} exact={true} />

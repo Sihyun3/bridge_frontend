@@ -10,6 +10,7 @@ import BridgeBlackLogo from '../SignUp/BridgeBlackLogo.png';
 import UnLock from './UnLock.png';
 import Locked from './Locked.png';
 import { click } from '@testing-library/user-event/dist/click';
+import { Password } from '@mui/icons-material';
 
 const SignUpTest = ({ history, props }) => {
     const [dropdownVisibility, setDropdownVisibility] = React.useState(false);
@@ -32,8 +33,8 @@ const SignUpTest = ({ history, props }) => {
     const [userEmail, setEmail] = useState();
 
 
-    const [Pmessage, setPmassage] = useState();
-    const [Emassage, setEmassage] = useState();
+    const [Pmessage, setPmessage] = useState();
+    const [Emessage, setEmessage] = useState();
     const [verifyCode, setVerifyCode] = useState();
     const [verifyConfirmMessage, setVerifyConfirmMessage] = useState();
     const [tag, setTag] = useState([]);
@@ -74,31 +75,28 @@ const SignUpTest = ({ history, props }) => {
         if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
             setEmail(frontmail);
             console.log(frontmail);
-            setEmassage(null);
+            setEmessage(null);
 
         } else {
             setEmail(userFirstEmail);
-            setEmassage('이메일 형식이 올바르지 않습니다.');
+            setEmessage('이메일 형식이 올바르지 않습니다.');
         }
-
-
     }, [insert])
 
 
 
-
-
-
     const handlerOnClick = e => {
-        if (confirmMessage == null && Pmessage == null && Emassage == null && userId != null) {
+        e.preventDefault();
+        if (confirmMessage == null && Pmessage == null && Emessage == null && userId != null && confirmIdMessage != null
+        ) {
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
-                "userId": userId, "userPassword": userPassword, "userPhoneNumber": select + userPhoneNumber,
-                "userEmail": userEmail + selectEmail, "userName": userName, "userNickname": userNickname
+                "userId": userId, "userPassword": userPassword, "userName": userName, "userEmail": userEmail, "userPhoneNumber": userPhoneNumber
             })
                 .then(response => {
 
                     alert('정상적으로 등록 되었습니다.')
                     history.push('/login')
+
 
                 })
                 .catch(error => {
@@ -108,6 +106,7 @@ const SignUpTest = ({ history, props }) => {
                 })
         } else {
             alert('형식이 일치하지 않습니다')
+
         }
     };
 
@@ -214,11 +213,11 @@ const SignUpTest = ({ history, props }) => {
         if (/^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/.test(number)) {
             // if (/^(select)-(?:\d{3}|\d{4})-\d{4}$/.test(e.target.value)) {
             setPhone(number);
-            setPmassage(null);
+            setPmessage(null);
             console.log(number);
         } else {
             setPhone(e.target.value);
-            setPmassage('번호 형식이 올바르지 않습니다.');
+            setPmessage('번호 형식이 올바르지 않습니다.');
         }
     };
     const handleSelectLastEmail = (e) => {
@@ -304,15 +303,17 @@ const SignUpTest = ({ history, props }) => {
                                     </div>
 
                                 </div>
-                                <div className={style.basicBox}>
+                                <div className={style.passwordBox}>
                                     <label>
-                                    <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} />
-                                    <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required maxLength={8} />
+
+                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={12} />
+
+                                        <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} /></label>
+                                    <label>
+                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={12} />
+                                        <img type="Button" className={style.Locked2} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
+
                                     </label>
-                                    <label>
-                                    <img type="Button" className={style.Locked2} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />        
-                                    <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required maxLength={8} />
-                                    </label>       
 
 
 
@@ -345,6 +346,7 @@ const SignUpTest = ({ history, props }) => {
                                     </select>
                                     <input className={style.NumberBoxInput} type="phoneNumber" placeholder="핸드폰 번호 ex 0000-0000" onBlur={changePhone} />
                                 </div>
+                                {console.log(">>>>>>>>>>>>>" + userPhoneNumber)}
                                 <div className={style.line_or}>
                                     <span className={style.line_or_before} />
                                     <span className={style.txt_or}>본인확인 이메일</span>
@@ -376,36 +378,6 @@ const SignUpTest = ({ history, props }) => {
                     </div>
                 </div>
             </div>
-
-
-
-
-            {/* <div className='container clearfix' >
-                <div className={style.loginbackg}>
-                    <h1 className={style.login}>회원 가입</h1>
-
-                    <input className={style.signupinput} onChange={handlerChangeName} placeholder="이름을 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeNickName} placeholder="닉네임을 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeUserId} placeholder="아이디를 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeEmail} placeholder="이메일을 입력해주세요." />
-                    <div>{Emassage}</div>
-
-                    <input className={style.signupinput2} onChange={handlerChangePassword} placeholder="비밀번호를 8자 이상 입력해주세요." />
-
-                    <input className={style.signupinput2} onChange={handlerChangeConfrimPassword} placeholder="비밀번호를 재입력해주세요." />
-                    <div >{confrimMessage}</div>
-                    <input className={style.signupinput2} onChange={changePhone} placeholder="전화번호를 입력해주세요." />
-                    <div>{Pmessage}</div>
-                    <br />
-                    <button className={style.loginbutton} onClick={handlerOnClick}>회원 가입</button>
-                    <p className={style.loginsns}>SNS로 가입하기</p>
-                  <div className={style.kakao}>  <KakaoLogin/></div>
-                    <div className={style.naver}><NaverLogin/></div>
-                </div>
-            </div> */}
-
-
-
         </>
 
     )

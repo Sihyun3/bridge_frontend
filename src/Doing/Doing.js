@@ -161,10 +161,6 @@ const Doing = ({ history, match, pcIdx }) => {
                     history.push('/login');
                 }
             });
-<<<<<<< HEAD
-
-=======
->>>>>>> f9500f482d52649cd948aaf24df8cc457b875d7f
     }
 
     // useEffect(() => {

@@ -77,7 +77,7 @@ const LoginTest = ({ setIsLogin }) => {
                             <form className={style.form}>
                                 <h1 className={style.formH1}>Login</h1>
                                 <input className={style.formInput} type="Id" placeholder="아이디" value={userId} onChange={(e) => setUserId(e.target.value)} />
-                                {/* <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} onBlur={handlerWrongPassword} /> */}
+                                <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
 
                                 {/* <input type="number" name="pointBox" value={pointBox} className={style.pointInput} onChange={(e)=>{
                                 setPointBox(e.target.value)
