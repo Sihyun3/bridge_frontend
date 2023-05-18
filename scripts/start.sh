@@ -16,6 +16,6 @@ echo "$TIME_NOW : copy build" >> $DEPLOY_LOG
 
 
 echo "$TIME_NOW : run nginx" >> $DEPLOY_LOG
-sudo service nginx start
+sudo sytemctl restart nginx 
 # chmod 111 JAR_FILE
 # nohup java -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
