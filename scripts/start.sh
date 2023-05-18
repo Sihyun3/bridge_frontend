@@ -11,7 +11,7 @@ TIME_NOW=$(date +%c)
 
 
 
-cp $PROJECT_ROOT/build/ /usr/share/nginx/html/
+cp -r $PROJECT_ROOT/build/ /usr/share/nginx/html/
 echo "$TIME_NOW : copy build" >> $DEPLOY_LOG
 
 
