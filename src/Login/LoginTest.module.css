@@ -113,8 +113,8 @@
   
   .registrationButton{
     color :#ffffff;
-    background-color: #000;
-    border-color: #000;
+    background-color: #3c3e58;
+    /* border-color: #000; */
     /* opacity: 0.; */
     font-size: 14px;
     font-weight: bold;
