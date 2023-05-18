@@ -84,8 +84,8 @@
 
     .idCheckButton{
     float: right;
-    background: #000;
-    border-color: #000;
+    background:#3c3e58;
+    /* border-color: #000; */
     color: white;
     font-size: 12px;
     font-weight: bold;
@@ -96,16 +96,18 @@
     /* border: 1px; */
     outline: none;
     border-radius: 5px;
+    /* background: url(free-icon-check-list-5973568.png); */
+    /* background: url(Alert.png); */
     }
   
   .warningMessage{
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
     text-align:left;
     color: #828282;
     /* color: #ff1818; */
     margin-top: 5px;
-    /* margin-left: 2px; */
+    margin-left: 4px;
     margin-right: 10px;
 
   }
@@ -133,7 +135,7 @@
     padding: 0 55px;
   }
 
-  .UnLock{
+  /* .UnLock{
       content: '';
       display: inline-block;
       position: absolute;
@@ -141,30 +143,30 @@
       margin-left: 400px;
       width: 18px;
       height: 24px;
-      margin-top: -45px;
+      margin-top: -200px;
       background-image: url('UnLock.png');
       background-repeat: no-repeat;
       background-position: 0 0;
       background-size: 18px 24px;
       cursor: pointer;
-  }
+  } */
 
   .Locked{
     content: '';
     display: inline-block;
-    position: absolute;
-    top: 34%;
-    margin-left: 400px;
+    position: relative;
+    top: 6px;
+    margin-left: -30px;
     width: 18px;
     height: 24px;
-    margin-top: -45px;
+    margin-top: -47px;
     background-image: url('UnLock.png');
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 18px 24px;
     cursor: pointer;
 }
-
+/* 
 
 .UnLock2{
   content: '';
@@ -180,14 +182,14 @@
   background-position: 0 0;
   background-size: 18px 24px;
   cursor: pointer;
-}
+} */
 
 .Locked2{
   content: '';
   display: inline-block;
-  position: absolute;
-  top: 41%;
-  margin-left: 400px;
+  position: relative;
+  top: 6px;
+  margin-left: -30px;
   width: 18px;
   height: 24px;
   margin-top: -45px;
@@ -202,12 +204,12 @@
 
   .pwWarningMessage{
     /* display: inline-block; */
-    font-size: 12px;
+    font-size: 14px;
     text-align:left;
     color: #828282;
     /* color: #ff1818; */
     /* margin-top: 3px; */
-    /* margin-left: 2px; */
+    margin-left: 4px;
     margin-right: 10px;
   }
 
@@ -221,13 +223,35 @@
     /* padding: 0 50px; */
   }
 
+  label{
+    width:100%;
+    display: center;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom:15px;
+    /* padding: 0 50px; */
+  }
+
+  .passwordBox{
+    width:100%;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+    margin-top: 10px;
+    padding: 0 55px;
+  }
+
 
   .formInput {
+    position:relative;
     background: #F6f6f6;
     font-size: 14px;
     padding: 16px;
-    margin: 5px 0;
-    margin-bottom: 10px;
+    /* margin: 5px 0; */
+    margin-bottom: 15px;
     width: 430px;
     height: 45px;
     border: 1px;
@@ -325,7 +349,7 @@
   /* 실선 안에 있는 텍스트 */
   .txt_or {
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     color: #828282;
     margin-left: 10px;
@@ -386,8 +410,8 @@
   }
 
   .CodeButton{
-    background: #000;
-    border-color: #000;
+    background: #3c3e58;
+    /* border-color: #000; */
     color: white;
     font-size: 12px;
     font-weight: bold;
@@ -462,7 +486,7 @@
     padding: 16px;
     margin: 5px 0;
     margin-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 45px;
     width: 430px;
     height: 45px;
     border: 1px;
@@ -492,7 +516,7 @@
     border-style: none;
     width: 182px;
     height: 72px;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
   
     }
@@ -523,3 +547,48 @@
   height: 20px;
 }
 
+
+
+/* Rectangle 91 */
+
+.Rectangle91{
+position: absolute;
+width: 128.99px;
+height: 43.98px;
+left: 1087px;
+top: 238px;
+
+background: rgba(60, 62, 88, 0.9);
+border-radius: 5px;
+}
+
+/* Rectangle 90 */
+
+.Rectangle90{
+position: absolute;
+width: 300px;
+height: 58px;
+left: 0px;
+top: 142px;
+
+background: rgba(60, 62, 88, 0.9);
+border-radius: 0px 0px 35px 35px;
+}
+
+/* OK */
+
+.alert1{
+position: absolute;
+width: 33px;
+height: 20px;
+left: 134px;
+top: 157px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 27px;
+
+color: #FFFFFF;
+}

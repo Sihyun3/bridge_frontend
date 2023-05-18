@@ -113,8 +113,8 @@
   
   .registrationButton{
     color :#ffffff;
-    background-color: #000;
-    border-color: #000;
+    background-color: #3c3e58;
+    /* border-color: #000; */
     /* opacity: 0.; */
     font-size: 14px;
     font-weight: bold;
@@ -126,7 +126,6 @@
     cursor: pointer;
     margin-top: 25px;
     margin-bottom: 3px;
-    
   }
   
   .button {
@@ -232,7 +231,7 @@
   }
   
   .span2 {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #6b6b6b;
     letter-spacing: 0.5px;
@@ -274,7 +273,7 @@
   /* 실선 안에 있는 텍스트 */
   .txt_or {
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     color: #828282;
     margin-left: 10px;
@@ -349,7 +348,7 @@
     justify-content: left;
     align-items:flex-start;
     flex-direction:row;
-    margin-top: 5px;
+    margin-top: 5px
     /* padding: 0 55px; */
 }
 
@@ -363,8 +362,9 @@
 
 .saveId{
   color: #636363;
-  font-size: 13px;
+  font-size: 14px;
   float: left;
   width: 100px;
   height: 20px;
+  margin-top: 0;
 }

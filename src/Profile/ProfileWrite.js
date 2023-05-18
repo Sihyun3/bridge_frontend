@@ -24,6 +24,7 @@ const ProfileWrite = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
+            alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
           }
