@@ -6,6 +6,8 @@ import jwt_decode from "jwt-decode";
 import axios from 'axios'
 import Waveform from '../Component/Waveform';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import jwtDecode from 'jwt-decode';
+
 const JamDetail = ({ match }) => {
     //잼소개 부분
     const [info, setInfo] = useState({});
@@ -104,6 +106,12 @@ const JamDetail = ({ match }) => {
     // 코멘트 삭제 핸들러
     const handlerClickDelete = (e) => {
         e.preventDefault();
+        const token = sessionStorage.getItem('token')
+        const decode = jwtDecode(token);
+        if (decode.sub != data.userId) {
+            alert('작성자만 삭제 가능합니다.');
+            history.push('/')
+        }
         axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
             .then(response => {
                 console.log(response);
@@ -182,7 +190,19 @@ const JamDetail = ({ match }) => {
                         {/* <img className={style.singlenote} src={note} onclick /> */}
                         <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "20px", outlineStyle: "none", marginBottom: 21, marginRight: 20, border: 0 }} >
                             <option value="" disabled selected>악기 선택</option>
-                            <option value="베이스">베이스  </option>
+                            <option value="여성보컬">여성보컬  </option>
+                            <option value="남성보컬">남성보컬  </option>
+                            <option value="일렉기타">일렉기타  </option>
+                            <option value="어쿠스틱기타">어쿠스틱기타  </option>
+                            <option value="베이스기타">베이스기타  </option>
+                            <option value="드럼">드럼  </option>
+                            <option value="퍼커션">퍼커션  </option>
+                            <option value="브라스">브라스  </option>
+                            <option value="바이올린">바이올린  </option>
+                            <option value="첼로">첼로  </option>
+                            <option value="콘트라베이스">콘트라베이스  </option>
+                            <option value="피아노">피아노 </option>
+                            <option value="신디사이저">신디사이저 </option>
                         </select>
 
                         {/* <input tyep="file" className={style.music} /> */}

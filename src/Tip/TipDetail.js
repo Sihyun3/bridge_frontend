@@ -40,51 +40,11 @@ const TipDetail = ({ match }) => {
             })
     }, [])
 
-    // const token = sessionStorage.getItem('token');
-    //     const decodedToken = jwt_decode(token);
-    //     console.log(decodedToken);
-    //     setUserNickname(decodedToken.userNickname);
-
-    //     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getlike`)
-    //         .then(response => {
-    //             console.log(response);
-    //             setLikeCt(response.data.LikeCt);
-    //         })
-    //         .catch(error => console.log(error));
-    // }, []);
-
-    // const likeUpdateHandler = () => {
-    //     setLikeUpdate(!likeUpdate)
-    //   }
-
-    // const LikeCountHandler = () => {
-    //     likeUpdateHandler()
-        
-    // if (!likeUpdate) {
-    //     setLikeCt(LikeCt +1)
-    //     axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/like/${tb_heart}`, {})
-    //     .then(response => {                           
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //         return;
-    //     });
-    // } else if (likeUpdate) {
-    //     setLikeCt(LikeCt -1)
-    //     axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/unlike/${tb_heart}`, {})
-    //     .then(response => {                           
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //         return;
-    //     });
-    // }} 
-
-
     const insert = (e) => {
         e.preventDefault();
+        if (temp.length >= 100) {
+            alert(`작성하신 댓글의 글자수가 100자를 초과합니다 \n 다시 작성해주세요.`);
+        }
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
             { "tbIdx": tb_idx, "tbcComments": temp },
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
@@ -112,7 +72,7 @@ const TipDetail = ({ match }) => {
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(() => {
                 alert("성공적으로 삭제 되었습니다.")
-                history.push('/bridge/tip/list')
+                history.push('/tip/list')
 
             })
             .catch(() => {
@@ -152,7 +112,7 @@ const TipDetail = ({ match }) => {
             <div className={style.editbox}>
                 <ul>
                     <li onClick={handlerdelete}> 삭제</li>
-                    <li><Link to={`/bridge/tip/edit/${data.tbIdx}`}></Link>수정</li>
+                    <li><Link to={`/tip/edit/${data.tbIdx}`}>수정</Link></li>
                 </ul>
             </div>
             <div className={style.line}></div>

@@ -37,8 +37,6 @@ const PartnerDatail = ({ match }) => {
 
     const handleDelete = () => {
         if (userId != data.userId) {
-            console.log(`+++++++++>` + userId);
-            console.log(`=========> ` + data.userId);
             alert(`작성자만 삭제가 가능합니다.`)
         } else {
             axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
@@ -50,6 +48,11 @@ const PartnerDatail = ({ match }) => {
                     console.log(err);
                 })
         }
+    }
+
+    const handleChat = (e) => {
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}`)
+
     }
 
 
@@ -90,7 +93,7 @@ const PartnerDatail = ({ match }) => {
                 </div>
                 {/* 신청하기 버튼 클릭시 해당 유저와 채팅 연결 필요 */}
                 <div className={style.buttonbox}>
-                    <button> 신청하기</button>
+                    <button onClick={handleChat}> 1:1 채팅 </button>
                 </div>
                 <div className={style.buttonbox2}>
                     <button onClick={handleDelete}>삭제하기</button>

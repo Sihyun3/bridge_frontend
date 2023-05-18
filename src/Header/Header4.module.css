@@ -39,13 +39,7 @@
     padding-top: 5px;
 }
 
-.rightContents li {
-    float: right;
-    
-}
-.Login {
-    
-}
+
 /* 메뉴 글씨 */
 .leftContents a {
     color: #f6f6f6;
@@ -140,6 +134,41 @@
     display : inline-block;
 
 }
+
+.pointbox {
+    display: inline-block;
+}
+
+.point {
+    /* min-width: -30px; */
+    display : inline-block;
+    margin-right: 16px;
+}
+
+
+
+.pointbox:hover .drop {
+    display: block;
+  }
+
+.pointbox .drop {
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #484a4d;
+  
+    left:1650px;
+    text-align: center;
+    vertical-align: center;
+    animation: fadein 0.5s;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  
+  
+}
+
+
 /*드롭다운 */
 .drop {
     display : none;
@@ -147,22 +176,21 @@
     z-index : 1; /*다른 요소들보다 앞에 배치*/
     font-weight: 400;
     background-color: #484a4d;
-  
-    /* width : 130px;  */
+
     left:1760px;
     text-align: center;
     vertical-align: center;
     animation: fadein 0.5s;
-    /* border-radius: 0.1rem; */
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    /* box-shadow: 2px 2px 2px #3d3d3d; */
   
 }
 
 .box:hover .drop {
     display: block;
   }
+
+
 
 .drop a{
     display : block;
@@ -172,7 +200,6 @@
     width:130px;
     height:32px;
     line-height: 30px; 
-    /* border-bottom: 1px solid #3d3d3d; */
    
    
   }
@@ -201,5 +228,13 @@
     background-size: contain;
     padding: 0;
     
+
+  }
+
+  .rightContents {
+    float: right;
+    top: 0px;
+    margin-left: 550px;
+
 
   }

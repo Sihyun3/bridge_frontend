@@ -46,7 +46,7 @@ const TipList = () => {
 
                     <div className={style.write}>
                         <button className={style.writebutton} onClick={() => {
-                            history.push('/bridge/tip/write')
+                            history.push('/tip/write')
                         }}>작성</button>
                     </div>
                     <input type="text" className={style.search} placeholder="검색어를 입력하세요"/>
@@ -55,7 +55,7 @@ const TipList = () => {
 
                 <div className={style.tipbox}>
                     {
-                        data.map((data) => {
+                        data.slice(offset, offset + limit).map((data) => {
                             console.log(data.tbIdx)
                             return (
 

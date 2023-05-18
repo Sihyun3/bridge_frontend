@@ -58,16 +58,7 @@ const SignUpTest = ({ history, props }) => {
 
         setSelect(e.target.value);
     };
-    // const handleFrontEmail = (e) => { setFrontEmail(e.target.value); };
 
-    // const handleSubmit = () => {
-    //     let datas = {
-    //         userPhoneNumber,
-    //         userEmail,
-    //         "userFrontNumber": select + userPhoneNumber,
-    //         "userLastEmail": userEmail + selectEmail,
-    //     };
-    // }
 
     useEffect(() => {
         let frontmail = userFirstEmail + selectEmail;

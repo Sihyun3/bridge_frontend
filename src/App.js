@@ -63,7 +63,7 @@ function App() {
       <Route path="/admin/notice/list" component={Notice} exact={true} />
       <Route path="/admin/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/admin/deal/list" component={DealListAd} exact={true} />
-      <Route path="/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} /> {/* 영구정지 권한 제어 필요 */}
+      <Route path="/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} /> 
 
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
 
@@ -86,7 +86,7 @@ function App() {
 
       <Route path="/admin/report/list" component={ReportList} exact={true} /> {/* 디자인 깨짐 */}  
 
-      <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
+      <Route path="/partner/list" component={PartnerList} exact={true} /> 
       <Route path="/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/partner/payment" component={PaymentTest2} exact={true} />
 

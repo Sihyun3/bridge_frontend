@@ -5,6 +5,7 @@ import style from './NoticeWrite.module.css';
 import '../reset.css';
 import { Viewer } from '@toast-ui/react-editor';
 import { useHistory } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
 function NoticeDetail({match}) {
@@ -12,6 +13,8 @@ function NoticeDetail({match}) {
 
     const {noticeIdx} = match.params;
     const [datas, setDatas] = useState([]);
+    
+    const [userId, setUserId] = useState('');
 
     const [data, setData] = useState([]);
     const [notice, setNotice] = useState({});
@@ -29,8 +32,10 @@ function NoticeDetail({match}) {
             history.push('/login')
             return;
           }
+          const token = sessionStorage.getItem('token');
+          const decode_token = jwt_decode(token);
+          setUserId(decode_token.sub);
         // sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6ImFkbWluIiwianRpIjoiN2I4MTY2Y2UtY2IzZC00NWU1LWExZDEtNjRhOGMzZGU0NWJhIiwiaWF0IjoxNjgzNTMwMTA4LCJleHAiOjg2NDAxNjgzNTMwMTA4fQ.0Ky3pPm61VOXna1rLOlI2KEUxTtxiPKxPwRDE5xSDko');
-        const token = sessionStorage.getItem('token');
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/detail/${noticeIdx}` )
         .then(reponse => {
             console.log(reponse);
@@ -104,8 +109,8 @@ function NoticeDetail({match}) {
           <div className={style.ContentsBox}>  { notice.contents && <Viewer initialValue={notice.contents}></Viewer>} </div>  
           {/* value= onChange={handlerChangeContents}/> */}
           {/* <textarea className={style.TitleBox} value={notice.contents} onChange={handlerChangeContents}></textarea> */}
-          <button className={style.Button2} onClick={handlerClickUpdate}>수정</button>
-          <button className={style.Button3} onClick={handlerClickDelete}>삭제</button>
+         { userId == 'admin' ? <button className={style.Button2} onClick={handlerClickUpdate}>수정</button> : ""}
+         { userId == 'admin' ? <button className={style.Button3} onClick={handlerClickDelete}>삭제</button> : ""}
           <button className={style.Button4} onClick={handlerClickList}>목록으로</button>
         </div>
 
