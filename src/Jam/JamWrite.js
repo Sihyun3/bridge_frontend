@@ -3,8 +3,9 @@ import JamBack from "./Rectangle 49.png";
 import JamIcon from "./Polygon 2.png";
 import musicfile from './musical-note.png';
 import axios from "axios";
-import { useState, useRef } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router";
+
 const JamWrite = () => {
 
     const [title, setTitle] = useState('');
@@ -17,13 +18,27 @@ const JamWrite = () => {
 
     const history = useHistory();
     
-    const handlersubmit = () => {
-        // sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+    useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
+            alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
-          }
-          const token = sessionStorage.getItem('token');
+        }
+        
+        // const decode_token = jwt_decode(token);
+    }, [])
+
+    const token = sessionStorage.getItem('token');
+
+
+    const handlersubmit = () => {
+        // sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+        // if (sessionStorage.getItem('token') == null) {
+        //     alert(`로그인이 필요합니다. 로그인해주세요`);
+        //     history.push('/login')
+        //     return;
+        //   }
+        //   const token = sessionStorage.getItem('token');
         //   const decode_token = jwt_decode(token);
        
         let formData = new FormData();

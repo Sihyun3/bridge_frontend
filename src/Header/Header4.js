@@ -42,16 +42,16 @@ function Header4({ isLogin, setIsLogin }) {
                                 <Link to="/split">  <a>Split Music</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/jam/list">     <a>Make Music</a></Link>
+                                <Link to="/jam/list">   <a>Make Music</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/partner/list"> <a>Commission</a></Link>
+                                <Link to="/partner/list">    <a>Commission</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/tip/list">     <a>Community</a></Link>
+                                <Link to="/tip/list">    <a>Community</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/tip/list">     <a>About Us</a></Link>
+                                <Link to="/tip/list">    <a>About Us</a></Link>
                             </li>
 
 
@@ -102,16 +102,16 @@ function Header4({ isLogin, setIsLogin }) {
                                 <Link to="/split">  <a>Split Music</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/jam/list">   <a>Make Music</a></Link>
+                                <Link to="/jam/list">   <a>Make Music</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/partner/list">    <a>Commission</a></Link>
+                                <Link to="/partner/list">    <a>Commission</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/tip/list">    <a>Community</a></Link>
+                                <Link to="/tip/list">    <a>Community</a></Link>
                             </li>
                             <li className={style.Lefts}>
-                                <Link to="/bridge/aboutUs">    <a>About Us</a></Link>
+                                <Link to="/aboutUs">    <a>About Us</a></Link>
                             </li>
 
                             <Link className={style.Login} to="/login">로그인</Link>

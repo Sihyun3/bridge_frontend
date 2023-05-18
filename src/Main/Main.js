@@ -9,6 +9,7 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 
+
 SwiperCore.use([Autoplay])	// 추가
 const Main = () => {
     const [data, setData] = useState([])
@@ -59,6 +60,8 @@ const Main = () => {
                     spaceBetween={50}
                     slidesPerView={1}
                     autoplay={{ delay: 10000 }}
+                    speed={1000}
+                 
                 >
                     {
                         data.map((n, index) => {
@@ -69,16 +72,16 @@ const Main = () => {
                   
                             return (
                                 <SwiperSlide>
-                                    <p className={style.tit} style={{ padding: 21}}>공지사항</p>
+                                    <p className={style.title} style={{ padding: 21}}>공지사항</p>
                                     <p className={style.link} style={{ padding: 21 }}>
                                         {/* 공지사항 링크 */}
                                         <Link to={`/notice/detail/${n.noticeIdx}`} title="공지사항 상세보기">
 
                                             {n.title}</Link>
                                     </p>
-                                    <div><p className={style.date} style={{ padding: 21, marginRight: '35px' }}>{data.getFullYear() +"년 "+ month + "월 " +data.getDate() +"일"}</p></div>
+                                    <div><p className={style.date} style={{ padding: 21, marginRight: '16px' }}>{data.getFullYear() +"년 "+ month + "월 " +data.getDate() +"일"}</p></div>
                                     <div> <p className={style.more} style={{ padding: 21 }}>
-                                        <Link to="/admin/notice/list" style={{ color: 'black' }} title="전체공지 더보기">더보기</Link>
+                                        <Link to="/bridge/admin/notice/list" style={{ color: '#EAEAEA' }} title="전체공지 더보기">더보기</Link>
                                     </p></div>
                                 </SwiperSlide>
                             )

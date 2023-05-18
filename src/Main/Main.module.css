@@ -183,17 +183,24 @@
 
 /* 공지사항 */
 
-.tit {
+.title {
     position: absolute;
-    left: 0;
-    top: 0;
-    color: #222;
-    font-weight: 400;
+    /* left: 0; */
+    /* top: 0; */
+    color: #EAEAEA;
+    font-weight: bold;
+    background-color: #151616;
+
 }
 
 .link {
     position: relative;
-    left: 80px;
+    left: 90px;
+    font-weight: lighter;
+    background-color: #151616;
+   
+
+
 }
 
 .link::before {
@@ -205,17 +212,17 @@
     width: 1px;
     height: 14px;
     margin-top: -7px;
-    background-color: black;
+    background-color: #DDDDDD;
 }
 
 .link a {
     overflow: hidden;
-    display: inline-block;
-    color: #222;
+    /* display: inline-block; */
+    color: #DDDDDD;
     max-width: 100%;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     text-overflow: ellipsis;
-    margin-left:14px;
+    margin-left:20px;
 }
 
 /* .link a strong {
@@ -225,9 +232,9 @@
 
 .date {
     position: absolute;
-    right: 85px;
+    right: 76px;
     top: 0;
-    color: #666;
+    color: #929595;
     font-family: 'Roboto';
 }
 
@@ -235,9 +242,9 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 70px;
+    width: 120px;
     text-align: right;
-    color: #222;
+    
 }
 
 .more::before {
@@ -249,7 +256,8 @@
     width: 1px;
     height: 14px;
     margin-top: -7px;
-    background-color: black;
+    background-color: #DDDDDD;
+    margin-left: 8px;
 }
 
 .more .iconset {
