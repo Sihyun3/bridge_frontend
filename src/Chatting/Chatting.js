@@ -16,11 +16,10 @@ const Chatting = ({match}) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-    const [reciver ,setReciver] = useState(''); 
+    // const [reciver ,setReciver] = useState(''); 
 
     const history = useHistory();
     
-    // const [reciver, setReciver] = useState('');
     const publish = () => {
         if (!client.current.connected) return;
         client.current.publish({

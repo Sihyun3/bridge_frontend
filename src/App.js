@@ -80,7 +80,9 @@ function App() {
      
       {/* 로그인 */}
       <Route path="/bridge/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
+      <Route path="/login" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 로그인 테스트  */}
+      <Route path="/login" component={(props) => <Login {...props} setIsLogin={setIsLogin} />} exact={true} />
       {/* 왓 이즈 디스..? */}
       <Route path="/bridge/signup" component={SignUpTest} exact={true} />
       {/* <Route path="/signup" component={SignUp} exact={true} /> */}
@@ -108,7 +110,8 @@ function App() {
 
       <Route path="/profile/write" component={ProfileWrite} exact={true} />
       <Route path="/report/write" component={ReportPage} exact={true} />
-
+      <Route path="/bridge/signup" component={SignUpTest} exact={true} />
+      <Route path="/signup" component={SignUp} exact={true} />
 
       {/* 기능 완성 */}
       <Route path="/find/:idx" component={Finduser} exact={true}/>

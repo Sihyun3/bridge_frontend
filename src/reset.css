@@ -163,6 +163,7 @@ button {
 }
 
 .container {
+	font-family: 'SUITE-Regular';
 	width: 1200px;
 	margin: 0 auto;
 	position: relative;
@@ -181,12 +182,14 @@ button {
 }
 
 .clearfix::after {
+	
 	display: block;
 	clear: both;
 	content: "";
 }
 
 .box1 {
+	
 	height: 280px;
 	width: 100%;
 	background-color: #f8dbdb;
