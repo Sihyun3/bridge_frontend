@@ -9,7 +9,7 @@ DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
 
 TIME_NOW=$(date +%c)
 
-sudo apt install nginx
+sudo apt-get install nginx
 rm /etc/nginx/conf.d/default.conf
 cp $PROJECT_ROOT/conf.d /
 
