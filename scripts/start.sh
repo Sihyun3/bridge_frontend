@@ -10,9 +10,8 @@ DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
 TIME_NOW=$(date +%c)
 
 
-cp $PROJECT_ROOT/nginx.conf /etc/nginx/conf.d/
 
-cp $PROJECT_ROOT/build /usr/share/nginx/html/
+cp $PROJECT_ROOT/build/ /usr/share/nginx/html/
 echo "$TIME_NOW : copy build" >> $DEPLOY_LOG
 
 
