@@ -62,6 +62,7 @@ function Notice({ history, noticeIdx, title, writer }) {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         const filtered = datas.filter(notice => {
+            console.log(notice);
             console.log(`>${searchInput}<`)
             console.log(notice.title.includes(searchInput))
             return notice.title.includes(searchInput)

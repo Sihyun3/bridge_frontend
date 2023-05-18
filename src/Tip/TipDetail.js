@@ -53,13 +53,19 @@ const TipDetail = ({ match }) => {
             .then(() => {
                 alert("성공적으로 삭제 되었습니다.")
                 history.push('/bridge/tip/list')
-
             })
             .catch(() => {
                 alert("삭제에 실패했습니다.")
             })
     }
-
+    const handlerHeart = () =>{
+        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/heart/${tb_idx}`)
+        .then((r)=>{
+            setData({...data, tbHeart:data.tbHeart+1})
+        }).catch(()=>{
+            alert("오류가 발생하였습니다.")
+        })
+    }
 
     return (
         <div className='container clearfix' >

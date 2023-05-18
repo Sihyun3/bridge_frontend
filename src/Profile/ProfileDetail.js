@@ -7,11 +7,10 @@ import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
 import Waveform from './Waveform';
 
-
-function ProfileDetail(){
-    const [data,setData] = useState('');
-    const [user,setUser] = useState('');
-    //하드코딩 -> 수정필요 
+function ProfileDetail() {
+    const [data, setData] = useState('');
+    const [user, setUser] = useState('');
+    const [tag,setTag] = useState('');
     const userId = "test"
     useEffect(() => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userId}`)

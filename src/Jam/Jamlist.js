@@ -34,9 +34,10 @@ const JamList = () => {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         const filtered = data.filter(notice => {
+            console.log(notice);
             console.log(`>${searchInput}<`)
-            console.log(notice.title.includes(searchInput))
-            return notice.title.includes(searchInput)
+            // console.log(notice.title.includes(searchInput))
+            return notice.ctitle.includes(searchInput)
         }
         );
         console.log(filtered);
@@ -64,7 +65,7 @@ const JamList = () => {
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
-                        data.map((data) => {
+                      filteredDatas == '' &&  data.map((data) => {
                             return (
                                 <>
                                     <div className={style.block}>
@@ -76,6 +77,20 @@ const JamList = () => {
                                 </>
                             );
                         })
+                    }
+                    { filteredDatas !=''  && filteredDatas.map((data) => {
+                        return (
+                            <>
+                                <div className={style.block}>
+                                    <Link to={`/jam/detail/${data.cidx}`}>
+                                        <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                        <p className={style.title}>{data.ctitle}</p>
+                                    </Link>
+                                </div>
+                            </>
+                        );
+                    })
+
                     }
 
             

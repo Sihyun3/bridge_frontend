@@ -22,130 +22,96 @@ const Doing = ({ history, match, pcIdx }) => {
     const [editClick, setEditClick] = useState('');
     const [isClick, setIsClick] = useState(false);
     const [isClick1, setIsClick1] = useState(false);
-    const [detailClick, setDetailClick] = useState([]);
-    const [commentOpen, setCommentOpen] = useState([]);
     const [commentUpload, setCommentUpload] = useState([]);
     const [variable, setVariable] = useState(false);
     const [progress, setProgress] = useState([]);
+
     const [tagList, setTagList] = useState([]);
-    const [contentList, setContentList] = useState([
-        {
-            pcNumber: '',
-            content: '',
-            writer: '',
-            pdNumber: '',
-            date: '',
-            file: '',
-            img: ''
-        }])
-    const [listArray, setListArray] = useState([
-        {
-            receiver: '',
-            photo: '',
-            tag1: '',
-            tag2: '',
-            tag3: '',
-            progress: ''
-        }
-    ]);
-    const [payList, setPayList] = useState(
-        {
-            sender: '',
-            receiver: '',
-            money: '',
-            date: '',
-            img: ''
-        }
-    );
-    const [commentList, setCommentList] = useState([{
-        pdcNumber: '',
-        writer: '',
-        content: ''
-    }])
+    const [detailClick, setDetailClick] = useState([]);
+    const [commentOpen, setCommentOpen] = useState([]);
 
+    const [contentList, setContentList] = useState([]);
+    const [list, setList] = useState([]);
+    const [commentList,setCommentList] = useState([]);
+    // const [contentList, setContentList] = useState([
+    //     {
+    //         pcNumber: '',
+    //         content: '',
+    //         writer: '',
+    //         pdNumber: '',
+    //         date: '',
+    //         file: '',
+    //         img: ''
+    //     }])
+    // const [listArray, setListArray] = useState([
+    //     {
+    //         receiver: '',
+    //         photo: '',
+    //         tag1: '',
+    //         tag2: '',
+    //         tag3: '',
+    //         progress: ''
+    //     }
+    // ]);
+    // const [payList, setPayList] = useState(
+    //     {
+    //         sender: '',
+    //         receiver: '',
+    //         money: '',
+    //         date: '',
+    //         img: ''
+    //     }
+    // );
+    // const [commentList, setCommentList] = useState([{
+    //     pdcNumber: '',
+    //     writer: '',
+    //     content: ''
+    // }])
+
+    //처음 렌더링이 될때 정보 가져오기
     useEffect(() => {
-        console.log(sessionStorage.token);
-
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-
         let userId = decode_token.sub;
         setUserId1(userId);
-        console.log(decode_token);
-        console.log(userId);
-
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${userId}`,
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerDetail/projectList/${userId}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
-                setListArray(response.data.map((data) => {
-                    return ({
-                        pdNumber: data.pdIdx,
-                        receiver: data.userId2,
-                        photo: data.profileImg,
-                        tag1: data.userTag1,
-                        tag2: data.userTag2,
-                        tag3: data.userTag3,
-                        progress: data.progress
-                    })
-                }))
+                setList(response.data);
             })
             .catch((error) => {
-                console.log(error);
-                console.log(userId)
                 return;
             })
 
     }, []);
 
+    const [temp, setTemp] = useState('');
 
+    const handlerClickSelect = (props) => {
+        console.log(props);
+        // setUserId2(receiver);
+        // const userId22 = receiver;
+        // // console.log(userId1);
+        // // console.log(userId2);
+        // setProgress(progress);
+        // tagList[0] = tag1;
+        // tagList[1] = tag2;
+        // tagList[2] = tag3;
+        setPdIdx(props);
+        setTemp(list.filter((data) => {
+            return (data.pdIdx == props);
+        }));
+        console.log(list);
 
-    const handlerClickSelect = (pdNumber, receiver, progress, tag1, tag2, tag3) => {
-
-        setUserId2(receiver);
-        const userId22 = receiver;
-        console.log(userId1);
-        console.log(userId2);
-        setProgress(progress);
-        tagList[0] = tag1;
-        tagList[1] = tag2;
-        tagList[2] = tag3;
-
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${userId22}`,
-            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-            .then((response) => {
-                console.log(response);
-                setPayList({
-                    sender: response.data.userId1,
-                    receiver: response.data.userId2,
-                    money: response.data.plMoney,
-                    date: response.data.plDate,
-                    img: response.data.profileImg
-                })
-            }).catch((error) => {
-                return;
-            }
-            )
-
-
-
-        setPdIdx(pdNumber);
-        console.log(pdIdx);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdNumber}`
-        )
+        console.log(list.filter((data) => {
+            return (data.pdIdx == props);
+        }));
+        // setPdIdx(pdNumber);
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${props}`)
             .then(response => {
                 console.log(response);
-                setContentList(response.data.map((data) => {
-                    return ({
-                        pcNumber: data.pcIdx,
-                        content: data.pcContent,
-                        writer: data.pcWriter,
-                        pdNumber: data.pdIdx,
-                        date: data.pcDate,
-                        file: data.pcFile,
-                        img: data.profileImg
-                    });
-                }));
+                setContentList(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -154,8 +120,6 @@ const Doing = ({ history, match, pcIdx }) => {
                     history.push('/3');
                 }
             });
-        // console.log(index);
-        // return (index);
     }
 
     const handlerClickUpload = () => {
@@ -193,10 +157,6 @@ const Doing = ({ history, match, pcIdx }) => {
             return;
         }
     }
-    // useEffect(() => {
-    //     console.log("바뀐후 >>>>>>>>>>>>>>>>>>" + editClick);
-    //     console.log('' == 0);
-    // }, [editClick])
 
 
     const handlerDetailClick = (index) => {
@@ -225,22 +185,15 @@ const Doing = ({ history, match, pcIdx }) => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/${pcIdx}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
-                console.log(response);
-                setCommentList(response.data.map((data) => {
-                    return ({
-                        writer: data.userId,
-                        content: data.pdcComment,
-                        pdcNumber: data.pdcIdx
-                    })
-                })
-                )
-                console.log(commentList);
-
+                console.log(response.data);
+                setCommentList(response.data)
             }).catch((error) => {
-                return;
+
             })
 
     }
+
+
 
     const handlerCommentUpload = (index) => {
         if (isClick1 == true) {
@@ -300,54 +253,38 @@ const Doing = ({ history, match, pcIdx }) => {
     }
 
     const ProjectList = () => {
-        // console.log(listArray);
-
-        return listArray && listArray.map((value, index) => {
+        return list && list.map((value, index) => {
+            console.log(value);
             return (
                 <>
                     <div key={index} className={style.partnerProfile}>
-                        <button onClick={() => handlerClickSelect(value.pdNumber, value.receiver, value.progress, value.tag1, value.tag2, value.tag3)}>
+                        <button onClick={() => handlerClickSelect(value.pdIdx)}>
                             <p className={style.img}> {value.photo}</p>
                             <div className={style.profileBox}>
-                                <span className={style.nickname}>{value.receiver}</span>
+                                <span className={style.nickname}>{value.userId2}</span>
                                 <span className={style.tag}> {'#' + value.tag1} {'#' + value.tag2} {'#' + value.tag3}</span>
                             </div>
                         </button>
                     </div>
-                    {/* {console.log(pdIdx)} */}
 
-                    {/* <div className={style.doinglist} key={index}>
-                        <button onClick={() => setPdIdx(handlerClickSelect(index + 1, value.receiver))}>
-                            <div className={style.img}>{value.photo}</div>
-                            <p className={style.p1}>{value.receiver} </p>
-                            <p className={style.p2}>{value.tag1}</p>
-                            <p className={style.p2}>{value.tag2}</p>
-                            <p className={style.p2}>{value.tag3}</p>
-                        </button>
-
-                        {console.log(pdIdx)}
-                    </div> */}
                 </>
             );
         });
-    };
+    }
 
 
     const ProjectPage = () => {
-
+        console.log(temp);
         return (
             <>
-
                 <div className={style.payBox}>
-                    <div className={style.payDate}> {payList.date} </div>
+                    {/* <div className={style.payDate}> {list[pdIdx].} </div> */}
                     <div className={style.payList}>
-                        <div className={style.img}>{payList.img}</div>
-                        <div className={style.sender}>{payList.sender}</div>
-                        <div className={style.money}>예치금 {payList.money}원이 결제되었습니다.</div>
+                        <div className={style.img}>{temp[0].profileImg}</div>
+                        <div className={style.sender}>{temp[0].userId2}</div>
+                        <div className={style.money}>예치금 {temp[0].pdMoney}원이 결제되었습니다.</div>
                     </div>
                 </div>
-                {/* {console.log(contentList)} */}
-
                 {contentList && contentList.map((value, index) => {
                     return (
                         <div className={style.contentBox}>
@@ -360,9 +297,7 @@ const Doing = ({ history, match, pcIdx }) => {
                                 <div className={style.file}>{value.file}</div>
                                 <button key={value.pcNumber} onClick={() => handlerEditClick(index)}>{editClick === index ? "게시글 수정취소" : "게시글 수정"}</button>
                                 {/* {console.log(editClick)} */}
-
                                 {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} /> : <></>}
-
                                 {/* {console.log(detailClick[index])} */}
                                 <button onClick={() => handlerDetailClick(index)} >{detailClick[index] == false || detailClick[index] == undefined ? "게시글 상세" : "게시글 접기"}</button>
                                 {/* {console.log(detailClick)} */}
@@ -377,13 +312,18 @@ const Doing = ({ history, match, pcIdx }) => {
                 }
 
                 )}
+
             </>
         )
+
     }
+
+
 
 
     const CommentList = () => {
         return commentList && commentList.map((data) => {
+            console.log(data);
             return (
                 <div>
                     {data.content != "" ? <p className={style.commentsname}>게시글 작성자: {data.writer}</p> : <p> 댓글이 없습니다. </p>}
@@ -401,126 +341,136 @@ const Doing = ({ history, match, pcIdx }) => {
 
 
     return (
-
         <>
+
             <div className={style.MainBox}>
                 <div className={style.list}>
                     <div className={style.listTitle}> 작업 목록 </div>
                     {ProjectList()}
+
                 </div>
             </div>
             <div className='container clearfix' >
                 <div className={style.doing}>
-                    <div className={style.doingTitle}> {userId2} </div>
-                    <div className={style.doingProgress}>{progress == '0' ?
-                        <>현재 작업이 <span style={{ fontWeight: 'bold' }}>진행 중</span>입니다. </>
-                        :
-                        <>완료된 작업입니다.</>}</div>
-                    <div>
-                        <div className={style.doingTag}>{'#' + tagList[0]} {'#' + tagList[1]} {'#' + tagList[2]}</div>
-                        {ProjectPage()}
-                        <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : "업로드 취소"}</button> <br />
-                        {/* {console.log(pdIdx)} */}
-                        {uploadClick ? <></> : <Content pdIdx={pdIdx} uploadClick={uploadClick} setUploadClick={setUploadClick}
-                            contentList={contentList} setContentList={setContentList} />}
-                        <Complete pdIdx={pdIdx} setProgress={setProgress} />
-                    </div>
+                    {
+                        pdIdx != '' &&
+                        <>
+                            <div className={style.doingTitle}> {userId2} </div>
+                            <div className={style.doingProgress}>{progress == '0' ?
+                                <>현재 작업이 <span style={{ fontWeight: 'bold' }}>진행 중</span>입니다. </>
+                                :
+                                <>완료된 작업입니다.</>}</div>
+                            <div>
+                                <div className={style.doingTag}>{'#' + tagList[0]} {'#' + tagList[1]} {'#' + tagList[2]}</div>
+                                {ProjectPage()}
+                                <button onClick={handlerClickUpload}>{uploadClick ? '업로드' : "업로드 취소"}</button> <br />
+
+                                {uploadClick ? <></> : <Content pdIdx={pdIdx} uploadClick={uploadClick} setUploadClick={setUploadClick}
+                                    contentList={contentList} setContentList={setContentList} />}
+                                <Complete pdIdx={pdIdx} setProgress={setProgress} />
+                            </div>
+                        </>
+                    }
+
                 </div>
             </div>
         </>
 
-        // <>
-        //     {/* <div>
-        //     <h1> {list.userId}, {list.userId1}</h1>
-        // </div> */}
-        //     {/* <Header1 /> */}
 
-        //     {/* <div>
-        //         {console.log(listArray)}
-        //     </div> */}
-        //     <div className='box1'>
-        //         <h1>게시판</h1>
-        //     </div>
-        //     <div className={style.list}>
-        //         <h2>작업 목록</h2>
-        //         <div>{ProjectList()}</div>
-        //         {/* <div className={style.doinglist}>
-        //             <img src={img} />
-        //             <p>닉네임</p>
-        //             <p>#악기태그</p>
-        //         </div>
-        //         <div className={style.doinglist}>
-        //             <img src={img} />
-        //             <p>닉네임</p>
-        //             <p>#악기태그</p>
-        //         </div> */}
-
-        //     </div>
-        //     <div className='container clearfix'>
-        //         <div className={style.Doing} >
-        //             <p className={style.teamname}>Team Name</p>
-        //             <p className={style.isDoing}>현재 작업이 <b style={{ fontWeight: "bold" }}>진행 중</b> 입니다</p>
-        //             <div className={style.upload}>업로드</div>
-        //             {a == 0 &&
-        //                 <div className={style.contentsbox}>
-        //                     <p className={style.date}>2023년 4월 7일</p>
-        //                     <div className={style.Doingbox}>
-        //                         <img className={style.img} src={img} />
-        //                         <div>{ProjectPage()}</div>
-        //                         {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
-        //                         <p className={style.name}>의뢰인</p>
-        //                         <p className={style.contents}>ㄴㅁㅇㄴ</p> */}
-        //                         <li className={style.clearfix} >
-        //                             <ul className={style.button}>코멘트</ul>
-        //                             <ul className={style.button}>펼치기</ul>
-        //                         </li>
-        //                     </div>
-        //                 </div>
-        //             }
-        //             {a != 1 &&
-        //                 <>
-        //                     <div className={style.contentsbox} style={{ marginBottom: '15px' }}>
-        //                         <p className={style.date}>2023년 4월 7일</p>
-        //                         <div className={style.Doingbox}>
-        //                             <img className={style.img} src={img} />
-        //                             <p>{CommentList()}</p>
-        //                             {/* <p className={style.name}>의뢰인</p> */}
-        //                             {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p> */}
-        //                             <li className={style.clearfix} >
-        //                                 <ul className={style.button}><button onClick={handlerClickCommentWrite}>코멘트</button></ul>
-        //                                 <ul className={style.button}><button onClick={() => handlerClickComment()}>{visible ? '펼치기' : '접기'}</button></ul>
-        //                             </li>
-        //                         </div>
-        //                     </div>
-        //                     <div className={style.commentsbox}>
-        //                         <img className={style.commentsimg1} src={img} />
-        //                         <img className={style.commentsimg} src={img} />
-        //                         <p className={style.commentsname}>의뢰인</p>
-        //                         <p className={style.commentscontents}>예치금 10,000 원이 결제 되었습니다.</p>
-        //                         <li className={style.commentsclearfix} >
-        //                             <ul className={style.commentsbutton}>답장</ul>
-        //                             <ul className={style.commentsbutton}>펼치기</ul>
-        //                         </li>
-        //                     </div>
-        //                     <div className={style.commentsbox}>
-        //                         <img className={style.commentsimg1} src={img} />
-        //                         <img className={style.commentsimg} src={img} />
-        //                         <p className={style.commentsname}>의뢰인</p>
-        //                         <p className={style.commentscontents}>예치금 10,000 원이 결제 되었습니다.</p>
-        //                         <li className={style.commentsclearfix} >
-        //                             <ul className={style.commentsbutton}>답장</ul>
-        //                             <ul className={style.commentsbutton}>펼치기</ul>
-        //                         </li>
-        //                     </div>
-
-        //                 </>
-        //             }
-
-        //         </div>
-        //     </div>
-        // </>
 
     )
 }
 
 export default Doing;
+
+
+ // <>
+    //     {/* <div>
+    //     <h1> {list.userId}, {list.userId1}</h1>
+    // </div> */}
+    //     {/* <Header1 /> */}
+
+    //     {/* <div>
+    //         {console.log(listArray)}
+    //     </div> */}
+    //     <div className='box1'>
+    //         <h1>게시판</h1>
+    //     </div>
+    //     <div className={style.list}>
+    //         <h2>작업 목록</h2>
+    //         <div>{ProjectList()}</div>
+    //         {/* <div className={style.doinglist}>
+    //             <img src={img} />
+    //             <p>닉네임</p>
+    //             <p>#악기태그</p>
+    //         </div>
+    //         <div className={style.doinglist}>
+    //             <img src={img} />
+    //             <p>닉네임</p>
+    //             <p>#악기태그</p>
+    //         </div> */}
+
+    //     </div>
+    //     <div className='container clearfix'>
+    //         <div className={style.Doing} >
+    //             <p className={style.teamname}>Team Name</p>
+    //             <p className={style.isDoing}>현재 작업이 <b style={{ fontWeight: "bold" }}>진행 중</b> 입니다</p>
+    //             <div className={style.upload}>업로드</div>
+    //             {a == 0 &&
+    //                 <div className={style.contentsbox}>
+    //                     <p className={style.date}>2023년 4월 7일</p>
+    //                     <div className={style.Doingbox}>
+    //                         <img className={style.img} src={img} />
+    //                         <div>{ProjectPage()}</div>
+    //                         {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
+    //                         <p className={style.name}>의뢰인</p>
+    //                         <p className={style.contents}>ㄴㅁㅇㄴ</p> */}
+    //                         <li className={style.clearfix} >
+    //                             <ul className={style.button}>코멘트</ul>
+    //                             <ul className={style.button}>펼치기</ul>
+    //                         </li>
+    //                     </div>
+    //                 </div>
+    //             }
+    //             {a != 1 &&
+    //                 <>
+    //                     <div className={style.contentsbox} style={{ marginBottom: '15px' }}>
+    //                         <p className={style.date}>2023년 4월 7일</p>
+    //                         <div className={style.Doingbox}>
+    //                             <img className={style.img} src={img} />
+    //                             <p>{CommentList()}</p>
+    //                             {/* <p className={style.name}>의뢰인</p> */}
+    //                             {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p> */}
+    //                             <li className={style.clearfix} >
+    //                                 <ul className={style.button}><button onClick={handlerClickCommentWrite}>코멘트</button></ul>
+    //                                 <ul className={style.button}><button onClick={() => handlerClickComment()}>{visible ? '펼치기' : '접기'}</button></ul>
+    //                             </li>
+    //                         </div>
+    //                     </div>
+    //                     <div className={style.commentsbox}>
+    //                         <img className={style.commentsimg1} src={img} />
+    //                         <img className={style.commentsimg} src={img} />
+    //                         <p className={style.commentsname}>의뢰인</p>
+    //                         <p className={style.commentscontents}>예치금 10,000 원이 결제 되었습니다.</p>
+    //                         <li className={style.commentsclearfix} >
+    //                             <ul className={style.commentsbutton}>답장</ul>
+    //                             <ul className={style.commentsbutton}>펼치기</ul>
+    //                         </li>
+    //                     </div>
+    //                     <div className={style.commentsbox}>
+    //                         <img className={style.commentsimg1} src={img} />
+    //                         <img className={style.commentsimg} src={img} />
+    //                         <p className={style.commentsname}>의뢰인</p>
+    //                         <p className={style.commentscontents}>예치금 10,000 원이 결제 되었습니다.</p>
+    //                         <li className={style.commentsclearfix} >
+    //                             <ul className={style.commentsbutton}>답장</ul>
+    //                             <ul className={style.commentsbutton}>펼치기</ul>
+    //                         </li>
+    //                     </div>
+
+    //                 </>
+    //             }
+
+    //         </div>
+    //     </div>
+    // </>

@@ -24,9 +24,6 @@ const MusicSplit = () => {
   const [music, setMusic] = useState('');
 
 
- 
-
-
   // 분리할 음원 파일 업로드
   const musicSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +34,8 @@ const MusicSplit = () => {
     }
     axios({
       method: 'POST',
-      url: `http://localhost:8080/api/insertMusicForSplit/1`,
+
+      url: `http://13.124.125.68:8080/api/insertMusicForSplit/`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
@@ -57,7 +55,7 @@ const MusicSplit = () => {
     e.preventDefault();
     console.log(musicUUID);
     //
-    axios.get(`http://localhost:8080/api/splitedMusic/${musicUUID}`)
+    axios.get(`http://13.124.125.68:8080/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;
         if (fileNames.length === 0) {
@@ -81,7 +79,7 @@ const MusicSplit = () => {
   }
   // 음원 분리 컨테이너 실행
   const handleMusicSplit = () => {
-    axios.get(`http://localhost:8080/api/docker/${musicUUID}`)
+    axios.get(`http://13.124.125.68:8080/api/docker/${musicUUID}`)
       .then(response => {
         console.log(response);
       })
@@ -98,7 +96,7 @@ const MusicSplit = () => {
     setIsSplitCompleted(false);
 
     const interval = setInterval(() => {
-      axios.get(`http://localhost:8080/api/IsDockerRun`)
+      axios.get(`http://13.124.125.68:8080/api/IsDockerRun`)
         .then(response => {
           if (response.data === false) {
             clearInterval(interval);
@@ -109,7 +107,7 @@ const MusicSplit = () => {
         .catch(error => {
           console.log(error);
         });
-    }, 1000);
+    }, 3000);
   };
   useEffect(() => {
     console.log(files)
@@ -214,7 +212,7 @@ const MusicSplit = () => {
             {/* 분리된 음원파일 다운로드 링크 및 재생 파형 만드는 Map */}
             {
               files && files.map((fn, idx) => {
-                const url = `http://localhost:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
+                const url = `http://13.209.80.136:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
 
                 return (
                   <>
@@ -226,22 +224,22 @@ const MusicSplit = () => {
                       </li>
                       {/* <Waveform   src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {
-                        idx == 0 && <Waveform color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 0 && <Waveform color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`http://13.124.125.68:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
                       {
-                        idx == 1 && <Waveform color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
-                      }
-
-                      {
-                        idx == 2 && <Waveform color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 1 && <Waveform color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`http://13.124.125.68:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
                       {
-                        idx == 3 && <Waveform color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 2 && <Waveform color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`http://13.124.125.68:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
                       {
-                        idx == 4 && <Waveform color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 3 && <Waveform color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`http://13.124.125.68:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                      }
+
+                      {
+                        idx == 4 && <Waveform color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`http://13.124.125.68:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
 
