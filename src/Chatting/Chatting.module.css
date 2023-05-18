@@ -8,7 +8,12 @@
     padding: 0px;
     color: #000;
 }
-
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
 /* 메인 박스 */
 .mainBox {
     width: 1200px;
@@ -20,10 +25,10 @@
 .chatListBox {
     width: 360px;
     height: 640px;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid;
+    background-color: rgb(241,241,241,0.5);
+    border: 2px solid rgb(241,241,241,1);
     border-right: none;
-    border-radius: 5px;
+    border-radius: 4px;
     float: left;
 }
 
@@ -33,16 +38,17 @@
     height: 640px;
     background-color: rgb(255, 255, 255);
     display: inline-block;
-    border: 1px solid;
-    border-radius: 5px;
+    border: 2px solid rgb(241,241,241,1);
+    border-radius: 6px;
 }
 
 /* 채팅 목록 텍스트 */
 .chatListText {
-    font-size: 25px;
+    font-size: 28px;
     padding-top: 50px;
     padding-left: 120px;
     margin-bottom: 30px;
+    font-family: 'SUITE-Regular';
 }
 
 /* 채팅 목록 수평선 */
@@ -61,7 +67,7 @@
 .profile {
     margin: 16px 0px;
     height: 68px;
-    border-top:1px solid #ebebeb;
+    border-top:1px solid #ffffff;
     padding-top:12px;
 }
 
@@ -81,13 +87,15 @@
 .profileContent {
     padding-left: 90px;
     padding-top: 3px;
-    font-size: 15px;
+    font-size: 16px;
+    font-family: 'SUITE-Regular';
 }
 
 /* 위 컨텐츠 박스 내 닉네임 */
 .profileName {
     font-weight: bold;
     margin-bottom: 8px;
+    font-family: 'SUITE-Regular';
 }
 
 /* 채팅 박스 최상위 텍스트 박스 */
@@ -107,11 +115,12 @@
 /* 위 텍스트 박스 닉네임 텍스트 */
 .chatName {
     display: inline-block;
-    font-size: 25px;
+    font-size: 26px;
     margin-bottom: 12px;
     margin-left: 10px;
     position: relative;
     top: -15px;
+    font-family: 'SUITE-Regular';
 }
 
 /* 채팅 수평선 */
@@ -142,7 +151,9 @@
     border-radius: 10px;
     display: inline-block;
     border-radius: 14px 14px 0px 14px;
-    
+    font-family: 'SUITE-Regular';
+    font-size: 18px;
+    line-height: 26px;
 }
 .chatContent1 {
     width:660px;
@@ -168,6 +179,9 @@
     background-color: #eeeeee;
     border-radius: 14px 14px 14px 0px;
     word-wrap: break-word;
+    font-family: 'SUITE-Regular';
+    font-size:18px;
+    line-height: 26px;
 }
 .chatContent4 {
     width:660px;
@@ -222,6 +236,9 @@
     background-color: #eeeeee;
     border: none;
     margin: 0 auto;
+    font-family: 'SUITE-Regular';
+    font-size: 18px;
+    padding:0px 12px;
 }
 .chatbox{
     overflow-y:auto;

@@ -78,7 +78,8 @@ function App() {
 
       <Route path="/profile/write" component={ProfileWrite} exact={true} />
       <Route path="/report/write" component={ReportPage} exact={true} />
-
+      <Route path="/bridge/signup" component={SignUpTest} exact={true} />
+      <Route path="/signup" component={SignUp} exact={true} />
 
       {/* 기능 완성 */}
       <Route path="/find/:idx" component={Finduser} exact={true}/>

@@ -59,6 +59,7 @@ const SignUp = ({ history }) => {
     const handlerChangePassword = e => {
         setPassword(e.target.value);
     };
+    
     const handlerChangeConfrimPassword = e => {
         if (e.target.value === userPassword) {
             setConfirmPassword(e.target.value)
@@ -91,7 +92,7 @@ const SignUp = ({ history }) => {
 
     //ID 중복체크
     const userIdCheck = () => {
-        axios.post(`http://localhost:8080/api/idlist/${userId}`, )
+        axios.post(`http://192.168.0.47:8080/api/idlist/${userId}`, )
             .then(response => {
                 const data = response.data;
                 if (data === 1) {
@@ -107,7 +108,7 @@ const SignUp = ({ history }) => {
             });
     }
 
-
+    
 
     return (
         <>

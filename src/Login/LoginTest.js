@@ -14,7 +14,6 @@ const LoginTest = ({ setIsLogin }) => {
 
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
-
     const history = useHistory();
 
     const handlerOnClick = e => {
@@ -121,4 +120,3 @@ const LoginTest = ({ setIsLogin }) => {
 
 
 export default LoginTest;
-

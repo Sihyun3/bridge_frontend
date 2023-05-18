@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
+import style from './Doing.module.css';
 
-const CommentWrite = ({ pcIdx, setCommentUpload, setIsClick1 }) => {
+const CommentWrite = ({ pcIdx }) => {
 
     const [pdcComment, setPdcComment] = useState('');
 
@@ -30,8 +31,6 @@ const CommentWrite = ({ pcIdx, setCommentUpload, setIsClick1 }) => {
             .then(response => {
                 console.log(response)
                 alert("댓글 추가 성공");
-                setCommentUpload(false);
-                setIsClick1(false);
             })
             .catch((eroor) => {
                 alert("댓글 추가 실패");
@@ -40,8 +39,8 @@ const CommentWrite = ({ pcIdx, setCommentUpload, setIsClick1 }) => {
     return (
         <>
             <form onSubmit={handlerSubmit}>
-                <input type="text" onChange={handlerChangePdcContent}></input>
-                <button>등록</button>
+                <input className={style.commentWrite} type="text" onChange={handlerChangePdcContent}></input>
+                <button className={style.submit}>등록</button>
 
             </form>
         </>

@@ -41,7 +41,176 @@
     justify-content: center;
     align-items: center;
   }
+
+  .basicBox2{
+    width:100%;
+    /* display: flex; */
+    /* justify-content: space-around; */
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10px;
+    /* padding: 0 50px; */
+  }
+
+
+  .idBox{
+    width:100%;
+    /* display: flex; */
+    /* justify-content:flex-start; */
+    align-items:center;
+    margin-right: 2px;
+    padding: 0 55px;
+    /* margin-top: 5px; */
+  }
+
+  .idInputBox {
+    
+    background: #F6f6f6;
+    /* opacity: 0.7; */
+    padding: 16px;
+    font-size: 14px;
+    /* text-align: ; */
+    margin: 5px 0;
+    /* margin-right: 10px; */
+    width: calc(70% - 10px);
+    height: 45px;
+    border: 1px;
+    outline: none;
+    border-radius: 5px;
+  }
+  .idInputBox:first-child {
+    margin-right: 10px;
+  }
+
+    .idCheckButton{
+    float: right;
+    background: #000;
+    border-color: #000;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 16px;
+    width: 30%;
+    margin: 5px 0;
+    /* height: 45px; */
+    /* border: 1px; */
+    outline: none;
+    border-radius: 5px;
+    }
   
+  .warningMessage{
+    display: inline-block;
+    font-size: 12px;
+    text-align:left;
+    color: #828282;
+    /* color: #ff1818; */
+    margin-top: 5px;
+    /* margin-left: 2px; */
+    margin-right: 10px;
+
+  }
+  .border2{
+    border: black; 
+    margin-bottom: 2; 
+    height: 12; 
+    padding-left:2; 
+    width:300px; 
+    /* md:w:500px; 
+    md:text-xl;  */
+    outline: none;
+  }
+
+
+  .warningBox{
+    width:100%;
+    display: flex;
+    /* justify-content:first baseline; */
+    align-items:left;
+    text-align:left;
+    flex-direction:column;
+    /* flex-grow: ; */
+    margin-right: 2px;
+    padding: 0 55px;
+  }
+
+  /* .UnLock{
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 41%;
+      margin-left: 400px;
+      width: 18px;
+      height: 24px;
+      margin-top: -200px;
+      background-image: url('UnLock.png');
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: 18px 24px;
+      cursor: pointer;
+  } */
+
+  .Locked{
+    content: '';
+    display: inline-block;
+    position: relative;
+    top: 6px;
+    margin-left: -30px;
+    width: 18px;
+    height: 24px;
+    margin-top: -47px;
+    background-image: url('UnLock.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 18px 24px;
+    cursor: pointer;
+}
+/* 
+
+.UnLock2{
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 41%;
+  margin-left: 400px;
+  width: 18px;
+  height: 24px;
+  margin-top: -45px;
+  background-image: url('UnLock.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 18px 24px;
+  cursor: pointer;
+} */
+
+.Locked2{
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: 6px;
+  margin-left: -30px;
+  width: 18px;
+  height: 24px;
+  margin-top: -45px;
+  background-image: url('UnLock.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 18px 24px;
+  cursor: pointer;
+}
+  
+
+
+  .pwWarningMessage{
+    /* display: inline-block; */
+    font-size: 12px;
+    text-align:left;
+    color: #828282;
+    /* color: #ff1818; */
+    /* margin-top: 3px; */
+    /* margin-left: 2px; */
+    margin-right: 10px;
+  }
+
   .basicBox{
     width:100%;
     display: flex;
@@ -52,8 +221,30 @@
     /* padding: 0 50px; */
   }
 
+  label{
+    width:100%;
+    display: center;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom:15px;
+    /* padding: 0 50px; */
+  }
+
+  .passwordBox{
+    width:100%;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+    margin-top: 10px;
+    padding: 0 55px;
+  }
+
 
   .formInput {
+    position:relative;
     background: #F6f6f6;
     font-size: 14px;
     padding: 16px;
@@ -73,7 +264,7 @@
     font-size: 14px;
     padding: 16px;
     margin: 5px 0;
-    margin-top: 35px;
+    margin-top: 30px;
     margin-bottom: 10px;
     width: 430px;
     height: 45px;
