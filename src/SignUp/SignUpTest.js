@@ -7,6 +7,7 @@ import React from 'react';
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleDown2 } from "react-icons/fa";
 import BridgeBlackLogo from '../SignUp/BridgeBlackLogo.png';
+import Alert from './Alert.png';
 import UnLock from './UnLock.png';
 import Locked from './Locked.png';
 import { click } from '@testing-library/user-event/dist/click';
@@ -27,6 +28,8 @@ const SignUpTest = ({ history, props }) => {
     const [userPassword, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [confirmMessage, setConfirmMessage] = useState();
+    const [PWmessage , setPWmessage] = useState();
+
     //연락처
     const [userPhoneNumber, setPhone] = useState();
     //이메일
@@ -88,8 +91,9 @@ const SignUpTest = ({ history, props }) => {
     const handlerOnClick = e => {
         e.preventDefault();
         if (confirmMessage == null && Pmessage == null && Emessage == null && userId != null && confirmIdMessage != null
-        ) {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
+           ) {
+           
+                axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
                 "userId": userId, "userPassword": userPassword, "userName": userName, "userEmail": userEmail, "userPhoneNumber": userPhoneNumber
             })
                 .then(response => {
@@ -115,7 +119,8 @@ const SignUpTest = ({ history, props }) => {
     const userIdCheck = (e) => {
         e.preventDefault();
         console.log("asjsdfjfkds")
-        axios.post(`http://192.168.0.47:8080/api/idlist/${userId}`,)
+        // axios.post(`http://192.168.0.47:8080/api/idlist/${userId}`,)
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
             .then(response => {
                 console.log(response.data);
                 const data = response.data;
@@ -183,6 +188,10 @@ const SignUpTest = ({ history, props }) => {
         setPassword(e.target.value);
     };
 
+    const handlerChangeNickName = e => {
+        setNickName(e.target.value);
+    }
+
 
 
     const handlerChangeConfirmId = e => {
@@ -198,12 +207,20 @@ const SignUpTest = ({ history, props }) => {
 
 
     const handlerChangeConfirmPassword = e => {
-        if (e.target.value === userPassword) {
+        if (e.target.value === userPassword
+            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(userPassword)) {
             setConfirmPassword(e.target.value)
+            setPassword(userPassword);
+            // setPWmessage(null);
             setConfirmMessage(null);
+        // } else if (e.target.value !== userPassword){
+        //     setConfirmPassword(e.target.value);
+        //     setConfirmMessage('비밀번호가 일치하지 않습니다.')
         } else {
             setConfirmPassword(e.target.value);
-            setConfirmMessage('비밀번호가 일치하지 않습니다.')
+            setConfirmMessage('비밀번호 형식이 올바르지 않습니다.')
+            // setPassword(e.target.value);
+            // setPWmessage('비밀번호 형식이 올바르지 않습니다.');
         }
     };
 
@@ -220,6 +237,18 @@ const SignUpTest = ({ history, props }) => {
             setPmessage('번호 형식이 올바르지 않습니다.');
         }
     };
+
+    const checkPassword = e => {
+        if (/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(userPassword)) {
+            setPassword(userPassword);
+            setPWmessage(null);
+            console.log(userPassword);
+        } else {
+            setPassword(e.target.value);
+            setPWmessage('비밀번호 형식이 올바르지 않습니다.');
+        }
+    };
+
     const handleSelectLastEmail = (e) => {
         setInsert(insert + 1);
         setSelectEmail(e.target.value);
@@ -267,6 +296,10 @@ const SignUpTest = ({ history, props }) => {
         }
     }
 
+    const [message111, setMessage111] = useState(true);
+    // const [showLockedButton, setShowLockedButton] = useState(true);
+
+    
 
 
     return (
@@ -304,6 +337,7 @@ const SignUpTest = ({ history, props }) => {
 
                                 </div>
                                 <div className={style.passwordBox}>
+                               
                                     <label>
 
                                         <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={12} />
@@ -311,7 +345,7 @@ const SignUpTest = ({ history, props }) => {
                                         <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} /></label>
                                     <label>
                                         <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={12} />
-                                        <img type="Button" className={style.Locked2} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
+                                        <img type="Button" className={style.Locked} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
 
                                     </label>
 
@@ -325,11 +359,12 @@ const SignUpTest = ({ history, props }) => {
                                     }} onBlur={handlerChangeConfirmPassword} />
 
                                     {
-                                        confirmMessage != null && <div className={style.pwWarningMessage}> {confirmMessage}</div>
+                                        confirmMessage != null ? <div className={style.pwWarningMessage}> {confirmMessage}</div>
+                                        :<div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
                                     }
 
                                 </div>
-
+                                
 
 
                                 <div>
@@ -344,7 +379,7 @@ const SignUpTest = ({ history, props }) => {
                                         <option value="016">016</option>
                                         <option value="018">018</option>
                                     </select>
-                                    <input className={style.NumberBoxInput} type="phoneNumber" placeholder="핸드폰 번호 ex 0000-0000" onBlur={changePhone} />
+                                    <input className={style.NumberBoxInput} type="phoneNumber" placeholder="ex) 0000 - 0000" onBlur={changePhone} />
                                 </div>
                                 {console.log(">>>>>>>>>>>>>" + userPhoneNumber)}
                                 <div className={style.line_or}>
@@ -363,8 +398,10 @@ const SignUpTest = ({ history, props }) => {
                                         <option value="@daum.net">daum.net</option>
                                     </select>
                                 </div>
-                                {console.log(">>>>>>>>>>>>>" + userEmail)}
                                 <button className={style.CodeButton} onClick={handlerAuth}>인증코드 요청</button>
+
+                                {console.log(">>>>>>>>>>>>>" + userEmail)}
+                                
                                 <div className={style.idBox}>
                                     <input className={style.idInputBox} type="email" placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
                                     <button className={style.idCheckButton} onClick={handlerCheck}>코드 인증</button>
