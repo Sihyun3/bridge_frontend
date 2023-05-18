@@ -20,12 +20,12 @@ function ReportPage() {
         setSelect(e.target.value);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
             alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
-          }
+        }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
@@ -36,7 +36,7 @@ function ReportPage() {
     //신고 제출 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail ,"reportReason":select})
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail, "reportReason": select })
             .then(response => {
                 console.log(response);
                 alert('정상적으로 신고되었습니다');
@@ -53,6 +53,7 @@ function ReportPage() {
 
     return (
         <div className="container">
+            <h1 className={style.mainText}>신고하기</h1>
             <div className={style.Box}>
                 <div id="target" className={style.Target}>신고대상: {reportedUserId}</div>
                 <select className={style.Select} onChange={handleSelect} value={select}>

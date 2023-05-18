@@ -121,8 +121,8 @@ function Header4({ isLogin, setIsLogin }) {
                             </li>
 
                             <Link className={style.Login} to="/login">로그인</Link>
-                            <Link className={style.regist} to="/bridge/signup">회원가입</Link>
-
+                            <Link className={style.regist} to="/signup">회원가입</Link>
+                            
 
 
                         </ul>

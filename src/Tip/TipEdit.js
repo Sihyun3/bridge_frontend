@@ -3,6 +3,7 @@ import axios from "axios";
 import ToastEditor from "../Component/ToastEditor";
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
+import style from '../Tip/TipWrite.js'
 
 export default function TipEdit({ match }) {
     // const tb_idx = match.params.tbIdx;
@@ -23,8 +24,11 @@ export default function TipEdit({ match }) {
     return (
 
         <div className="container">
-            <div><span>제목 : </span><input value={title} onChange={(e) => { setTitle(e.target.value) }} type='text'></input></div>
-            {data.tbContents && <ToastEditor data={data} title={title}></ToastEditor>}
+            <div className={style.topbox}><input className={style.titlebox} value={title} onChange={(e) => { setTitle(e.target.value) }} type='text'></input>
+            </div>
+            <div className={style.writebox}>
+                {data.tbContents && <ToastEditor data={data} title={title}></ToastEditor>}
+            </div>
         </div>
 
     )
