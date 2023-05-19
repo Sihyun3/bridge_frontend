@@ -481,7 +481,7 @@ const SignUpTest = ({ history, props }) => {
                                 </div>
 
                                 <div className={style.MailBox}>
-                                    <input className={style.mailBoxInput} type="email" placeholder="이메일" onChange={handlerChangeEmail} />
+                                    <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
                                     <select className={style.selectMailBox} value={selectEmail} onChange={handleSelectLastEmail}>
                                         {/* <option value="mail" disabled selected>e-mail</option> */}
                                         <option value="@bridge.com">bridge.com</option>
