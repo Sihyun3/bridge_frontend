@@ -15,7 +15,7 @@ sudo chmod -R  777 $PROJECT_ROOT/build
 echo "$TIME_NOW : copy build" >> $DEPLOY_LOG
 sudo rm -rf  $PROJECT_ROOT/node_modules
 
-echo "$TIME_NOW : run nginx" >> $DEPLOY_LOG
+echo "$TIME_NOW : restart nginx" >> $DEPLOY_LOG
 sudo systemctl restart nginx 
 # chmod 111 JAR_FILE
 # nohup java -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
