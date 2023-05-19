@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
+import guitars from '../img/guitars.jpg'
 
 const TipList = () => {
     const history = useHistory();
@@ -32,10 +33,11 @@ const TipList = () => {
     
     return (
         <>
-            <div className={style.box1}>
+            <div className={style.box1} >
                 <h1>게시판</h1>
-            </div>
+            </div>  
             <div className='container clearfix'>
+         
                 <div className={style.leftbox}>
                     <button className={style.good}>좋아요순</button>
                 </div>
@@ -48,7 +50,7 @@ const TipList = () => {
                             history.push('/tip/write')
                         }}>작성</button>
                     </div>
-                    <input type="text" className={style.search} placeholder="검색어를 입력하세요"/>
+                    <input type="text" className={style.search} placeholder="검색어를 입력하세요."/>
                     <img className={style.searchImg} src={searchImg} />
                 </div>
 
