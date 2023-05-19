@@ -138,12 +138,16 @@ const SignUpTest = ({ history, props }) => {
                 title: '입력된 내용이 없습니다.',
                 text: '사용하실 아이디를 입력해주세요.'
             })
-           
             return;
-
         }
-    
-        
+        if(confirmIdMessage == "아이디 형식이 일치하지 않습니다."){
+            Swal.fire({
+                icon: 'error',
+                title: '아이디 형식이 옳지않아~용.',
+                text: '4 ~ 16자 영문 대 소문자, 숫자를 사용하세요.'
+            })
+            return; 
+        }
         console.log("asjsdfjfkds")
         // axios.post(`http://192.168.0.47:8080/api/idlist/${userId}`,)
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
@@ -278,12 +282,9 @@ const SignUpTest = ({ history, props }) => {
 
 
     const handlerChangeConfirmId = e => {
-        if (e.target.value === userId) {
-            setConfirmId(e.target.value)
-            setConfirmIdMessage("이미 사용중인 아이디입니다.");
-        } else {
-            setConfirmId(e.target.value);
-            setConfirmIdMessage(null);
+        
+        if(!/^[a-zA-Z0-9]{8,16}$/.test(userId)) {
+            setConfirmIdMessage("아이디 형식이 일치하지 않습니다")
         }
     };
 
@@ -406,12 +407,12 @@ const SignUpTest = ({ history, props }) => {
 
                                 <div className={style.idBox}>
                                     <div className={style.basicBox2}>
-                                        <input className={style.idInputBox} type="Id" placeholder="아이디" onChange={handlerChangeUserId} />
+                                        <input className={style.idInputBox} type="Id" placeholder="아이디"  onBlur={handlerChangeConfirmId} onChange={handlerChangeUserId} />
                                         <button className={style.idCheckButton} onClick={userIdCheck}>ID 중복확인</button>
                                         <div>
                                             <span type="Id" name="Id" value={confirmId} onChange={(e) => {
                                                 setConfirmId(e.target.value)
-                                            }} onBlur={handlerChangeConfirmId} />
+                                            }} />
 
                                             {
                                                 confirmIdMessage != null && <div className={style.warningMessage}> {confirmIdMessage}</div>
@@ -480,7 +481,7 @@ const SignUpTest = ({ history, props }) => {
                                 </div>
 
                                 <div className={style.MailBox}>
-                                    <input className={style.mailBoxInput} type="email" placeholder="이메일" onChange={handlerChangeEmail} />
+                                    <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
                                     <select className={style.selectMailBox} value={selectEmail} onChange={handleSelectLastEmail}>
                                         {/* <option value="mail" disabled selected>e-mail</option> */}
                                         <option value="@bridge.com">bridge.com</option>
