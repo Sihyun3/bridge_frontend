@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const ReportList = () => {
 
     const [data, setData] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState([]);
     const [filteredDatas, setFilteredDatas] = useState([]);
 
     const [limit, setLimit] = useState(10);
@@ -50,15 +50,15 @@ const ReportList = () => {
 
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
-        const filtered = data.filter(notice => {
-            console.log(`>${searchInput}<`)
-            console.log(notice.title.includes(searchInput))
-            return notice.title.includes(searchInput)
+        setFilteredDatas(data.filter(datas => {
+            console.log(`>>>>>>>>>>>>${searchInput}<`)
+            return (
+                datas.reportReason.includes(searchInput) ||
+                datas.userId.includes(searchInput) ||
+                datas.reportedUserId.includes(searchInput)
+            )
         }
-        );
-        console.log(filtered);
-        setFilteredDatas(filtered);
-        setPage(1);
+        ));
     }
 
 
@@ -89,7 +89,7 @@ const ReportList = () => {
                     </ul>
 
                     {
-                        data.map((reportList) => {
+                        filteredDatas == "" && data.slice(offset, offset + limit).map((reportList) => {
                             return (
                                 <>
 
@@ -113,6 +113,30 @@ const ReportList = () => {
 
 
 
+                                </>
+                            )
+                        })
+                    }
+                    {
+                        filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((reportList) => {
+                            return (
+                                <>
+                                    <div className={style.list}>
+                                        <Link to={`/admin/report/detail/${reportList.reportIdx}`} >
+                                            <span className={style.num}>
+                                                {reportList.reportIdx}
+                                            </span>
+                                            <span className={style.reason}>
+                                                {reportList.reportReason}
+                                            </span>
+                                            <span className={style.id}>
+                                                {reportList.userId}
+                                            </span>
+                                            <span className={style.reid}>
+                                                {reportList.reportedUserId}
+                                            </span>
+                                        </Link>
+                                    </div>
                                 </>
                             )
                         })

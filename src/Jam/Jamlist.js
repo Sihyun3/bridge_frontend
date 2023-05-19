@@ -73,7 +73,23 @@ const JamList = () => {
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
-                        data.map((data) => {
+                        filteredDatas=="" && data.map((data) => {
+                            return (
+                                <>
+                                    <div className={style.block}>
+                                        <Link to={`/jam/detail/${data.cidx}`}>
+                                            <div className={style.imgbox}>
+                                                <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.cphoto}.jpg`}></img>
+                                            </div>
+                                            <p className={style.title}>{data.ctitle}</p>
+                                        </Link>
+                                    </div>
+                                </>
+                            );
+                        })
+                    }
+                     {
+                        filteredDatas!="" && data.map((data) => {
                             return (
                                 <>
                                     <div className={style.block}>
