@@ -12,6 +12,8 @@ import UnLock from './UnLock.png';
 import Locked from './Locked.png';
 import { click } from '@testing-library/user-event/dist/click';
 import { Password } from '@mui/icons-material';
+import Swal from "sweetalert2";
+import check from './check.png';
 
 const SignUpTest = ({ history, props }) => {
     const [dropdownVisibility, setDropdownVisibility] = React.useState(false);
@@ -28,7 +30,7 @@ const SignUpTest = ({ history, props }) => {
     const [userPassword, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [confirmMessage, setConfirmMessage] = useState();
-    const [PWmessage , setPWmessage] = useState();
+    const [PWmessage, setPWmessage] = useState();
 
     //연락처
     const [userPhoneNumber, setPhone] = useState();
@@ -65,7 +67,6 @@ const SignUpTest = ({ history, props }) => {
 
     useEffect(() => {
         let frontmail = userFirstEmail + selectEmail;
-
         if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
             setEmail(frontmail);
             console.log(frontmail);
@@ -82,45 +83,109 @@ const SignUpTest = ({ history, props }) => {
     const handlerOnClick = e => {
         e.preventDefault();
         if (confirmMessage == null && Pmessage == null && Emessage == null && userId != null && confirmIdMessage != null
-           ) {
-           
-                axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
+        ) {
+
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
                 "userId": userId, "userPassword": userPassword, "userName": userName, "userEmail": userEmail, "userPhoneNumber": userPhoneNumber
             })
                 .then(response => {
 
-                    alert('정상적으로 등록 되었습니다.')
+                    // alert('정상적으로 등록 되었습니다.')
+                    Swal.fire({
+                        title: 'Congraturation!',
+                        text: 'Bridge의 회원이 되신 것을 축하드립니다.',
+                        imageUrl: 'https://media.discordapp.net/attachments/1105381996731039825/1108956932884148294/20210508_150502.jpg?width=438&height=584',
+                        imageWidth: 300,
+                        imageHeight: 300
+                    })
                     history.push('/login')
 
 
                 })
                 .catch(error => {
-                    alert('id, pw가 일치하지 않습니다')
+                    // alert('id, pw가 일치하지 않습니다')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'id, pw가 일치하지 않습니다.',
+                        text: '확인 후 다시 시도해주세요.',
+                    })
                     console.log(error)
                     sessionStorage.clear();
                 })
         } else {
-            alert('형식이 일치하지 않습니다')
+            // alert('형식이 일치하지 않습니다')
+            Swal.fire({
+                icon: 'error',
+                title: '형식이 일치하지 않습니다.',
+                text: '확인 후 다시 시도해주세요.',
+            })
 
         }
     };
 
 
+
+
+
+
     //ID 중복체크
     const userIdCheck = (e) => {
         e.preventDefault();
+        if (userId == undefined || userId == '') {
+            setConfirmIdMessage("사용하실 아이디를 입력해주세요.")
+            Swal.fire({
+                icon: 'info',
+                title: '입력된 내용이 없습니다.',
+                text: '사용하실 아이디를 입력해주세요.'
+            })
+           
+            return;
+
+        }
+    
+        
         console.log("asjsdfjfkds")
         // axios.post(`http://192.168.0.47:8080/api/idlist/${userId}`,)
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
             .then(response => {
                 console.log(response.data);
                 const data = response.data;
+                // if (confirmIdInputMessage !== null) {
+                //     // alert('사용하실 아이디를 입력해주세요.');
+
+
+                // } else
                 if (data === 1) {
-                    alert("이미 사용중인 아이디입니다.");
+                    // alert("이미 사용중인 아이디입니다.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: '이미 사용중인 아이디입니다.',
+                        text: '다른 아이디로 다시 시도해주세요.'
+                    })
+
                     setConfirmIdMessage("이미 사용중인 아이디입니다.");
                 } else if (data === 0) {
 
-                    alert("사용 가능한 아이디입니다.");
+                    // Swal.fire("사용 가능한 아이디입니다.");
+                    Swal.fire({
+                        title: '사용 가능한 아이디입니다.',
+                        text: "이 id를 사용하시겠습니까?",
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Success!',
+                                '탁월한 선택이십니다 :)',
+                                'success'
+
+                            )
+                        }
+                    })
+
                     setConfirmIdMessage("탁월한 선택이십니다.");
                 }
             })
@@ -129,16 +194,30 @@ const SignUpTest = ({ history, props }) => {
             });
     }
 
+
+
     const handlerAuth = () => {
         // axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
         axios.post(`http://192.168.0.47:8080/emailConfirm/${userEmail}`)
             .then((r) => {
                 console.log(r.data)
                 setAuth(r.data)
-                alert("인증번호가 발송되었습니다.")
+                // alert("인증번호가 발송되었습니다.")
+                Swal.fire({
+                    icon: 'success',
+                    title: '인증번호가 발송되었습니다.',
+                    text: '메일함을 확인해주세요.',
+                    confirmButtonColor: '#3c3e58'
+                    // confirmButtonColor: '#3085d6'
+                })
             })
             .catch(() => {
-                alert("오류가 발생하였습니다.")
+                Swal.fire({
+                    icon: 'error',
+                    title: '메일 주소를 입력해주세요!',
+                    // text: '잠시 후 인증코드가 포함된 메일이 전송됩니다.',
+                })
+                // alert("오류가 발생하였습니다.")
             })
     }
 
@@ -147,10 +226,22 @@ const SignUpTest = ({ history, props }) => {
             // axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
             axios.post(`http://192.168.0.47:8080/emailConfirm/${userEmail}`)
                 .then((r) => {
-                    alert("인증이 성공적으로 완료되었습니다.");
+                    // alert("인증이 성공적으로 완료되었습니다.");
+                    Swal.fire({
+                        title: '인증이 성공적으로 완료되었습니다.',
+                        text: "가입절차를 마무리 해주세요.",
+                        icon: 'success',
+                        confirmButtonColor: '#3c3e58'
+                        // confirmButtonColor: '#3085d6'
+                    })
                 })
         } else {
-            alert("인증번호가 일치하지 않습니다.");
+            // alert("인증번호가 일치하지 않습니다.");
+            Swal.fire({
+                title: '인증코드가 일치하지 않습니다.',
+                text: "입력하신 내용을 다시 확인해주세요.",
+                icon: 'error',
+            })
         }
     }
 
@@ -171,10 +262,11 @@ const SignUpTest = ({ history, props }) => {
     const handlerChangeName = e => {
         setName(e.target.value);
     };
-    const handlerChangeUserId = e => {
 
+    const handlerChangeUserId = e => {
         setUserId(e.target.value);
     };
+
     const handlerChangePassword = e => {
         setPassword(e.target.value);
     };
@@ -199,14 +291,14 @@ const SignUpTest = ({ history, props }) => {
 
     const handlerChangeConfirmPassword = e => {
         if (e.target.value === userPassword
-            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(userPassword)) {
+            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
             setConfirmPassword(e.target.value)
             setPassword(userPassword);
             // setPWmessage(null);
             setConfirmMessage(null);
-        // } else if (e.target.value !== userPassword){
-        //     setConfirmPassword(e.target.value);
-        //     setConfirmMessage('비밀번호가 일치하지 않습니다.')
+            // } else if (e.target.value !== userPassword){
+            //     setConfirmPassword(e.target.value);
+            //     setConfirmMessage('비밀번호가 일치하지 않습니다.')
         } else {
             setConfirmPassword(e.target.value);
             setConfirmMessage('비밀번호 형식이 올바르지 않습니다.')
@@ -287,14 +379,16 @@ const SignUpTest = ({ history, props }) => {
         }
     }
 
-    const [message111, setMessage111] = useState(true);
-    // const [showLockedButton, setShowLockedButton] = useState(true);
 
-    
+
+
+
+
 
 
     return (
         <>
+
             <div className='container clearfix'>
                 <div className={style.wrapper}>
                     <div className={style.container}>
@@ -322,20 +416,26 @@ const SignUpTest = ({ history, props }) => {
                                             {
                                                 confirmIdMessage != null && <div className={style.warningMessage}> {confirmIdMessage}</div>
                                             }
+                                            {/* {
+                                                console.log("aaaaaaaaaaaaaaaaasssssssssssssss" + confirmIdInputMessage)
+                                            }
+                                            {
+                                                confirmIdInputMessage != null && <div className={style.warningMessage}> {confirmIdInputMessage}</div>
+                                            } */}
 
                                         </div>
                                     </div>
 
                                 </div>
                                 <div className={style.passwordBox}>
-                               
+
                                     <label>
 
-                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={12} />
+                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={16} />
 
                                         <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} /></label>
                                     <label>
-                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={12} />
+                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={16} />
                                         <img type="Button" className={style.Locked} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
 
                                     </label>
@@ -351,11 +451,11 @@ const SignUpTest = ({ history, props }) => {
 
                                     {
                                         confirmMessage != null ? <div className={style.pwWarningMessage}> {confirmMessage}</div>
-                                        :<div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+                                            : <div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
                                     }
 
                                 </div>
-                                
+
 
 
                                 <div>
@@ -392,7 +492,7 @@ const SignUpTest = ({ history, props }) => {
                                 <button className={style.CodeButton} onClick={handlerAuth}>인증코드 요청</button>
 
                                 {console.log(">>>>>>>>>>>>>" + userEmail)}
-                                
+
                                 <div className={style.idBox}>
                                     <input className={style.idInputBox} type="email" placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
                                     <button className={style.idCheckButton} onClick={handlerCheck}>코드 인증</button>

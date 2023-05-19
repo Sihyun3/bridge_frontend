@@ -83,9 +83,9 @@ function App() {
       {/* 기능 완성 */}
       <Route path="/find/:idx" component={Finduser} exact={true}/>
 
-      <Route path="/admin/report/list" component={ReportList} exact={true} /> {/* 디자인 깨짐 */}  
+      <Route path="/admin/report/list" component={ReportList} exact={true} />
 
-      <Route path="/partner/list" component={PartnerList} exact={true} /> 
+      <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
       <Route path="/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/partner/payment" component={PaymentTest2} exact={true} />
 

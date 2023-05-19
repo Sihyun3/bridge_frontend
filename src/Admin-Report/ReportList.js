@@ -66,16 +66,17 @@ const ReportList = () => {
 
     return (
         <>
-            <div className={style.box1}>
-                <h1>신고 관리</h1>
-            </div>
             <div className='container clearfix'>
+                <div className={style.box1}>
+                    <h1>신고 관리</h1>
+                </div>
+
                 <form onSubmit={handlerSerchSubmit}>
                     <div className={style.serchbox}>
                         <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
                     </div>
                     <div className={style.serchbox}>
-                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
+                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요." />
                     </div>
                 </form>
                 <div className={style.reportbox}>
@@ -93,16 +94,20 @@ const ReportList = () => {
                                 <>
 
                                     <div className={style.list}>
-                                        <Link to={`/admin/report/detail/${reportList.reportIdx}`} className={style.num}> {reportList.reportIdx} </Link>
-                                        <span>
-                                            {reportList.reportReason}
-                                        </span>
-                                        <span>
-                                            {reportList.userId}
-                                        </span>
-                                        <span>
-                                            {reportList.reportedUserId}
-                                        </span>
+                                        <Link to={`/admin/report/detail/${reportList.reportIdx}`} >
+                                            <span className={style.num}>
+                                                {reportList.reportIdx}
+                                            </span>
+                                            <span className={style.reason}>
+                                                {reportList.reportReason}
+                                            </span>
+                                            <span className={style.id}>
+                                                {reportList.userId}
+                                            </span>
+                                            <span className={style.reid}>
+                                                {reportList.reportedUserId}
+                                            </span>
+                                        </Link>
                                     </div>
 
 

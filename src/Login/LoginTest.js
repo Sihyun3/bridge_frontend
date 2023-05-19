@@ -8,6 +8,7 @@ import axios from "axios";
 // import {KAKAO_AUTH_URL} from './LoginTest/KaKaoLogin';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from "react-cookie";
+import Swal from "sweetalert2";
 
 
 const LoginTest = ({ setIsLogin }) => {
@@ -18,12 +19,20 @@ const LoginTest = ({ setIsLogin }) => {
 
     const handlerOnClick = e => {
         e.preventDefault();
-        setCookie('rememberUserId',userId);
+        setCookie('rememberUserId', userId);
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`,
             { "userId": userId, "userPassword": userPassword })
             .then(response => {
                 if (response.data) {
-                    alert('정상적으로 로그인되었습니다');
+                    // alert('정상적으로 로그인되었습니다');
+                    Swal.fire({
+                        title: 'Welcome!',
+                        text: '정상적으로 로그인되었습니다.',
+                        imageUrl: 'https://cdn-icons-png.flaticon.com/128/8727/8727696.png',
+                        imageWidth: 60,
+                        imageHeight: 60,
+                        confirmButtonColor: '#3c3e58'
+                      })
                     console.log(response);
                     console.log(history)
                     console.log(setIsLogin)
@@ -65,7 +74,6 @@ const LoginTest = ({ setIsLogin }) => {
 
     return (
         <>
-
             <div className='container clearfix'>
                 <div className={style.wrapper}>
                     <div className={style.container}>
@@ -76,12 +84,12 @@ const LoginTest = ({ setIsLogin }) => {
                                 <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
 
                                 <div className={style.saveBox}>
-                                    <input className={style.idCheckBox} type='checkbox' checked={isRemember} id="saveId" name="saveId" value="saveId"  onChange={(e) => {handleOnChange(e);}} />
+                                    <input className={style.idCheckBox} type='checkbox' checked={isRemember} id="saveId" name="saveId" value="saveId" onChange={(e) => { handleOnChange(e); }} />
                                     <label for="saveId" className={style.saveId}>아이디 저장</label>
                                     {/* <span className={style.saveId}>아이디 저장</span> */}
                                 </div>
                                 <div className={style.loginButtonBox}>
-                                <button className={style.loginButton} onClick={handlerOnClick}>로그인</button>
+                                    <button className={style.loginButton} onClick={handlerOnClick}>로그인</button>
                                 </div>
                                 <div className={style.find}>
                                     <Link className={style.registration} to="/find/0">아이디찾기</Link>

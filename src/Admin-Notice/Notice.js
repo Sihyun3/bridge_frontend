@@ -119,38 +119,27 @@ function Notice({ history, noticeIdx, title, writer }) {
         <>
 
 
-            <div className={style.box1}>
-                <h1>공지사항</h1>
-            </div>
-            <div className='container clearfix'>
 
-                <div className={style.leftbox}>
-                    <button className={style.date}>작성일자</button>
+            <div className='container clearfix'>
+                <div className={style.box1}>
+                    <h1>공지사항</h1>
                 </div>
+
 
                 <div className={style.rightbox} onSubmit={handlerSerchSubmit}>
 
 
                     <div className={style.write}>
-
-                       {  id == 'admin'? <button className={style.writebutton} onClick={handlerOnclick} >작성</button> : ""}
-
-
-
-
-
-
+                        {id == 'admin' ? <button className={style.writebutton} onClick={handlerOnclick} >작성</button> : ""}
                     </div>
-                    <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
-
-                    <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
+                    <div className={style.serchbox}>
+                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요." />
+                    </div>
+                    <div className={style.serchbox}>
+                        <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
+                    </div>
 
                 </div>
-
-
-
-
-
 
 
 
@@ -158,8 +147,6 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-
-
                                 <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>

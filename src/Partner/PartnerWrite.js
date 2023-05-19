@@ -129,7 +129,7 @@ const PartnerWrite = () => {
                 })
                 .catch(error => {
                     console.log(error);
-                    alert(`업로드 중 오류가 발생했습니다.`);
+                    alert(`모든 항목을 작성해주세요.`);
                 });
 
         }
@@ -139,7 +139,7 @@ const PartnerWrite = () => {
         <>
             <div className="container clearfix" >
 
-                <h1 className={style.mainText}>파트너 모집 작성</h1>
+                <h1 className={style.mainText}>나의 연주자 찾기</h1>
 
                 <div className={style.content}>
                     <div className={style.title}>
