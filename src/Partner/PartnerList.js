@@ -1,6 +1,4 @@
 import style from '../Partner/PartnerList.module.css';
-import Header1 from '../Header/Header1';
-import img from '../img/checkbox.png';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
@@ -140,7 +138,7 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-          <Link to={`/bridge/partner/write`}><button > 나의 연주자 찾기 </button></Link>
+          <Link to={`/partner/write`}><button > 나의 연주자 찾기 </button></Link>
         </div>
 
         <div className={style.page}>

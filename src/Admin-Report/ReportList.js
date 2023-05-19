@@ -25,15 +25,15 @@ const ReportList = () => {
             alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
-          }
-          const token = sessionStorage.getItem('token');
-          const decode_token = jwt_decode(token);
-          console.log(">>>>>>>>>>>>> " + decode_token);
+        }
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        console.log(">>>>>>>>>>>>> " + decode_token);
 
-          if (decode_token.sub != 'admin') {
+        if (decode_token.sub != 'admin') {
             alert(`관리자만 이용할 수 있습니다`);
             history.push(`/`)
-          }
+        }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
             .then(response => {
                 console.log(response.data);
@@ -65,16 +65,17 @@ const ReportList = () => {
 
     return (
         <>
-            <div className={style.box1}>
-                <h1>신고 관리</h1>
-            </div>
             <div className='container clearfix'>
+                <div className={style.box1}>
+                    <h1>신고 관리</h1>
+                </div>
+
                 <form onSubmit={handlerSerchSubmit}>
                     <div className={style.serchbox}>
                         <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
                     </div>
                     <div className={style.serchbox}>
-                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
+                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요." />
                     </div>
                 </form>
                 <div className={style.reportbox}>
@@ -92,16 +93,20 @@ const ReportList = () => {
                                 <>
 
                                     <div className={style.list}>
-                                        <Link to={`/admin/report/detail/${reportList.reportIdx}`} className={style.num}> {reportList.reportIdx} </Link>
-                                        <span>
-                                            {reportList.reportReason}
-                                        </span>
-                                        <span>
-                                            {reportList.userId}
-                                        </span>
-                                        <span>
-                                            {reportList.reportedUserId}
-                                        </span>
+                                        <Link to={`/admin/report/detail/${reportList.reportIdx}`} >
+                                            <span className={style.num}>
+                                                {reportList.reportIdx}
+                                            </span>
+                                            <span className={style.reason}>
+                                                {reportList.reportReason}
+                                            </span>
+                                            <span className={style.id}>
+                                                {reportList.userId}
+                                            </span>
+                                            <span className={style.reid}>
+                                                {reportList.reportedUserId}
+                                            </span>
+                                        </Link>
                                     </div>
 
 

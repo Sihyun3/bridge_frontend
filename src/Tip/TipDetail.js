@@ -40,51 +40,11 @@ const TipDetail = ({ match }) => {
             })
     }, [])
 
-    // const token = sessionStorage.getItem('token');
-    //     const decodedToken = jwt_decode(token);
-    //     console.log(decodedToken);
-    //     setUserNickname(decodedToken.userNickname);
-
-    //     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getlike`)
-    //         .then(response => {
-    //             console.log(response);
-    //             setLikeCt(response.data.LikeCt);
-    //         })
-    //         .catch(error => console.log(error));
-    // }, []);
-
-    // const likeUpdateHandler = () => {
-    //     setLikeUpdate(!likeUpdate)
-    //   }
-
-    // const LikeCountHandler = () => {
-    //     likeUpdateHandler()
-        
-    // if (!likeUpdate) {
-    //     setLikeCt(LikeCt +1)
-    //     axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/like/${tb_heart}`, {})
-    //     .then(response => {                           
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //         return;
-    //     });
-    // } else if (likeUpdate) {
-    //     setLikeCt(LikeCt -1)
-    //     axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/unlike/${tb_heart}`, {})
-    //     .then(response => {                           
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //         return;
-    //     });
-    // }} 
-
-
     const insert = (e) => {
         e.preventDefault();
+        if (temp.length >= 100) {
+            alert(`작성하신 댓글의 글자수가 100자를 초과합니다 \n 다시 작성해주세요.`);
+        }
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
             { "tbIdx": tb_idx, "tbcComments": temp },
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
@@ -112,7 +72,7 @@ const TipDetail = ({ match }) => {
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(() => {
                 alert("성공적으로 삭제 되었습니다.")
-                history.push('/bridge/tip/list')
+                history.push('/tip/list')
 
             })
             .catch(() => {
@@ -128,7 +88,7 @@ const TipDetail = ({ match }) => {
             </div></Link>
             <div className={style.title}>
                 <h1>{data.tbTitle}</h1>
-                <br /><br />
+              
                 <p>조회수:{data.tbViews}</p>
                 <p>작성일:{data.tbCreatedt}</p>
             </div>
@@ -152,25 +112,25 @@ const TipDetail = ({ match }) => {
             <div className={style.editbox}>
                 <ul>
                     <li onClick={handlerdelete}> 삭제</li>
-                    <li><Link to={`/bridge/tip/edit/${data.tbIdx}`}></Link>수정</li>
+                    <li><Link to={`/tip/edit/${data.tbIdx}`}>수정</Link></li>
                 </ul>
             </div>
             <div className={style.line}></div>
             <div className={style.comment}><h2>댓글</h2></div>
-            <div className={style.com}>
+            <div className={style.commentall}>
                 {comments.map((data, idx) => {
                     return (
-                        <div className={style.comments} style={{ width: 1000, marginLeft: 80, height: 40, float: "left", lineHeight: "40px" }}  >
+                        <div className={style.comments}  >
                             <div style={{ width: "100px", float: "left" }} > {data.userId} </div>
-                            <div> {data.tbcComments}</div>
+                            <div className={style.text}> {data.tbcComments}</div>
                         </div>
                     )
                 })}
             </div>
             <div className={style.line}></div>
             <div className={style.input}>
-                <div style={{ margin: "0 auto", width: "900px" }}>
-                    <input type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} className={style.writeComment} />
+                <div>
+                    <input className={style.writeComment} type='text' value={temp} onChange={(e) => { setTemp(e.target.value) }} />
                     <input type="button" className={style.finish} onClick={insert} value="등록" />
                 </div>
             </div>

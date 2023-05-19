@@ -2,8 +2,6 @@
 import style from './JamList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
-import Header1 from '../Header/Header1'
-import img from "../Jam/PlayButton.png"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from "react-router-dom";

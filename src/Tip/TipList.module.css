@@ -1,18 +1,19 @@
 
 /*게시판 글씨 써진 박스*/
 .box1 {
-    height: 280px;
+    height: 240px;
     width: 100%;
-    background-color: #ffffff;
     text-align: center;
-    border-bottom: 3px solid #212121;
-    
+    border-bottom: 3px solid #d9d9d9;
+    background-image: url("../img/guitar.jpg");
+    background-size: 100%;
 }
 
 .box1 h1 {
     padding-top: 100px;
     font-size: 48px;
 }
+
 
 /*정렬버튼을 묶는 박스*/
 .leftbox {
@@ -103,11 +104,12 @@
 
     border-top:1px solid #acacac;
     width:1168px;
-    height:36px;
+    height:44px;
     float: left;
     padding-top:4px;
     padding-bottom:5px;
     margin-right:32px;
+    padding-left: 12px;
  
     
 }
@@ -117,7 +119,7 @@
     /* padding-left: 60px; */
     padding-right: 36px;
     padding-top: 6px;
-    font-size: 14px;
+    font-size: 16px;
     display: inline-block;
 }
 /*작성자*/

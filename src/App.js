@@ -1,5 +1,5 @@
 // 헤더 풋터
-import Header2 from './Header/Header2';
+
 import Footer from './Footer/Footer';
 //페이지 임포트
 import LoginStart from './Login/LoginStart';
@@ -72,19 +72,18 @@ function App() {
 
       <Route path="/tip/list" component={TipList} exact={true} />
       <Route path="/tip/write" component={TipWrite} exact={true} />
-      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> {/* 디자인 디테일 수정 필요 */}
+      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> 
 
       <Route path="/split" component={MusicSplit} exact={true} />
 
       <Route path="/profile/write" component={ProfileWrite} exact={true} />
       <Route path="/report/write" component={ReportPage} exact={true} />
-      {/* <Route path="/signup" component={SignUpTest} exact={true} /> */}
-      {/* <Route path="/signup" component={SignUp} exact={true} /> */}
+
 
       {/* 기능 완성 */}
       <Route path="/find/:idx" component={Finduser} exact={true}/>
 
-      <Route path="/admin/report/list" component={ReportList} exact={true} /> {/* 디자인 깨짐 */}  
+      <Route path="/admin/report/list" component={ReportList} exact={true} />
 
       <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
       <Route path="/partner/write" component={PartnerWrite} exact={true} />

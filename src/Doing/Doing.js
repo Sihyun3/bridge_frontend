@@ -1,7 +1,5 @@
 import style from './Doing.module.css'
 import '../reset.css';
-import Header1 from '../Header/Header1';
-import img from "./checkbox.png"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -74,7 +72,6 @@ const Doing = ({ history, match, pcIdx }) => {
     useEffect(() => {
         console.log(sessionStorage.token);
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
         }
@@ -495,97 +492,7 @@ const Doing = ({ history, match, pcIdx }) => {
             </div>
         </>
 
-        // <>
-        //     {/* <div>
-        //     <h1> {list.userId}, {list.userId1}</h1>
-        // </div> */}
-        //     {/* <Header1 /> */}
-
-        //     {/* <div>
-        //         {console.log(listArray)}
-        //     </div> */}
-        //     <div className='box1'>
-        //         <h1>게시판</h1>
-        //     </div>
-        //     <div className={style.list}>
-        //         <h2>작업 목록</h2>
-        //         <div>{ProjectList()}</div>
-        //         {/* <div className={style.doinglist}>
-        //             <img src={img} />
-        //             <p>닉네임</p>
-        //             <p>#악기태그</p>
-        //         </div>
-        //         <div className={style.doinglist}>
-        //             <img src={img} />
-        //             <p>닉네임</p>
-        //             <p>#악기태그</p>
-        //         </div> */}
-
-        //     </div>
-        //     <div className='container clearfix'>
-        //         <div className={style.Doing} >
-        //             <p className={style.teamname}>Team Name</p>
-        //             <p className={style.isDoing}>현재 작업이 <b style={{ fontWeight: "bold" }}>진행 중</b> 입니다</p>
-        //             <div className={style.upload}>업로드</div>
-        //             {a == 0 &&
-        //                 <div className={style.contentsbox}>
-        //                     <p className={style.date}>2023년 4월 7일</p>
-        //                     <div className={style.Doingbox}>
-        //                         <img className={style.img} src={img} />
-        //                         <div>{ProjectPage()}</div>
-        //                         {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p>
-        //                         <p className={style.name}>의뢰인</p>
-        //                         <p className={style.contents}>ㄴㅁㅇㄴ</p> */}
-        //                         <li className={style.clearfix} >
-        //                             <ul className={style.button}>코멘트</ul>
-        //                             <ul className={style.button}>펼치기</ul>
-        //                         </li>
-        //                     </div>
-        //                 </div>
-        //             }
-        //             {a != 1 &&
-        //                 <>
-        //                     <div className={style.contentsbox} style={{ marginBottom: '15px' }}>
-        //                         <p className={style.date}>2023년 4월 7일</p>
-        //                         <div className={style.Doingbox}>
-        //                             <img className={style.img} src={img} />
-        //                             <p>{CommentList()}</p>
-        //                             {/* <p className={style.name}>의뢰인</p> */}
-        //                             {/* <p className={style.contents}>예치금 10,000 원이 결제 되었습니다.</p> */}
-        //                             <li className={style.clearfix} >
-        //                                 <ul className={style.button}><button onClick={handlerClickCommentWrite}>코멘트</button></ul>
-        //                                 <ul className={style.button}><button onClick={() => handlerClickComment()}>{visible ? '펼치기' : '접기'}</button></ul>
-        //                             </li>
-        //                         </div>
-        //                     </div>
-        //                     <div className={style.commentsbox}>
-        //                         <img className={style.commentsimg1} src={img} />
-        //                         <img className={style.commentsimg} src={img} />
-        //                         <p className={style.commentsname}>의뢰인</p>
-        //                         <p className={style.commentscontents}>예치금 10,000 원이 결제 되었습니다.</p>
-        //                         <li className={style.commentsclearfix} >
-        //                             <ul className={style.commentsbutton}>답장</ul>
-        //                             <ul className={style.commentsbutton}>펼치기</ul>
-        //                         </li>
-        //                     </div>
-        //                     <div className={style.commentsbox}>
-        //                         <img className={style.commentsimg1} src={img} />
-        //                         <img className={style.commentsimg} src={img} />
-        //                         <p className={style.commentsname}>의뢰인</p>
-        //                         <p className={style.commentscontents}>예치금 10,000 원이 결제 되었습니다.</p>
-        //                         <li className={style.commentsclearfix} >
-        //                             <ul className={style.commentsbutton}>답장</ul>
-        //                             <ul className={style.commentsbutton}>펼치기</ul>
-        //                         </li>
-        //                     </div>
-
-        //                 </>
-        //             }
-
-        //         </div>
-        //     </div>
-        // </>
-
+    
     )
 }
 

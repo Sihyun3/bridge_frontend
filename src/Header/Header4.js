@@ -1,8 +1,10 @@
+
 import style from './Header4.module.css'
 import { Route, Link } from 'react-router-dom';
 import { Component, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import BridgeWhiteLogo from '../Header/BridgeWhiteLogo.png'
+import axios from 'axios';
 
 function Header4({ isLogin, setIsLogin }) {
 
@@ -26,6 +28,12 @@ function Header4({ isLogin, setIsLogin }) {
             setUserNickname(decodedToken.name);
             console.log(userNickname);
             setIsLogin(true);
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decodedToken.sub}`)
+                .then(res=>{
+                    console.log(">>>>>>>>>" + res.data);
+                    setUserPoint(res.data);
+                })
+                .catch(err => { console.log(err)})
         }
     }, [isLogin])
 
@@ -55,12 +63,12 @@ function Header4({ isLogin, setIsLogin }) {
                             </li>
 
 
-                        {/* <div className={style.rightContents}> */}
+                        <div className={style.rightContents}>
                             <div className={style.pointbox}>
                                 <li> <a className={style.point}>{userPoint}P</a></li>
                                 <div className={style.drop}>
-                                    <Link to="/profile/charge">충전하기</Link>
-                                    <Link to="/partner/bankHistory">거래내역</Link>
+                                    <Link to="/partner/charge">충전하기</Link>
+                                    <Link to="/deal/list">거래내역</Link>
                                 </div>
                             </div>
 
@@ -72,17 +80,15 @@ function Header4({ isLogin, setIsLogin }) {
                                 <div className={style.drop}>
                                     <Link to="/profile/detail">프로필</Link>
                                     <Link to="/partner/doing">작업페이지</Link>
-                                    {/* 거래내역 추가 부탁해요 */}
                                     <Link to="/chatting">채팅</Link>
-
                                     <a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a>
 
 
                                 </div>
                                 
                             </div>
-                            {/* </div> */}
-
+                            </div>
+                       
 
                         </ul>
                     </div>

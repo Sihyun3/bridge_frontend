@@ -1,12 +1,13 @@
 import style from './ProfileDetail.module.css'
 import '../reset.css';
-import Header1 from '../Header/Header1';
-import img from "./checkbox.png"
+import certiMark from "./icons/certiMark.svg"
+import profile_img from "./icons/user.svg"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
 import Waveform from './Waveform';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { CreateOutlined, MailOutline, ReportProblemOutlined } from '@mui/icons-material';
 
 
 function ProfileDetail({match}){
@@ -36,21 +37,21 @@ function ProfileDetail({match}){
     return (
         <>
             <div className='box1'>
-                <h1>게시판</h1>
+                <h1>Profile</h1>
             </div>
             <div className='container clearfix'>
                 <div className={style.profile}>
-                    <img className={style.img} src={img} />
+                    <img className={style.profileIMG} src={profile_img} />
                     <span className={style.name}>{user.userId}</span>
                     {
                         a == 0 &&
-                        <img src={img} className={style.certi}></img>
+                        <img src={certiMark} className={style.certi}></img>
                     }
                     <p style={{ marginTop: "10px", marginBottom: "10px" }}>{data.userPosition}</p>
                     <p className={style.comment}>
                         {data.userIntroduction}
-                        {/* 한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur. 
-                        Aliquam mattis nam rutrum platea lectus lobortis consectetur. */}
+                        한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur. 
+                        Aliquam mattis nam rutrum platea lectus lobortis consectetur.
                     </p>
                     <p>
                         {
@@ -60,10 +61,19 @@ function ProfileDetail({match}){
                             }) 
                         }
                     </p>
+
                     <p className={style.link} onClick={() => { window.open('https://google.co.kr', '_blank') }}>{data.userSite}</p>
-                    <img src={img} className={style.icon}></img>
-                    <img src={img} className={style.icon}></img>
-                    <img src={img} className={style.icon}></img>
+
+                    
+                        <MailOutline sx={{ fontSize: 24 }}/>
+                        <CreateOutlined sx={{ fontSize: 24 }}/>
+                        <ReportProblemOutlined sx={{ fontSize: 24 }}/>
+                    {/* <img src={Message} className={style.icon}></img>
+                    <img src={PersonPinCircle} className={style.icon}></img>
+                    <img src={Report} className={style.icon}></img> */}
+                  
+
+
                 </div>
                 <div className={style.detail}>
                     <div className={style.playbar}>        
