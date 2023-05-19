@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 import Waveform from "../Component/Waveform";
 
 
-function Content({ pdIdx, uploadClick, setUploadClick, state, contentList, setContentList }) {
+function Content({ pdIdx, uploadClick, setUploadClick, handlerClickSelect, index1, pdNumber1 }) {
 
     const [pcContent, setPcContent] = useState('');
     const [pcFile, setPcFile] = useState('');
@@ -61,6 +61,7 @@ function Content({ pdIdx, uploadClick, setUploadClick, state, contentList, setCo
             } else {
             alert("업로드가 성공했습니다.")
             setUploadClick(!uploadClick);
+            handlerClickSelect(index1, pdNumber1);
             }
 
         }).catch(() => {

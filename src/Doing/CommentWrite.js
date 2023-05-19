@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import style from './Doing.module.css';
 
-const CommentWrite = ({ pcIdx }) => {
+const CommentWrite = ({ pcIdx, CommentSet}) => {
 
     const [pdcComment, setPdcComment] = useState('');
+    const [render, setRender] = useState(false)
 
     const token = sessionStorage.getItem('token');
     const decode_token = jwt_decode(token);
@@ -30,21 +31,32 @@ const CommentWrite = ({ pcIdx }) => {
             { headers: header })
             .then(response => {
                 console.log(response)
+                if(response.data == 1){
                 alert("댓글 추가 성공");
+                CommentSet(pcIdx);
+                setPdcComment('');
+                }
+                else if (response.data == 0) {
+                    alert("작성한 내용이 없습니다.")
+                }
             })
             .catch((eroor) => {
                 alert("댓글 추가 실패");
             })
     }
+
+
     return (
         <>
             <form onSubmit={handlerSubmit}>
-                <input className={style.commentWrite} type="text" onChange={handlerChangePdcContent}></input>
-                <button className={style.submit}>등록</button>
+                <input className={style.commentWrite} value={pdcComment} type="text" onChange={handlerChangePdcContent}></input>
 
+                <button className={style.submit}>등록</button>
             </form>
+
         </>
     );
+
 }
 
 export default CommentWrite;
