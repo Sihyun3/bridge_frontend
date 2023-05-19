@@ -8,31 +8,38 @@ import { Viewer } from '@toast-ui/react-editor';
 import Waveform from './Waveform';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { CreateOutlined, MailOutline, ReportProblemOutlined } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
-function ProfileDetail({match}){
-    const [data,setData] = useState('');
-    const [user,setUser] = useState('');
-    const [tag,setTag] = useState('');
+function ProfileDetail() {
+    const [data, setData] = useState([]);
+    const [user, setUser] = useState('');
+    const [tag, setTag] = useState('');
+    const [userId, setUserId] = useState('');
 
     const history = useHistory();
 
-    const userId = match.params;
-  
+    // const reported = match.params;
+
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
             alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
-          }
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userId}`)
-            .then((response) => {
-                console.log(response.data)
-                setData(response.data.profile)
-                setUser(response.data.userDto);
-                setTag(response.data.taglist)
-            })
-    }, [])
+        } else {
+            const token = sessionStorage.getItem('token');
+            const decode_token = jwt_decode(token);
+            setUserId(decode_token.sub);
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
+                .then((response) => {
+                    console.log(response.data)
+                    setData(response.data.profile[0]);
+                    setUser(response.data.userDto);
+                    setTag(response.data.taglist)
+                })
+        }
+    }, [userId])
     let a = 0;
     return (
         <>
@@ -41,7 +48,7 @@ function ProfileDetail({match}){
             </div>
             <div className='container clearfix'>
                 <div className={style.profile}>
-                    <img className={style.profileIMG} src={profile_img} />
+                    <img className={style.profileIMG} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
                     <span className={style.name}>{user.userId}</span>
                     {
                         a == 0 &&
@@ -50,44 +57,44 @@ function ProfileDetail({match}){
                     <p style={{ marginTop: "10px", marginBottom: "10px" }}>{data.userPosition}</p>
                     <p className={style.comment}>
                         {data.userIntroduction}
-                        한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur. 
-                        Aliquam mattis nam rutrum platea lectus lobortis consectetur.
+                        {/* 한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur.
+                        Aliquam mattis nam rutrum platea lectus lobortis consectetur. */}
                     </p>
                     <p>
                         {
                             Array.isArray(tag) && tag.map((d) => {
                                 return (<span>#{d.tag}</span>)
 
-                            }) 
+                            })
                         }
                     </p>
 
                     <p className={style.link} onClick={() => { window.open('https://google.co.kr', '_blank') }}>{data.userSite}</p>
 
-                    
-                        <MailOutline sx={{ fontSize: 24 }}/>
-                        <CreateOutlined sx={{ fontSize: 24 }}/>
-                        <ReportProblemOutlined sx={{ fontSize: 24 }}/>
+
+                    <Link to="#">   <MailOutline sx={{ fontSize: 24 }} /> </Link>
+                    <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 }} /></Link>
+                    <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
                     {/* <img src={Message} className={style.icon}></img>
                     <img src={PersonPinCircle} className={style.icon}></img>
                     <img src={Report} className={style.icon}></img> */}
-                  
+
 
 
                 </div>
                 <div className={style.detail}>
-                    <div className={style.playbar}>        
-                            <Waveform
-                                data={data.userMusic}
-                                src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.userMusic}.mp3`}
-                            />
+                    <div className={style.playbar}>
+                        <Waveform
+                            data={data.userMusic}
+                            src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.userMusic}`}
+                        />
                     </div>
                     <div className={style.introduce}>
                         {data.userPortfolio && <Viewer initialValue={data.userPortfolio}></Viewer>}
                     </div>
                 </div>
                 <div className={style.review}>
-                    <p style={{ fontSize: "20px", marginTop:"20px"}}>후기</p>
+                    <p style={{ fontSize: "20px", marginTop: "20px" }}>후기</p>
                     <div className={style.reviewdetail}>
                         <p className={style.reviewtitle}>작업물 제목</p>
                         <p className={style.reviewcontents}>

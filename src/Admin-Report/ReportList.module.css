@@ -1,10 +1,10 @@
 /*게시판 글씨 써진 박스*/
 .box1 {
-    height: 280px;
+    height: 240px;
     width: 100%;
-    background-color: #ffffff;
+ 
     text-align: center;
-    border-bottom: 3px solid #1f1f1f;
+    border-bottom: 2px solid #d9d9d9;
 }
 
 .box1 h1 {
@@ -20,43 +20,77 @@
 .list {
     /* margin:4px; */
     border-top: 1px solid #acacac;
-    width: 1104px;
+    width: 1168px;
     height: 42px;
     float: left;
-    padding-top: 30px;
-    padding-bottom: 5px;
+    /* padding-top: 30px; */
+    /* padding-bottom: 5px; */
     /* margin-right:32px; */
-    padding-left: 62px;
+    padding-left: 56px;
+    display: block;
+    
 
 
 }
-
+.num {
+    width:160px;
+    height:42px;
+    display: inline-block;
+    float: left;
+    line-height: 40px;
+}
+.reason {
+    width:390px;
+    height:42px;
+    display: inline-block;
+    float: left;
+    line-height: 40px;
+}
+.id {
+    width:330px;
+    height:42px;
+    display: inline-block;
+    float: left;
+    line-height: 38px;
+}
+.reid {
+    width:200px;
+    height:42px;
+    display: inline-block;
+    float: left;
+    line-height: 38px;
+}
 .list:first-child {
-    border-top: 3px solid black;
+    /* border-top: 3px solid black; */
 }
 
-.list span {
-    margin: 0px 155px;
+/* .list span {
+    margin: 0px 154px;
+    line-height: 40px;
 }
 
+.list span:last-child {
+    margin-right: 0px;
+} */
 /*게시글 묶음 박스*/
 .reportbox {
     margin-top: 80px;
     margin-bottom: 60px;
     /* border-top: 2px solid black; */
-    border-bottom: 2px solid #1f1f1f;
+    border-bottom: 2px solid #979797;
     float: left;
     width: 1168px;
 }
 
 .info {
-    border-top: 3px solid #1f1f1f;
+    border-top: 2px solid #979797;
 }
 
 /*신고번호 등 */
 .info li {
     float: left;
-    margin: 20px 100px;
+    margin: 20px 92px;
+    font-size: 18px;
 
 
 }
@@ -92,13 +126,14 @@
     margin-top: 30px;
     height: 30px;
     border: none;
-    border-bottom: 3px solid #1f1f1f;
+    border-bottom: 2px solid #afafaf;
     width: 220px;
     display: inline;
     margin-right: 32px;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 1px;
     text-transform: uppercase;
+    outline: none;
     /* position: absolute; */
 }
 

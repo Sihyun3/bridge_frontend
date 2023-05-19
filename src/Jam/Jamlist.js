@@ -22,8 +22,8 @@ const JamList = () => {
         // const decode_token = jwt_decode(token);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam`)
             .then(r => {
-                setData(r.data)
-                console.log(r.data)
+                setData(r.data);
+                console.log(r.data);
             })
     }, [])
 
@@ -43,10 +43,10 @@ const JamList = () => {
 
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
-        const filtered = data.filter(notice => {
+        const filtered = data.filter(data => {
             console.log(`>${searchInput}<`)
-            console.log(notice.title.includes(searchInput))
-            return notice.title.includes(searchInput)
+            console.log(data.ctitle.includes(searchInput))
+            return data.ctitle.includes(searchInput)
         });
         console.log(filtered);
         setFilteredDatas(filtered);
@@ -73,19 +73,35 @@ const JamList = () => {
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
-                        data.map((data) => {
+                        filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((data) => {
                             return (
-                                <>
-                                    <div className={style.block}>
-                                        <Link to={`/jam/detail/${data.cidx}`}>
-                                            <div className={style.imgbox}>
-                                                <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
-                                            </div>
-                                            <p className={style.title}>{data.ctitle}</p>
-                                        </Link>
-                                    </div>
-                                </>
+                                <div className={style.block}>
+                                    <Link to={`/jam/detail/${data.cidx}`}>
+                                        <div className={style.imgbox}>
+                                            <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.cphoto}.jpg`}></img>
+                                        </div>
+                                        <p className={style.title}>{data.ctitle}</p>
+                                    </Link>
+                                </div>
                             );
+                        })
+                    }
+
+
+                    {
+                        filteredDatas == "" && data && data.slice(offset, offset + limit).map((data) => {
+
+                            return (
+
+                                <div className={style.block}>
+                                    <Link to={`/jam/detail/${data.cidx}`}>
+                                        <div className={style.imgbox}>
+                                            <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                        </div>
+                                        <p className={style.title}>{data.ctitle}</p>
+                                    </Link>
+                                </div>
+                            )
                         })
                     }
 
@@ -133,7 +149,7 @@ const JamList = () => {
                         }
                     </nav>
                 </div>
-            </div>
+            </div >
         </>
     );
 }

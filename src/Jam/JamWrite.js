@@ -25,26 +25,16 @@ const JamWrite = () => {
             return;
         }
         
-        // const decode_token = jwt_decode(token);
     }, [])
 
     const token = sessionStorage.getItem('token');
 
 
     const handlersubmit = () => {
-        // sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-        // if (sessionStorage.getItem('token') == null) {
-        //     alert(`로그인이 필요합니다. 로그인해주세요`);
-        //     history.push('/login')
-        //     return;
-        //   }
-        //   const token = sessionStorage.getItem('token');
-        //   const decode_token = jwt_decode(token);
-       
         let formData = new FormData();
 
-        // let datas = {"cTitle" : title, "cContents": content}
         let datas = { "title": title, "content": content };
+
         formData.append("data", new Blob([JSON.stringify(datas)], { type: "application/json" }))
         for (let i = 0; i < photo.length; i++) {
             formData.append("files", photo[i]);
@@ -57,7 +47,6 @@ const JamWrite = () => {
             formData1.append("files", music[i]);
         }
 
-        // sessionStorage.getItem('token')
         axios({
             method: 'POST',
             url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertjam`,

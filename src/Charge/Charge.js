@@ -45,8 +45,6 @@ const Charge = ({ match }) => {
         setChargePoint(e.target.value);
     }
 
-
-
     useEffect(() =>{
         console.log(total);
         console.log(usepoint);

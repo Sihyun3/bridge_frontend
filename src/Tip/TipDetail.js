@@ -4,10 +4,10 @@ import back_button from './back-button.png'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Viewer } from '@toast-ui/react-editor';
-import jwtDecode from 'jwt-decode';
 // import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom';
 import { Icon } from '@iconify/react';
+import jwtDecode from 'jwt-decode';
 
 const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
@@ -15,13 +15,14 @@ const TipDetail = ({ match }) => {
     const tb_idx = match.params.tbIdx;
     const [temp, setTemp] = useState()
     const history = useHistory();
+    const [user, setUser] = useState('');
 
     // const [likeUpdate, setLikeUpdate] = useState(false)
     // const [LikeCt, setLikeCt] = useState(0)
     // const [userNickname, setUserNickname] = useState('');
     // const tb_heart = match.params.tb_heart;
 
-    
+
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
@@ -29,8 +30,9 @@ const TipDetail = ({ match }) => {
             history.push('/login')
             return;
         }
-        // const token = sessionStorage.getItem('token');
-        // const decode_token = jwt_decode(token);
+        const token = sessionStorage.getItem('token')
+        const decode = jwtDecode(token);
+        setUser(decode.sub);
 
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
             .then(r => {
@@ -43,41 +45,41 @@ const TipDetail = ({ match }) => {
     const insert = (e) => {
         e.preventDefault();
         if (temp.length >= 100) {
-            alert(`작성하신 댓글의 글자수가 100자를 초과합니다 \n 다시 작성해주세요.`);
+            alert(`작성하신 댓글의 글자수가 100자를 초과합니다 \n 제한된 글자수에 맞게 다시 작성해주세요.`);
+        } else {
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
+                { "tbIdx": tb_idx, "tbcComments": temp },
+                { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
+            ).then(() => {
+                console.log("asdasdasd")
+                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
+                    .then(r => {
+                        console.log(r.data)
+                        setComments(r.data)
+                    })
+            }
+            )
         }
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
-            { "tbIdx": tb_idx, "tbcComments": temp },
-            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
-        ).then(() => {
-            console.log("asdasdasd")
-            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
-                .then(r => {
-                    console.log(r.data)
-                    setComments(r.data)
-                })
-        }
-        )
         setTemp("");
     }
 
     const handlerdelete = () => {
-        const token = sessionStorage.getItem('token')
-        const decode = jwtDecode(token);
-        if (decode.sub != data.userId) {
+        if (user == data.userId || user == 'admin') {
+            axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
+                { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+                .then(() => {
+                    alert("성공적으로 삭제 되었습니다.")
+                    history.push('/tip/list')
+
+                })
+                .catch(() => {
+                    alert("삭제에 실패했습니다.")
+                })
+        } else {
             alert('작성자만 삭제 가능합니다.');
             history.push('/')
         }
-        console.log(decode.sub);
-        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
-            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-            .then(() => {
-                alert("성공적으로 삭제 되었습니다.")
-                history.push('/tip/list')
 
-            })
-            .catch(() => {
-                alert("삭제에 실패했습니다.")
-            })
     }
 
 
@@ -88,7 +90,7 @@ const TipDetail = ({ match }) => {
             </div></Link>
             <div className={style.title}>
                 <h1>{data.tbTitle}</h1>
-              
+
                 <p>조회수:{data.tbViews}</p>
                 <p>작성일:{data.tbCreatedt}</p>
             </div>
@@ -96,23 +98,11 @@ const TipDetail = ({ match }) => {
             <div className={style.content}>
                 {data.tbContents && <Viewer initialValue={data.tbContents}></Viewer>}
             </div>
-            {/* <div className={style.heartbox}> */}
-                {/* <i onClick={handlerHeart}>{data.tbHeart} ♡</i> */}
-            {/* </div> */}
-
-            {/* <div className={style.likesBox}>
-         <h1 className={style.likes}> Likes  {LikeCt} </h1>
-         <br/>
-        {likeUpdate ?
-          <button onClick={LikeCountHandler}><Icon className={style.heart} icon="material-symbols:heart-plus" /></button>:
-          <button onClick={LikeCountHandler}><Icon className={style.heart} icon="material-symbols:heart-minus-outline" /></button>
-        }
-        </div> */}
 
             <div className={style.editbox}>
                 <ul>
-                    <li onClick={handlerdelete}> 삭제</li>
-                    <li><Link to={`/tip/edit/${data.tbIdx}`}>수정</Link></li>
+                    {user == data.userId || user == 'admin' ? <li onClick={handlerdelete}> 삭제</li> : ""}
+                    {user == data.userId || user == 'admin' ? <li><Link to={`/tip/edit/${data.tbIdx}`}>수정</Link></li> : ""}
                 </ul>
             </div>
             <div className={style.line}></div>

@@ -5,6 +5,13 @@ import { useState, useEffect, useRef } from 'react'
 import jwt_decode from "jwt-decode";
 import axios from 'axios'
 import Waveform from '../Component/Waveform';
+import { PlayCircleFilledOutlined } from '@mui/icons-material';
+import { blue } from '@mui/material/colors';
+
+
+
+
+
 const JamDetail = ({ match }) => {
     //잼소개 부분
     const [info, setInfo] = useState({});
@@ -45,10 +52,10 @@ const JamDetail = ({ match }) => {
             console.log("축 성공");
             let musicInfo = { instrument: instrument, musicUUID: response.data.uuid }
             setData([...data, musicInfo]);
+            window.location.reload();
         }).catch(() => {
             alert(`업로드 중 오류가 발생했습니다.`);
         });
-        window.location.reload();
     }
     useEffect(() => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
@@ -56,7 +63,7 @@ const JamDetail = ({ match }) => {
                 setData(response.data.music);
                 setInfo(response.data.data)
                 setCommentsList(response.data.commentsList)
-                console.log(response.data.music);
+                console.log(">>>>>>>>>>>>>>>>>>>" + response.data.music);
                 console.log(response.data);
             })
     }, [])
@@ -80,17 +87,18 @@ const JamDetail = ({ match }) => {
             alert('작성된 내용이 없습니다')
             return;
         }
-    
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, {  "ccComments": comment },
-        { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
+
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
                 console.log(response);
                 setInsert(insert + 1);
                 alert('코맨트가 정상적으로 등록되었습니다')
+                window.location.reload();
 
             })
             .catch(error => {
-                alert("로그인 해주세요");
+                alert("오류가 발생했습니다");
             });
     };
 
@@ -121,21 +129,36 @@ const JamDetail = ({ match }) => {
         <>
             <div className='container clearfix'>
                 <div className={style.title}>
-                    <h1>{info.ctitle} </h1>
-                    <br /><br />
-                    <p>{info.ccontents}</p>
+                    <div className={style.imgbox}>
+                        <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+
+                        <div>
+                            <h1>{info.ctitle} </h1>
+                            <br /><br />
+                            <h3>Album By {" "} {" "} {info.cwriter}</h3>
+                            <br /><br />
+                            <p>{info.ccontents}</p>
+
+                        </div>
+                    </div>
+
+                    <div className={style.playbox}>
+                        {/* <img className={style.playbutton} src={play} onClick={allplay} /> */}
+                        <PlayCircleFilledOutlined sx={{ fontSize: 64, color: blue[500], cursor: "pointer" }} onClick={allplay} />
+                        {/* 여기에 플레이 바 추가해야함 */}
+                        {/* <button onClick={allplay}>All Play/Pause</button> */}
+                    </div>
+
                 </div>
 
-                <div className={style.playbox}>
-                    <img className={style.playbutton} src={play} onClick={allplay} />
-                    {/* 여기에 플레이 바 추가해야함 */}
-                    {/* <button onClick={allplay}>All Play/Pause</button> */}
-                </div>
-                <div style={{ marginLeft: "40px" }}>
-                    <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
-                    <span style={{ marginLeft: "10px", position: "relative", bottom: "5px" }}>전체 선택</span>
-                </div>
+
+
                 <div className={style.jam}>
+                    <div style={{ margin: "20px" }}>
+                        <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
+                        <span style={{ marginLeft: "10px" }}>전체 선택</span>
+                    </div>
+
                     <div>
 
                         {data.map((musicInfo, index) => {
@@ -161,7 +184,7 @@ const JamDetail = ({ match }) => {
                                     <Waveform
                                         data={data}
                                         key={musicInfo.musicUUID}
-                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}.mp3`}
+                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
                                         ref={(elem) => (child.current[index] = elem)}
                                     />
                                     {/* 노래제목 */}
@@ -173,9 +196,21 @@ const JamDetail = ({ match }) => {
                     </div>
                     <div className={style.input}>
                         {/* <img className={style.singlenote} src={note} onclick /> */}
-                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "20px", outlineStyle: "none", marginBottom: 21, marginRight: 20, border: 0 }} >
+                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "44px", outlineStyle: "none", marginBottom: 21, marginRight: 0, border: 0 }} >
                             <option value="" disabled selected>악기 선택</option>
-                            <option value="베이스">베이스  </option>
+                            <option value="여성보컬">여성보컬  </option>
+                            <option value="남성보컬">남성보컬  </option>
+                            <option value="일렉기타">일렉기타  </option>
+                            <option value="어쿠스틱기타">어쿠스틱기타  </option>
+                            <option value="베이스기타">베이스기타  </option>
+                            <option value="드럼">드럼  </option>
+                            <option value="퍼커션">퍼커션  </option>
+                            <option value="브라스">브라스  </option>
+                            <option value="바이올린">바이올린  </option>
+                            <option value="첼로">첼로  </option>
+                            <option value="콘트라베이스">콘트라베이스  </option>
+                            <option value="피아노">피아노  </option>
+                            <option value="신디사이저">신디사이저  </option>
                         </select>
 
                         {/* <input tyep="file" className={style.music} /> */}

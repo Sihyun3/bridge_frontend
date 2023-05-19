@@ -36,9 +36,7 @@ const PartnerDatail = ({ match }) => {
     }, [])
 
     const handleDelete = () => {
-        if (userId != data.userId) {
-            alert(`작성자만 삭제가 가능합니다.`)
-        } else {
+        if (userId == data.userId || userId == 'admin') {
             axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
                 .then((response) => {
                     alert(`정상적으로 삭제되었습니다`)
@@ -47,12 +45,20 @@ const PartnerDatail = ({ match }) => {
                 .catch((err) => {
                     console.log(err);
                 })
+        } else {
+            alert(`작성자만 삭제가 가능합니다.`)
         }
     }
 
     const handleChat = (e) => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}`)
-
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`, { "userId1": userId, "userId2": data.userId })
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        history.push(`/chatting`)
     }
 
 
@@ -96,8 +102,7 @@ const PartnerDatail = ({ match }) => {
                     <button onClick={handleChat}> 1:1 채팅 </button>
                 </div>
                 <div className={style.buttonbox2}>
-                    <button onClick={handleDelete}>삭제하기</button>
-               
+                    {userId == data.userId || userId == 'admin' ? <button onClick={handleDelete}>삭제하기</button> : ""}
                 </div>
 
                 <div className={style.line}></div>

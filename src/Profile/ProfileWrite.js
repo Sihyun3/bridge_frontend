@@ -103,7 +103,7 @@ const ProfileWrite = () => {
             .then(response => {
                 console.log(response);
                 alert(`정상적으로 업로드했습니다.`);
-                history.push(`/profile/detail/${userId}`)
+                history.push(`/profile/detail`)
             })
             .catch(error => {
                 console.log(error);
