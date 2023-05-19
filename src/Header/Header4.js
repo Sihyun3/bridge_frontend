@@ -11,6 +11,7 @@ function Header4({ isLogin, setIsLogin }) {
     const [state, setState] = useState(false);
     const [userNickname, setUserNickname] = useState('');
     const [userPoint, setUserPoint] = useState('');
+    const [userId, setUserId] = useState('');
 
 
     const handlerOnLogoutClick = () => {
@@ -25,13 +26,16 @@ function Header4({ isLogin, setIsLogin }) {
             const token = sessionStorage.getItem('token');
             const decodedToken = jwt_decode(token);
             console.log(decodedToken)
-            setUserNickname(decodedToken.name);
-            console.log(userNickname);
-            setIsLogin(true);
+      
+
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decodedToken.sub}`)
                 .then(res=>{
-                    console.log(">>>>>>>>>" + res.data);
+                    // console.log(">>>>>>>>>" + res.data);
                     setUserPoint(res.data);
+                    setUserNickname(decodedToken.name);
+                    console.log("**********" + decodedToken.name);
+                    setIsLogin(true);
+                    setUserId(decodedToken.userId);
                 })
                 .catch(err => { console.log(err)})
         }
@@ -78,7 +82,7 @@ function Header4({ isLogin, setIsLogin }) {
                             <div className={style.box}>
                                 <li> <a className={style.nickname}>{userNickname}님</a></li>
                                 <div className={style.drop}>
-                                    <Link to="/profile/detail">프로필</Link>
+                                    <Link to={`/profile/detail`}>프로필</Link>
                                     <Link to="/partner/doing">작업페이지</Link>
                                     <Link to="/chatting">채팅</Link>
                                     <a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a>
@@ -122,7 +126,7 @@ function Header4({ isLogin, setIsLogin }) {
 
                             <Link className={style.Login} to="/login">로그인</Link>
                             <Link className={style.regist} to="/signup">회원가입</Link>
-                            
+                                                    
 
 
                         </ul>

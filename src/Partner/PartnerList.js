@@ -138,7 +138,7 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-          <Link to={`/partner/write`}><button > 나의 연주자 찾기 </button></Link>
+          <Link to={`/partner/write`}><button > Ask Commission </button></Link>
         </div>
 
         <div className={style.page}>

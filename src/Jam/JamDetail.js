@@ -25,6 +25,7 @@ const JamDetail = ({ match }) => {
     const [insert, setInsert] = useState(0);
     const [data, setData] = useState([]);
     const history = useHistory();
+    const [id, setId] = useState('');
 
     const handleChangeComment = (e) => {
         setComment(e.target.value);
@@ -49,22 +50,26 @@ const JamDetail = ({ match }) => {
             console.log("축 성공");
             let musicInfo = { instrument: instrument, musicUUID: response.data.uuid }
             setData([...data, musicInfo]);
+            window.location.reload();
+
         }).catch(() => {
             alert(`업로드 중 오류가 발생했습니다.`);
         });
-        window.location.reload();
     }
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
             alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
-          }
+        }
+        const token = sessionStorage.getItem('token')
+        const decode = jwtDecode(token);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
                 setData(response.data.music);
                 setInfo(response.data.data)
                 setCommentsList(response.data.commentsList)
+                setId(decode.sub);
                 console.log(response.data.music);
                 console.log(response.data);
             })
@@ -89,9 +94,9 @@ const JamDetail = ({ match }) => {
             alert('작성된 내용이 없습니다')
             return;
         }
-    
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, {  "ccComments": comment },
-        { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`}})
+
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
                 console.log(response);
                 setInsert(insert + 1);
@@ -106,30 +111,29 @@ const JamDetail = ({ match }) => {
     // 코멘트 삭제 핸들러
     const handlerClickDelete = (e) => {
         e.preventDefault();
-        const token = sessionStorage.getItem('token')
-        const decode = jwtDecode(token);
-        if (decode.sub != data.userId) {
+      
+        if (id == data.userId || id == 'admin') {
+            axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
+                .then(response => {
+                    console.log(response);
+                    if (response.data === 1) {
+                        alert('정상적으로 삭제되었습니다.');
+                        // history.push('/insertComments');				// 정상적으로 삭제되면 목록으로 이동
+                    } else {
+                        alert('삭제에 실패했습니다.');
+                        return;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert(`삭제에 실패했습니다. (${error.message})`);
+                    return;
+                });
+        } else {
             alert('작성자만 삭제 가능합니다.');
             history.push('/')
         }
-        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
-            .then(response => {
-                console.log(response);
-                if (response.data === 1) {
-                    alert('정상적으로 삭제되었습니다.');
-                    // history.push('/insertComments');				// 정상적으로 삭제되면 목록으로 이동
-                } else {
-                    alert('삭제에 실패했습니다.');
-                    return;
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                alert(`삭제에 실패했습니다. (${error.message})`);
-                return;
-            });
         window.location.reload();
-
     };
 
     return (
@@ -176,7 +180,7 @@ const JamDetail = ({ match }) => {
                                     <Waveform
                                         data={data}
                                         key={musicInfo.musicUUID}
-                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}.mp3`}
+                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
                                         ref={(elem) => (child.current[index] = elem)}
                                     />
                                     {/* 노래제목 */}
@@ -221,7 +225,7 @@ const JamDetail = ({ match }) => {
                                     <div className={style.comments} style={{ width: 1000, marginLeft: 80, height: 40, float: "left", lineHeight: "40px" }}  >
                                         <div style={{ width: "100px", float: "left" }} > {comment.userId} </div>
                                         <div style={{ float: 'left', width: "850px " }}> {comment.ccComments}</div>
-                                        <button value={comment.ccIdx} onClick={handlerClickDelete}>삭제</button>
+                                      { id==comment.userId || id=='admin' ?  <button value={comment.ccIdx} onClick={handlerClickDelete}>삭제</button> : "" }
                                     </div>
                                 </>
 

@@ -7,7 +7,7 @@ import style from '../Tip/TipWrite.js'
 
 export default function TipEdit({ match }) {
     // const tb_idx = match.params.tbIdx;
-    const tb_idx = 2;
+    const tb_idx = match.params.tbIdx;
     const [data, setData] = useState({});
     const [title, setTitle] = useState("");
     const history = useHistory();
@@ -17,6 +17,7 @@ export default function TipEdit({ match }) {
             .then(r => {
                 setData(r.data.tipDetail);
                 console.log(">>>>>>>>>>>>>>>>>>>" + r.data.tipDetail);
+                console.log("*******************" + data.tbContents);
                 setTitle(r.data.tipDetail.tbTitle);
             })
     }, [])

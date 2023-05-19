@@ -25,21 +25,22 @@ const ReportList = () => {
             alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
-          }
-          const token = sessionStorage.getItem('token');
-          const decode_token = jwt_decode(token);
-          console.log(">>>>>>>>>>>>> " + decode_token);
+        }
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        console.log(">>>>>>>>>>>>> " + decode_token);
 
-          if (decode_token.sub != 'admin') {
+        if (decode_token.sub != 'admin') {
             alert(`관리자만 이용할 수 있습니다`);
             history.push(`/`)
-          }
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
-            .then(response => {
-                console.log(response.data);
-                setData(response.data);
-            })
-            .catch(error => console.log(error));
+        } else {
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
+                .then(response => {
+                    console.log(response.data);
+                    setData(response.data);
+                })
+                .catch(error => console.log(error));
+        }
     }, []);
 
 

@@ -40,10 +40,7 @@ function Notice({ history, noticeIdx, title, writer }) {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setId(decode_token.sub);
-        // if (decode_token.sub != 'admin') {
-        //     alert(`관리자만 이용할 수 있습니다`);
-        //     history.push(`/`)} 
-        
+          
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
                 .then(response => {
                     console.log(response);

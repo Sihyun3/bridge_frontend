@@ -22,8 +22,8 @@ const JamList = () => {
         // const decode_token = jwt_decode(token);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam`)
             .then(r => {
-                setData(r.data)
-                console.log(r.data)
+                setData(r.data);
+                console.log(r.data);
             })
     }, [])
 
@@ -79,7 +79,7 @@ const JamList = () => {
                                     <div className={style.block}>
                                         <Link to={`/jam/detail/${data.cidx}`}>
                                             <div className={style.imgbox}>
-                                                <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                                <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.cphoto}.jpg`}></img>
                                             </div>
                                             <p className={style.title}>{data.ctitle}</p>
                                         </Link>

@@ -6,14 +6,16 @@ import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-function ReportPage() {
+function ReportPage({match}) {
 
     const [select, setSelect] = useState('');
     const [reportReasonDetail, setReportReasonDetail] = useState('')
-    const [reportedUserId, setReportedUserId] = useState('');
+    // const [reportedUserId, setReportedUserId] = useState('');
     const [userId, setUserId] = useState('');
 
     const history = useHistory();
+
+    const reportedUserId = match.params.userId;
 
     //신고사유 선택
     const handleSelect = (e) => {
@@ -30,7 +32,7 @@ function ReportPage() {
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
         //신고당하는사람 하드코딩 => 나중에 get 해오기 => 수정 필요 !!! 
-        setReportedUserId("testtest");
+        // setReportedUserId("testtest");
     })
 
     //신고 제출 
@@ -40,7 +42,7 @@ function ReportPage() {
             .then(response => {
                 console.log(response);
                 alert('정상적으로 신고되었습니다');
-                history.push(`/profile/detail/${reportedUserId}`)
+                history.push(`/`)
             })
             .catch(error => {
                 console.log(error);

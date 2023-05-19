@@ -45,10 +45,10 @@ const JamDetail = ({ match }) => {
             console.log("축 성공");
             let musicInfo = { instrument: instrument, musicUUID: response.data.uuid }
             setData([...data, musicInfo]);
+            window.location.reload();
         }).catch(() => {
             alert(`업로드 중 오류가 발생했습니다.`);
         });
-        window.location.reload();
     }
     useEffect(() => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
@@ -179,7 +179,7 @@ const JamDetail = ({ match }) => {
                         </select>
 
                         {/* <input tyep="file" className={style.music} /> */}
-                        <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} />
+                        <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => { setMusic(e.target.files) }} />
                         <input type="button" className={style.music} onClick={onSubmit} value="등록" />
                     </div>
                 </div>
