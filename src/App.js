@@ -42,6 +42,7 @@ import PaymentTest2 from './Payment/PaymentTest2';
 import Portfolio from './Profile/Portfolio';
 import PaymentList from './Payment/PaymentList';
 import ProfileDetail from './Profile/ProfileDetail';
+import DoingTest from './Doing/DoingTest';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);

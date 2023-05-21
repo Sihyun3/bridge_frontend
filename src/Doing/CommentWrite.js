@@ -42,7 +42,7 @@ const CommentWrite = ({ pcIdx, CommentSet}) => {
             })
             .catch((eroor) => {
                 alert("댓글 추가 실패");
-            })
+            })  
     }
 
 

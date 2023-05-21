@@ -6,6 +6,8 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import * as StompJs from '@stomp/stompjs';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+import Doing from '../Doing/Doing';
 
 
 const Chatting = ({match}) => {
@@ -90,6 +92,10 @@ const Chatting = ({match}) => {
         );
     })
 
+    const hanlderConvertDoring = () => {
+        
+    }
+
     return (
         <>
             <div className='container clearfix'>
@@ -140,9 +146,11 @@ const Chatting = ({match}) => {
                                 }
                             </div>
                             <div className={style.chatFoot}>
+                                <Link to="/partner/doing">
                                 <button className={style.handButton}>
                                     <img src={hand} className={style.handIcon}></img>
                                 </button>
+                                </Link>
                                 <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
                                 <button className={style.sendButton} onClick={publish}>
                                     <img src={send} className={style.sendIcon}></img>

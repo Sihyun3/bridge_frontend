@@ -31,7 +31,7 @@ const Doing = ({ history }) => {
             pcNumber: '',
             content: '',
             writer: '',
-            pdNumber: '',
+            pdNumber: '',   
             date: '',
             file: '',
             img: '',
@@ -82,13 +82,14 @@ const Doing = ({ history }) => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${decode_token.sub}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
-                console.log(response);
+                console.log(response); 
                 setListArray(response.data.map((data) => {
+                    const img = `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}`;
                     return ({
                         pdNumber: data.pdIdx,
                         userId1: data.userId1,
-                        userId2: data.userId2,
-                        photo: data.profileImg,
+                        userId2: data.userId2,  
+                        photo: img,
                         tag1: data.userTag1,
                         tag2: data.userTag2,
                         tag3: data.userTag3,
@@ -111,6 +112,8 @@ const Doing = ({ history }) => {
     const handlerClickSelect = (index, pdNumber) => {
 
         setSelect(true);
+        setIsClick(false);
+        setEditClick('');
 
         setIndex1(index);
         setPdNumber1(pdNumber);
@@ -151,6 +154,7 @@ const Doing = ({ history }) => {
 
         setPdIdx(pdNumber);
         console.log(pdIdx);
+        console.log(pdNumber);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdNumber}`
         )
             .then(response => {
@@ -159,7 +163,7 @@ const Doing = ({ history }) => {
                     return ({
                         pcNumber: data.pcIdx,
                         content: data.pcContent,
-                        writer: data.pcWriter,
+                        writer: data.pcWriter,  
                         pdNumber: data.pdIdx,
                         date: data.pcDate,
                         file: data.pcFile,
@@ -227,7 +231,6 @@ const Doing = ({ history }) => {
 
     }
     const CommentSet = (props) => {
-        console.log(">>>>>>>>>>>>>>>>" + props);
 
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/${props}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
@@ -274,7 +277,7 @@ const Doing = ({ history }) => {
                 console.log(error);
                 alert(`삭제에 실패했습니다. (${error.message})`);
                 return;
-            });
+            }); 
     }
 
     const handlerCommentDelete = (pdcIdx, pcIdx) => {
@@ -296,9 +299,6 @@ const Doing = ({ history }) => {
             })
     }
 
-
-
-
     const ProjectList = () => {
         console.log(listArray);
         let partnerLet2;
@@ -315,7 +315,8 @@ const Doing = ({ history }) => {
                         <>
                             <div key={index} className={style.partnerProfile}>
                                 <button onClick={() => handlerClickSelect(index, value.pdNumber)}>
-                                    <p className={style.img}> {value.photo}</p>
+                                    {/* <p className={style.img}> {value.photo}</p> */}
+                                    <img className={style.img} src={value.photo}></img>
                                     <div className={style.profileBox}>
                                         <span className={style.nickname}>{partnerLet2}</span>
                                         <span className={style.tag}>
@@ -377,19 +378,9 @@ const Doing = ({ history }) => {
                                         />}
                                 </div>
                             </div>
-                            {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} /> : <></>}
+                            {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} index1={index1} pdNumber1={pdNumber1} handlerClickSelect={handlerClickSelect} /> : <></>}
                             {commentOpen === index && CommentList()}
                             {commentOpen === index ? <div className={style.commentWriteBox}><CommentWrite pcIdx={value.pcNumber} CommentSet={CommentSet} /></div> : <> </>}
-                            {/* <button key={value.pcNumber} onClick={() => handlerEditClick(index)}>{editClick === index ? "게시글 수정취소" : "게시글 수정"}</button> 
-                                {/* {editClick === index ? <ContentUpdate pcIdx={value.pcNumber} setEditClick={setEditClick} setIsClick={setIsClick} /> : <></>} */}
-
-                            {/* {console.log(detailClick[index])} */}
-                            {/* <button onClick={() => handlerDetailClick(index)} >{detailClick[index] == false || detailClick[index] == undefined ? "게시글 상세" : "게시글 접기"}</button> */}
-                            {/* {console.log(detailClick)} */}
-                            {/* {detailClick[index] == true ? <ContentDetail pcIdx={value.pcNumber} /> : <></>} */}
-                            {/* <button onClick={() => handlerCommentUpload(index)}>댓글 작성</button> {commentUpload === index ? <CommentWrite pcIdx={value.pcNumber} setCommentUpload={setCommentUpload} setIsClick1={setIsClick1} /> : <> </>} */}
-                            {/* <button onClick={() => handlerContentDelete(value.pcNumber)}> 게시글 삭제 </button> */}
-
                         </div>
                     )
                 }
@@ -399,7 +390,8 @@ const Doing = ({ history }) => {
     }
 
     const CommentList = () => {
-        return (commentList.length != 0 ? commentList.map((data) => {
+        console.log(commentList);   
+        return ( commentList.length != ''? commentList.map((data) => {
             return (
                 <div className={style.comment}>
                     <div className={style.iconBox}><img src={reply} className={style.commentIcon} /></div>
