@@ -19,6 +19,7 @@ const Chatting = ({match}) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
+    //상대
     const [reciver ,setReciver] = useState(''); 
 
     const history = useHistory();
@@ -92,8 +93,13 @@ const Chatting = ({match}) => {
         );
     })
 
-    const hanlderConvertDoring = () => {
-        
+    const handleHand = () => {
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, {"userId1" : sender})
+            .then(r => {
+                console.log("작업창 생성")
+                history.push(`/partner/doing`)
+            })
+            .catch(e => {console.log(e)})
     }
 
     return (
@@ -146,11 +152,11 @@ const Chatting = ({match}) => {
                                 }
                             </div>
                             <div className={style.chatFoot}>
-                                <Link to="/partner/doing">
-                                <button className={style.handButton}>
+                                {/* <Link to="/partner/doing"> */}
+                                <button onClick={handleHand} className={style.handButton}>
                                     <img src={hand} className={style.handIcon}></img>
                                 </button>
-                                </Link>
+                                {/* </Link> */}
                                 <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
                                 <button className={style.sendButton} onClick={publish}>
                                     <img src={send} className={style.sendIcon}></img>

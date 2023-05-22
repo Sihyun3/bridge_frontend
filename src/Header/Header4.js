@@ -22,10 +22,10 @@ function Header4({ isLogin, setIsLogin }) {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') != null) {
-            console.log("aaaaaaaaaaaaaa");
+            // console.log("aaaaaaaaaaaaaa");
             const token = sessionStorage.getItem('token');
             const decodedToken = jwt_decode(token);
-            console.log(decodedToken)
+            // console.log(decodedToken)
       
 
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decodedToken.sub}`)
@@ -33,7 +33,7 @@ function Header4({ isLogin, setIsLogin }) {
                     // console.log(">>>>>>>>>" + res.data);
                     setUserPoint(res.data);
                     setUserNickname(decodedToken.name);
-                    console.log("**********" + decodedToken.name);
+                    // console.log("**********" + decodedToken.name);
                     setIsLogin(true);
                     setUserId(decodedToken.userId);
                 })

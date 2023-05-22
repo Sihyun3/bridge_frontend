@@ -11,7 +11,7 @@ function PaymentTest2({ match }) {
 
     //나중에 네이밍 변경해도 될까요? - 당연하쥐....
 
-    const  producer  = "test1"; //제작자 (돈 받을 사람 우선 하드코딩 해뒀던 거)
+    const  {producer, cidx}  = match.params; //제작자 (돈 받을 사람 우선 하드코딩 해뒀던 거)
 
     const [user1, setUser1] = useState([]);         //로그인한 유저 
     const [clients, setClients] = useState('');     //의뢰인(주는사람)
@@ -62,7 +62,7 @@ function PaymentTest2({ match }) {
                 .then(response => {
                     console.log(response.data);
                     alert('결제가 완료되었습니다.');
-                    history.push(`/deal/list`); //거래내역 페이지로 설정해뒀는데 추후 수정 필요 
+                    history.push(`/partner/doing/detail/${cidx}`); //거래내역 페이지로 설정해뒀는데 추후 수정 필요 
                     //(아마 두잉으로 연결)
                 })
                 .catch(err => {
@@ -178,7 +178,6 @@ function PaymentTest2({ match }) {
                         <span className={style.totalPayment} name="total"> {total} 원</span>
                         {/* <span className={style.totalPayment} name="total"> {total} 원</span> */}
                         {/* {calculateSum().toLocaleString()} */}
-
                     </div>
 
                     <div>
