@@ -39,7 +39,7 @@ function Content({ pdIdx, uploadClick, setUploadClick, handlerClickSelect, index
 
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        let pcWriter = decode_token.name;
+        let pcWriter = decode_token.sub;
 
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
