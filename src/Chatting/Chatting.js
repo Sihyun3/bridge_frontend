@@ -19,6 +19,7 @@ const Chatting = ({match}) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
+    //상대
     const [reciver ,setReciver] = useState(''); 
 
     const history = useHistory();

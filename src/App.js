@@ -43,6 +43,8 @@ import Portfolio from './Profile/Portfolio';
 import PaymentList from './Payment/PaymentList';
 import ProfileDetail from './Profile/ProfileDetail';
 import DoingTest from './Doing/DoingTest';
+import DoingList from './Doing/DoingList';
+import DoingDetail from './Doing/DoingDetail';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -88,7 +90,7 @@ function App() {
 
       <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
       <Route path="/partner/write" component={PartnerWrite} exact={true} />
-      <Route path="/partner/payment" component={PaymentTest2} exact={true} />
+      <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} />
 
       <Route path="/chatting" component={Chatting} exact={true} />
 
@@ -101,7 +103,8 @@ function App() {
       
       <Route path="/profile/detail" component={ProfileDetail} exact={true} />
       
-      <Route path="/partner/doing" component={Doing} exact={true} />
+      <Route path="/partner/doing" component={DoingList} exact={true} />
+      <Route path="/partner/doing/detail/:cidx" component={DoingDetail} exact={true} />
 
       <Footer />
     </>
