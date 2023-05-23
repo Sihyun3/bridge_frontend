@@ -140,13 +140,13 @@ const SignUpTest = ({ history, props }) => {
             })
             return;
         }
-        if(confirmIdMessage == "아이디 형식이 일치하지 않습니다."){
+        if (confirmIdMessage == "아이디 형식이 일치하지 않습니다.") {
             Swal.fire({
                 icon: 'error',
                 title: '아이디 형식이 옳지않아~용.',
                 text: '4 ~ 16자 영문 대 소문자, 숫자를 사용하세요.'
             })
-            return; 
+            return;
         }
         console.log("asjsdfjfkds")
         // axios.post(`http://192.168.0.47:8080/api/idlist/${userId}`,)
@@ -160,16 +160,14 @@ const SignUpTest = ({ history, props }) => {
 
                 // } else
                 if (data === 1) {
-                    // alert("이미 사용중인 아이디입니다.");
+                    alert("이미 사용중인 아이디입니다.");
                     Swal.fire({
                         icon: 'error',
                         title: '이미 사용중인 아이디입니다.',
                         text: '다른 아이디로 다시 시도해주세요.'
                     })
-
                     setConfirmIdMessage("이미 사용중인 아이디입니다.");
                 } else if (data === 0) {
-
                     // Swal.fire("사용 가능한 아이디입니다.");
                     Swal.fire({
                         title: '사용 가능한 아이디입니다.',
@@ -185,7 +183,6 @@ const SignUpTest = ({ history, props }) => {
                                 'Success!',
                                 '탁월한 선택이십니다 :)',
                                 'success'
-
                             )
                         }
                     })
@@ -206,14 +203,14 @@ const SignUpTest = ({ history, props }) => {
             .then((r) => {
                 console.log(r.data)
                 setAuth(r.data)
-                // alert("인증번호가 발송되었습니다.")
-                Swal.fire({
-                    icon: 'success',
-                    title: '인증번호가 발송되었습니다.',
-                    text: '메일함을 확인해주세요.',
-                    confirmButtonColor: '#3c3e58'
-                    // confirmButtonColor: '#3085d6'
-                })
+                alert("인증번호가 발송되었습니다.")
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: '인증번호가 발송되었습니다.',
+                //     text: '메일함을 확인해주세요.',
+                //     confirmButtonColor: '#3c3e58'
+                //     // confirmButtonColor: '#3085d6'
+                // })
             })
             .catch(() => {
                 Swal.fire({
@@ -249,7 +246,6 @@ const SignUpTest = ({ history, props }) => {
         }
     }
 
-
     // const handlerOnClickForVerification = e => {
     //     if (e.target.value === verifyCode) {
     //         setVerifyCode(e.target.value)
@@ -281,9 +277,10 @@ const SignUpTest = ({ history, props }) => {
 
 
 
+
     const handlerChangeConfirmId = e => {
-        
-        if(!/^[a-zA-Z0-9]{8,16}$/.test(userId)) {
+
+        if (!/^[a-zA-Z0-9]{8,16}$/.test(userId)) {
             setConfirmIdMessage("아이디 형식이 일치하지 않습니다")
         }
     };
@@ -297,9 +294,10 @@ const SignUpTest = ({ history, props }) => {
             setPassword(userPassword);
             // setPWmessage(null);
             setConfirmMessage(null);
-            // } else if (e.target.value !== userPassword){
-            //     setConfirmPassword(e.target.value);
-            //     setConfirmMessage('비밀번호가 일치하지 않습니다.')
+        } else if (e.target.value !== userPassword
+            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
+            setConfirmPassword(e.target.value);
+            setConfirmMessage('비밀번호가 일치하지 않습니다.')
         } else {
             setConfirmPassword(e.target.value);
             setConfirmMessage('비밀번호 형식이 올바르지 않습니다.')
@@ -380,136 +378,129 @@ const SignUpTest = ({ history, props }) => {
         }
     }
 
+        return (
+            <>
 
+                <div className='container clearfix'>
+                    <div className={style.wrapper}>
+                        <div className={style.container}>
+                            <div className={style.signUpContainer}>
+                                <form className={style.form}>
+                                    <img className={style.BridgeBlackLogo} src={BridgeBlackLogo} alt='브릿지 로고'></img>
 
-
-
-
-
-
-    return (
-        <>
-
-            <div className='container clearfix'>
-                <div className={style.wrapper}>
-                    <div className={style.container}>
-                        <div className={style.signUpContainer}>
-                            <form className={style.form}>
-                                <img className={style.BridgeBlackLogo} src={BridgeBlackLogo} alt='브릿지 로고'></img>
-
-                                <div className={style.basicBox}>
-                                    <div className={style.line_or}>
-                                        <span className={style.line_or_before} />
-                                        <span className={style.txt_or}>회원가입</span>
-                                        <span className={style.line_or_after} />
+                                    <div className={style.basicBox}>
+                                        <div className={style.line_or}>
+                                            <span className={style.line_or_before} />
+                                            <span className={style.txt_or}>회원가입</span>
+                                            <span className={style.line_or_after} />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className={style.idBox}>
-                                    <div className={style.basicBox2}>
-                                        <input className={style.idInputBox} type="Id" placeholder="아이디"  onBlur={handlerChangeConfirmId} onChange={handlerChangeUserId} />
-                                        <button className={style.idCheckButton} onClick={userIdCheck}>ID 중복확인</button>
-                                        <div>
-                                            <span type="Id" name="Id" value={confirmId} onChange={(e) => {
-                                                setConfirmId(e.target.value)
-                                            }} />
+                                    <div className={style.idBox}>
+                                        <div className={style.basicBox2}>
+                                            <input className={style.idInputBox} type="Id" placeholder="아이디" onBlur={handlerChangeConfirmId} onChange={handlerChangeUserId} />
+                                            <button className={style.idCheckButton} onClick={userIdCheck} >ID 중복확인</button>
+                                            <div>
+                                                <span type="Id" name="Id" value={confirmId} onChange={(e) => {
+                                                    setConfirmId(e.target.value)
+                                                }} />
 
-                                            {
-                                                confirmIdMessage != null && <div className={style.warningMessage}> {confirmIdMessage}</div>
-                                            }
-                                            {/* {
+                                                {
+                                                    confirmIdMessage != null && <div className={style.warningMessage}> {confirmIdMessage}</div>
+                                                }
+                                                {/* {
                                                 console.log("aaaaaaaaaaaaaaaaasssssssssssssss" + confirmIdInputMessage)
                                             }
                                             {
                                                 confirmIdInputMessage != null && <div className={style.warningMessage}> {confirmIdInputMessage}</div>
                                             } */}
 
+                                            </div>
                                         </div>
+
+                                    </div>
+                                    <div className={style.passwordBox}>
+
+                                        <label>
+
+                                            <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={16} />
+
+                                            <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} /></label>
+                                        <label>
+                                            <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={16} />
+                                            <img type="Button" className={style.Locked} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
+
+                                        </label>
+
+
+
+
+                                    </div>
+                                    <div className={style.warningBox}>
+                                        <span type="password" name="password" value={confirmPassword} className={style.txt_or} onChange={(e) => {
+                                            setConfirmPassword(e.target.value)
+                                        }} onBlur={handlerChangeConfirmPassword} />
+
+                                        {
+                                            confirmMessage != null ? <div className={style.pwWarningMessage}> {confirmMessage}</div>
+                                                : <div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+                                        }
+
                                     </div>
 
-                                </div>
-                                <div className={style.passwordBox}>
-
-                                    <label>
-
-                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={16} />
-
-                                        <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} /></label>
-                                    <label>
-                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={16} />
-                                        <img type="Button" className={style.Locked} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
-
-                                    </label>
 
 
+                                    <div>
+                                        <input className={style.nameInput} type="text" placeholder="이름" onChange={handlerChangeName} />
+                                    </div>
+                                    <div className={style.NumberBox}>
 
+                                        <select className={style.selectNumberBox} onChange={handleSelectFrontNumber}>
+                                            {/* <option value="number" disabled selected>010</option> */}
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="018">018</option>
+                                        </select>
+                                        <input className={style.NumberBoxInput} type="phoneNumber" placeholder="ex) 0000 - 0000" onBlur={changePhone} />
+                                    </div>
+                                    {console.log(">>>>>>>>>>>>>" + userPhoneNumber)}
+                                    <div className={style.line_or}>
+                                        <span className={style.line_or_before} />
+                                        <span className={style.txt_or}>본인확인 이메일</span>
+                                        <span className={style.line_or_after} />
+                                    </div>
 
-                                </div>
-                                <div className={style.warningBox}>
-                                    <span type="password" name="password" value={confirmPassword} className={style.txt_or} onChange={(e) => {
-                                        setConfirmPassword(e.target.value)
-                                    }} onBlur={handlerChangeConfirmPassword} />
+                                    <div className={style.MailBox}>
+                                        <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
+                                        <select className={style.selectMailBox} value={selectEmail} onChange={handleSelectLastEmail}>
+                                            {/* <option value="mail" disabled selected>e-mail</option> */}
+                                            <option value="@bridge.com">bridge.com</option>
+                                            <option value="@naver.com">naver.com</option>
+                                            <option value="@gmail.com">gmail.com</option>
+                                            <option value="@daum.net">daum.net</option>
+                                        </select>
+                                    </div>
+                                    <button className={style.CodeButton} onClick={handlerAuth}>인증코드 요청</button>
 
-                                    {
-                                        confirmMessage != null ? <div className={style.pwWarningMessage}> {confirmMessage}</div>
-                                            : <div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
-                                    }
+                                    {console.log(">>>>>>>>>>>>>" + userEmail)}
 
-                                </div>
+                                    <div className={style.idBox}>
+                                        <input className={style.idInputBox} type="email" placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
+                                        <button className={style.idCheckButton} onClick={handlerCheck}>코드 인증</button>
+                                        {/* <button className={style.registrationButton} onClick={handlerOnClickForVerification}>확인 </button> */}
+                                    </div>
+                                    {/* <input className={style.formInput} type="PINCODE" placeholder="인증번호를 입력하세요" onChange={changePhone} /> */}
 
-
-
-                                <div>
-                                    <input className={style.nameInput} type="text" placeholder="이름" onChange={handlerChangeName} />
-                                </div>
-                                <div className={style.NumberBox}>
-
-                                    <select className={style.selectNumberBox} onChange={handleSelectFrontNumber}>
-                                        {/* <option value="number" disabled selected>010</option> */}
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="018">018</option>
-                                    </select>
-                                    <input className={style.NumberBoxInput} type="phoneNumber" placeholder="ex) 0000 - 0000" onBlur={changePhone} />
-                                </div>
-                                {console.log(">>>>>>>>>>>>>" + userPhoneNumber)}
-                                <div className={style.line_or}>
-                                    <span className={style.line_or_before} />
-                                    <span className={style.txt_or}>본인확인 이메일</span>
-                                    <span className={style.line_or_after} />
-                                </div>
-
-                                <div className={style.MailBox}>
-                                    <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
-                                    <select className={style.selectMailBox} value={selectEmail} onChange={handleSelectLastEmail}>
-                                        {/* <option value="mail" disabled selected>e-mail</option> */}
-                                        <option value="@bridge.com">bridge.com</option>
-                                        <option value="@naver.com">naver.com</option>
-                                        <option value="@gmail.com">gmail.com</option>
-                                        <option value="@daum.net">daum.net</option>
-                                    </select>
-                                </div>
-                                <button className={style.CodeButton} onClick={handlerAuth}>인증코드 요청</button>
-
-                                {console.log(">>>>>>>>>>>>>" + userEmail)}
-
-                                <div className={style.idBox}>
-                                    <input className={style.idInputBox} type="email" placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
-                                    <button className={style.idCheckButton} onClick={handlerCheck}>코드 인증</button>
-                                    {/* <button className={style.registrationButton} onClick={handlerOnClickForVerification}>확인 </button> */}
-                                </div>
-                                {/* <input className={style.formInput} type="PINCODE" placeholder="인증번호를 입력하세요" onChange={changePhone} /> */}
-
-                                <button className={style.registrationButton} onClick={handlerOnClick}>가입하기</button>
-                            </form>
+                                    <button className={style.registrationButton} onClick={handlerOnClick}>가입하기</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </>
+                    </div >
+                </div >
+            </>
 
-    )
-}
+        )
+    }
 
 export default SignUpTest;

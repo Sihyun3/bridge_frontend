@@ -1,7 +1,6 @@
 import style from '../Partner/PartnerList.module.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Pagination from '../Pagination';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -70,7 +69,7 @@ const PartnerList = () => {
   return (
     <>
       <div className={style.box1}>
-        <h1>연주자 찾기</h1>
+        <h1>Commission</h1>
       </div>
       <div className="container clearfix" >
         <div className={style.tagbox}>
@@ -108,10 +107,8 @@ const PartnerList = () => {
               .map((partnerList, index) => {
                 return (
                   <div key={index} className={style.block}>
-                    {console.log(">>" + partnerList.crPhoto)}
                     <div className={style.imgbox}>
                       <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
-                      {/* <p className={style.title}>{partnerList.userId}</p> */}
                     </div>
                     <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                     <p className={style.date}>
@@ -121,17 +118,13 @@ const PartnerList = () => {
                       {partnerTag
                         .filter((tag) => partnerList.crIdx === tag.crIdx)
                         .map((tag, tagIndex) => {
-                          // console.log(3%3)
                           if (tagIndex % 3 == 0) {
                             return (<><br /><span className={style.tag} key={tagIndex}>#{tag.crtTag} </span> </>)
                           }
                           return (<span className={style.tag} key={tagIndex}>#{tag.crtTag} </span>);
                         }
-
-
                         )}
                     </div>
-
                   </div>
                 );
               })}
@@ -142,7 +135,6 @@ const PartnerList = () => {
         </div>
 
         <div className={style.page}>
-
           <nav className="pageNum" >
             <button onClick={() => setPage(page - 1)} disabled={page === 1} >
               &lt;
@@ -159,9 +151,6 @@ const PartnerList = () => {
               ))}
           </nav>
         </div>
-
-
-
       </div>
     </>
   );

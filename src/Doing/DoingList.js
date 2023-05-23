@@ -24,6 +24,13 @@ const DoingList = () => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${decode_token.sub}`)
             .then(res => {
                 setUserList(res.data);
+                console.log(">>>>>>>>>>" + res.data);
+                userList.map(list=>{
+                    return(
+                    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userList.userId2}`)
+                    )
+                })
+                
             })
             .catch(err => {
                 console.log(err);

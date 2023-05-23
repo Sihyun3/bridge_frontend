@@ -8,19 +8,12 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function ReportPage({match}) {
 
-    const [select, setSelect] = useState('');
-    const [reportReasonDetail, setReportReasonDetail] = useState('')
-    // const [reportedUserId, setReportedUserId] = useState('');
-    const [userId, setUserId] = useState('');
-
-    const history = useHistory();
-
     const reportedUserId = match.params.userId;
 
-    //신고사유 선택
-    const handleSelect = (e) => {
-        setSelect(e.target.value);
-    };
+    const [select, setSelect] = useState('');
+    const [reportReasonDetail, setReportReasonDetail] = useState('')
+    const [userId, setUserId] = useState('');
+    const history = useHistory();
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
@@ -31,11 +24,12 @@ function ReportPage({match}) {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-        //신고당하는사람 하드코딩 => 나중에 get 해오기 => 수정 필요 !!! 
-        // setReportedUserId("testtest");
     })
 
-    //신고 제출 
+    const handleSelect = (e) => {
+        setSelect(e.target.value);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail, "reportReason": select })

@@ -22,11 +22,11 @@ function Notice({ history, noticeIdx, title, writer }) {
     const [check, setCheck] = useState(false);
 
     // const [checkBox, setCheckBox] = useState();
-    const checkedData = [noticeIdx, title, writer]
-    const [checkedArray, setCheckedArray] = useState([]);
-    const [checkedList, setCheckedLists] = useState([]);
-    const [isChecked, setIsChecked] = useState();
-    const [checkingBox, setCheckingBoxs] = useState([]);
+    // const checkedData = [noticeIdx, title, writer]
+    // const [checkedArray, setCheckedArray] = useState([]);
+    // const [checkedList, setCheckedLists] = useState([]);
+    // const [isChecked, setIsChecked] = useState();
+    // const [checkingBox, setCheckingBoxs] = useState([]);
 
     const [id, setId] = useState('');
 
@@ -59,10 +59,8 @@ function Notice({ history, noticeIdx, title, writer }) {
         if (e.target.value == "false") {
             const indexArray = datas.map((notice, index) => notice.noticeIdx);
             setValue(indexArray);
-            console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
             setCheck(true);
         } else {
-            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb")
             setValue([]);
             setCheck(false);
 
@@ -75,12 +73,9 @@ function Notice({ history, noticeIdx, title, writer }) {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         const filtered = datas.filter(notice => {
-            console.log(`>${searchInput}<`)
-            console.log(notice.title.includes(searchInput))
             return notice.title.includes(searchInput)
         }
         );
-        console.log(filtered);
         setFilteredDatas(filtered);
         setPage(1);
     }

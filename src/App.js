@@ -57,7 +57,8 @@ function App() {
       <Route path="/" component={Main} exact={true} />
       <Route path="/login/start" component={LoginStart} exact={true} />
       <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
-      <Route path="/signup" component={SignUpTest} exact={true} /> {/* 수정된 디자인으로 변경해주세요*/}
+      <Route path="/signup" component={SignUpTest} exact={true} /> {/*수정된 디자인으로 변경해주세요*/}
+      {/* <Route path="/signup" component={SignUp} exact={true} /> */}
 
       <Route path="/jam/list" component={JamList} exact={true} />
       <Route path="/jam/write" component={JamWrite} exact={true} />
@@ -89,8 +90,8 @@ function App() {
       <Route path="/admin/report/list" component={ReportList} exact={true} />
 
       <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
-      <Route path="/partner/write" component={PartnerWrite} exact={true} />
-      <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} />
+      <Route path="/partner/write" component={PartnerWrite} exact={true} /> 
+      <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} />  {/* 여기까지 체크 완료 // 나중에 로컬호스트로 된거 있는지 재체크 필요 */}
 
       <Route path="/chatting" component={Chatting} exact={true} />
 

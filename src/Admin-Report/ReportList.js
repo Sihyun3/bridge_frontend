@@ -16,7 +16,6 @@ const ReportList = () => {
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
-    const [value, setValue] = useState([]);
 
     const history = useHistory();
 
@@ -28,7 +27,6 @@ const ReportList = () => {
         }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        console.log(">>>>>>>>>>>>> " + decode_token);
 
         if (decode_token.sub != 'admin') {
             alert(`관리자만 이용할 수 있습니다`);
@@ -51,7 +49,6 @@ const ReportList = () => {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         setFilteredDatas(data.filter(datas => {
-            console.log(`>>>>>>>>>>>>${searchInput}<`)
             return (
                 datas.reportReason.includes(searchInput) ||
                 datas.userId.includes(searchInput) ||
@@ -61,16 +58,12 @@ const ReportList = () => {
         ));
     }
 
-
-
-
     return (
         <>
             <div className='container clearfix'>
                 <div className={style.box1}>
                     <h1>신고 관리</h1>
                 </div>
-
                 <form onSubmit={handlerSerchSubmit}>
                     <div className={style.serchbox}>
                         <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
@@ -87,7 +80,6 @@ const ReportList = () => {
                         <li>신고자</li>
                         <li>신고 대상</li>
                     </ul>
-
                     {
                         filteredDatas == "" && data.slice(offset, offset + limit).map((reportList) => {
                             return (
@@ -109,10 +101,6 @@ const ReportList = () => {
                                             </span>
                                         </Link>
                                     </div>
-
-
-
-
                                 </>
                             )
                         })
@@ -185,8 +173,6 @@ const ReportList = () => {
                 </div>
 
             </div>
-
-
         </>
     )
 }

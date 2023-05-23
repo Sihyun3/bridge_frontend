@@ -63,8 +63,16 @@
 /*배터&프로필 입력칸 개별 div*/
 .button {
     margin: 0 auto;
-    border-bottom:  2px solid #ebedf2;
+    /* border-bottom:  2px solid #ebedf2; */
 
+
+}
+.signupbtn {
+    font-size: 18px;
+    float: right;
+    margin:40px 20px 40px 0px;
+    border-bottom:  2px solid #ebedf2;
+    padding-bottom: 12px;
 
 }
 
@@ -90,3 +98,4 @@
     margin-bottom: 40px;
     font-size: 20px;
 }
+

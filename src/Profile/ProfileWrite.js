@@ -1,4 +1,4 @@
-import style from '../Profile/ProfileWrite.module.css'
+import style from '../Profile/ProfileWrite.module.css';
 import { useEffect, useState, useRef } from 'react';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
@@ -8,40 +8,32 @@ import { Editor } from '@toast-ui/react-editor';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 
 const ProfileWrite = () => {
-
-
     const editorRef = useRef(null);
     const history = useHistory();
-    
+
     const [userId, setUserId] = useState('');
-    const [position, setPosition] = useState('');
     const [introduction, setIntroduction] = useState('');
     const [userSite, setUserSite] = useState('');
     const [profileImg, setProfileImg] = useState([]);
     const [select, setSelect] = useState('');
     const [music, setMusic] = useState([]);
-    const [tag, setTag] = useState([]);
+    const [selectedInstruments, setSelectedInstruments] = useState([]);
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
             alert(`로그인이 필요합니다. 로그인해주세요`);
-            history.push('/login')
+            history.push('/login');
             return;
-          }
+        }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-    }, [select])
+    }, [select]);
 
-
-    // 파일 선택창의 값을 직접 제어하기 위해서 사용  
-    // const inputFiles = useRef();
     // 파일 크기 및 개수 제한
     const MAX_FILE_COUNT = 1;
 
-    // 파일 종류, 크기, 개수 제한을 벗어나는 경우 메시지를 보여주고, 
-    // 파일 입력창을 초기화하는 함수
-    const isNotValid = msg => {
+    const isNotValid = (msg) => {
         alert(msg);
         profileImg.current.value = '';
         setProfileImg([]);
@@ -60,39 +52,44 @@ const ProfileWrite = () => {
             }
         }
         setProfileImg([...files]);
-    }
+    };
 
+    const handleIntroduction = (e) => {
+        setIntroduction(e.target.value);
+    };
 
-    const handleIntroduction = (e) => { setIntroduction(e.target.value); } //소개
-    const handleSite = (e) => { setUserSite(e.target.value); } //사이트
-    const handleSelect = (e) => { setSelect(e.target.value); };
+    const handleSite = (e) => {
+        setUserSite(e.target.value);
+    };
+
+    const handleSelect = (e) => {
+        setSelect(e.target.value);
+    };
 
     const handlerInstrument = (e) => {
-        setTag([...tag, e.target.value])
-    }
-
-    // 서버로 전달할 폼 데이터를 작성
+        const instrument = e.target.value;
+        if (selectedInstruments.includes(instrument)) {
+            setSelectedInstruments(selectedInstruments.filter((item) => item !== instrument));
+        } else {
+            if (selectedInstruments.length < 3) {
+                setSelectedInstruments([...selectedInstruments, instrument]);
+            }
+        }
+    };
 
     const handleSubmit = () => {
         let datas = {
             userId,
             userSite,
-            "userIntroduction": introduction,
-            "userPosition": select,
-            "userPortfolio" : editorRef.current.getInstance().getHTML()
+            userIntroduction: introduction,
+            userPosition: select,
+            userPortfolio: editorRef.current.getInstance().getHTML()
         };
         const formData = new FormData();
-        console.log(tag);
-        formData.append(
-            'data',
-            new Blob([JSON.stringify(datas)], { type: 'application/json' })
-        );
-        formData.append(
-            'tag',
-            new Blob([JSON.stringify({ tags: tag })], { type: 'application/json' })
-        );
-        Object.values(profileImg).forEach(file => formData.append('files', file));
-        Object.values(music).forEach(file => formData.append('music', file));
+        formData.append('data', new Blob([JSON.stringify(datas)], { type: 'application/json' }));
+        formData.append('tag', new Blob([JSON.stringify({ tags: selectedInstruments })], { type: 'application/json' }));
+        Object.values(profileImg).forEach((file) => formData.append('files', file));
+        Object.values(music).forEach((file) => formData.append('music', file));
 
         axios({
             method: 'POST',
@@ -100,12 +97,12 @@ const ProfileWrite = () => {
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         })
-            .then(response => {
+            .then((response) => {
                 console.log(response);
                 alert(`정상적으로 업로드했습니다.`);
-                history.push(`/profile/detail`)
+                history.push(`/profile/detail`);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
                 alert(`업로드 중 오류가 발생했습니다.`);
             });
@@ -113,82 +110,105 @@ const ProfileWrite = () => {
 
     return (
         <>
-            <div className='container clearfix' >
-                {/* <div className={style.loginbackg}> */}
-                    <h1 className={style.login}>프로필 편집</h1>
-                    <div className={style.button}>
-                        <div style={{marginBottom:"10px"}}> 프로필 사진을 첨부해주세요</div>
-                        <input type='file' className={style.signupinput} onChange={handleProfile} ref={profileImg} multiple accept="image/*" placeholder="프로필 사진을 첨부해주세요." />
-                    </div>
+            <div className='container clearfix'>
+                <h1 className={style.login}>프로필 편집</h1>
+                <div className={style.button}>
+                    <div style={{ marginBottom: '10px' }}>프로필 사진을 첨부해주세요</div>
+                    <input
+                        type='file'
+                        className={style.signupinput}
+                        onChange={handleProfile}
+                        ref={profileImg}
+                        multiple
+                        accept='image/*'
+                        placeholder='프로필 사진을 첨부해주세요.'
+                    />
+                </div>
 
-                    <div className={style.button}>
-                        <div style={{marginBottom:"10px",marginTop:"10px"}}> 프로필 음악을 첨부해주세요</div>
-                        <input type='file' className={style.signupinput} onChange={(e) => { setMusic(e.target.files) }} multiple placeholder="프로필 음악을 첨부해주세요." />
-                        {console.log("music--->" + music)}
-                        {/* (e) => { setMusic(e.target.files) } */}
-                    </div>
-                    <div className={style.button}>
+                <div className={style.button}>
+                    <div style={{ marginBottom: '10px', marginTop: '10px' }}>프로필 음악을 첨부해주세요</div>
+                    <input
+                        type='file'
+                        className={style.signupinput}
+                        onChange={(e) => {
+                            setMusic(e.target.files);
+                        }}
+                        multiple
+                        placeholder='프로필 음악을 첨부해주세요.'
+                    />
+                    {console.log("music--->" + music)}
+                </div>
 
+                <div className={style.button}>
                     <select className={style.signupinput} onChange={handleSelect}>
-                        <option value="" disabled selected>포지션 선택</option>
-                        <option value="작곡가">작곡가</option>
-                        <option value="연주자">연주자</option>
-                        <option value="작곡가 겸 연주자">작곡가 겸 연주자</option>
+                        <option value='' disabled selected>
+                            포지션 선택
+                        </option>
+                        <option value='작곡가'>작곡가</option>
+                        <option value='연주자'>연주자</option>
+                        <option value='작곡가 겸 연주자'>작곡가 겸 연주자</option>
                     </select>
-                    </div>
-                    <div className={style.button}>
+                </div>
 
-                    <input className={style.signupinput} value={userSite} onChange={handleSite} placeholder="본인을 소개할 수 있는 링크를 입력해주세요." />
-                    </div>
-                    <div className={style.button}>
+                <div className={style.button}>
+                    <input className={style.signupinput} value={userSite} onChange={handleSite} placeholder='본인을 소개할 수 있는 링크를 입력해주세요.' />
+                </div>
 
-                    <input className={style.signupinput} value={introduction} onChange={handleIntroduction} placeholder="한줄소개를 입력해주세요." />
-                    </div>
+                <div className={style.button}>
+                    <input className={style.signupinput} value={introduction} onChange={handleIntroduction} placeholder='한줄소개를 입력해주세요.' />
+                </div>
 
-                    <div className={style.button}>
-
+                <div className={style.button}>
                     <select className={style.signupinput} onChange={handlerInstrument}>
-                        <option value="" disabled selected>악기 선택</option>
-                        <option value="성악">성악</option>
-                        <option value="보컬">보컬</option>
-                        <option value="바이올린">바이올린</option>
-                        <option value="베이스">베이스</option>
-                        <option value="일렉 기타">일렉 기타</option>
-                        <option value="건반">건반</option>
+                        <option value='' disabled selected>
+                            악기 선택 &#40; 3개까지 가능 &#41;
+                        </option>
+                        <option value='성악'>성악</option>
+                        <option value='보컬'>보컬</option>
+                        <option value='바이올린'>바이올린</option>
+                        <option value='베이스'>베이스</option>
+                        <option value='일렉 기타'>일렉 기타</option>
+                        <option value='어쿠스틱 기타'>어쿠스틱 기타</option>
+                        <option value='드럼'>드럼</option>
+                        <option value='브라스'>브라스</option>
+                        <option value='건반'>건반</option>
+                        <option value='첼로'>첼로</option>
+                        <option value='콘트라베이스'>콘트라베이스</option>
+                        <option value='신디사이저'>신디사이저</option>
                     </select>
-                    </div>
-                    <div className={style.button} style={{marginTop:"10px",paddingBottom:"10px"}}>
-                        {
-                            tag.map((d) => {
-                                return (<span> {d} </span>)
-                            })
-                        }
-                    </div>
-                   
-                    {/* <button onClick={handlerPortfolio}>포토폴리오 작성하기</button> */}
-                {/* </div> */}
-                <h2 className={style.portfolio}> 포토폴리오 작성</h2>
-                <Editor
-                    ref={editorRef}
-                    // 미리보기 스타일 지정
-                    previewStyle="vertical"
-                    // 에디터 창 높이
-                    height="500px"
-                    //초기 입력모드 설정
-                    initialEditType="wysiwyg"
-                    //입력모드 변경 안보이게
-                    hideModeSwitch={true}
-                    //단축키 사용 여부
-                    useCommandShortcut={true}
-                    //글자색 변경 플러그인
-                    plugins={[colorSyntax]}
-                />
-                <button className={style.loginbutton} onClick={handleSubmit}>저장하기</button>
+                </div>
 
+                <div className={style.button} style={{ marginTop: '10px', paddingBottom: '20px' }}>
+                    <div>
+                        {selectedInstruments.map((instrument) => (
+                            <span
+                                key={instrument}
+                                style={{ marginLeft: '5px', padding: '2px 5px', borderRadius: '5px', background: 'lightblue', cursor: 'pointer' }}
+                                onClick={() => setSelectedInstruments(selectedInstruments.filter((item) => item !== instrument))}
+                            >
+                                {instrument}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                <Editor
+                    previewStyle='vertical'
+                    height='300px'
+                    initialEditType='wysiwyg'
+                    useCommandShortcut={true}
+                    plugins={[colorSyntax]}
+                    ref={editorRef}
+                />
+
+                <div className={style.button}>
+                    <button className={style.signupbtn} onClick={handleSubmit}>
+                        등록
+                    </button>
+                </div>
             </div>
         </>
-
-    )
-}
+    );
+};
 
 export default ProfileWrite;

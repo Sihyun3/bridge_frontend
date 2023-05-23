@@ -17,7 +17,7 @@ import KakaotalkLogo from '../Login/KakaotalkLogo.png';
 const KakaoLogin = ({ }) => {
     const { Kakao } = window;
 
-    const JAVASCRIPT_APP_KEY = '68aeb9a371fc365c535495a103132163';
+    const JAVASCRIPT_APP_KEY = '7e512efaee6eeeeca2d427733a82b016';
 
     // 액세스 토큰을 상태 변수로 선언 
     // 로그인 버튼 출력 제어에 사용

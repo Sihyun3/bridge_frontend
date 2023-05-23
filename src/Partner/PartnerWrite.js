@@ -11,12 +11,9 @@ const PartnerWrite = () => {
     const [date1, setDate1] = useState('');
     const [date2, setDate2] = useState('');
     const [money, setMoney] = useState(0);
-    const [partnerImg, setPartnerImg] = useState('');
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState('');
     const [inputImg, setInputImg] = useState([]);
-
-
 
     const history = useHistory();
 
@@ -31,12 +28,10 @@ const PartnerWrite = () => {
         setUserId(decode_token.sub);
     }, [])
 
-    // 파일 크기 및 개수 제한
-    const MAX_FILE_SIZE = 1 * 1024 * 1024; //1MB
+    // 파일 크기(1MB) 및 개수 제한 
+    const MAX_FILE_SIZE = 1 * 1024 * 1024;
     const MAX_FILE_COUNT = 1;
 
-    // 파일 종류, 크기, 개수 제한을 벗어나는 경우 메시지를 보여주고, 
-    // 파일 입력창을 초기화하는 함수
     const isNotValid = msg => {
         alert(msg);
         inputImg.current.value = '';
@@ -61,7 +56,6 @@ const PartnerWrite = () => {
         setInputImg([...files]);
     }
 
-    //태그
     const partnerTag = [
         { name: '여성보컬' },
         { name: '남성보컬' },
@@ -78,20 +72,19 @@ const PartnerWrite = () => {
         { name: '신디사이저' }
     ];
 
-    const handleTitle = (e) => { setTitle(e.target.value); } //제목
-    const handleDate1 = (e) => { setDate1(e.target.value); } //시작일
-    const handleDate2 = (e) => { setDate2(e.target.value); } //종료일
-    const handleMoney = (e) => { setMoney(e.target.value); } //금액
-    const handleContent = (e) => { setContent(e.target.value); } //내용
+    const handleTitle = (e) => { setTitle(e.target.value); }
+    const handleDate1 = (e) => { setDate1(e.target.value); }
+    const handleDate2 = (e) => { setDate2(e.target.value); }
+    const handleMoney = (e) => { setMoney(e.target.value); }
+    const handleContent = (e) => { setContent(e.target.value); }
 
-    //선택된 태그 담을 상태변수
     const [checkedList, setCheckedList] = useState([]);
 
     const handleCheck = (checked, id) => {
         if (checked) {
             setCheckedList([...checkedList, id]);
         } else {
-            setCheckedList(checkedList.filter((el) => el !== id)); //체크해제
+            setCheckedList(checkedList.filter((el) => el !== id));
         }
     }
 
@@ -115,7 +108,6 @@ const PartnerWrite = () => {
     const handleSumit = () => {
         const result = window.confirm("사이트 정책상 수정이 불가합니다. \n등록 전 내용을 다시 한 번 확인해주세요.")
         if (result) {
-
             axios({
                 method: 'POST',
                 url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertPartnerWrite`,
@@ -131,19 +123,16 @@ const PartnerWrite = () => {
                     console.log(error);
                     alert(`모든 항목을 작성해주세요.`);
                 });
-
         }
     };
 
     return (
         <>
             <div className="container clearfix" >
-
-                <h1 className={style.mainText}>나의 연주자 찾기</h1>
-
+                <h1 className={style.mainText}>Commission</h1>
                 <div className={style.content}>
                     <div className={style.title}>
-                    <span className={style.titleText}>제목: </span>
+                        <span className={style.titleText}>제목: </span>
                         <input type="text" value={title} onChange={handleTitle} className={style.titleInput} placeholder="제목을 입력해주세요."></input>
                     </div>
                     <div className={style.period}>
@@ -176,7 +165,6 @@ const PartnerWrite = () => {
                     <div className={style.image}>
                         <span className={style.imageText}>이미지: </span>
                         <input type="file" onChange={handleInputImg} ref={inputImg} multiple accept="image/*" className={style.imageInput}></input>
-                        {/* <button className={style.imageButton}>첨부</button> */}
                     </div>
                     <div className={style.intro}>
                         <span className={style.introText}>소개글: </span>
@@ -186,8 +174,6 @@ const PartnerWrite = () => {
                         <button onClick={handleSumit} className={style.registButton}>등록</button>
                     </div>
                 </div>
-
-
             </div>
         </>
     )
