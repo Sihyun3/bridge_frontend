@@ -23,6 +23,11 @@ const Chatting = ({match}) => {
     const [reciver ,setReciver] = useState(''); 
 
     const history = useHistory();
+
+    const header = {
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+    };
     
     const publish = () => {
         if (!client.current.connected) return;
@@ -93,13 +98,29 @@ const Chatting = ({match}) => {
         );
     })
 
-    const handleHand = () => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, {"userId1" : sender})
-            .then(r => {
-                console.log("작업창 생성")
-                history.push(`/partner/doing`)
-            })
-            .catch(e => {console.log(e)})
+    const data = {
+        userId2 : reciver,
+        userId1 : sender,
+        progress : "0"
+
+    }
+    const handlerConvertDoing = (e) => {
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/insert`, data,
+        {headers: header})
+        .then(response => {
+            console.log(response);
+            if (response.data == 0 ) {
+                alert("이미 작업 중인 사용자입니다.");
+                window.location.reload();
+            }
+            else {
+            alert("채팅방으로 이동합니다.");
+            window.location.reload();
+            }
+        })
+        .catch((error) => {
+            alert("오류");
+        })
     }
 
     return (
@@ -152,11 +173,11 @@ const Chatting = ({match}) => {
                                 }
                             </div>
                             <div className={style.chatFoot}>
-                                {/* <Link to="/partner/doing"> */}
-                                <button onClick={handleHand} className={style.handButton}>
+                                <Link to="/partner/doing">
+                                <button onClick={handlerConvertDoing} className={style.handButton}>
                                     <img src={hand} className={style.handIcon}></img>
                                 </button>
-                                {/* </Link> */}
+                                </Link>
                                 <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
                                 <button className={style.sendButton} onClick={publish}>
                                     <img src={send} className={style.sendIcon}></img>

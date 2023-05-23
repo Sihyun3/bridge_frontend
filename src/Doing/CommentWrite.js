@@ -10,7 +10,7 @@ const CommentWrite = ({ pcIdx, CommentSet}) => {
 
     const token = sessionStorage.getItem('token');
     const decode_token = jwt_decode(token);
-    let userId = decode_token.name;
+    let userId = decode_token.sub;
 
     const handlerChangePdcContent = e => setPdcComment(e.target.value);
     const handlerSubmit = (e) => {
