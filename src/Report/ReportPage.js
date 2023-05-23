@@ -5,8 +5,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
-function ReportPage({match}) {
+function ReportPage({ match }) {
 
     const reportedUserId = match.params.userId;
 
@@ -17,7 +18,11 @@ function ReportPage({match}) {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
@@ -34,8 +39,11 @@ function ReportPage({match}) {
         e.preventDefault();
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail, "reportReason": select })
             .then(response => {
-                console.log(response);
-                alert('정상적으로 신고되었습니다');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Success!',
+                    text: '정상적으로 신고되었습니다.'
+                })
                 history.push(`/`)
             })
             .catch(error => {

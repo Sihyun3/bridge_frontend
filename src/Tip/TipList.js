@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import guitars from '../img/guitars.jpg'
+import Swal from "sweetalert2";
 
 const TipList = () => {
     const history = useHistory();
@@ -15,7 +16,11 @@ const TipList = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login');
             return;
         }
@@ -51,6 +56,18 @@ const TipList = () => {
         setPage(1);
     }
 
+    // 내림차순 정렬
+    const [like, setLike] = useState([]);
+    const arr = useState([data]);
+    console.log(arr); // [5, 100, 20]
+
+    arr.sort((a, b) => b - a);
+    console.log(arr); // [100, 20, 5]
+
+    const handleHeartClick = (e) => {
+        return setLike(arr);
+    };
+
 
 
     return (
@@ -59,28 +76,35 @@ const TipList = () => {
                 <h1>게시판</h1>
             </div>
             <div className='container clearfix'>
+                <div className={style.topBox}>
+                    <div className={style.leftbox}>
+                        <button className={style.good} onClick={handleHeartClick}>좋아요순</button>
+                    </div>
 
-                <div className={style.leftbox}>
-                    <button className={style.good}>좋아요순</button>
-                </div>
+                    <div className={style.rightbox}>
 
-                <div className={style.rightbox}>
-
+                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요." />
+                        <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
+                    </div>
 
                     <div className={style.write}>
-                        <button className={style.writebutton} onClick={() => {
+                        {/* <button class="custom-btn btn-11" onClick={() => {
                             history.push('/tip/write')
-                        }}>작성</button>
+                        }}>작성</button> */}
+                        {/* <div className='container clearfix'> */}
+                        <button className={style.btn6} onClick={() => {
+                            history.push('/tip/write')
+                        }}><span>작성</span>
+                        </button>
+                        {/* </div> */}
+                        {/* <button class="custom-btn btn-11">Read More</button> */}
                     </div>
-                    <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요." />
-                    <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
                 </div>
-
                 <div className={style.tipbox}>
                     {
-                         filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((data) => {
+                        filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((data) => {
                             console.log(data.tbIdx)
-                            {console.log("++++++++++" + filteredDatas)}
+                            { console.log("++++++++++" + filteredDatas) }
                             return (
 
                                 <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
@@ -98,10 +122,10 @@ const TipList = () => {
 
                     {
                         filteredDatas == "" && data && data.slice(offset, offset + limit).map((data) => {
-                            
+
                             return (
 
-                                <Link to={`/tip/detail/${data.tbIdx}`}className={style.list}>
+                                <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>
                                     <a className={style.title}>{data.tbTitle}</a>
                                     <a className={style.writer}>{data.userId}</a>
                                     <a className={style.heart}>♡</a>
@@ -114,13 +138,13 @@ const TipList = () => {
                 </div>
                 <div className={style.page}>
 
-                    <nav className="pageNum" >
-                        <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+                    <nav className={style.pageNum} >
+                        <button className={style.pageButton} onClick={() => setPage(page - 1)} disabled={page === 1} >
                             &lt;
                         </button>
                         {
                             filteredDatas && Array(Math.ceil(filteredDatas.length / limit)).fill().map((page, i) => (
-                                <button
+                                <button className={style.pageButton}
                                     key={i + 1}
                                     onClick={() => setPage(i + 1)}
                                     aria-current={page === i + 1 ? "page" : null}
@@ -131,7 +155,7 @@ const TipList = () => {
 
                         {
                             filteredDatas == "" && Array(Math.ceil(data.length / limit)).fill().map((page, i) => (
-                                <button
+                                <button className={style.pageButton}
                                     key={i + 1}
                                     onClick={() => setPage(i + 1)}
                                     aria-current={page === i + 1 ? "page" : null}
@@ -142,11 +166,13 @@ const TipList = () => {
 
                         {
                             filteredDatas == "" && data ?
-                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(data.length / limit)}>
+                                <button className={style.pageButton}
+                                    onClick={() => setPage(page + 1)} disabled={page == Math.ceil(data.length / limit)}>
                                     &gt;
                                 </button>
                                 :
-                                <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
+                                <button className={style.pageButton}
+                                    onClick={() => setPage(page + 1)} disabled={page == Math.ceil(filteredDatas.length / limit)}>
                                     &gt;
                                 </button>
                         }

@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { CreateOutlined, MailOutline, ReportProblemOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 
 function ProfileDetail() {
@@ -20,11 +21,13 @@ function ProfileDetail() {
 
     const history = useHistory();
 
-    // const reported = match.params;
-
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         } else {
@@ -33,14 +36,15 @@ function ProfileDetail() {
             setUserId(decode_token.sub);
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
                 .then((response) => {
-                    console.log(response.data)
                     setData(response.data.profile[0]);
                     setUser(response.data.userDto);
                     setTag(response.data.taglist)
                 })
         }
     }, [userId])
+
     let a = 0;
+
     return (
         <>
             <div className='box1'>
@@ -55,11 +59,11 @@ function ProfileDetail() {
                         <img src={certiMark} className={style.certi}></img>
                     }
                     <p style={{ marginTop: "10px", marginBottom: "10px" }}>{data.userPosition}</p>
+
                     <p className={style.comment}>
                         {data.userIntroduction}
-                        {/* 한줄 소개 입니다.Lorem ipsum dolor sit amet consectetur.
-                        Aliquam mattis nam rutrum platea lectus lobortis consectetur. */}
                     </p>
+
                     <p>
                         {
                             Array.isArray(tag) && tag.map((d) => {
@@ -71,17 +75,11 @@ function ProfileDetail() {
 
                     <p className={style.link} onClick={() => { window.open('https://google.co.kr', '_blank') }}>{data.userSite}</p>
 
-
                     <Link to="#">   <MailOutline sx={{ fontSize: 24 }} /> </Link>
                     <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 }} /></Link>
                     <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
-                    {/* <img src={Message} className={style.icon}></img>
-                    <img src={PersonPinCircle} className={style.icon}></img>
-                    <img src={Report} className={style.icon}></img> */}
-
-
-
                 </div>
+                
                 <div className={style.detail}>
                     <div className={style.playbar}>
                         <Waveform
@@ -118,7 +116,6 @@ function ProfileDetail() {
                             다음에 꼭 다시 찾아뵙겠습니다...😭😭😭
                         </p>
                     </div>
-
                 </div>
             </div>
         </>

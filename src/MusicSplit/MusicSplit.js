@@ -4,8 +4,7 @@ import Waveform from "../Waveform";
 import style from './MusicSplit.module.css';
 import musicfile_upload from './icons/MusicFileIcon.png'
 import { useHistory } from "react-router";
-
-// import Dropzone from 'react-dropzone';
+import Swal from "sweetalert2"
 
 
 
@@ -18,9 +17,7 @@ const MusicSplit = () => {
 
   const [clicked, setClicked] = useState(false);
 
-  //컨테이너 true 면 loading
   const [isLoading, setIsLoading] = useState(false);
-  //컨테이너 false 면 completed
   const [isSplitCompleted, setIsSplitCompleted] = useState(false);
   const [music, setMusic] = useState('');
 
@@ -28,12 +25,16 @@ const MusicSplit = () => {
 
   useEffect(() => {
     if (sessionStorage.getItem('token') == null) {
-        alert(`로그인이 필요합니다. 로그인해주세요`);
-        history.push('/login')
-        return;
+      Swal.fire({
+        icon: 'error',
+        title: '로그인이 필요합니다.',
+        text: '로그인 페이지로 이동합니다.',
+      })
+      history.push('/login')
+      return;
     }
-  },[]);
- 
+  }, []);
+
 
 
   // 분리할 음원 파일 업로드
@@ -50,29 +51,37 @@ const MusicSplit = () => {
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
-      console.log("축 성공");
       let musicInfo = { musicTitle: response.data.fileNames, musicUUID: response.data.uuid }
       setData([...data, musicInfo]);
-      console.log(response.data.uuid);
       setMusicUUID(response.data.uuid);
-      alert(`업로드가 성공했습니다. 분리 시작 버튼을 눌러주세요.`)
+      Swal.fire(
+        '업로드가 성공했습니다.',
+        '분리 시작 버튼을 눌러주세요.',
+        'success'
+      )
     }).catch(() => {
-      alert(`업로드 중 오류가 발생했습니다.`);
+      Swal.fire({
+        icon: 'error',
+        title: '업로드 중 오류가 발생했습니다.',
+        text: '다시 시도해주세요.'
+      })
     });
   };
 
   // 분리 확인 버튼 연결 핸들러
   const handleCheck = (e) => {
     e.preventDefault();
-    console.log(musicUUID);
-    //
     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;
         if (fileNames.length === 0) {
-          alert('분리된 음악 파일이 존재하지 않습니다.');
+          Swal.fire({
+            icon: 'info',
+            title: '다시 시도해주세요',
+            text: '분리된 음악 파일이 존재하지 않습니다.'
+          })
+
         } else {
-          console.log(fileNames);
           setFiles(fileNames);
           setClicked(true);
         }
@@ -80,24 +89,25 @@ const MusicSplit = () => {
       .catch(error => {
         console.log(error);
       });
-
   };
 
-  // 분리 시작 버튼 클릭시 함수2개 호출
   const startSplit = () => {
     handleMusicSplit();
     handleIsRunning();
   }
-  // 음원 분리 컨테이너 실행
+
   const handleMusicSplit = () => {
     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/docker/${musicUUID}`)
       .then(response => {
         console.log(response);
       })
       .catch(error => {
-        console.log(error);
         console.log("분리 오류 url ==> " + `/api/docker/${musicUUID}`);
-        alert(`오류가 발생했습니다 (${error.message})`);
+        Swal.fire({
+          icon: 'error',
+          title: '분리 중 오류가 발생했습니다.',
+          text: '다시 시도해주세요.'
+        })
       });
   };
 
@@ -230,8 +240,8 @@ const MusicSplit = () => {
                     <div className={style.inst_list}>
                       <li className={style.instruments}><a href={url}>{fn}</a>
 
-                      
-                      
+
+
                       </li>
                       {/* <Waveform   src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {

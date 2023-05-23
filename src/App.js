@@ -1,5 +1,8 @@
-// 헤더 풋터
+import { useEffect, useState } from 'react';
+import { Route } from 'react-router-dom';
 
+// 헤더 풋터
+import Header4 from './Header/Header4';
 import Footer from './Footer/Footer';
 //페이지 임포트
 import LoginStart from './Login/LoginStart';
@@ -23,17 +26,13 @@ import JamWrite from './Jam/JamWrite';
 import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
-// import JamDetail from './Jam/JamDetail';
 import JamDetail from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import ReportList from './Admin-Report/ReportList';
 import TipEdit from './Tip/TipEdit'
 import TipDetail from './Tip/TipDetail'
-import { useEffect, useState } from 'react';
-import { Route } from 'react-router-dom';
 import PartnerList from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
-import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
 import Finduser from './Login/Finduser';
 import SignUpTest from './SignUp/SignUpTest';
@@ -57,55 +56,57 @@ function App() {
       <Route path="/" component={Main} exact={true} />
       <Route path="/login/start" component={LoginStart} exact={true} />
       <Route path="/login" component={(props) => <LoginTest {...props} setIsLogin={setIsLogin} />} exact={true} />
-      <Route path="/signup" component={SignUpTest} exact={true} /> {/*수정된 디자인으로 변경해주세요*/}
-      {/* <Route path="/signup" component={SignUp} exact={true} /> */}
+      <Route path="/signup" component={SignUpTest} exact={true} />
+
+      <Route path="/deal/list" component={PaymentList} exact={true} />
 
       <Route path="/jam/list" component={JamList} exact={true} />
       <Route path="/jam/write" component={JamWrite} exact={true} />
+
 
       <Route path="/admin" component={MainAd} exact={true} />
       <Route path="/admin/notice/list" component={Notice} exact={true} />
       <Route path="/admin/notice/write" component={NoticeWrite} exact={true} />
       <Route path="/admin/deal/list" component={DealListAd} exact={true} />
+      <Route path="/admin/report/list" component={ReportList} exact={true} />
       <Route path="/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} /> {/* 영구정지 권한 제어 필요 */} {/* 기능 됐는데 시현만 있음 */}
 
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
-
+      
+      <Route path="/partner/list" component={PartnerList} exact={true} />
+      <Route path="/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
       <Route path="/partner/charge" component={Charge} exact={true} />
 
       <Route path="/tip/list" component={TipList} exact={true} /> {/* 좋아요 / 좋아요순 기능 구현 x / DESC  */}
       <Route path="/tip/write" component={TipWrite} exact={true} />
-      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} /> {/* 디자인 디테일 수정 필요 */}
+      <Route path="/tip/edit/:tbIdx" component={TipEdit} excat={true} />
+      <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} />
 
       <Route path="/split" component={MusicSplit} exact={true} />
+      {/*  */}
 
+      {/* 이 위로 주석 안지워짐 // 나중에 로컬호스트로 된거 있는지 재체크 필요 // 권한 설정 다 됐는지 재확인 */}
       <Route path="/profile/write" component={ProfileWrite} exact={true} />
       <Route path="/report/write/:userId" component={ReportPage} exact={true} />
 
 
-      {/* 기능 완성 */}
-      <Route path="/find/:idx" component={Finduser} exact={true}/>
+      {/* 기능 완성 & 디자인 x */}
+      <Route path="/find/:idx" component={Finduser} exact={true} /> {/* 은정언니 작업중 */}
 
-      <Route path="/admin/report/list" component={ReportList} exact={true} />
-
-      <Route path="/partner/list" component={PartnerList} exact={true} /> {/* 콘트라베이스만 내려옴 + 리스트 정렬 디자인 깨짐 */} 
-      <Route path="/partner/write" component={PartnerWrite} exact={true} /> 
-      <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} />  {/* 여기까지 체크 완료 // 나중에 로컬호스트로 된거 있는지 재체크 필요 */}
+      <Route path="/partner/doing" component={DoingList} exact={true} /> {/* 쏘 작업중 */}
+      <Route path="/partner/doing/detail/:cidx" component={DoingDetail} exact={true} />
 
       <Route path="/chatting" component={Chatting} exact={true} />
 
-      <Route path="/deal/list" component={PaymentList} exact={true} /> {/* 돋보기 집나감... */}
+      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} /> {/* 지민쓰 작업중 */}
 
-      {/* 디자인 * 기능 미완 */}
-      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
-      <Route path="/tip/edit/:tbIdx" component={TipEdit} excat={true} /> 
-      
-      <Route path="/profile/detail" component={ProfileDetail} exact={true} />
-      
-      <Route path="/partner/doing" component={DoingList} exact={true} />
-      <Route path="/partner/doing/detail/:cidx" component={DoingDetail} exact={true} />
+
+      {/* 디자인 & 기능 미완 */}
+      <Route path="/profile/detail" component={ProfileDetail} exact={true} /> {/* 후기 작성 기능, 페이지 필요 */}
+
+      <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} /> {/* 프로필 불러오기 필요 (기능만 필요) */}
 
       <Footer />
     </>

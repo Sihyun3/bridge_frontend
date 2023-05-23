@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Swal from "sweetalert2";
 
 const PartnerWrite = () => {
 
@@ -19,7 +20,11 @@ const PartnerWrite = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
@@ -33,7 +38,11 @@ const PartnerWrite = () => {
     const MAX_FILE_COUNT = 1;
 
     const isNotValid = msg => {
-        alert(msg);
+        Swal.fire({
+            icon: 'error',
+            title: '다시 시도해주세요.',
+            text: msg
+        })
         inputImg.current.value = '';
         setInputImg([]);
     };
@@ -115,13 +124,20 @@ const PartnerWrite = () => {
                 data: formData
             })
                 .then(response => {
-                    console.log(response);
-                    alert(`정상적으로 업로드했습니다.`);
+                    Swal.fire(
+                        'Success!',
+                        '업로드가 정상적으로 완료되었습니다.',
+                        'success'
+                    )
                     history.push('/partner/list')
                 })
                 .catch(error => {
                     console.log(error);
-                    alert(`모든 항목을 작성해주세요.`);
+                    Swal.fire({
+                        icon: 'error',
+                        title: '다시 시도해주세요.',
+                        text: '모든 항목을 작성해주세요.'
+                    })
                 });
         }
     };

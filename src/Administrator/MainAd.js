@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 
 const MainAd = () => {
@@ -17,18 +18,26 @@ const MainAd = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
-          }
-          const token = sessionStorage.getItem('token');
-          const decode_token = jwt_decode(token);
-          console.log(">>>>>>>>>>>>> " + decode_token);
+        }
+        const token = sessionStorage.getItem('token');
+        const decode_token = jwt_decode(token);
+        console.log(">>>>>>>>>>>>> " + decode_token);
 
-          if (decode_token.sub != 'admin') {
-            alert(`관리자만 이용할 수 있습니다`);
+        if (decode_token.sub != 'admin') {
+            Swal.fire({
+                icon: 'error',
+                title: '관리자만 이용할 수 있습니다',
+                text: '메인 페이지로 이동합니다.',
+            })
             history.push(`/`)
-          }
+        }
     }, [])
 
     return (

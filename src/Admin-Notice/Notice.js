@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import searchImg from './searchImg.png'
 // import { Link } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 function Notice({ history, noticeIdx, title, writer }) {
 
@@ -20,30 +21,25 @@ function Notice({ history, noticeIdx, title, writer }) {
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);
     const [check, setCheck] = useState(false);
-
-    // const [checkBox, setCheckBox] = useState();
-    // const checkedData = [noticeIdx, title, writer]
-    // const [checkedArray, setCheckedArray] = useState([]);
-    // const [checkedList, setCheckedLists] = useState([]);
-    // const [isChecked, setIsChecked] = useState();
-    // const [checkingBox, setCheckingBoxs] = useState([]);
-
     const [id, setId] = useState('');
 
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         } else {
-        const token = sessionStorage.getItem('token');
-        const decode_token = jwt_decode(token);
-        setId(decode_token.sub);
-          
+            const token = sessionStorage.getItem('token');
+            const decode_token = jwt_decode(token);
+            setId(decode_token.sub);
+
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
                 .then(response => {
-                    console.log(response);
                     setDatas(response.data);
                 })
                 .catch(error => console.log(error));
@@ -87,16 +83,28 @@ function Notice({ history, noticeIdx, title, writer }) {
             .then(response => {
                 console.log(response);
                 if (response.data.length === noticeIdx.length) {
-                    alert('해당 글이 정상적으로 삭제되었습니다.');
+                    Swal.fire(
+                        'Success!',
+                        '정상적으로 삭제되었습니다.',
+                        'success'
+                    )
                     history.push('/admin/notice/list');
                 } else {
-                    alert('삭제에 실패했습니다. 다시 시도해주세요.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제에 실패했습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                     return;
                 }
             })
             .catch(error => {
                 console.log(error);
-                alert(`삭제에 실패하였습니다.(${error.message})`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '삭제에 실패했습니다.',
+                    text: '다시 시도해주세요.'
+                })
                 return;
             });
     };

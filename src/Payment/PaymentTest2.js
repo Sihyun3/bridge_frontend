@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 function PaymentTest2({ match }) {
     const history = useHistory();
@@ -22,7 +23,11 @@ function PaymentTest2({ match }) {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
@@ -45,7 +50,11 @@ function PaymentTest2({ match }) {
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/doPayment/${producer}`,
                 { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total, downpayment })
                 .then(response => {
-                    alert('결제가 완료되었습니다.');
+                    Swal.fire(
+                        'Success!',
+                        '결제가 완료되었습니다.',
+                        'success'
+                    )
                     history.push(`/partner/doing/detail/${cidx}`);
                 })
                 .catch(err => {
@@ -53,12 +62,20 @@ function PaymentTest2({ match }) {
                 })
         } else if (total > 0 && usepoint > total && pointBox < total) {
             setTemp(usepoint);
-            alert('입력하신 금액보다 총 결제금액이 많습니다 \n확인 후 다시 시도하세요.');
+            Swal.fire({
+                icon: 'info',
+                title: '다시 시도해주세요.',
+                text: '입력하신 금액보다 총 결제금액이 많습니다'
+            })
             setPointBox(0);
             setUsepoint(temp);
             setTotal(downpayment);
         } else {
-            alert('보유 포인트가 부족합니다. 포인트를 충전해주세요.');
+            Swal.fire({
+                icon: 'info',
+                title: '보유 포인트가 부족합니다.',
+                text: '포인트 충전 페이지로 이동합니다.'
+            })
             history.push(`/partner/charge/${total}`);
         }
     }

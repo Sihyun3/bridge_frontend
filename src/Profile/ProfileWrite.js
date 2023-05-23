@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import Swal from "sweetalert2";
 
 const ProfileWrite = () => {
     const editorRef = useRef(null);
@@ -21,7 +22,11 @@ const ProfileWrite = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login');
             return;
         }
@@ -34,7 +39,11 @@ const ProfileWrite = () => {
     const MAX_FILE_COUNT = 1;
 
     const isNotValid = (msg) => {
-        alert(msg);
+        Swal.fire({
+            icon: 'error',
+            title: '다시 시도해주세요.',
+            text: msg
+        })
         profileImg.current.value = '';
         setProfileImg([]);
     };
@@ -99,12 +108,20 @@ const ProfileWrite = () => {
         })
             .then((response) => {
                 console.log(response);
-                alert(`정상적으로 업로드했습니다.`);
+                Swal.fire(
+                    'Success!',
+                    '업로드가 정상적으로 완료되었습니다.',
+                    'success'
+                )
                 history.push(`/profile/detail`);
             })
             .catch((error) => {
                 console.log(error);
-                alert(`업로드 중 오류가 발생했습니다.`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '업로드 중 오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
             });
     };
 

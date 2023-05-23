@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Waveform from '../Component/Waveform';
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DoingDetail = ({ match }) => {
     const { cidx } = match.params;
@@ -20,12 +21,17 @@ const DoingDetail = ({ match }) => {
     const [comment, setComment] = useState('');
     const [commentList, setCommentList] = useState([]);
     const [open, setOpen] = useState(false);
+    const [uuid, setUuid] = useState('');
 
 
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert('로그인이 필요합니다. 로그인해주세요');
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login');
             return;
         }
@@ -39,7 +45,7 @@ const DoingDetail = ({ match }) => {
                 setList(res.data);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cidx}`)
                     .then(r => {
-                        console.log(">>>>" + r.data);
+                        // console.log(">>>>" + r.data);
                         setProgress(r.data[0].progress);
                         setUserId2(r.data[0].userId2);
                         setMoney(r.data[0].cmoney);
@@ -57,6 +63,14 @@ const DoingDetail = ({ match }) => {
 
         let formData = new FormData();
         for (let i = 0; i < files.length; i++) {
+            if (!files[i].type.includes('audio')) {
+                Swal.fire({
+                    icon: 'info',
+                    title: '음악 파일만 업로드 가능합니다',
+                    text: '다시 시도해주세요.'
+                })
+                return;
+            }
             formData.append("files", files[i]);
         }
         let datas = { "cdComment": inputText, userId, "cIdx": cidx };
@@ -64,7 +78,8 @@ const DoingDetail = ({ match }) => {
 
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommissionDetail/${cidx}`, formData)
             .then((response) => {
-                console.log("업로드 성공");
+                // console.log("업로드 성공>>>>>>" + response.data.uuid);
+                setUuid(response.data.uuid);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
                         console.log(">>>>" + res.data);
@@ -77,7 +92,11 @@ const DoingDetail = ({ match }) => {
                     });
             })
             .catch(() => {
-                alert(`업로드 중 오류가 발생했습니다.`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '업로드 중 오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
             });
     };
 
@@ -88,7 +107,6 @@ const DoingDetail = ({ match }) => {
 
     const handleCancel = () => {
         setEditIdx(-1);
-        // setInputText(editText);
         setInputText('');
         setMusic([]);
     };
@@ -178,7 +196,6 @@ const DoingDetail = ({ match }) => {
     }
 
     const handleComment = (cdIdx) => {
-        // console.log(">>>>>>>>>>>접기>>>" + cdIdx);
         setOpen(false)
     }
 
@@ -187,12 +204,11 @@ const DoingDetail = ({ match }) => {
             .then(r => {
                 console.log("댓글>>>>>>>>>>" + r.data);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
-                .then(r => {
-                    setCommentList(r.data);
-                    setOpen(true);
-                    // console.log(">>>>>>>>>>>펴기>>>" + cdIdx);
-                })
-                .catch(e => { console.log(e) })
+                    .then(r => {
+                        setCommentList(r.data);
+                        setOpen(true);
+                    })
+                    .catch(e => { console.log(e) })
             })
             .catch(e => { console.log("댓글실패" + e) })
     }
@@ -204,7 +220,6 @@ const DoingDetail = ({ match }) => {
             .then(r => {
                 setCommentList(r.data);
                 setOpen(true);
-                console.log(">>>>>>>>>>>펴기>>>" + cdIdx);
                 setCommentIdx(cdIdx);
             })
             .catch(e => { console.log(e) })
@@ -235,12 +250,11 @@ const DoingDetail = ({ match }) => {
 
 
                 {list.map((item) => {
-                    const { cdIdx, cDate, userId, cdComment, cdFile } = item;
+                    const { cdIdx, cdDate, userId, cdComment, cdFile } = item;
 
                     return (
                         <div key={cdIdx}>
                             <div>
-                                <p>{cDate}</p>
                                 <div>
                                     <span>{userId}</span>
                                     <span> : </span>
@@ -262,6 +276,7 @@ const DoingDetail = ({ match }) => {
                                     ) : (
                                         <div>
                                             <span>{cdComment}</span>
+                                            <p>{cdDate}</p>
                                             {open && commentIdx == cdIdx && commentList.map((comment) => {
                                                 const { ccIdx, userId, ccDate, ccContents, cdIdx } = comment;
                                                 if (cdIdx === cdIdx) {
@@ -279,7 +294,6 @@ const DoingDetail = ({ match }) => {
                                                     )
                                                 }
                                             })}
-
                                         </div>
                                     )}
                                 </div>
@@ -314,6 +328,7 @@ const DoingDetail = ({ match }) => {
                                             <Waveform
                                                 src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${cdFile}`}
                                             />
+                                            <a href={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommissionDown/${cdFile}`}><button>다운로드</button></a> &nbsp; &nbsp;
                                             <button onClick={() => handleFileDel(cdIdx)}>파일 삭제</button>
                                         </div>
                                     )}
