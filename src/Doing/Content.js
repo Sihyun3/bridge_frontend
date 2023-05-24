@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../Doing/Content.module.css"
 import jwt_decode from "jwt-decode";
+import Waveform from "../Component/Waveform";
 
 
-function Content({ pdIdx, uploadClick, setUploadClick }) {
+function Content({ pdIdx, uploadClick, setUploadClick, handlerClickSelect, index1, pdNumber1 }) {
 
-    const [ContentList, setContentList] = useState([]);
     const [pcContent, setPcContent] = useState('');
     const [pcFile, setPcFile] = useState('');
     const [pdcComment, setPdcComment] = useState('');
@@ -39,7 +39,7 @@ function Content({ pdIdx, uploadClick, setUploadClick }) {
 
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        let pcWriter = decode_token.name;
+        let pcWriter = decode_token.sub;
 
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
@@ -61,11 +61,14 @@ function Content({ pdIdx, uploadClick, setUploadClick }) {
             } else {
             alert("업로드가 성공했습니다.")
             setUploadClick(!uploadClick);
+            handlerClickSelect(index1, pdNumber1);
             }
 
         }).catch(() => {
             alert("업로드 중 오류가 발생했습니다.");
         });
+
+   
     };
     return (
         <>

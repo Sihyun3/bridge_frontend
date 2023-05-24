@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 // import style from './Notice.module.css'
 import searchImg from './searchImg.png'
 // import { Link } from 'react-router-dom'
-
+import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 function Notice({ history, noticeIdx, title, writer }) {
+
     const [datas, setDatas] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [filteredDatas, setFilteredDatas] = useState([]);
@@ -19,22 +21,29 @@ function Notice({ history, noticeIdx, title, writer }) {
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);
     const [check, setCheck] = useState(false);
-
-    // const [checkBox, setCheckBox] = useState();
-    const checkedData = [noticeIdx, title, writer]
-    const [checkedArray, setCheckedArray] = useState([]);
-    const [checkedList, setCheckedLists] = useState([]);
-    const [isChecked, setIsChecked] = useState();
-    const [checkingBox, setCheckingBoxs] = useState([]);
+    const [id, setId] = useState('');
 
 
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
-            .then(response => {
-                console.log(response);
-                setDatas(response.data);
+        if (sessionStorage.getItem('token') == null) {
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
             })
-            .catch(error => console.log(error));
+            history.push('/login')
+            return;
+        } else {
+            const token = sessionStorage.getItem('token');
+            const decode_token = jwt_decode(token);
+            setId(decode_token.sub);
+
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
+                .then(response => {
+                    setDatas(response.data);
+                })
+                .catch(error => console.log(error));
+        }
     }, []);
 
 
@@ -46,10 +55,8 @@ function Notice({ history, noticeIdx, title, writer }) {
         if (e.target.value == "false") {
             const indexArray = datas.map((notice, index) => notice.noticeIdx);
             setValue(indexArray);
-            console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
             setCheck(true);
         } else {
-            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb")
             setValue([]);
             setCheck(false);
 
@@ -62,12 +69,9 @@ function Notice({ history, noticeIdx, title, writer }) {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         const filtered = datas.filter(notice => {
-            console.log(`>${searchInput}<`)
-            console.log(notice.title.includes(searchInput))
             return notice.title.includes(searchInput)
         }
         );
-        console.log(filtered);
         setFilteredDatas(filtered);
         setPage(1);
     }
@@ -79,16 +83,28 @@ function Notice({ history, noticeIdx, title, writer }) {
             .then(response => {
                 console.log(response);
                 if (response.data.length === noticeIdx.length) {
-                    alert('해당 글이 정상적으로 삭제되었습니다.');
-                    history.push('/notice');
+                    Swal.fire(
+                        'Success!',
+                        '정상적으로 삭제되었습니다.',
+                        'success'
+                    )
+                    history.push('/admin/notice/list');
                 } else {
-                    alert('삭제에 실패했습니다. 다시 시도해주세요.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제에 실패했습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                     return;
                 }
             })
             .catch(error => {
                 console.log(error);
-                alert(`삭제에 실패하였습니다.(${error.message})`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '삭제에 실패했습니다.',
+                    text: '다시 시도해주세요.'
+                })
                 return;
             });
     };
@@ -96,7 +112,7 @@ function Notice({ history, noticeIdx, title, writer }) {
 
 
     const handlerOnclick = () => {
-        history.push('/notice/write');
+        history.push('/admin/notice/write');
     };
 
 
@@ -106,38 +122,27 @@ function Notice({ history, noticeIdx, title, writer }) {
         <>
 
 
-            <div className={style.box1}>
-                <h1>공지사항</h1>
-            </div>
-            <div className='container clearfix'>
 
-                <div className={style.leftbox}>
-                    <button className={style.date}>작성일자</button>
+            <div className='container clearfix'>
+                <div className={style.box1}>
+                    <h1>공지사항</h1>
                 </div>
+
 
                 <div className={style.rightbox} onSubmit={handlerSerchSubmit}>
 
 
                     <div className={style.write}>
-
-                        <button className={style.writebutton} onClick={handlerOnclick} >작성</button>
-
-
-
-
-
-
+                        {id == 'admin' ? <button className={style.writebutton} onClick={handlerOnclick} >작성</button> : ""}
                     </div>
-                    <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요" />
-
-                    <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
+                    <div className={style.serchbox}>
+                        <input type="text" className={style.search} value={searchInput} onChange={handlerSerchInput} placeholder="검색어를 입력하세요." />
+                    </div>
+                    <div className={style.serchbox}>
+                        <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
+                    </div>
 
                 </div>
-
-
-
-
-
 
 
 
@@ -145,9 +150,7 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-                               
-
-                                <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
+                                <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>
                                 </Link>
@@ -163,9 +166,9 @@ function Notice({ history, noticeIdx, title, writer }) {
                     {
                         filteredDatas == "" && datas && datas.slice(offset, offset + limit).map((notice, index) => (
                             <div className={style.list}>
-                                
 
-                                <Link to={`/bridge/notice/detail/${notice.noticeIdx}`}>
+
+                                <Link to={`/notice/detail/${notice.noticeIdx}`}>
                                     <span className={style.title}>{notice.title}</span>
                                     <span className={style.writer}>{notice.userId}</span>
                                 </Link>

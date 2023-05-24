@@ -7,16 +7,18 @@ import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
 import style from './Waveform.module.css'
 import image from '../Jam/musical-note.png'
 import base from './base.png'
+import { Pause, PlayArrow, VolumeUpRounded } from "@mui/icons-material";
+import { blue, grey } from "@mui/material/colors";
 
 const formWaveSurferOptions = ref => ({
     container: ref,
     waveColor: "#eee",
-    progressColor: "OrangeRed",
+    progressColor: "LightBlue",
     cursorColor: "OrangeRed",
     barWidth: 6,
     barRadius: 3,
     responsive: true,
-    height: 120,
+    height: 60,
     normalize: true,
     partialRender: true,
     interact: true,
@@ -144,14 +146,14 @@ const Waveform = forwardRef((props, ref) => {
 
     return (
         <>
-            <div style={{marginBottom: "40px"}}>
+            <div style={{marginBottom: "60px"}}>
 {/* style={{ marginTop: 20 }} */}
                 {/* <span className={style.pauseTime}> {a}</span> */}
-                <div style={ {float:"left"}} className="clearfix">
+                <div style={ {float:"left", marginTop: "-32px"}} className="clearfix">
                     <img alt="악기 이미지" src={base}/>
-                    <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play} /> : <img className={style.button} src={JamBack} />}</button></span>
+                    <span alt="재생 버튼" style={{ marginLeft: 40, marginTop: 44, float: "right" }}> <button onClick={handlePlayPause}>{!playing ? <PlayArrow sx={{ fontSize: 40 , color: blue[500] }}/> : <Pause sx={{ fontSize: 40 , color: blue[500] }} /> }</button></span>
                     <div >
-                        <label htmlFor="volume">Volume</label>
+                        <label htmlFor="volume"><VolumeUpRounded sx={{ color: grey[400], fontSize: 24 }}/></label>
                         <input
                             type="range"
                             id="volume"
@@ -161,6 +163,7 @@ const Waveform = forwardRef((props, ref) => {
                             step=".025"
                             onChange={onVolumeChange}
                             defaultValue={volume}
+                            
                         />
                     </div>
                 </div>
@@ -168,8 +171,10 @@ const Waveform = forwardRef((props, ref) => {
                 <div style={{ width: 800, marginLeft: 220 }}>
                     <div id="waveform" ref={waveformRef} />
                 </div>
-                <div style={{marginLeft: "220px"}}>
-                    <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span>
+                <div style={{marginLeft: "220px" , marginTop: "5px"}}>
+                    <span>{min}:{sec}</span> 
+                    
+                    <span style={{marginLeft: "740px"}}>{tMin}:{tSec}</span>
                 </div>
                 {/* <p className ={style.explain} >{a}</p>  */}
                 {/* <button onClick={test}>asdasd</button> */}

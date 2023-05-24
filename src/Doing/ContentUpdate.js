@@ -3,7 +3,7 @@ import axios from "axios";
 import style from "../Doing/Content.module.css"
 import jwt_decode from "jwt-decode";
 
-const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
+const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, handlerClickSelect }) => {
 
     const [ContentList, setContentList] = useState({
         content: '',
@@ -25,21 +25,14 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/content/${pcIdx}`)
             .then(response => {
                 console.log(response);
-                // console.log(pcIdx);
-                // console.log(response.data);
-                setContentList({
-                    content: response.data.pcContent,
-                    date: response.data.pcDate,
-                    file: response.data.pcFile,
-                    writer: response.data.pcWriter
-                })
-                setTest(response.data.pcContent.pcIdx);
-                console.log("111111111" + test);
-                // const token = sessionStorage.getItem('token');
-                // console.log("111111111" + token);
-                // const decode_token = jwt_decode(token);
-                // console.log("222222222" + decode_token);
-                // setWriter(decode_token.sub);
+                // setContentList({
+                //     content: response.data.pcContent,
+                //     date: response.data.pcDate,
+                //     file: response.data.pcFile,
+                //     writer: response.data.pcWriter
+                // })
+                setPcContent(response.data.pcContent);
+                setPcFile(response.data.pcFile);
             }
             )
             .catch(error => console.log(error));
@@ -53,12 +46,11 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
             alert("파일 크기는 50MB를 초과할 수 없습니다.");
             return;
         }
+        setPcFile(ContentList.file);
         setPcFile(e.target.files);
     };
 
     const handlerChangePcContent = e => setPcContent(e.target.value);
-    const handlerChangePdcComment = e => setPdcComment(e.target.value);
-    const handlerChangePcWriter = (e) => setPcWriter(e.target.value);
 
 
     const handlerSubmit = (e) => {
@@ -101,37 +93,13 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
                     alert("수정되었습니다.");
                     setEditClick(false)
                     setIsClick(false);
-                }   
+                    handlerClickSelect(index1, pdNumber1);
+                }
             })
             .catch((error) => {
                 alert("업로드 중 오류가 발생했습니다.");
             });
     }
-    const handlerClickDelete = (pcContent, pcImg, pcWriter) => {
-        // if (pcWriter != userNickname) {
-        //     alert('작성자만 삭제할 수 있습니다.');
-        //     console.log(userNickname);
-
-        //     return;
-        // }
-        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/delete/${pcIdx}`)
-            .then(response => {
-                console.log(response);
-                if (response.data === "Y") {
-                    alert('정상적으로 삭제되었습니다.');
-                    window.location.replace(`/17`);
-                } else {
-                    alert('삭제에 실패했습니다.');
-                    return;
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                alert(`삭제에 실패했습니다. (${error.message})`);
-                return;
-            });
-    };
-
 
     return (
         <>
@@ -140,15 +108,13 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick }) => {
             <div className={style.contentbox}>
 
                 <form onSubmit={handlerSubmit}>
-
-                    {ContentList.writer}
-
-                    <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} placeholder={ContentList.content}>
+                    {/* {ContentList.writer} */}
+                    <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} />
                         {/* {ContentList.content} */}
-                    </textarea>
-
-                    <input className={style.file} type="file" id="pcFile" name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder={ContentList.file} />
-                    <button className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제"> 삭제 </button>
+                    {console.log(ContentList.file)}
+                    <input className={style.file} type="file" id="pcFile"  name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder={pcFile} />
+                
+                    {/* <button className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제"> 삭제 </button> */}
                     <button className={style.done} type="submit">등록</button>
                 </form>
             </div>

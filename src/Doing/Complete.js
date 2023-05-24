@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
+import style from './Doing.module.css';
 
 const Complete = ({ pdIdx,setProgress }) => {
 
@@ -25,7 +26,7 @@ const Complete = ({ pdIdx,setProgress }) => {
 
 return (
     <>
-        <button onClick={handlerProjectComplete}> 결제 진행 </button>
+        <button className={style.complete} onClick={handlerProjectComplete}> 결제 진행 </button>
     </>
 );
 }

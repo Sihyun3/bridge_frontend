@@ -11,173 +11,215 @@
 
 /* 메인 박스 */
 .mainBox {
-    width: 570px;
-    height: 690px;
-    background-color: #E1E5E9;
-    margin: 200px auto;
-    border-radius: 15px;
+    width: 1200px;
+    height: 780px;
+    /* background-color: #f5f5f5af; */
+    margin: 60px auto;
+    /* border-radius: 15px; */
 }
 
 /* 메인 텍스트(거래 내역) */
 .mainText {
     text-align: center;
+    color:#383838;
     font-size: 30px;
     font-weight: bold;
     padding-top: 50px;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 2px solid #d9d9d9;
 }
 
 /* 거래일자 박스 */
 .dealDate {
-    width: 440px;
+    width: 600px;
     height: 40px;
-    margin: 0px auto;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
+    /* margin: 0px auto; */
     margin-bottom: 10px;
+    margin-top:20px;
+    float:left;
+    margin-bottom: 60px;
 }
 
 /* 거래일자 택스트 */
 .dealDate p {
     display: inline-block;
     margin-left: 20px;
+    border-right:2px solid #d9d9d9;
+    padding:10px;
+    padding-right: 20px;
 }
 
 /* 거래 일자 input 첫번째 박스 */
 .dealInput1 {
-    width: 80px;
+    width: 120px;
     margin-left: 20px;
     /* font-size: 10px; */
 }
 
 /* 거래일자 input 두번째 박스 */
 .dealInput2 {
-    width: 80px;
+    width: 120px;
 }
 
 /* 거래일자 박스 내 3개월, 6개월 버튼 */
 .dealButton1, .dealButton2 {
-    width: 50px;
+    width: 56px;
     height: 30px; 
-    background-color: rgba(160, 160, 160, 0.8);
-    border-radius: 5px;
-    margin-left: 10px;
+    background-color: #e6e6e6;
+    border-radius: 4px;
+    margin-left: 16px;
     margin-top: 7px;
 }
 
 /* 검색하기 박스 */
 .search {
-    width: 440px;
+    width: 600px;
     height: 40px;
-    margin: 0px auto;
-    background-color: rgba(255, 255, 255, 0.5);
+    /* margin: 0px auto; */
     border-radius: 5px;
+    float:left;
+    margin-top:20px;
+    margin-bottom: 60px;
+
 }
 
 /* 검색하기 텍스트 */
 .search p {
     display: inline-block;
     margin-left: 20px;
-    margin-top: 10px;
+    border-right:2px solid #d9d9d9;
+    padding:10px;
+    padding-right: 20px;
 }
 
 /* 검색하기 input 박스 */
 .searchInput {
     width: 315px;
     height: 30px;
-    background-color: rgba(203, 203, 203, 0.5);
+    background-color: #f5f5f5af;
     border: 0px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-left: 20px;
     margin-top: 5px;
 }
 
 /* 초기화, 검색 묶는 박스 */
 .buttonBox {
-    width: 440px;
-    margin: 0px auto;
+    width: 1200px;
+    display: block;
+    padding-left: 40px;
+    height:40px;
+    float: left;
     text-align: center;
-    margin-top: 20px;
+    vertical-align: 20px;
 }
 
 /* 초기화 버튼, 검색 버튼 */
 .initButton, .searchButton {
-    width: 70px;
+    width: 140px;
     height: 30px;
-    background-color: #A5A6A6;
-    border-radius: 5px;
+    
+  
 }
 
 /* 초기화 버튼 */
 .initButton {
-    margin-right: 10px;
+
+    border-right:2px solid #d9d9d9;
 }
 
 /* 검색 버튼 */
 .searchButton {
-    margin-left: 10px;
+   
 }
 
 /* 초기화, 검색 버튼 클릭 */
 .initButton:hover, .searchButton:hover {
-    background-color: rgba(165, 166, 166, 0.5);
+   font-weight: bold;
 }
 
 /* 거래내역 실제 컨텐츠 */
 .contentBox {
-    width: 440px;
-    height: 360px;
-    background-color: rgba(203, 203, 203, 0.5);
-    margin: 20px auto;
-    border-radius: 5px;
+    width: 1200px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 20px auto 60px auto;
+
+    float:left;
+    border-top: 2px solid #d9d9d9;
+    border-bottom: 2px solid #d9d9d9;
 }
 
 /* 테이블 제목 */
 .tableText {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
-    padding-top: 10px;
-    padding-left: 25px;
+    padding-top: 28px;
+    padding-left: 60px;
 }
 
 /* 테이블 박스 */
 table {
-    /* border: 1px solid; */
-    width: 400px;
+
+    width: 1200px;
     height: 300px;
     margin: 20px auto;
-    border-radius: 5px;
     border-style: hidden;
     /* box-shadow: 0 0 0 1px #000; */
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color:rgba(255, 255, 255, 0.5);
     
     
 }
+
 
 /* 테이블 제목, 데이터 셀 */
 th, td {
     border: 1px solid;
     text-align: center;
-    font-size: 15px;
+    font-size: 16px;
     border-color: rgba(161, 161, 161, 0.5);
 }
 
 /* 테이블 제목 셀 */
 th {
-    height: 40px;
+
+    height: 52px;
     vertical-align: middle;
     font-weight: bold;
 }
 
+
 /* 테이블 데이터 셀 */
 td {
-    font-size: 13px;
+    height:44px;
+    font-size: 15px;
     vertical-align: middle;
-    color: rgba(161, 161, 161, 1);
+    color: rgb(36, 36, 36);
+    margin:8px 0px;
 }
 
 /* 테이블 내 plus, minus 아이콘 */
 .plus, .minus {
     width: 15px;
     height: 15px;
+}
+/*페이징*/
+.page {
+    float: left;
+    text-align: center;
+    width:1200px;
+
+}
+.page button {
+    margin: 0px 8px;
+}
+/*돋보기 이미지 */
+.searchImg {
+    width:26px;
+    height:26px;
+    margin: 0px 0px;
+    padding: 0px 0px;
+    position: absolute;
+    bottom: 790px;
+    right: 110px;
 }
