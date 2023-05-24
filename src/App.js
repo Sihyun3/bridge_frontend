@@ -90,7 +90,7 @@ function App() {
 
     <Route path="/find/:idx" component={Finduser} exact={true}/>
       {/* 회원 가입 */}
-      <Route path="/bridge/signup" component={SignUp} exact={true} />
+      <Route path="/signup" component={SignUp} exact={true} />
       {/* 왓 이즈 디스...? */}
       <Route path="/30" component={SignUpTest} exact={true} />
 
