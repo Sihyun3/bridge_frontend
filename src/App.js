@@ -103,7 +103,7 @@ function App() {
       
       <Route path="/profile/detail" component={ProfileDetail} exact={true} />
       
-      <Route path="/partner/doing" component={DoingList} exact={true} />
+      <Route path="/partner/doing" component={Doing} exact={true} />
       <Route path="/partner/doing/detail/:cidx" component={DoingDetail} exact={true} />
 
       <Footer />

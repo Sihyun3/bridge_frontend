@@ -3,7 +3,7 @@ import axios from "axios";
 import ToastEditor from "../Component/ToastEditor";
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
-import style from '../Tip/TipWrite.js'
+import style from '../Admin-Notice/NoticeWrite.module.css'
 
 export default function TipEdit({ match }) {
     // const tb_idx = match.params.tbIdx;
