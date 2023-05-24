@@ -5,7 +5,6 @@ import KakaoLogin from '../Login/KaKaoLogin';
 import NaverLogin from './NaverLogin';
 import { useState } from "react";
 import axios from "axios";
-// import {KAKAO_AUTH_URL} from './LoginTest/KaKaoLogin';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
@@ -24,7 +23,6 @@ const LoginTest = ({ setIsLogin }) => {
             { "userId": userId, "userPassword": userPassword })
             .then(response => {
                 if (response.data) {
-                    // alert('정상적으로 로그인되었습니다');
                     Swal.fire({
                         title: 'Welcome!',
                         text: '정상적으로 로그인되었습니다.',
@@ -32,17 +30,18 @@ const LoginTest = ({ setIsLogin }) => {
                         imageWidth: 60,
                         imageHeight: 60,
                         confirmButtonColor: '#3c3e58'
-                      })
-                    console.log(response);
-                    console.log(history)
-                    console.log(setIsLogin)
+                    })
                     sessionStorage.setItem("token", response.data);
                     setIsLogin(true);
                     history.push('/');
                 }
             })
             .catch(error => {
-                alert('id, pw가 일치하지 않습니다')
+                Swal.fire({
+                    icon: 'info',
+                    title: 'id, pw가 일치하지 않습니다',
+                    text: '다시 시도해주세요.'
+                })
                 console.log(error)
                 sessionStorage.clear();
             })
@@ -51,14 +50,12 @@ const LoginTest = ({ setIsLogin }) => {
     const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
     const [isRemember, setIsRemember] = useState(false);
 
-    /*페이지가 최초 렌더링 될 경우*/
+
     useEffect(() => {
-        /*저장된 쿠키값이 있으면, CheckBox TRUE 및 UserID에 값 셋팅*/
         if (cookies.rememberUserId !== undefined) {
             setUserId(cookies.rememberUserId);
             setIsRemember(true);
         }
-
     }, []);
 
     const handleOnChange = (e) => {
@@ -82,11 +79,9 @@ const LoginTest = ({ setIsLogin }) => {
                                 <h1 className={style.formH1}>Login</h1>
                                 <input className={style.formInput} type="Id" placeholder="아이디" value={userId} onChange={(e) => setUserId(e.target.value)} />
                                 <input className={style.formInput} type="password" placeholder="비밀번호" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
-
                                 <div className={style.saveBox}>
                                     <input className={style.idCheckBox} type='checkbox' checked={isRemember} id="saveId" name="saveId" value="saveId" onChange={(e) => { handleOnChange(e); }} />
                                     <label for="saveId" className={style.saveId}>아이디 저장</label>
-                                    {/* <span className={style.saveId}>아이디 저장</span> */}
                                 </div>
                                 <div className={style.loginButtonBox}>
                                     <button className={style.loginButton} onClick={handlerOnClick}>로그인</button>
@@ -102,12 +97,6 @@ const LoginTest = ({ setIsLogin }) => {
                                     <span className={style.line_or_after} />
                                 </div>
                                 <button className={style.registrationButton} onClick={handlerOnClick2}>회원가입</button>
-                                {/* <button className={style.formBtn} > <Link to="/27" /> </button> */}
-
-                                {/* <div>
-                                <Link to="/27" type="button" className={style.registrationButton}>회원가입</Link>  
-                                </div> */}
-
                                 <span className={style.span2}>SNS 계정으로 간편로그인</span>
                                 <div>
                                     <div className={style.kakaoBtn}>

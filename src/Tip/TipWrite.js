@@ -3,6 +3,7 @@ import ToastEditor from '../Component/ToastEditor'
 import '../reset.css'
 import style from '../Admin-Notice/NoticeWrite.module.css'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
 
 export default function TipWrite() {
@@ -12,7 +13,11 @@ export default function TipWrite() {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
           }

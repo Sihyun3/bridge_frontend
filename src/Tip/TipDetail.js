@@ -8,6 +8,7 @@ import { Viewer } from '@toast-ui/react-editor';
 import { useHistory } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import jwtDecode from 'jwt-decode';
+import Swal from "sweetalert2";
 
 const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
@@ -17,16 +18,13 @@ const TipDetail = ({ match }) => {
     const history = useHistory();
     const [user, setUser] = useState('');
 
-    // const [likeUpdate, setLikeUpdate] = useState(false)
-    // const [LikeCt, setLikeCt] = useState(0)
-    // const [userNickname, setUserNickname] = useState('');
-    // const tb_heart = match.params.tb_heart;
-
-
-
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
@@ -45,7 +43,11 @@ const TipDetail = ({ match }) => {
     const insert = (e) => {
         e.preventDefault();
         if (temp.length >= 100) {
-            alert(`작성하신 댓글의 글자수가 100자를 초과합니다 \n 제한된 글자수에 맞게 다시 작성해주세요.`);
+            Swal.fire({
+                icon: 'error',
+                title: '글자수가 100자를 초과합니다.',
+                text: '제한된 글자수에 맞게 다시 작성해주세요.'
+            })
         } else {
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
                 { "tbIdx": tb_idx, "tbcComments": temp },
@@ -68,15 +70,27 @@ const TipDetail = ({ match }) => {
             axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
                 .then(() => {
-                    alert("성공적으로 삭제 되었습니다.")
+                    Swal.fire(
+                        'Success!',
+                        '정상적으로 삭제되었습니다.',
+                        'success'
+                    )
                     history.push('/tip/list')
 
                 })
                 .catch(() => {
-                    alert("삭제에 실패했습니다.")
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제에 실패했습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                 })
         } else {
-            alert('작성자만 삭제 가능합니다.');
+            Swal.fire({
+                icon: 'error',
+                title: '삭제에 실패했습니다.',
+                text: '작성자만 삭제 가능합니다.'
+            })
             history.push('/')
         }
 

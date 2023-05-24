@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 const PartnerDatail = ({ match }) => {
 
@@ -18,7 +19,11 @@ const PartnerDatail = ({ match }) => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
@@ -39,14 +44,22 @@ const PartnerDatail = ({ match }) => {
         if (userId == data.userId || userId == 'admin') {
             axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
                 .then((response) => {
-                    alert(`정상적으로 삭제되었습니다`)
+                    Swal.fire(
+                        'Success!',
+                        '정상적으로 삭제되었습니다.',
+                        'success'
+                    )
                     history.push(`/partner/list`);
                 })
                 .catch((err) => {
                     console.log(err);
                 })
         } else {
-            alert(`작성자만 삭제가 가능합니다.`)
+            Swal.fire({
+                icon: 'error',
+                title: '삭제에 실패했습니다.',
+                text: '작성자만 삭제가 가능합니다.'
+            })
         }
     }
 

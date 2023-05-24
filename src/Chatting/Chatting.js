@@ -8,27 +8,21 @@ import axios from 'axios';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import Doing from '../Doing/Doing';
+import Swal from "sweetalert2";
 
 
-const Chatting = ({match}) => {
+const Chatting = ({ match }) => {
 
     const client = useRef({});
     const [chatList, setChatList] = useState([]);
-    //나
     const [sender, setSender] = useState('');
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-    //상대
-    const [reciver ,setReciver] = useState(''); 
+    const [reciver, setReciver] = useState('');
 
     const history = useHistory();
 
-    const header = {
-        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
-        'Content-Type': 'application/json'
-    };
-    
     const publish = () => {
         if (!client.current.connected) return;
         client.current.publish({
@@ -44,13 +38,14 @@ const Chatting = ({match}) => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
-          }
-        //   const token = sessionStorage.getItem('token');
-        // sessionStorage.setItem("token","eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-        // sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
+        }
         connect();
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(r => {
@@ -72,7 +67,6 @@ const Chatting = ({match}) => {
     const chatroom = (props) => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chat/${props}`)
             .then(response => {
-                console.log(response.data.messagelist)
                 setMessage(response.data.messagelist);
                 setRoomIdx(response.data.chatting.roomIdx)
                 subscribe(response.data.chatting.roomIdx);
@@ -98,29 +92,12 @@ const Chatting = ({match}) => {
         );
     })
 
-    const data = {
-        userId2 : reciver,
-        userId1 : sender,
-        progress : "0"
-
-    }
-    const handlerConvertDoing = (e) => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/insert`, data,
-        {headers: header})
-        .then(response => {
-            console.log(response);
-            if (response.data == 0 ) {
-                alert("이미 작업 중인 사용자입니다.");
-                window.location.reload();
-            }
-            else {
-            alert("채팅방으로 이동합니다.");
-            window.location.reload();
-            }
-        })
-        .catch((error) => {
-            alert("오류");
-        })
+    const handleHand = () => {
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
+            .then(r => {
+                history.push(`/partner/doing`)
+            })
+            .catch(e => { console.log(e) })
     }
 
     return (
@@ -163,7 +140,6 @@ const Chatting = ({match}) => {
                             <div className={style.chatbox}>
                                 {
                                     message.map(d => {
-                                        // console.log(d.writer);
                                         if (d.writer == sender) {
                                             return (<div className={style.chatContent1}><p>{d.data}</p></div>)
                                         } else if (d.writer != null && d.writer != sender) {
@@ -173,11 +149,9 @@ const Chatting = ({match}) => {
                                 }
                             </div>
                             <div className={style.chatFoot}>
-                                <Link to="/partner/doing">
-                                <button onClick={handlerConvertDoing} className={style.handButton}>
+                                <button onClick={handleHand} className={style.handButton}>
                                     <img src={hand} className={style.handIcon}></img>
                                 </button>
-                                </Link>
                                 <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
                                 <button className={style.sendButton} onClick={publish}>
                                     <img src={send} className={style.sendIcon}></img>

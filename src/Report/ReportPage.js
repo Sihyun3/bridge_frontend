@@ -5,43 +5,45 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
-function ReportPage({match}) {
-
-    const [select, setSelect] = useState('');
-    const [reportReasonDetail, setReportReasonDetail] = useState('')
-    // const [reportedUserId, setReportedUserId] = useState('');
-    const [userId, setUserId] = useState('');
-
-    const history = useHistory();
+function ReportPage({ match }) {
 
     const reportedUserId = match.params.userId;
 
-    //신고사유 선택
-    const handleSelect = (e) => {
-        setSelect(e.target.value);
-    };
+    const [select, setSelect] = useState('');
+    const [reportReasonDetail, setReportReasonDetail] = useState('')
+    const [userId, setUserId] = useState('');
+    const history = useHistory();
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-        //신고당하는사람 하드코딩 => 나중에 get 해오기 => 수정 필요 !!! 
-        // setReportedUserId("testtest");
     })
 
-    //신고 제출 
+    const handleSelect = (e) => {
+        setSelect(e.target.value);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail, "reportReason": select })
             .then(response => {
-                console.log(response);
-                alert('정상적으로 신고되었습니다');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Success!',
+                    text: '정상적으로 신고되었습니다.'
+                })
                 history.push(`/`)
             })
             .catch(error => {

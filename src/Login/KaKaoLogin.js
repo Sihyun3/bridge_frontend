@@ -17,7 +17,7 @@ import KakaotalkLogo from '../Login/KakaotalkLogo.png';
 const KakaoLogin = ({ }) => {
     const { Kakao } = window;
 
-    const JAVASCRIPT_APP_KEY = '68aeb9a371fc365c535495a103132163';
+    const JAVASCRIPT_APP_KEY = '7e512efaee6eeeeca2d427733a82b016';
 
     // 액세스 토큰을 상태 변수로 선언 
     // 로그인 버튼 출력 제어에 사용
@@ -42,6 +42,10 @@ const KakaoLogin = ({ }) => {
         }
         // 쿼리 스트링으로 부터 인가 코드를 추출
         const code = window.location.search.split('=')[1];
+        // const code = new URL(window.location.href).searchParams.get("code");
+   
+    
+        // console.log(code);
         if (code) {
             // REST API로 토큰 받기를 요청
             axios.post(
@@ -104,7 +108,7 @@ const KakaoLogin = ({ }) => {
                                 })
                                 .catch(error => {
                                     console.log(error);
-                                    sessionStorage.clear();
+                                    // sessionStorage.clear();
                                     alert('일치하는 정보가 없습니다.');
                                 })
                             // history.push('/');

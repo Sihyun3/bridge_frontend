@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Waveform from '../Component/Waveform';
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DoingDetail = ({ match }) => {
     const { cidx } = match.params;
@@ -17,12 +18,20 @@ const DoingDetail = ({ match }) => {
     const [editText, setEditText] = useState('');
     const [progress, setProgress] = useState(0);
     const [money, setMoney] = useState(0);
-    const [willMoney, setWillMoney] = useState(0);
+    const [comment, setComment] = useState('');
+    const [commentList, setCommentList] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [uuid, setUuid] = useState('');
+
 
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert('로그인이 필요합니다. 로그인해주세요');
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login');
             return;
         }
@@ -36,7 +45,7 @@ const DoingDetail = ({ match }) => {
                 setList(res.data);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cidx}`)
                     .then(r => {
-                        console.log(">>>>" + r.data);
+                        // console.log(">>>>" + r.data);
                         setProgress(r.data[0].progress);
                         setUserId2(r.data[0].userId2);
                         setMoney(r.data[0].cmoney);
@@ -54,6 +63,14 @@ const DoingDetail = ({ match }) => {
 
         let formData = new FormData();
         for (let i = 0; i < files.length; i++) {
+            if (!files[i].type.includes('audio')) {
+                Swal.fire({
+                    icon: 'info',
+                    title: '음악 파일만 업로드 가능합니다',
+                    text: '다시 시도해주세요.'
+                })
+                return;
+            }
             formData.append("files", files[i]);
         }
         let datas = { "cdComment": inputText, userId, "cIdx": cidx };
@@ -61,7 +78,8 @@ const DoingDetail = ({ match }) => {
 
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommissionDetail/${cidx}`, formData)
             .then((response) => {
-                console.log("업로드 성공");
+                // console.log("업로드 성공>>>>>>" + response.data.uuid);
+                setUuid(response.data.uuid);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
                         console.log(">>>>" + res.data);
@@ -74,7 +92,11 @@ const DoingDetail = ({ match }) => {
                     });
             })
             .catch(() => {
-                alert(`업로드 중 오류가 발생했습니다.`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '업로드 중 오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
             });
     };
 
@@ -85,7 +107,6 @@ const DoingDetail = ({ match }) => {
 
     const handleCancel = () => {
         setEditIdx(-1);
-        // setInputText(editText);
         setInputText('');
         setMusic([]);
     };
@@ -174,6 +195,36 @@ const DoingDetail = ({ match }) => {
             .catch(e => { console.log(e) })
     }
 
+    const handleComment = (cdIdx) => {
+        setOpen(false)
+    }
+
+    const submitComment = (cdIdx) => {
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insert/CommissionComment/${cdIdx}`, { userId, "ccContents": comment, cdIdx })
+            .then(r => {
+                console.log("댓글>>>>>>>>>>" + r.data);
+                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
+                    .then(r => {
+                        setCommentList(r.data);
+                        setOpen(true);
+                    })
+                    .catch(e => { console.log(e) })
+            })
+            .catch(e => { console.log("댓글실패" + e) })
+    }
+
+    const [commentIdx, setCommentIdx] = useState('');
+
+    const handleOpen = (cdIdx) => {
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
+            .then(r => {
+                setCommentList(r.data);
+                setOpen(true);
+                setCommentIdx(cdIdx);
+            })
+            .catch(e => { console.log(e) })
+    }
+
     return (
         <>
             <div>
@@ -199,76 +250,109 @@ const DoingDetail = ({ match }) => {
 
 
                 {list.map((item) => {
-                    const { cdIdx, cDate, userId, cdComment, cdFile } = item;
+                    const { cdIdx, cdDate, userId, cdComment, cdFile } = item;
 
                     return (
                         <div key={cdIdx}>
-                            <p>{cDate}</p>
                             <div>
-                                <span>{userId}</span>
-                                <span> : </span>
+                                <div>
+                                    <span>{userId}</span>
+                                    <span> : </span>
+                                    {editIdx === cdIdx ? (
+                                        <>
+                                            <input
+                                                type="text"
+                                                value={editText}
+                                                onChange={(e) => setEditText(e.target.value)}
+                                            />
+                                            <input type="file" multiple="multiple" onChange={(e) => setMusic(e.target.files)} />
+                                            {music.length === 0 && cdFile && (
+                                                <div>
+                                                    <span> {cdFile}</span>
+                                                    <br />
+                                                </div>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <div>
+                                            <span>{cdComment}</span>
+                                            <p>{cdDate}</p>
+                                            {open && commentIdx == cdIdx && commentList.map((comment) => {
+                                                const { ccIdx, userId, ccDate, ccContents, cdIdx } = comment;
+                                                if (cdIdx === cdIdx) {
+                                                    return (
+                                                        <div key={cdIdx}>
+                                                            <div>
+                                                                <div>
+                                                                    {ccDate} &nbsp;&nbsp; &nbsp;&nbsp;
+                                                                    {userId}&nbsp;:&nbsp;&nbsp;
+                                                                    {ccContents} &nbsp;&nbsp; &nbsp;&nbsp;
+                                                                    <hr />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <button onClick={() => handleDel(cdIdx)}>삭제</button>  &nbsp;
                                 {editIdx === cdIdx ? (
                                     <>
-                                        <input
-                                            type="text"
-                                            value={editText}
-                                            onChange={(e) => setEditText(e.target.value)}
-                                        />
-                                        <input type="file" multiple="multiple" onChange={(e) => setMusic(e.target.files)} />
-                                        {music.length === 0 && cdFile && (
-                                            <div>
-                                                <span>기존 파일: {cdFile}</span>
-                                                <br />
-                                            </div>
-                                        )}
+                                        <button onClick={() => handleSave(cdIdx)}>저장</button>  &nbsp;
+                                        <button onClick={handleCancel}>취소</button>
                                     </>
                                 ) : (
-                                    <span>{cdComment}</span>
+                                    <>
+                                        <button onClick={() => handleEditBtn(cdIdx)}>수정</button> &nbsp;  &nbsp;
+                                    </>
                                 )}
+                                <div>
+                                    {open && commentIdx == cdIdx ?
+                                        <button onClick={() => handleComment(cdIdx)}>접기</button>
+                                        :
+                                        <button onClick={() => handleOpen(cdIdx)}>펼치기</button>
+                                    }
+                                    <hr />
+                                </div>
+                                {open && commentIdx == cdIdx && <div>
+                                    <input type="text" onChange={(e) => setComment(e.target.value)} />
+                                    <button onClick={() => submitComment(cdIdx)}>등록</button>
+                                </div>}
+
+                                <div>
+                                    {cdFile && (
+                                        <div>
+                                            <Waveform
+                                                src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${cdFile}`}
+                                            />
+                                            <a href={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommissionDown/${cdFile}`}><button>다운로드</button></a> &nbsp; &nbsp;
+                                            <button onClick={() => handleFileDel(cdIdx)}>파일 삭제</button>
+                                        </div>
+                                    )}
+                                </div>
+                                <hr />
                             </div>
 
-                            <button onClick={() => handleDel(cdIdx)}>삭제</button>  &nbsp;
-                            {editIdx === cdIdx ? (
-                                <>
-                                    <button onClick={() => handleSave(cdIdx)}>저장</button>  &nbsp;
-                                    <button onClick={handleCancel}>취소</button>
-                                </>
-                            ) : (
-                                <button onClick={() => handleEditBtn(cdIdx)}>수정</button>
-                            )}
-                            <div>
-                                {cdFile && (
-                                    <div>
-                                        <Waveform
-                                            src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${cdFile}`}
-                                        />
-                                        <button onClick={() => handleFileDel(cdIdx)}>파일 삭제</button>
-                                    </div>
-                                )}
-                            </div>
-                            <hr />
                         </div>
                     );
                 })}
-                {/* <div>
-                    {progress == 1 ?
-                        <p> {userId2} 님께 {willMoney}p 가 적립되었습니다.</p>
-                        :
-                        ""
-                    }
-                </div> */}
+
+
                 <br />
 
                 <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} />
                 <input type="file" multiple="multiple" onChange={(e) => setMusic(e.target.files)} />
                 <button onClick={handleSubmit}>등록</button>
-                <span> &nbsp;  &nbsp; &nbsp; </span>
+                &nbsp;  &nbsp; &nbsp;
                 <Link to='/partner/doing'><button> 목록으로 </button></Link>
-                <span> &nbsp;  &nbsp; &nbsp; </span>
+                &nbsp;  &nbsp; &nbsp;
                 {money == 0 ? <Link to={`/partner/payment/${userId2}/${cidx}`}><button> 안심결제 </button></Link> : ""}
-                <span> &nbsp;  &nbsp; &nbsp; </span>
+                &nbsp;  &nbsp; &nbsp;
                 {progress == 0 ? <button onClick={handleEnd}> 작업완료 </button> : ""}
-                <span> &nbsp;  &nbsp; &nbsp; </span>
+                &nbsp;  &nbsp; &nbsp;
             </div>
         </>
     );

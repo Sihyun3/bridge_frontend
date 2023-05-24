@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Password } from '@mui/icons-material';
 import style from './Finduser.module.css'
+import Swal from "sweetalert2";
 
 export default function Finduser({ match }) {
 
@@ -21,11 +22,27 @@ export default function Finduser({ match }) {
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/emailid/${email}/${userId}`)
                 .then((r) => {
                     if (r.data == 0) {
+<<<<<<< HEAD
                         alert("이메일과 아이디가 일치하지 않습니다.")
                         return;
                     }
                 }).catch(() => {
                     alert("이메일과 아이디가 일치하지 않습니다.")
+=======
+                        Swal.fire({
+                            icon: 'info',
+                            title: '다시 시도해주세요.',
+                            text: '이메일과 아이디가 일치하지 않습니다.'
+                        })
+                        return;
+                    }
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'info',
+                        title: '다시 시도해주세요.',
+                        text: '이메일과 아이디가 일치하지 않습니다.'
+                    })
+>>>>>>> b5c5ef89de6d6e59fd9e2dab08d5ece555435b21
                     return;
                 })
         }
@@ -33,10 +50,18 @@ export default function Finduser({ match }) {
             .then((r) => {
                 console.log(r.data)
                 setAuth(r.data)
-                alert("인증번호가 발송되었습니다.")
+                Swal.fire({
+                    icon: 'info',
+                    title: '인증번호가 발송되었습니다.',
+                    text: '다음 단계를 진행해주세요.'
+                })
             })
             .catch(() => {
-                alert("오류가 발생하였습니다.")
+                Swal.fire({
+                    icon: 'error',
+                    title: '오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
             })
     }
 
@@ -47,7 +72,11 @@ export default function Finduser({ match }) {
                     setData("회원님의 아이디는 " + r.data + "입니다.");
                 })
                 .catch(() => {
-                    alert("일치하는 정보가 없습니다.")
+                    Swal.fire({
+                        icon: 'error',
+                        title: '일치하는 정보가 없습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                 })
         } else {
             setData("인증번호가 일치하지 않습니다.")
@@ -64,11 +93,19 @@ export default function Finduser({ match }) {
         if (auth == temp) {
             axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/findPassword/${email}/${password}`)
                 .then((r) => {
-                    alert('비밀번호가 변경 되었습니다.');
+                    Swal.fire(
+                        'Success!',
+                        '비밀번호가 변경 되었습니다.',
+                        'success'
+                    )
                     history.push(`/login`);
                 })
                 .catch(() => {
-                    alert("일치하는 정보가 없습니다.")
+                    Swal.fire({
+                        icon: 'error',
+                        title: '일치하는 정보가 없습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                 })
         } else {
             setData("인증번호가 일치하지 않습니다.")
@@ -77,7 +114,11 @@ export default function Finduser({ match }) {
 
     if (idx == 0) {
         return (
+<<<<<<< HEAD
             <div className="clearfix container">
+=======
+            <div className="clearfix container" style={{ height: "100vh" }}>
+>>>>>>> b5c5ef89de6d6e59fd9e2dab08d5ece555435b21
                 <div className={style.wrapper}>
                     <div className={style.container}>
                         <div className={style.form}>

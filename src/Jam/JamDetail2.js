@@ -7,33 +7,51 @@ import axios from 'axios'
 import Waveform from '../Component/Waveform';
 import { PlayCircleFilledOutlined } from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
-
-
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
 
 const JamDetail = ({ match }) => {
-    //잼소개 부분
+
     const [info, setInfo] = useState({});
     const [value, setvalue] = useState([]);
     const child = useRef([]);
-    //음악 등록부분
+
     const [music, setMusic] = useState('');
     const [instrument, setInstrument] = useState('');
-    // 코멘트
+
     const [comment, setComment] = useState('');
     const [commentsList, setCommentsList] = useState([]);
     const cIdx = match.params.cIdx;
 
-    //추가
     const [insert, setInsert] = useState(0);
     const [data, setData] = useState([]);
+    const history = useHistory();
 
     const handleChangeComment = (e) => {
         setComment(e.target.value);
     };
 
-    //음악 업로드 페이지
+
+    useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
+            history.push('/login')
+            return;
+        }
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
+            .then(response => {
+                setData(response.data.music);
+                setInfo(response.data.data)
+                setCommentsList(response.data.commentsList)
+            })
+    }, [insert])
+
+
     const onSubmit = (e) => {
         e.preventDefault();
         let files = music;
@@ -49,24 +67,17 @@ const JamDetail = ({ match }) => {
             headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
             data: formData
         }).then((response) => {
-            console.log("축 성공");
             let musicInfo = { instrument: instrument, musicUUID: response.data.uuid }
             setData([...data, musicInfo]);
             window.location.reload();
         }).catch(() => {
-            alert(`업로드 중 오류가 발생했습니다.`);
+            Swal.fire({
+                icon: 'error',
+                title: '업로드 중 오류가 발생했습니다.',
+                text: '다시 시도해주세요.'
+            })
         });
     }
-    useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
-            .then(response => {
-                setData(response.data.music);
-                setInfo(response.data.data)
-                setCommentsList(response.data.commentsList)
-                console.log(">>>>>>>>>>>>>>>>>>>" + response.data.music);
-                console.log(response.data);
-            })
-    }, [])
 
     const onCheckAll = (isChecked) => {
         if (isChecked) {
@@ -76,53 +87,62 @@ const JamDetail = ({ match }) => {
             setvalue([]);
         }
     }
+
     const allplay = () => {
         value.forEach((index) => {
             child.current[index].PlayAll();
         });
     }
+
     const handleCommentSubmit = (e) => {
         e.preventDefault();
         if (comment == "") {
-            alert('작성된 내용이 없습니다')
+            Swal.fire({
+                icon: 'info',
+                title: '작성된 내용이 없습니다',
+                text: '다시 시도해주세요.'
+            })
             return;
         }
 
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
-                console.log(response);
                 setInsert(insert + 1);
-                alert('코맨트가 정상적으로 등록되었습니다')
-                window.location.reload();
-
             })
             .catch(error => {
-                alert("오류가 발생했습니다");
+                Swal.fire({
+                    icon: 'error',
+                    title: '오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
             });
     };
 
-    // 코멘트 삭제 핸들러
+
     const handlerClickDelete = (e) => {
         e.preventDefault();
         axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
             .then(response => {
-                console.log(response);
                 if (response.data === 1) {
-                    alert('정상적으로 삭제되었습니다.');
-                    // history.push('/insertComments');				// 정상적으로 삭제되면 목록으로 이동
+                    setInsert(insert + 1);
                 } else {
-                    alert('삭제에 실패했습니다.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제에 실패했습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                     return;
                 }
             })
             .catch(error => {
-                console.log(error);
-                alert(`삭제에 실패했습니다. (${error.message})`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '삭제에 실패했습니다.',
+                    text: '다시 시도해주세요.'
+                })
                 return;
             });
-        window.location.reload();
-
     };
 
     return (
@@ -143,15 +163,9 @@ const JamDetail = ({ match }) => {
                     </div>
 
                     <div className={style.playbox}>
-                        {/* <img className={style.playbutton} src={play} onClick={allplay} /> */}
                         <PlayCircleFilledOutlined sx={{ fontSize: 64, color: blue[500], cursor: "pointer" }} onClick={allplay} />
-                        {/* 여기에 플레이 바 추가해야함 */}
-                        {/* <button onClick={allplay}>All Play/Pause</button> */}
                     </div>
-
                 </div>
-
-
 
                 <div className={style.jam}>
                     <div style={{ margin: "20px" }}>
@@ -160,13 +174,9 @@ const JamDetail = ({ match }) => {
                     </div>
 
                     <div>
-
                         {data.map((musicInfo, index) => {
                             return (
                                 <div key={musicInfo.musicUUID}>
-                                    {/* <img className={style.instrument} src={play} /> */}
-                                    {/* 체크박스 */}
-                                    {/* <label className={style.label}> */}
                                     <input
                                         type="checkbox"
                                         className={style.checkbox}
@@ -179,23 +189,19 @@ const JamDetail = ({ match }) => {
                                             }
                                         }}
                                     />
-                                    {/* </label> */}
-                                    {/* 파형 */}
                                     <Waveform
                                         data={data}
                                         key={musicInfo.musicUUID}
                                         src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
                                         ref={(elem) => (child.current[index] = elem)}
                                     />
-                                    {/* 노래제목 */}
                                     {musicInfo.musicTitle}
                                 </div>
                             );
-                        })}  {/* 맵 끝*/}
-                        {/* 여기에 플레이 바 추가해야함 */}
+                        })}
                     </div>
+
                     <div className={style.input}>
-                        {/* <img className={style.singlenote} src={note} onclick /> */}
                         <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "44px", outlineStyle: "none", marginBottom: 21, marginRight: 0, border: 0 }} >
                             <option value="" disabled selected>악기 선택</option>
                             <option value="여성보컬">여성보컬  </option>
@@ -213,7 +219,6 @@ const JamDetail = ({ match }) => {
                             <option value="신디사이저">신디사이저  </option>
                         </select>
 
-                        {/* <input tyep="file" className={style.music} /> */}
                         <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} />
                         <input type="button" className={style.music} onClick={onSubmit} value="등록" />
                     </div>
@@ -232,17 +237,16 @@ const JamDetail = ({ match }) => {
                                         <button value={comment.ccIdx} onClick={handlerClickDelete}>삭제</button>
                                     </div>
                                 </>
-
                             )
                         })
                     }
                 </div>
+
                 <div style={{ margin: "0 auto", width: "900px" }}>
                     <input type="text" value={comment} onChange={handleChangeComment} className={style.writeComment}></input>
                     <button onClick={handleCommentSubmit} className={style.finish} >등록</button>
                 </div>
             </div>
-
         </>
     )
 }

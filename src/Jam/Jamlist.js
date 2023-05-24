@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import Swal from "sweetalert2";
+
 const JamList = () => {
 
     const [data, setData] = useState([]);
@@ -14,7 +16,11 @@ const JamList = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
@@ -96,7 +102,7 @@ const JamList = () => {
                                 <div className={style.block}>
                                     <Link to={`/jam/detail/${data.cidx}`}>
                                         <div className={style.imgbox}>
-                                            <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                                            <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.cphoto}.jpg`}></img>
                                         </div>
                                         <p className={style.title}>{data.ctitle}</p>
                                     </Link>

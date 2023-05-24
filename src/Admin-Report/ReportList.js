@@ -5,6 +5,7 @@ import style from '../Admin-Report/ReportList.module.css'
 import searchImg from './searchImg.png'
 import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Swal from "sweetalert2";
 
 
 const ReportList = () => {
@@ -16,22 +17,28 @@ const ReportList = () => {
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
-    const [value, setValue] = useState([]);
 
     const history = useHistory();
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert(`로그인이 필요합니다. 로그인해주세요`);
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login')
             return;
         }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        console.log(">>>>>>>>>>>>> " + decode_token);
 
         if (decode_token.sub != 'admin') {
-            alert(`관리자만 이용할 수 있습니다`);
+            Swal.fire({
+                icon: 'error',
+                title: 'id, pw가 일치하지 않습니다.',
+                text: '확인 후 다시 시도해주세요.',
+            })
             history.push(`/`)
         } else {
             axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportList`)
@@ -51,7 +58,6 @@ const ReportList = () => {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         setFilteredDatas(data.filter(datas => {
-            console.log(`>>>>>>>>>>>>${searchInput}<`)
             return (
                 datas.reportReason.includes(searchInput) ||
                 datas.userId.includes(searchInput) ||
@@ -61,16 +67,12 @@ const ReportList = () => {
         ));
     }
 
-
-
-
     return (
         <>
             <div className='container clearfix'>
                 <div className={style.box1}>
                     <h1>신고 관리</h1>
                 </div>
-
                 <form onSubmit={handlerSerchSubmit}>
                     <div className={style.serchbox}>
                         <img type="button" className={style.searchImg} src={searchImg} value="검색" onClick={handlerSerchSubmit} />
@@ -87,7 +89,6 @@ const ReportList = () => {
                         <li>신고자</li>
                         <li>신고 대상</li>
                     </ul>
-
                     {
                         filteredDatas == "" && data.slice(offset, offset + limit).map((reportList) => {
                             return (
@@ -109,10 +110,6 @@ const ReportList = () => {
                                             </span>
                                         </Link>
                                     </div>
-
-
-
-
                                 </>
                             )
                         })
@@ -185,8 +182,6 @@ const ReportList = () => {
                 </div>
 
             </div>
-
-
         </>
     )
 }
