@@ -42,7 +42,7 @@ const KakaoLogin = ({ }) => {
         }
         // 쿼리 스트링으로 부터 인가 코드를 추출
         const code = window.location.search.split('=')[1];
-        sessionStorage.setItem("code", code);
+        // sessionStorage.setItem("code", code);
         if (code) {
             // REST API로 토큰 받기를 요청
             axios.post(
@@ -105,7 +105,7 @@ const KakaoLogin = ({ }) => {
                                 })
                                 .catch(error => {
                                     console.log(error);
-                                    sessionStorage.clear();
+                                    // sessionStorage.clear();
                                     alert('일치하는 정보가 없습니다.');
                                 })
                             // history.push('/');

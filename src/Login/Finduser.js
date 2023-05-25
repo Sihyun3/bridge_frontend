@@ -22,6 +22,13 @@ export default function Finduser({ match }) {
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/emailid/${email}/${userId}`)
                 .then((r) => {
                     if (r.data == 0) {
+<<<<<<< HEAD
+                        alert("이메일과 아이디가 일치하지 않습니다.")
+                        return;
+                    }
+                }).catch(() => {
+                    alert("이메일과 아이디가 일치하지 않습니다.")
+=======
                         Swal.fire({
                             icon: 'info',
                             title: '다시 시도해주세요.',
@@ -35,6 +42,7 @@ export default function Finduser({ match }) {
                         title: '다시 시도해주세요.',
                         text: '이메일과 아이디가 일치하지 않습니다.'
                     })
+>>>>>>> b5c5ef89de6d6e59fd9e2dab08d5ece555435b21
                     return;
                 })
         }
@@ -106,7 +114,11 @@ export default function Finduser({ match }) {
 
     if (idx == 0) {
         return (
+<<<<<<< HEAD
+            <div className="clearfix container">
+=======
             <div className="clearfix container" style={{ height: "100vh" }}>
+>>>>>>> b5c5ef89de6d6e59fd9e2dab08d5ece555435b21
                 <div className={style.wrapper}>
                     <div className={style.container}>
                         <div className={style.form}>
@@ -119,7 +131,10 @@ export default function Finduser({ match }) {
                                 <input className={style.input} placeholder='인증 코드를 입력해주세요' value={temp} onChange={(e) => { setTemp(e.target.value) }}></input>
                                 <button className={style.button} onClick={handlerCheck}>확인</button>
                             </div>
-                            <div className={style.result}>{data}</div>
+                            <div className={style.result}>
+                                    <hr className={style.hr}></hr>
+                                {data}
+                            </div>
                         </div>
                     </div>
                 </div>
