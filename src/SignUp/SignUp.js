@@ -10,7 +10,6 @@ import BridgeBlackLogo from '../SignUp/BridgeBlackLogo.png';
 import Alert from './Alert.png';
 import UnLock from './UnLock.png';
 import Locked from './Locked.png';
-import { click } from '@testing-library/user-event/dist/click';
 import { Password } from '@mui/icons-material';
 
 const SignUp = ({ history, props }) => {

@@ -45,6 +45,7 @@ const JamDetail = ({ match }) => {
         }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
+                console.log(response);
                 setData(response.data.music);
                 setInfo(response.data.data)
                 setCommentsList(response.data.commentsList)
@@ -150,7 +151,8 @@ const JamDetail = ({ match }) => {
             <div className='container clearfix'>
                 <div className={style.title}>
                     <div className={style.imgbox}>
-                        <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
+                        {/* 여기 수정해야됨 */}
+                        {/* <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${info.cphoto}.jpg`}></img> */}
 
                         <div>
                             <h1>{info.ctitle} </h1>
@@ -190,7 +192,7 @@ const JamDetail = ({ match }) => {
                                         }}
                                     />
                                     <Waveform
-                                        data={data}
+                                        data={musicInfo}
                                         key={musicInfo.musicUUID}
                                         src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
                                         ref={(elem) => (child.current[index] = elem)}

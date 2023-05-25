@@ -84,7 +84,6 @@ function App() {
       <Route path="/tip/detail/:tbIdx" component={TipDetail} exact={true} />
 
       <Route path="/split" component={MusicSplit} exact={true} />
-      {/*  */}
 
       {/* 이 위로 주석 안지워짐 // 나중에 로컬호스트로 된거 있는지 재체크 필요 // 권한 설정 다 됐는지 재확인 */}
       <Route path="/profile/write" component={ProfileWrite} exact={true} />
