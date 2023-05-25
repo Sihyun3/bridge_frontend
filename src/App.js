@@ -52,6 +52,7 @@ function App() {
 
   return (
     <>
+    {/* 충전하기 거래내역 안뜸 */}
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
 
       {/* 기능 & 디자인 완성된 페이지 */}
@@ -105,12 +106,12 @@ function App() {
       <Route path="/profile/detail" component={ProfileDetail} exact={true} />
       <Route path="/profile/detail/:user" component={ProfileDetailUser} exact={true} />
 
-
+{/* 파트너쪽 밑에 안됨 */}
 
       {/* 디자인 & 기능 미완 */}
    
 
-      <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} /> {/* 프로필 불러오기 필요 (기능만 필요) */}
+      <Route path="/partner/payment/:producer" component={PaymentTest2} exact={true} /> {/* 프로필 불러오기 필요 (기능만 필요) */}
       <Route path="/partner/review/:userId2" component={Review} exact={true} />
       <Footer />
     </>

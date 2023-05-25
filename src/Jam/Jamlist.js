@@ -37,7 +37,7 @@ const JamList = () => {
     const [searchInput, setSearchInput] = useState('');
     const [filteredDatas, setFilteredDatas] = useState([]);
 
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(8);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     const [value, setValue] = useState([]);

@@ -354,7 +354,7 @@ const DoingDetail = ({ match }) => {
                 &nbsp;  &nbsp; &nbsp;
                 <Link to='/partner/doing'><button> 목록으로 </button></Link>
                 &nbsp;  &nbsp; &nbsp;
-                {money == 0 ? <Link to={`/partner/payment/${userId2}/${cidx}`}><button> 안심결제 </button></Link> : ""}
+                {/* {money == 0 ? <Link to={`/partner/payment/${userId2}/${cidx}`}><button> 안심결제 </button></Link> : ""} */}
                 &nbsp;  &nbsp; &nbsp;
                 {progress == 0 ? <button onClick={handleEnd}> 작업완료 </button> : ""}
                 &nbsp;  &nbsp; &nbsp;

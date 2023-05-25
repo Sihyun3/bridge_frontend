@@ -42,10 +42,10 @@ function PaymentTest2({ match }) {
                 setUsepoint(response.data);
                 setClients(decode_token.sub);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
-                    .then((r) => { setProfile1( r.data.profile[0]); console.log("profile1>>" + r.data.profile[0]) })
+                    .then((r) => { setProfile1(r.data.profile[0]); console.log("profile1>>" + r.data.profile[0]) })
                     .catch((e) => { console.log(e) })
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${producer}`)
-                    .then((r) => { setProfile2( r.data.profile[0]); console.log("profile2>>" + r.data.profile[0]) })
+                    .then((r) => { setProfile2(r.data.profile[0]); console.log("profile2>>" + r.data.profile[0]) })
                     .catch((e) => { console.log(e) })
             })
             .catch(error => {
@@ -63,7 +63,12 @@ function PaymentTest2({ match }) {
                         '결제가 완료되었습니다.',
                         'success'
                     )
-                    history.push(`/partner/doing/detail/${cidx}`);
+                    axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${producer}`, { "userId1": user1,"coMoney" : pointBox })
+                        .then(r => {
+                            history.push(`/partner/doing/`);
+
+                        })
+                        .catch(e => { console.log(e) })
                 })
                 .catch(err => {
                     console.log(err);

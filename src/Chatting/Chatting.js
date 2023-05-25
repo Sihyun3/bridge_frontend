@@ -93,11 +93,12 @@ const Chatting = ({ match }) => {
     })
 
     const handleHand = () => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
-            .then(r => {
-                history.push(`/partner/doing`)
-            })
-            .catch(e => { console.log(e) })
+   
+                history.push(`/partner/payment/${reciver}/`)
+            //     axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
+            //     .then(r => {
+            // })
+            // .catch(e => { console.log(e) })
     }
 
     return (
@@ -115,6 +116,7 @@ const Chatting = ({ match }) => {
                                 } else if (list.userId2 == sender) {
                                     reciver = list.userId1
                                 }
+                                console.log(list);
                                 return (
                                     <div className={style.profile} onClick={() => chatroom(list.roomIdx)}>
                                         <div className={style.profileImg}>
@@ -124,7 +126,7 @@ const Chatting = ({ match }) => {
 
                                             <div className={style.profileName}>{reciver}</div>
 
-                                            <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div>
+                                            {/* <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div> */}
                                         </div>
                                     </div>)
                             })}

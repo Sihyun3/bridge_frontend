@@ -154,6 +154,9 @@ const PartnerList = () => {
                   {i + 1}
                 </button>
               ))}
+                      <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(partnerList.length / limit)}>
+                                    &gt;
+                                </button>
           </nav>
         </div>
       </div>
