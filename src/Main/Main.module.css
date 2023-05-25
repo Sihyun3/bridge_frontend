@@ -9,10 +9,19 @@
     color: #000;
 }
 
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* 컨텐츠 모두 묶는 박스 */
   .Container {
     width: 1200px;
     margin: 100px auto;
+
+
   }
 
 /* 상단 글자  */
@@ -66,14 +75,28 @@
 }
 
 /* 온라인 합주 텍스트 */
-.online p {
+.online h3 {
     margin-top: 180px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.online p:hover {
+.online h3:hover {
     color: #FCFCFC;
+}
+
+.online p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+
+
 }
 
 /* 오프라인 합주 버튼 */
@@ -99,14 +122,28 @@
 
 
 /* 오프라인 합주 텍스트 */
-.offline p {
+.offline h3 {
     margin-top: 180px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.offline p:hover {
+.offline h3:hover {
     color: #FCFCFC;
+}
+
+.offline p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+
+
 }
 
 .secondLine {
@@ -138,14 +175,28 @@
 }
 
 /* 음원분리 텍스트 */
-.musicSep p {
+.musicSep h4 {
     margin-top: 110px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.musicSep p:hover {
+.musicSep h4:hover {
     color: #FCFCFC;
+}
+
+.musicSep p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+
+
 }
 
 /* 커뮤니티 버튼 */
@@ -171,15 +222,31 @@
 
 
 /* 커뮤니티 텍스트 */
-.community p {
+.community h4 {
     margin-top: 110px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.community p:hover {
+.community h4:hover {
     color: #FCFCFC;
 }
+
+.community p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+    
+
+}
+
+
 
 /* 공지사항 */
 

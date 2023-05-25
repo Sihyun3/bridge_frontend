@@ -13,7 +13,8 @@ import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 
 
-function ProfileDetail({}) {
+function ProfileDetailUser({ match }) {
+    const { user } = match.params;
     const [data, setData] = useState([]);
     const [userInfo, setUserInfo] = useState('');
     const [tag, setTag] = useState('');
@@ -35,12 +36,13 @@ function ProfileDetail({}) {
             const token = sessionStorage.getItem('token');
             const decode_token = jwt_decode(token);
             setUserId(decode_token.sub);
-            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
                 .then((response) => {
                     setData(response.data.profile[0]);
                     setUserInfo(response.data.userDto);
                     setTag(response.data.taglist)
                     setReviewList(response.data.reviewlist);
+                    console.log("리뷰리스트>>>>>>>>>" + reviewList);
                 })
         }
     }, [userId])
@@ -81,7 +83,7 @@ function ProfileDetail({}) {
                     <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 }} /></Link>
                     <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
                 </div>
-                
+
                 <div className={style.detail}>
                     <div className={style.playbar}>
                         <Waveform
@@ -95,21 +97,22 @@ function ProfileDetail({}) {
                 </div>
                 <div className={style.review}>
                     <p style={{ fontSize: "20px", marginTop: "20px" }}>후기</p>
+
                     {reviewList.map(list => {
-                        return(
+                        return (
                             <div className={style.reviewdetail}>
-                            {/* <p className={style.reviewtitle}>작업물 제목</p> */}
-                            <p className={style.reviewcontents}>
-                            {list.content}
-                            </p>
-                        </div>
+                                {/* <p className={style.reviewtitle}>작업물 제목</p> */}
+                                <p className={style.reviewcontents}>
+                                    {list.content}
+                                </p>
+                            </div>
                         )
                     })}
-               
+
 
                 </div>
             </div>
         </>
     );
 }
-export default ProfileDetail;
+export default ProfileDetailUser;

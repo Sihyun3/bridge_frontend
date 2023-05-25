@@ -190,7 +190,12 @@ const DoingDetail = ({ match }) => {
         axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/commissionEnd/${cidx}`)
             .then(r => {
                 console.log("완료변경")
-                window.location.reload();
+                Swal.fire({
+                    icon: 'info',
+                    title: '작업이 완료 되었습니다.',
+                    text: '함께 작업한 후기를 남겨주세요.'
+                })
+                history.push(`/partner/review/${userId2}`)
             })
             .catch(e => { console.log(e) })
     }

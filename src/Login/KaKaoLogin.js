@@ -31,7 +31,7 @@ const KakaoLogin = ({ }) => {
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
 
         Kakao.Auth.authorize({
-            redirectUri: 'http://localhost:3000/signup'
+            redirectUri: 'http://localhost:3000/login'
         });
     };
 
@@ -42,17 +42,14 @@ const KakaoLogin = ({ }) => {
         }
         // 쿼리 스트링으로 부터 인가 코드를 추출
         const code = window.location.search.split('=')[1];
-        // const code = new URL(window.location.href).searchParams.get("code");
-   
-    
-        // console.log(code);
+        // sessionStorage.setItem("code", code);
         if (code) {
             // REST API로 토큰 받기를 요청
             axios.post(
                 'https://kauth.kakao.com/oauth/token', {
                 grant_type: 'authorization_code',                   // 고정
                 client_id: JAVASCRIPT_APP_KEY,                      // 앱 REST API 키
-                redirect_uri: 'http://localhost:3000/signup',   // 인가 코드가 리다이렉트된 URI
+                redirect_uri: 'http://localhost:3000/login',   // 인가 코드가 리다이렉트된 URI
                 code: code                                          // 인가 코드 받기 요청으로 얻은 인가 코드
             }, {
                 headers: {
@@ -147,11 +144,11 @@ const KakaoLogin = ({ }) => {
                     onClick={handlerLogin} />
             } */}
 
-            {!accessToken &&
+
                 <img className={style.logo} style={sns}
                 src={KakaotalkLogo}
                     onClick={handlerLogin} />
-            }
+            
         </>
     );
 }

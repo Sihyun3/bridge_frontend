@@ -139,8 +139,8 @@ const PaymentList = ({ match }) => {
     return (
         <>
             <div className='container clearfix'>
-                <h1 className={style.mainText}>포인트 내역 조회</h1>
                 <div className={style.mainBox}>
+                    <h1 className={style.mainText}>포인트 내역 조회</h1>
                     <div className={style.dealDate}>
                         <p>거래 일자</p>
                         <input className={style.dealInput1} type='date' value={date1} onChange={handleDate1} /> - <input type='date' className={style.dealInput2} value={date2} onChange={handleDate2}></input>

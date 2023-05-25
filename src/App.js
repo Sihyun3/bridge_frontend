@@ -44,6 +44,8 @@ import ProfileDetail from './Profile/ProfileDetail';
 import DoingTest from './Doing/DoingTest';
 import DoingList from './Doing/DoingList';
 import DoingDetail from './Doing/DoingDetail';
+import Review from './Doing/Review';
+import ProfileDetailUser from './Profile/ProfileDetailUser';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -100,13 +102,16 @@ function App() {
 
       <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} /> {/* 지민쓰 작업중 */}
 
+      <Route path="/profile/detail" component={ProfileDetail} exact={true} />
+      <Route path="/profile/detail/:user" component={ProfileDetailUser} exact={true} />
+
 
 
       {/* 디자인 & 기능 미완 */}
-      <Route path="/profile/detail" component={ProfileDetail} exact={true} /> {/* 후기 작성 기능, 페이지 필요 */}
+   
 
       <Route path="/partner/payment/:producer/:cidx" component={PaymentTest2} exact={true} /> {/* 프로필 불러오기 필요 (기능만 필요) */}
-
+      <Route path="/partner/review/:userId2" component={Review} exact={true} />
       <Footer />
     </>
   )

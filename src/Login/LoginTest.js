@@ -22,7 +22,7 @@ const LoginTest = ({ setIsLogin }) => {
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`,
             { "userId": userId, "userPassword": userPassword })
             .then(response => {
-                if (response.data) {
+                if (response.data.startsWith(0)) {
                     Swal.fire({
                         title: 'Welcome!',
                         text: '정상적으로 로그인되었습니다.',
@@ -31,9 +31,17 @@ const LoginTest = ({ setIsLogin }) => {
                         imageHeight: 60,
                         confirmButtonColor: '#3c3e58'
                     })
-                    sessionStorage.setItem("token", response.data);
+                    console.log(">>>>>>>>>>" + response.data.substr(1))
+                    sessionStorage.setItem("token", response.data.substr(1));
                     setIsLogin(true);
                     history.push('/');
+                } else if (response.data.startsWith(1)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '정지된 계정입니다.',
+                        text: 'bridge@test.com 으로 문의해주세요.'
+                    })
+                    sessionStorage.clear();
                 }
             })
             .catch(error => {
