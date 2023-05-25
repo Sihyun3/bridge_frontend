@@ -4,7 +4,9 @@ import Waveform from "../Waveform";
 import style from './MusicSplit.module.css';
 import musicfile_upload from './icons/MusicFileIcon.png'
 import { useHistory } from "react-router";
-import Swal from "sweetalert2"
+import { useRef } from "react";
+
+// import Dropzone from 'react-dropzone';
 
 
 
@@ -17,19 +19,25 @@ const MusicSplit = () => {
 
   const [clicked, setClicked] = useState(false);
 
+  //컨테이너 true 면 loading
   const [isLoading, setIsLoading] = useState(false);
+  //컨테이너 false 면 completed
   const [isSplitCompleted, setIsSplitCompleted] = useState(false);
   const [music, setMusic] = useState('');
 
   const history = useHistory();
 
+  const wavesurfer = useRef(null);
+  let [min, setMin] = useState(0);
+  let [sec, setSec] = useState(0);
+  const [playing, setPlay] = useState(false);
+  let [tMin, setTMin] = useState(0);
+  let [tSec, setTSec] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+
   useEffect(() => {
     if (sessionStorage.getItem('token') == null) {
-      Swal.fire({
-        icon: 'error',
-        title: '로그인이 필요합니다.',
-        text: '로그인 페이지로 이동합니다.',
-      })
+      alert(`로그인이 필요합니다. 로그인해주세요`);
       history.push('/login')
       return;
     }
@@ -47,41 +55,33 @@ const MusicSplit = () => {
     }
     axios({
       method: 'POST',
-      url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertMusicForSplit/1`,
+      url: `http://localhost:8080/api/insertMusicForSplit/1`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
+      console.log("축 성공");
       let musicInfo = { musicTitle: response.data.fileNames, musicUUID: response.data.uuid }
       setData([...data, musicInfo]);
+      console.log(response.data.uuid);
       setMusicUUID(response.data.uuid);
-      Swal.fire(
-        '업로드가 성공했습니다.',
-        '분리 시작 버튼을 눌러주세요.',
-        'success'
-      )
+      alert(`업로드가 성공했습니다. 분리 시작 버튼을 눌러주세요.`)
     }).catch(() => {
-      Swal.fire({
-        icon: 'error',
-        title: '업로드 중 오류가 발생했습니다.',
-        text: '다시 시도해주세요.'
-      })
+      alert(`업로드 중 오류가 발생했습니다.`);
     });
   };
 
   // 분리 확인 버튼 연결 핸들러
   const handleCheck = (e) => {
     e.preventDefault();
-    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/splitedMusic/${musicUUID}`)
+    console.log(musicUUID);
+    //
+    axios.get(`http://localhost:8080/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;
         if (fileNames.length === 0) {
-          Swal.fire({
-            icon: 'info',
-            title: '다시 시도해주세요',
-            text: '분리된 음악 파일이 존재하지 않습니다.'
-          })
-
+          alert('분리된 음악 파일이 존재하지 않습니다.');
         } else {
+          console.log(fileNames);
           setFiles(fileNames);
           setClicked(true);
         }
@@ -89,25 +89,24 @@ const MusicSplit = () => {
       .catch(error => {
         console.log(error);
       });
+
   };
 
+  // 분리 시작 버튼 클릭시 함수2개 호출
   const startSplit = () => {
     handleMusicSplit();
     handleIsRunning();
   }
-
+  // 음원 분리 컨테이너 실행
   const handleMusicSplit = () => {
-    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/docker/${musicUUID}`)
+    axios.get(`http://localhost:8080/api/docker/${musicUUID}`)
       .then(response => {
         console.log(response);
       })
       .catch(error => {
+        console.log(error);
         console.log("분리 오류 url ==> " + `/api/docker/${musicUUID}`);
-        Swal.fire({
-          icon: 'error',
-          title: '분리 중 오류가 발생했습니다.',
-          text: '다시 시도해주세요.'
-        })
+        alert(`오류가 발생했습니다 (${error.message})`);
       });
   };
 
@@ -117,7 +116,7 @@ const MusicSplit = () => {
     setIsSplitCompleted(false);
 
     const interval = setInterval(() => {
-      axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/IsDockerRun`)
+      axios.get(`http://localhost:8080/api/IsDockerRun`)
         .then(response => {
           if (response.data == false) {
             clearInterval(interval);
@@ -133,14 +132,49 @@ const MusicSplit = () => {
   useEffect(() => {
     console.log(files)
   }, [])
+  const childComponentRef = useRef([]);
+  const handlePlayPause2 = (e) => {
+    // wavesurfer.current.handlePlayPause();
+    // setPlay(!playing);
+    // wavesurfer.current.playPause();
+    // childComponentRef.current.willBeUsedInParentComponent();
+    // childComponentRef.current[e.target.value].setPlay(!playing);
+    childComponentRef.current[e.target.value].handlePlayPause();
 
+    console.log(childComponentRef);
+  };
 
+  const onVolumeChange2 = (e) => {
+    // const { target } = e;
+    // const newVolume = +target.value;
+
+    // if (newVolume) {
+    //   setVolume(newVolume);
+    //   wavesurfer.current.setVolume(newVolume || 1);
+    // }
+    childComponentRef.current.onVolumeChange();
+    console.log(">>>>>>>>>>>>>" + childComponentRef);
+  };
 
 
 
   return (
 
     <>
+      <div className='container clearfix'>
+        <div className={style.info}>
+          <h2>음원 분리</h2>
+          <h3>Music Split</h3>
+          <p>분리하고, 조합하고, 추출하며 새로운 소리를 탐구해 보세요.</p><br />
+          <p>1. '선택된 파일 없음'을 클릭해 파일을 넣는다.</p><br />
+          <p>2. 제출버튼을 클릭해 확인한다.</p><br />
+          <p>3. 분리 시작 버튼을 누른 뒤 잠시 기다린다.</p><br />
+          <p>4. '분리가 완료되었습니다.'라는 문장이 나오면 분리 확인 버튼을 누른다.</p>
+
+        </div>
+      </div>
+
+
 
       <section className={style.Page}>
         <div className={style.above_title}>
@@ -159,6 +193,8 @@ const MusicSplit = () => {
 
                 {/* </div> */}
               </button>
+
+
 
 
               <div className={style.form_submit}>
@@ -202,6 +238,12 @@ const MusicSplit = () => {
                     <button className={style.split} onClick={startSplit}>분리 시작</button>
 
 
+                    {/* 분리확인 버튼 클릭시 만들어진 map 이 화면에 보여짐 */}
+                    <div className={style.split}>
+                      {!clicked && <button onClick={handleCheck}>분리 확인</button>}
+                    </div>
+
+
                     {/* {isLoading && <div className={style.splitStatus}> 분리중입니다.</div>}
             {isSplitCompleted && <div className={style.splitStatus}> 분리가 완료되었습니다.</div>} */}
 
@@ -219,6 +261,7 @@ const MusicSplit = () => {
 
 
 
+
         <div>
           <ul className={style.splitIng}>
             {/* 분리 상태 메세지 */}
@@ -226,45 +269,61 @@ const MusicSplit = () => {
           {isSplitCompleted && <div> 분리가 완료되었습니다.</div>} */}
 
             {/* 분리확인 버튼 클릭시 만들어진 map 이 화면에 보여짐 */}
-            <div className={style.checkSplit}>
+            {/* <div className={style.checkSplit}>
               {!clicked && <button onClick={handleCheck}>분리 확인</button>}
-            </div>
+            </div> */}
 
             {/* 분리된 음원파일 다운로드 링크 및 재생 파형 만드는 Map */}
             {
               files && files.map((fn, idx) => {
-                const url = `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/downloadSplitedMusic/${musicUUID}/${fn}`;
+                const url = `http://localhost:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
 
                 return (
                   <>
                     <div className={style.inst_list}>
                       <li className={style.instruments}><a href={url}>{fn}</a>
+                        <div><button onClick={handlePlayPause2} value={idx}>{!playing ? "Play" : "Pause"}</button>{" "}
+                          <input
+                            type="range"
+                            id="volume"
+                            name="volume"
+                            min="0.01"
+                            max="1"
+                            step=".025"
+                            onChange={onVolumeChange2}
+                            defaultValue={volume}
+                            color="#3523d2"
+                          />
+                          {/* <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div> */}
+                        </div>
+
 
 
 
                       </li>
-                      {/* <Waveform   src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
+                      {/* <Waveform   src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {
-                        idx == 0 && <Waveform color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 0 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
                       {
-                        idx == 1 && <Waveform color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} />
-                      }
-
-                      {
-                        idx == 2 && <Waveform color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 1 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
                       {
-                        idx == 3 && <Waveform color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 2 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
                       {
-                        idx == 4 && <Waveform color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 3 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                      }
+
+                      {
+                        idx == 4 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
 
                     </div>
+
                   </>
                 )
               })

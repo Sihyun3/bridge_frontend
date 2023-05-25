@@ -47,7 +47,7 @@ const Payment = () => {
                     <span className={style.advanceText}>선지급금</span>
                     <input type="text" className={style.advance} placeholder='ex)  10,000'></input>
                 </div>
-                <div>
+                <div className={style.payText}>
                     <span className={style.willPayment}>의뢰 완료시 결제될 금액</span>
                     <input type='text' className={style.willPaymentAm} placeholder='ex)  100,000'></input>
                 </div>

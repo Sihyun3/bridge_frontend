@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import Doing from '../Doing/Doing';
 import Swal from "sweetalert2";
-
+import { Icon } from '@iconify/react';
 
 const Chatting = ({ match }) => {
 
@@ -154,7 +154,8 @@ const Chatting = ({ match }) => {
                                 </button>
                                 <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
                                 <button className={style.sendButton} onClick={publish}>
-                                    <img src={send} className={style.sendIcon}></img>
+                                    <Icon icon="mingcute:send-fill" color="#345" width="36" />
+                                    {/* <img src={send} className={style.sendIcon}></img> */}
                                 </button>
                             </div>
                         </div>

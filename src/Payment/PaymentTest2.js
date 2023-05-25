@@ -18,6 +18,8 @@ function PaymentTest2({ match }) {
     let [pointBox, setPointBox] = useState('');
     const [total, setTotal] = useState('');
     const [isChecked, setIsChecked] = useState(false);
+    const [profile1, setProfile1] = useState([]);
+    const [profile2, setProfile2] = useState([]);
 
 
 
@@ -39,6 +41,12 @@ function PaymentTest2({ match }) {
             .then(response => {
                 setUsepoint(response.data);
                 setClients(decode_token.sub);
+                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
+                    .then((r) => { setProfile1( r.data.profile[0]); console.log("profile1>>" + r.data.profile[0]) })
+                    .catch((e) => { console.log(e) })
+                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${producer}`)
+                    .then((r) => { setProfile2( r.data.profile[0]); console.log("profile2>>" + r.data.profile[0]) })
+                    .catch((e) => { console.log(e) })
             })
             .catch(error => {
                 console.log(error);
@@ -115,14 +123,14 @@ function PaymentTest2({ match }) {
                     <div className={style.profile}>
                         <div className={style.request}>
                             <div className={style.requestText}>{clients}</div>
-                            <img src={user} className={style.requestImg}></img>
+                            <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profile1.profileImg}.jpg`} className={style.requestImg}></img>
                         </div>
 
                         <img src={arrow} className={style.arrowImg}></img>
 
                         <div className={style.response}>
                             <div className={style.responseText}>{producer}</div>
-                            <img src={user} className={style.responseImg}></img>
+                            <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profile2.profileImg}.jpg`} className={style.responseImg}></img>
                         </div>
                     </div>
 

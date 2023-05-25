@@ -79,13 +79,16 @@ const Waveform = forwardRef((props, ref) => {
   //import 해서 사용 //.current.함수 로 사용하기 위해 선언
   useImperativeHandle(ref, () => ({
     // 부모 컴포넌트에서 사용할 함수를 선언
-    PlayAll
+    PlayAll,handlePlayPause, onVolumeChange
   }))
-
+  // useHandle(ref , ()=>({
+  //   handlePlayPause
+  // }))
 
   function PlayAll() {
     setPlay(!playing);
     wavesurfer.current.playPause();
+    console.log("abc")
   }
 
   useEffect(() => {
@@ -139,7 +142,7 @@ const Waveform = forwardRef((props, ref) => {
     wavesurfer.current.playPause();
   };
 
-  const onVolumeChange = e => {
+  const onVolumeChange = () => {
     const { target } = e;
     const newVolume = +target.value;
 
@@ -171,8 +174,9 @@ const Waveform = forwardRef((props, ref) => {
 
         {/* <span className={style.pauseTime}> {a}</span> */}
 
-        <div><button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>{" "}
-        <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div>
+        {/* <div><button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>{" "} */}
+        <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span>
+        {/* </div>  */}
 
        
 
@@ -187,7 +191,7 @@ const Waveform = forwardRef((props, ref) => {
           <label htmlFor="volume"><svg xmlns="http://www.w3.org/2000/svg"  width="20"
   height="20" viewBox="0 0 576 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg></label>
           {" "}
-          <input
+          {/* <input
             type="range"
             id="volume"
             name="volume"
@@ -197,7 +201,7 @@ const Waveform = forwardRef((props, ref) => {
             onChange={onVolumeChange}
             defaultValue={volume}
             color="#3523d2"
-          />
+          /> */}
           {/* <label htmlFor="volume">Volume</label> */}
         </div>
       </div>
