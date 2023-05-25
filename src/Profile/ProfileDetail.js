@@ -98,7 +98,6 @@ function ProfileDetail({}) {
                     {reviewList.map(list => {
                         return(
                             <div className={style.reviewdetail}>
-                            {/* <p className={style.reviewtitle}>작업물 제목</p> */}
                             <p className={style.reviewcontents}>
                             {list.content}
                             </p>
