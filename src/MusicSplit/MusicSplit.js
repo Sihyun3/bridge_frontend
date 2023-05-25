@@ -33,7 +33,8 @@ const MusicSplit = () => {
   const [playing, setPlay] = useState(false);
   let [tMin, setTMin] = useState(0);
   let [tSec, setTSec] = useState(0);
-  const [volume, setVolume] = useState(0.5);
+  // const [volume, setVolume] = useState(0.5);
+  const volumeRef = useRef(0);
 
   useEffect(() => {
     if (sessionStorage.getItem('token') == null) {
@@ -133,27 +134,17 @@ const MusicSplit = () => {
     console.log(files)
   }, [])
   const childComponentRef = useRef([]);
-  const handlePlayPause2 = (e) => {
-    // wavesurfer.current.handlePlayPause();
-    // setPlay(!playing);
-    // wavesurfer.current.playPause();
-    // childComponentRef.current.willBeUsedInParentComponent();
-    // childComponentRef.current[e.target.value].setPlay(!playing);
-    childComponentRef.current[e.target.value].handlePlayPause();
-
-    console.log(childComponentRef);
+  const handlePlayPause2 = (index) => () => {
+    childComponentRef.current[index].handlePlayPause();
   };
 
-  const onVolumeChange2 = (e) => {
-    // const { target } = e;
-    // const newVolume = +target.value;
+  const onVolumeChange = (event) => {
+    // const newVolume = event.target.value;
+    // volumeRef.current = newVolume; // 볼륨 값을 업데이트
 
-    // if (newVolume) {
-    //   setVolume(newVolume);
-    //   wavesurfer.current.setVolume(newVolume || 1);
+    // if (childComponentRef.current && childComponentRef.current.setVolume) {
+    //   childComponentRef.current.setVolume(newVolume); // 웨이브폼 컴포넌트의 setVolume 메서드를 호출하여 볼륨 조절
     // }
-    childComponentRef.current.onVolumeChange();
-    console.log(">>>>>>>>>>>>>" + childComponentRef);
   };
 
 
@@ -282,7 +273,8 @@ const MusicSplit = () => {
                   <>
                     <div className={style.inst_list}>
                       <li className={style.instruments}><a href={url}>{fn}</a>
-                        <div><button onClick={handlePlayPause2} value={idx}>{!playing ? "Play" : "Pause"}</button>{" "}
+                        {/* value={idx} */}
+                        <div><button onClick={handlePlayPause2(idx)} >{!playing ? "Play" : "Pause"}</button>{" "}
                           <input
                             type="range"
                             id="volume"
@@ -290,8 +282,10 @@ const MusicSplit = () => {
                             min="0.01"
                             max="1"
                             step=".025"
-                            onChange={onVolumeChange2}
-                            defaultValue={volume}
+                            // defaultValue={volumeRef.current}
+                            // value={volumeRef.current}
+                            onChange={onVolumeChange}
+                            defaultValue={0.5}
                             color="#3523d2"
                           />
                           {/* <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div> */}
@@ -303,22 +297,22 @@ const MusicSplit = () => {
                       </li>
                       {/* <Waveform   src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {
-                        idx == 0 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 0 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
                       {
-                        idx == 1 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
-                      }
-
-                      {
-                        idx == 2 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 1 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`}  />
                       }
 
                       {
-                        idx == 3 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 2 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
                       {
-                        idx == 4 && <Waveform ref={(elem) => (childComponentRef.current[idx] = elem)} color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 3 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                      }
+
+                      {
+                        idx == 4 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
 

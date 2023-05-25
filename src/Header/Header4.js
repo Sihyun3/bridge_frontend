@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import BridgeWhiteLogo from '../Header/BridgeWhiteLogo.png'
 import { Icon } from '@iconify/react';
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 function Header4({ isLogin, setIsLogin }) {
 
@@ -15,7 +16,11 @@ function Header4({ isLogin, setIsLogin }) {
 
 
     const handlerOnLogoutClick = () => {
-        alert("로그아웃되었습니다.");
+        Swal.fire({
+            icon: 'info',
+            title: '로그아웃 되었습니다.',
+            text: '다음에 또 만나요'
+        })
         sessionStorage.clear();
         setIsLogin(false);
     }
@@ -102,8 +107,8 @@ function Header4({ isLogin, setIsLogin }) {
                                     
                                     <li> <a className={style.point}>{userPoint}<Icon icon="mdi:coins" color="#fcee26" /></a></li>
                                     <div className={style.drop}>
-                                        <Link to="/profile/charge">충전하기</Link>
-                                        <Link to="/partner/bankHistory">거래내역</Link>
+                                        <Link to="/partner/charge">충전하기</Link>
+                                        <Link to="/deal/list">거래내역</Link>
                                     </div>
                                 </div>
 
@@ -157,7 +162,7 @@ function Header4({ isLogin, setIsLogin }) {
                             </li>
 
                             <Link className={style.Login} to="/login">로그인</Link>
-                            <Link className={style.regist} to="/bridge/signup">회원가입</Link>
+                            <Link className={style.regist} to="/signup">회원가입</Link>
 
 
 

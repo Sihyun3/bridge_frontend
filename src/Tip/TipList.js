@@ -1,3 +1,4 @@
+
 import style from './TipList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
@@ -10,9 +11,8 @@ import Swal from "sweetalert2";
 
 const TipList = () => {
     const history = useHistory();
-    const [data, setData] = useState([]);
     const [filteredDatas, setFilteredDatas] = useState([]);
-
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
@@ -27,7 +27,8 @@ const TipList = () => {
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
             .then(r => {
                 console.log(">>>>>>>>>>" + r.data);
-                setData(r.data);
+                // setData(r.data);
+                handlerDesc(r.data)
             })
     }, [])
 
@@ -57,18 +58,53 @@ const TipList = () => {
     }
 
     // 내림차순 정렬
-    const [like, setLike] = useState([]);
-    const arr = useState([data]);
-    console.log(arr); // [5, 100, 20]
 
-    arr.sort((a, b) => b - a);
-    console.log(arr); // [100, 20, 5]
 
+
+    const [heartsList, setHeartsList] = useState([]);
+    // useEffect(() => {
+
+    //     axios.get('http://localhost:8080/api/tiplist/heartsList')
+    //         .then(response => {
+    //             console.log(response);
+    //             setData(response.data);
+    //             setHeartsList(response.data.tbHeart);
+    //         })
+    //         .catch(error => console.log(error));
+
+    // }, [])
+
+
+    // const [heartsList, setHeartsList] = useState([data]);
+    // const arr = useState([heartsList]);
+    const [temp, setTemp] = useState('')
     const handleHeartClick = (e) => {
-        return setLike(arr);
+        // heartsList.sort((a, b) => b - a);
+        // console.log(heartsList);
+        // setHeartsList(heartsList);
+        e.preventDefault();
+        const temp = data.sort((a, b) => { return (b.tbHeart - a.tbHeart) });
+        setData([...temp]);
+        // setTemp("d");
+        console.log(temp);
     };
 
+    const handlerDesc = (d) => {
+        if (data == '') {
+            const temp = d.sort((a, b) => { return (b.tbIdx - a.tbIdx) })
+            setData([...temp]);
+        } else if (data != '') {
+            const temp = data.sort((a, b) => { return (b.tbIdx - a.tbIdx) })
+            setData([...temp]);
+        }
 
+    }
+
+
+    // const handleHeartClick = (e) => {
+    //     e.preventDefault();
+    //     setData(arr);
+    // };
 
     return (
         <>
@@ -79,6 +115,8 @@ const TipList = () => {
                 <div className={style.topBox}>
                     <div className={style.leftbox}>
                         <button className={style.good} onClick={handleHeartClick}>좋아요순</button>
+                        <button className={style.good} onClick={handlerDesc}>최신순</button>
+
                     </div>
 
                     <div className={style.rightbox}>
