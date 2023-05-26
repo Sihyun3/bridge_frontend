@@ -109,8 +109,6 @@ function App() {
 {/* 파트너쪽 밑에 안됨 */}
 
       {/* 디자인 & 기능 미완 */}
-   
-
       <Route path="/partner/payment/:producer" component={PaymentTest2} exact={true} /> {/* 프로필 불러오기 필요 (기능만 필요) */}
       <Route path="/partner/review/:userId2" component={Review} exact={true} />
       <Footer />
