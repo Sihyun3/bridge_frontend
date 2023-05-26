@@ -1,108 +1,85 @@
-import { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import Waveform from "../Component/Waveform";
-import { Co2Sharp } from "@mui/icons-material";
+import style from './JamDetail.module.css'
+import play from './play.png'
+import note from './note.png'
+import { useState, useEffect, useRef } from 'react'
 import jwt_decode from "jwt-decode";
+import axios from 'axios'
+import Waveform from '../Component/Waveform';
+import { PlayCircleFilledOutlined } from '@mui/icons-material';
+import { blue } from '@mui/material/colors';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
-export default function JamDetail2() {
 
+const JamDetail = ({ match }) => {
+
+    const [info, setInfo] = useState({});
     const [value, setvalue] = useState([]);
-    const [data, setData] = useState([]);
     const child = useRef([]);
 
-    // 코멘트
-    const [comment, setComment] = useState('');
-    const [writer, setWriter] = useState('');
-    const [commentsList, setCommentsList] = useState([]);
+    const [music, setMusic] = useState('');
+    const [instrument, setInstrument] = useState('');
 
-    //추가
+    const [comment, setComment] = useState('');
+    const [commentsList, setCommentsList] = useState([]);
+    const cIdx = match.params.cIdx;
+
     const [insert, setInsert] = useState(0);
+    const [data, setData] = useState([]);
+    const history = useHistory();
 
     const handleChangeComment = (e) => {
         setComment(e.target.value);
     };
 
-    const handleChangeWriter = e => {
-        setWriter(e.target.value);
-    };
-
 
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openComments/1`)
-            .then(response => {
-                setCommentsList(response.data.selectCommentsList)
-                const token = sessionStorage.getItem('token');
-                console.log("111111111" + token);
-                const decode_token = jwt_decode(token);
-                console.log("222222222" + decode_token);
-                setWriter(decode_token.sub);
-            }
-            )
-            .catch(error => console.log(error));
-    }, [insert]);
-    //commentsList
-
-    // 코멘트 등록 핸들러
-    const handleCommentSubmit = (e) => {
-        e.preventDefault();
-        //cIdx 부분 1번으로 하드코딩==> 수정 필요
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/1`, { "userId": writer, "ccComments": comment })
+        if (sessionStorage.getItem('token') == null) {
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
+            history.push('/login')
+            return;
+        }
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
                 console.log(response);
-                setInsert(insert + 1);
-                alert('코맨트가 정상적으로 등록되었습니다')
-
+                setData(response.data.music);
+                setInfo(response.data.data)
+                setCommentsList(response.data.commentsList)
             })
-            .catch(error => {
-                console.log(error);
-                alert(`오류가 발생했습니다 (${error.message})`);
-            });
-    };
+    }, [insert])
 
-    // 코멘트 삭제 핸들러
-    const handlerClickDelete = (ccIdx) => {
-        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${ccIdx}`)
-            .then(response => {
-                console.log(response);
-                if (response.data === 1) {
-                    alert('정상적으로 삭제되었습니다.');
-                    // history.push('/insertComments');				// 정상적으로 삭제되면 목록으로 이동
-                } else {
-                    alert('삭제에 실패했습니다.');
-                    return;
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                alert(`삭제에 실패했습니다. (${error.message})`);
-                return;
-            });
-    };
 
-    // 잼 음악 파일 업로드 axios Post
     const onSubmit = (e) => {
         e.preventDefault();
-        let files = e.target.profile_files.files;
+        let files = music;
         let formData = new FormData();
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
         }
+        let datas = { "cmInstrument": instrument }
+        formData.append("data", new Blob([JSON.stringify(datas)], { type: "application/json" }))
         axios({
             method: 'POST',
-            //cIdx 1번으로 하드코딩
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/1`,
-            headers: { 'Content-Type': 'multipart/form-data;' },
+            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${cIdx}`,
+            headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
             data: formData
         }).then((response) => {
-            console.log("축 성공");
-            let musicInfo = { musicTitle: response.data.fileNames, musicUUID: response.data.uuid }
+            let musicInfo = { instrument: instrument, musicUUID: response.data.uuid }
             setData([...data, musicInfo]);
+            window.location.reload();
         }).catch(() => {
-            alert(`업로드 중 오류가 발생했습니다.`);
+            Swal.fire({
+                icon: 'error',
+                title: '업로드 중 오류가 발생했습니다.',
+                text: '다시 시도해주세요.'
+            })
         });
     }
 
-    //잼 체크 박스 전체 선택 
     const onCheckAll = (isChecked) => {
         if (isChecked) {
             const indexArray = data.map((music, index) => index);
@@ -112,95 +89,168 @@ export default function JamDetail2() {
         }
     }
 
-    // 잼 전체 재생 (자식에서 부모로)
     const allplay = () => {
         value.forEach((index) => {
             child.current[index].PlayAll();
         });
     }
-    const test = () => {
-        setData([...data, 1])
-    }
+
+    const handleCommentSubmit = (e) => {
+        e.preventDefault();
+        if (comment == "") {
+            Swal.fire({
+                icon: 'info',
+                title: '작성된 내용이 없습니다',
+                text: '다시 시도해주세요.'
+            })
+            return;
+        }
+
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
+            { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            .then(response => {
+                setInsert(insert + 1);
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
+            });
+    };
+
+
+    const handlerClickDelete = (e) => {
+        e.preventDefault();
+        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
+            .then(response => {
+                if (response.data === 1) {
+                    setInsert(insert + 1);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제에 실패했습니다.',
+                        text: '다시 시도해주세요.'
+                    })
+                    return;
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '삭제에 실패했습니다.',
+                    text: '다시 시도해주세요.'
+                })
+                return;
+            });
+    };
 
     return (
         <>
-            {/* 전체선택하는 체크박스 */}
-            <div>
-                <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
-                <span>전체 선택</span>
-            </div>
+            <div className='container clearfix'>
+                <div className={style.title}>
+                    <div className={style.imgbox}>
+                        {/* 여기 수정해야됨 */}
+                        {/* <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${info.cphoto}.jpg`}></img> */}
 
-            {/* 파형&체크박스 맵 돌린거 */}
-            {data.map((musicInfo, index) => {
-                return (
-                    <div key={musicInfo.musicUUID}>
-                        {/* 체크박스 */}
-                        <input
-                            type="checkbox"
-                            checked={value.includes(index)}
-                            onChange={(e) => {
-                                if (e.target.checked) {
-                                    setvalue([...value, index]);
-                                } else {
-                                    setvalue(value.filter((v) => v !== index));
-                                }
-                            }}
-                        />
-                        {/* 파형 */}
-                        <Waveform
-                            data={data}
-                            key={musicInfo.musicUUID}
-                            src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/rkskek.mp3`}
-                            ref={(elem) => (child.current[index] = elem)}
-                        />
-                        {/* 노래제목 */}
-                        {musicInfo.musicTitle}
+                        <div>
+                            <h1>{info.ctitle} </h1>
+                            <br /><br />
+                            <h3>Album By {" "} {" "} {info.cwriter}</h3>
+                            <br /><br />
+                            <p>{info.ccontents}</p>
+
+                        </div>
                     </div>
-                );
-            })}  {/* 맵 끝*/}
 
-            {/* 잼 전체 재생 버튼 */}
-            <button onClick={allplay}>All Play/Pause</button>
+                    <div className={style.playbox}>
+                        <PlayCircleFilledOutlined sx={{ fontSize: 64, color: blue[500], cursor: "pointer" }} onClick={allplay} />
+                    </div>
+                </div>
 
-            <form onSubmit={(e) => onSubmit(e)}>
-                <input type="file" name="profile_files" multiple="multiple" />
-                <button type="submit">제출</button>
-            </form>
+                <div className={style.jam}>
+                    <div style={{ margin: "20px" }}>
+                        <input type="checkbox" checked={value.length === data.length} onChange={(e) => onCheckAll(e.target.checked)} />
+                        <span style={{ marginLeft: "10px" }}>전체 선택</span>
+                    </div>
 
-            {/* 댓글 목록  map*/}
-            {/* 작성자만 삭제 가능하게 만들어야함  ==> 수정 필요*/}
-            <hr />
-            <br />
-            <br />
-            <div>
-                <h2>댓글 목록</h2>
-                <hr />
-                <ul className="comment_list">
-                    {commentsList.map(commentsList => {
-                        return (
-                            <li key={commentsList.commentIdx}>
-                                <div>
-                                    <li>작성자 {commentsList.userId}</li>
-                                    <li>작성일 {commentsList.cdate}</li>
+                    <div>
+                        {data.map((musicInfo, index) => {
+                            return (
+                                <div key={musicInfo.musicUUID}>
+                                    <input
+                                        type="checkbox"
+                                        className={style.checkbox}
+                                        checked={value.includes(index)}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                setvalue([...value, index]);
+                                            } else {
+                                                setvalue(value.filter((v) => v !== index));
+                                            }
+                                        }}
+                                    />
+                                    <Waveform
+                                        data={musicInfo}
+                                        key={musicInfo.musicUUID}
+                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
+                                        ref={(elem) => (child.current[index] = elem)}
+                                    />
+                                    {musicInfo.musicTitle}
                                 </div>
-                                <div className="view_contents">
-                                    <li>내용 {commentsList.ccComments}</li>
-                                    <input type="button" className="btn" value="삭제" onClick={() => handlerClickDelete(commentsList.ccIdx)} />
-                                </div>
-                                <hr />
-                            </li>
-                        )
-                    })
+                            );
+                        })}
+                    </div>
+
+                    <div className={style.input}>
+                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "44px", outlineStyle: "none", marginBottom: 21, marginRight: 0, border: 0 }} >
+                            <option value="" disabled selected>악기 선택</option>
+                            <option value="여성보컬">여성보컬  </option>
+                            <option value="남성보컬">남성보컬  </option>
+                            <option value="일렉기타">일렉기타  </option>
+                            <option value="어쿠스틱기타">어쿠스틱기타  </option>
+                            <option value="베이스기타">베이스기타  </option>
+                            <option value="드럼">드럼  </option>
+                            <option value="퍼커션">퍼커션  </option>
+                            <option value="브라스">브라스  </option>
+                            <option value="바이올린">바이올린  </option>
+                            <option value="첼로">첼로  </option>
+                            <option value="콘트라베이스">콘트라베이스  </option>
+                            <option value="피아노">피아노  </option>
+                            <option value="신디사이저">신디사이저  </option>
+                        </select>
+
+                        <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} />
+                        <input type="button" className={style.music} onClick={onSubmit} value="등록" />
+                    </div>
+                </div>
+                <div className={style.line}></div>
+                <div className={style.comment}><h2>댓글</h2></div>
+
+                <div className={style.com}>
+                    {
+                        commentsList.map((comment) => {
+                            return (
+                                <>
+                                    <div className={style.comments} style={{ width: 1000, marginLeft: 80, height: 40, float: "left", lineHeight: "40px" }}  >
+                                        <div style={{ width: "100px", float: "left" }} > {comment.userId} </div>
+                                        <div style={{ float: 'left', width: "850px " }}> {comment.ccComments}</div>
+                                        <button value={comment.ccIdx} onClick={handlerClickDelete}>삭제</button>
+                                    </div>
+                                </>
+                            )
+                        })
                     }
-                </ul>
-            </div>
+                </div>
 
-            {/* 코멘트 작성 폼 */}
-            <form onSubmit={handleCommentSubmit}>
-                <input type="text" id="writer" name="writer" value={writer} readOnly />
-                <input type="text" id="comment" name="comment" value={comment} onChange={handleChangeComment} placeholder="코멘트를 입력하세요" />
-                <button type="submit">작성</button>
-            </form>
+                <div style={{ margin: "0 auto", width: "900px" }}>
+                    <input type="text" value={comment} onChange={handleChangeComment} className={style.writeComment}></input>
+                    <button onClick={handleCommentSubmit} className={style.finish} >등록</button>
+                </div>
+            </div>
         </>
     )
-};
+}
+
+export default JamDetail;

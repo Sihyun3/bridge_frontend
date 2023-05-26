@@ -6,17 +6,28 @@ import JamBack from "../Jam/Rectangle 49.png";
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
 import style from './Waveform.module.css'
 import image from '../Jam/musical-note.png'
-import base from './base.png'
+import vocal from '../img/vocal.png'
+import elect from '../img/elect.png'
+import aco from '../img/acu.png'
+import base from '../img/base.png'
+import drum from '../img/drum.png'
+import piano from '../img/piano.png'
+import elseinstrument from '../img/elseinstrument.png'
+
+
+
+import { Pause, PlayArrow, VolumeUpRounded } from "@mui/icons-material";
+import { blue, grey } from "@mui/material/colors";
 
 const formWaveSurferOptions = ref => ({
     container: ref,
     waveColor: "#eee",
-    progressColor: "OrangeRed",
+    progressColor: "LightBlue",
     cursorColor: "OrangeRed",
     barWidth: 6,
     barRadius: 3,
     responsive: true,
-    height: 120,
+    height: 60,
     normalize: true,
     partialRender: true,
     interact: true,
@@ -141,17 +152,40 @@ const Waveform = forwardRef((props, ref) => {
     // const handleMouseOut = () => {
     //   setIsHovering(false);
     // };
-
+    const [img, setImg] = useState("");
+    useEffect(() => {
+        console.log(props.data)
+        switch (props.data.cmInstrument) {
+            case "여성보컬": setImg(vocal)
+                break;
+            case "남성보컬": setImg(vocal)
+                break;
+            case "일렉기타": setImg(elect)
+                break;
+            case "어쿠스틱기타": setImg(aco)
+                break;
+            case "베이스기타": setImg(base)
+                break;
+            case "드럼": setImg(drum)
+                break;
+            case "피아노": setImg(piano)
+                break;
+            case "신디사이저": setImg(piano)
+                break;
+            default:
+                setImg(elseinstrument)
+        }
+    }, [])
     return (
         <>
-            <div style={{marginBottom: "40px"}}>
-{/* style={{ marginTop: 20 }} */}
+            <div style={{ marginBottom: "60px" }}>
+                {/* style={{ marginTop: 20 }} */}
                 {/* <span className={style.pauseTime}> {a}</span> */}
-                <div style={ {float:"left"}} className="clearfix">
-                    <img alt="악기 이미지" src={base}/>
-                    <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play} /> : <img className={style.button} src={JamBack} />}</button></span>
+                <div style={{ float: "left", marginTop: "-32px" }} className="clearfix">
+                    <img alt="악기 이미지" style={{width:"118px",height:"123px"}} src={img} />
+                    <span alt="재생 버튼" style={{ marginLeft: 40, marginTop: 44, float: "right" }}> <button onClick={handlePlayPause}>{!playing ? <PlayArrow sx={{ fontSize: 40, color: blue[500] }} /> : <Pause sx={{ fontSize: 40, color: blue[500] }} />}</button></span>
                     <div >
-                        <label htmlFor="volume">Volume</label>
+                        <label htmlFor="volume"><VolumeUpRounded sx={{ color: grey[400], fontSize: 24 }} /></label>
                         <input
                             type="range"
                             id="volume"
@@ -161,6 +195,7 @@ const Waveform = forwardRef((props, ref) => {
                             step=".025"
                             onChange={onVolumeChange}
                             defaultValue={volume}
+
                         />
                     </div>
                 </div>
@@ -168,8 +203,10 @@ const Waveform = forwardRef((props, ref) => {
                 <div style={{ width: 800, marginLeft: 220 }}>
                     <div id="waveform" ref={waveformRef} />
                 </div>
-                <div style={{marginLeft: "220px"}}>
-                    <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span>
+                <div style={{ marginLeft: "220px", marginTop: "5px" }}>
+                    <span>{min}:{sec}</span>
+
+                    <span style={{ marginLeft: "740px" }}>{tMin}:{tSec}</span>
                 </div>
                 {/* <p className ={style.explain} >{a}</p>  */}
                 {/* <button onClick={test}>asdasd</button> */}

@@ -14,7 +14,7 @@ const Payment = () => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${userId}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${decode_token.sub}`)
             .then(response => {
                 console.log(response.data);
                 setCurrentPoint(response.data.userPoint);
@@ -47,7 +47,7 @@ const Payment = () => {
                     <span className={style.advanceText}>선지급금</span>
                     <input type="text" className={style.advance} placeholder='ex)  10,000'></input>
                 </div>
-                <div>
+                <div className={style.payText}>
                     <span className={style.willPayment}>의뢰 완료시 결제될 금액</span>
                     <input type='text' className={style.willPaymentAm} placeholder='ex)  100,000'></input>
                 </div>

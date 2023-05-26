@@ -1,28 +1,20 @@
 import style from '../Partner/PartnerList.module.css';
-import Header1 from '../Header/Header1';
-import img from '../img/checkbox.png';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Pagination from '../Pagination';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
 const PartnerList = () => {
   const [partnerList, setPartnerList] = useState([]);
   const [partnerTag, setPartnerTag] = useState([]);
   const [tag, setTag] = useState('');
+  const history = useHistory();
 
   //페이징
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
-
-
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = (partnerList) => {
-    let currentPosts = 0;
-    currentPosts = partnerList.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
 
   const tags = [
@@ -42,6 +34,15 @@ const PartnerList = () => {
   ];
 
   useEffect(() => {
+    if (sessionStorage.getItem('token') == null) {
+      Swal.fire({
+        icon: 'error',
+        title: '로그인이 필요합니다.',
+        text: '로그인 페이지로 이동합니다.',
+    })
+      history.push('/login')
+      return;
+    }
     axios
       .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
@@ -73,88 +74,91 @@ const PartnerList = () => {
   return (
     <>
       <div className={style.box1}>
-        <h1>파트너 모집</h1>
+        <h1>Commission</h1>
       </div>
-      <div className="container clearfix">
+      <div className="container clearfix" >
         <div className={style.tagbox}>
-          
-            <h2>#태그</h2>
-          
+
           {tags.map((tags, index) => {
             if (index % 5 == 0) {
               return (<>   <label className={style.tags} for={`tagRadio-${index}`}>
-              <button
-              key={index}
-                className={style.taglists}
-                id={`tagRadio-${index}`}
-                value={tags.name}
-                onClick={handleRadio}
-              />
-             #{tags.name}</label></>)
-            }
-            return (
-              // <span className={style.taglist} key={index}>
-              <label className={style.tags} for={`tagRadio-${index}`}>
                 <button
-                key={index}
+                  key={index}
                   className={style.taglists}
                   id={`tagRadio-${index}`}
                   value={tags.name}
                   onClick={handleRadio}
                 />
-               #{tags.name}</label>
-              // </span>
+                #{tags.name}</label></>)
+            }
+            return (
+              <label className={style.tags} for={`tagRadio-${index}`}>
+                <button
+                  key={index}
+                  className={style.taglists}
+                  id={`tagRadio-${index}`}
+                  value={tags.name}
+                  onClick={handleRadio}
+                />
+                #{tags.name}</label>
             );
           })}
           <button className={style.tags} onClick={clearRadio}>#전체</button>
         </div>
         <div className="clearfix" style={{ margin: '50px 0' }}>
           {
-          currentPosts(partnerList) && currentPosts(partnerList)
-            .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
-            .map((partnerList, index) => {
-              return (
-                <div key={index} className={style.block}>
-                  <Link to={`/bridge/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${partnerList.crPhoto}`} alt="" /></Link>
-                  {/* <p className={style.title}>{partnerList.userId}</p> */}
-                  <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
-                  <p className={style.date}>
-                    {partnerList.crStartDate} ~ {partnerList.crEndDate}
-                  </p>
-                  <div className={style.tagblock}>
-                    {partnerTag
-                      .filter((tag) => partnerList.crIdx === tag.crIdx)
-                      .map((tag, tagIndex) => {
-                        // console.log(3%3)
-                        if (tagIndex % 3 == 0) {
-                          return (<><br /><span className={style.tag} key={tagIndex}>#{tag.crtTag} </span> </>)
+            partnerList && partnerList
+              .filter((partnerList) => (tag === '') || partnerTag.some((partnerTag) => partnerList.crIdx == partnerTag.crIdx && partnerTag.crtTag == tag))
+              .map((partnerList, index) => {
+                return (
+                  <div key={index} className={style.block}>
+                    <div className={style.imgbox}>
+                      <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
+                    </div>
+                    <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
+                    <p className={style.date}>
+                      {partnerList.crStartDate} ~ {partnerList.crEndDate}
+                    </p>
+                    <div className={style.tagblock}>
+                      {partnerTag
+                        .filter((tag) => partnerList.crIdx === tag.crIdx)
+                        .map((tag, tagIndex) => {
+                          if (tagIndex % 3 == 0) {
+                            return (<><br /><span className={style.tag} key={tagIndex}>#{tag.crtTag} </span> </>)
+                          }
+                          return (<span className={style.tag} key={tagIndex}>#{tag.crtTag} </span>);
                         }
-                        return (<span className={style.tag} key={tagIndex}>#{tag.crtTag} </span>);
-                      }
-
-
-                      )}
+                        )}
+                    </div>
                   </div>
-              
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
 
         <div className={style.buttonbox}>
-        <Link to={`/bridge/partner/write`}><button > 파트너 찾기 </button></Link>
+          <Link to={`/partner/write`}><button > Ask Commission </button></Link>
         </div>
 
-        <div style={{margin:"0 auto"}} className='clearfix'>
-          <Pagination
-            className={style.page}
-            postsPerPage={postsPerPage}
-            totalPosts={partnerList.length}
-            paginate={setCurrentPage}
-          ></Pagination>
+        <div className={style.page}>
+          <nav className="pageNum" >
+            <button onClick={() => setPage(page - 1)} disabled={page === 1} >
+              &lt;
+            </button>
+            {
+              partnerList && Array(Math.ceil(partnerList.length / limit)).fill().map((page, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setPage(i + 1)}
+                  aria-current={page === i + 1 ? "page" : null}
+                >
+                  {i + 1}
+                </button>
+              ))}
+                      <button onClick={() => setPage(page + 1)} disabled={page == Math.ceil(partnerList.length / limit)}>
+                                    &gt;
+                                </button>
+          </nav>
         </div>
-
-
       </div>
     </>
   );

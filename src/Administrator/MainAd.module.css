@@ -1,8 +1,10 @@
 
 /* 컨텐츠 모두 묶는 박스 */
 .mainBox {
-    width: 1200px;
-    margin: 180px auto;
+    width: 800px;
+    margin: 140px auto;
+
+    height:500px;
   }
 
 /* 메인 텍스트 */

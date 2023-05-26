@@ -13,9 +13,10 @@
 .mainBox {
     width: 645px;
     height: 800px;
-    margin: 300px auto;
-    background-color: #d9d9d9;
-    border-radius: 10px;
+    margin: 120px auto;
+    /* background-color: #d9d9d9; */
+   border-bottom: 2px solid #b1b1b1;
+    border-top: 2px solid #b1b1b1;
 }
 
 /* '결제' 텍스트 */
@@ -32,15 +33,15 @@
     width: 150px;
     height: 150px;
     margin-top: 70px;
-    display: inline-block;
+    float: left;
 }
 
 /* '신청자 닉넴' 텍스트 */
 .requestText {
     font-size: 25px;
-    margin-left: 90px;
-    width: 150px;
+    width: 320px;
     height: 34px;
+    text-align: center;
 
 }
 /* 신청자 아이콘 */
@@ -49,6 +50,7 @@
     height: 120px;
     margin-left: 100px;
     margin-bottom: 35px;
+    border-radius:70%;
 }
 
 /* 중간에 화살표 아이콘 */
@@ -72,9 +74,9 @@
 /* '커미션주 닉넴' 텍스트 */
 .responseText {
     font-size: 25px;
-    margin-left: 60px;
-    width: 180px;
+    width: 284px;
     height: 34px;
+    text-align: center;
 }
 
 /* 커미션주 아이콘 */
@@ -83,6 +85,7 @@
     height: 120px;
     margin-left: 85px;
     margin-bottom: 35px;
+    border-radius:70%;
 }
 
 /* '선지급금' 텍스트 */
@@ -102,21 +105,26 @@
     background-color: #d9d9d9;
 }
 
+.payText {
+    text-align: center;
+}
+
 /* '의뢰완료시 결제될 금액' 텍스트 */
 .willPayment {
-    margin-left: 120px;
-    width: 100px;
-    height: 48px;
+    margin-left: 84px;
+    /* width: 100px; */
+    /* height: 48px; */
     font-size: 16px;
 }
 
 /* 의뢰완료시 금액 입력칸 */
 .willPaymentAm {
-    margin-left: 121px;
+    margin-left: 150px;
     border: none;
     height: 38px;
     text-align: center;
-    background-color: #d9d9d9;
+    background-color: #f1f1f1;
+    border-radius: 4px;
 }
 
 /* 줄 */
@@ -127,7 +135,7 @@
 
 /* 총 결제금액 텍스트 */
 .total {
-    font-size: 16px;
+    font-size: 18px;
     margin-left: 125px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -154,10 +162,11 @@
     width: 375px;
     height: 35px;
     border-radius: 5px;
-    background-color: #998686;
+    background-color: #f1f1f1;
     padding: 0 25px;
     font-size: 16px;
-    color: white;
+    color: black;
+    outline: none;
 }
 
 /* 포인트 입력칸 끝에 있는 'P' 텍스트 */
@@ -203,8 +212,8 @@
     border-radius: 4px;
     font-size: 16px;
     color: white;
-    margin-top: 24px;
-    margin-left: 280px;
+    margin:52px auto 32px auto;
+    display: block;
 }
 
 /* 잔액부족 알림 */

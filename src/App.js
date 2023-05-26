@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
+import { Route } from 'react-router-dom';
+
 // 헤더 풋터
-import Header2 from './Header/Header2';
+import Header4 from './Header/Header4';
 import Footer from './Footer/Footer';
 //페이지 임포트
 import LoginStart from './Login/LoginStart';
@@ -10,7 +13,6 @@ import ReportPage from './Report/ReportPage';
 import SignUp from './SignUp/SignUp';
 import TipList from './Tip/TipList';
 import ReportDetail from './Admin-Report/ReportDetail';
-import ProfileDetail from './Profile/ProfileDetail';
 import JamList from './Jam/Jamlist';
 import Doing from './Doing/Doing';
 import Charge from './Charge/Charge';
@@ -24,37 +26,34 @@ import JamWrite from './Jam/JamWrite';
 import NoticeWrite from './Admin-Notice/NoticeWrite';
 import NoticeDetail from './Admin-Notice/NoticeDetail';
 import TipWrite from './Tip/TipWrite'
-import JamDetail from './Jam/JamDetail';
-// import JamDetail2 from './Jam/JamDetail2';
+import JamDetail from './Jam/JamDetail2';
 import MusicSplit from './MusicSplit/MusicSplit';
 import ReportList from './Admin-Report/ReportList';
 import TipEdit from './Tip/TipEdit'
 import TipDetail from './Tip/TipDetail'
-import { useEffect, useState } from 'react';
-import { Route } from 'react-router-dom';
 import PartnerList from './Partner/PartnerList';
 import PartnerDatail from './Partner/PartnerDatail';
-import Header4 from './Header/Header4';
 import LoginTest from './Login/LoginTest';
 import Finduser from './Login/Finduser';
 import SignUpTest from './SignUp/SignUpTest';
 import PaymentTest from './Payment/PaymentTest';
 import PaymentTest2 from './Payment/PaymentTest2';
 import Portfolio from './Profile/Portfolio';
+import PaymentList from './Payment/PaymentList';
+import ProfileDetail from './Profile/ProfileDetail';
+import DoingTest from './Doing/DoingTest';
+import DoingList from './Doing/DoingList';
+import DoingDetail from './Doing/DoingDetail';
+import Review from './Doing/Review';
+import ProfileDetailUser from './Profile/ProfileDetailUser';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  // useEffect(() => {
-  //   sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJkMjE3ZmQ0Ny1kYWUwLTQ0OGEtOTQwNy1mYWE1NjY2OTQ3NWIiLCJpYXQiOjE2ODI1ODY1MjgsImV4cCI6ODY0MDE2ODI1ODY1Mjh9.nEvZzgu8d0J4yfTaQ1Ea3oPUL-LQBH7aIv-JVxgF78o");
-  // }, [])
-
-
-
   return (
     <>
+    {/* 충전하기 거래내역 안뜸 */}
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
-      {/* 완성된 페이지 */}
 
       {/* 기능 & 디자인 완성된 페이지 */}
       <Route path="/" component={Main} exact={true} />

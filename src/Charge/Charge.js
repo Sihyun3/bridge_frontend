@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import style from './Charge.module.css';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
 const Charge = ({ match }) => {
 
     const { total } = match.params;
     const { usepoint } = match.params;
 
-
+    const history = useHistory();
 
     const [userId, setUserId] = useState('');
     const [currentPoint, setCurrentPoint] = useState(0);
@@ -16,9 +18,19 @@ const Charge = ({ match }) => {
     const [willPoint, setWillPoint] = useState(0);
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
+            history.push('/login')
+            return;
+          }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
+        console.log(">>>>>>>>>>>>>>" + userId);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${userId}`)
             .then(response => {
                 console.log(response.data);
@@ -37,8 +49,6 @@ const Charge = ({ match }) => {
     const handleChargePoint = (e) => {
         setChargePoint(e.target.value);
     }
-
-
 
     useEffect(() =>{
         console.log(total);
@@ -62,12 +72,10 @@ const Charge = ({ match }) => {
     //카카오페이 버튼 클릭 핸들러
     const handleKakaopay = (e) => {
         e.preventDefault();
-        sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
+        //sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
-                console.log(response);
-                console.log("==============" + response.data)
-                console.log("++++++++++++++" + response.data.next_redirect_pc_url);
+                console.log(response.data);
                 window.location.href = response.data.next_redirect_pc_url;     
             })
             .catch(error => {
@@ -75,22 +83,23 @@ const Charge = ({ match }) => {
             })
     }
 
-    const test = () => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`, { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-            .then(r => {
-                console.log(r);
-            })
-    }
+    // const test = () => {
+    //     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`, { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+    //         .then(r => {
+    //             console.log(r);
+    //         })
+    // }
 
     return (
         <>
             <div className='container clearfix'>
+            <h1 className={style.mainText}>포인트 충전</h1>
                 <div className={style.mainBox}>
-                    <h1 className={style.mainText}>포인트 충전</h1>
+                  
                     <div className={style.mainContent}>
                         <div className={style.possess}>
                             <p className={style.possessText}>현재 보유 포인트</p>
-                            <p className={style.possessMoney} value={currentPoint}>{currentPoint}</p>
+                            <p className={style.possessMoney} value={currentPoint}>{currentPoint}&nbsp;원</p>
                         </div>
                         <div className={style.charge}>
                             <p className={style.chargeText1}>충전할 금액</p>

@@ -1,9 +1,13 @@
-import style from './DealListAd.module.css';
+import style from '../Administrator/DealListAd.module.css';
 import plus from './plus.png';
 import minus from './minus.png';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import searchImg from '../Tip/searchImg.png';
+import jwt_decode from "jwt-decode";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from "sweetalert2";
 
 const DealListAd = () => {
 
@@ -13,6 +17,8 @@ const DealListAd = () => {
     const [date1, setDate1] = useState('');
     const [date2, setDate2] = useState('');
     let [currentDate, setCurrentDate] = useState('');
+
+    const history = useHistory();
 
     const [limit, setLimit] = useState(8);
     const [page, setPage] = useState(1);
@@ -26,6 +32,26 @@ const DealListAd = () => {
     const handleDate2 = (e) => { setDate2(e.target.value) }
 
     useEffect(() => {
+        if (sessionStorage.getItem('token') == null) {
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
+            history.push('/login')
+            return;
+          }
+          const token = sessionStorage.getItem('token');
+          const decode_token = jwt_decode(token);
+
+          if (decode_token.sub != 'admin') {
+            Swal.fire({
+                icon: 'error',
+                title: 'id, pw가 일치하지 않습니다.',
+                text: '확인 후 다시 시도해주세요.',
+            })
+            history.push(`/`)
+          }
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
             .then(res => {
                 setData(res.data);
@@ -133,9 +159,10 @@ const DealListAd = () => {
 
     return (
         <>
-            <div className='container clearfix'></div>
+            <div className='container clearfix'>
+            <h1 className={style.mainText}>포인트 내역 조회</h1>
             <div className={style.mainBox}>
-                <h1 className={style.mainText}>포인트 내역 조회</h1>
+               
                 <div className={style.dealDate}>
                     <p>거래 일자</p>
                     <input className={style.dealInput1} type='date' value={date1} onChange={handleDate1} /> - <input type='date' className={style.dealInput2} value={date2} onChange={handleDate2}></input>
@@ -144,7 +171,8 @@ const DealListAd = () => {
                     <button className={style.dealButton2} onClick={handle6Month}>6개월</button>
                 </div>
                 <div className={style.search}>
-                    <button onClick={handleSearch}>검색하기</button> <input type='text' value={searchInput} onChange={hadleSearchInput} className={style.searchInput} ></input>
+                    <p>검색하기</p> <input type='text' value={searchInput} onChange={hadleSearchInput} className={style.searchInput} ></input>
+                   <button type='button' onClick={handleSearch}><img src={searchImg} className={style.searchImg}/></button> 
                 </div>
                 <div className={style.buttonBox}>
                     <button onClick={handleAll} className={style.initButton}>전체내역</button>
@@ -155,10 +183,10 @@ const DealListAd = () => {
                     <div className={style.tableText}>{filteredDatas == "" ? <p>총 {data.length}건 </p> : <p> 총 {filteredDatas.length} 건 </p>} </div>
                     <table>
                         <colgroup className={style.tableCol}>
-                            <col width="30%" />
-                            <col width="22%" />
-                            <col width="22%" />
-                            <col width="26%" />
+                            <col width="15%" />
+                            <col width="25%" />
+                            <col width="25%" />
+                            <col width="35%" />
                         </colgroup>
                         <thead>
                             <tr>
@@ -238,6 +266,7 @@ const DealListAd = () => {
                         }
                     </nav>
                 </div>
+            </div>
             </div>
         </>
     );

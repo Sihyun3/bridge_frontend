@@ -9,17 +9,26 @@
     color: #000;
 }
 
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* 컨텐츠 모두 묶는 박스 */
   .Container {
     width: 1200px;
     margin: 100px auto;
+
+
   }
 
 /* 상단 글자  */
 .textBox {
     width: 100%;
     margin: 1.75rem auto;
-    max-width: 1320px;
+    max-width: 1236px;
     padding-inline: 1rem;
 }
 
@@ -55,7 +64,7 @@
     background-color: rgba(217, 217, 217, 0.8);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1522870389523-7e83c0065eaf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1509310202330-aec5af561c6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1509&q=80");
     background-size: 530px;
 
 }
@@ -66,14 +75,28 @@
 }
 
 /* 온라인 합주 텍스트 */
-.online p {
+.online h3 {
     margin-top: 180px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.online p:hover {
+.online h3:hover {
     color: #FCFCFC;
+}
+
+.online p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+
+
 }
 
 /* 오프라인 합주 버튼 */
@@ -99,14 +122,28 @@
 
 
 /* 오프라인 합주 텍스트 */
-.offline p {
+.offline h3 {
     margin-top: 180px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.offline p:hover {
+.offline h3:hover {
     color: #FCFCFC;
+}
+
+.offline p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+
+
 }
 
 .secondLine {
@@ -128,7 +165,7 @@
     background-color: rgba(217, 217, 217, 0.8);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 15px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1445375011782-2384686778a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("https://freequizgames.com/wp-content/uploads/2022/12/what-instrument-am-i-musical-personality-test-instant-results_2022-12-12_270789.jpg");
     background-size: 550px 245px;
 }
 
@@ -138,14 +175,28 @@
 }
 
 /* 음원분리 텍스트 */
-.musicSep p {
+.musicSep h4 {
     margin-top: 110px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.musicSep p:hover {
+.musicSep h4:hover {
     color: #FCFCFC;
+}
+
+.musicSep p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+
+
 }
 
 /* 커뮤니티 버튼 */
@@ -165,35 +216,58 @@
 }
 
 /* 커뮤니티 버튼 클릭 */
-.communnity:hover {
+.community:hover {
     opacity: 0.8;
 }
 
 
 /* 커뮤니티 텍스트 */
-.community p {
+.community h4 {
     margin-top: 110px;
     margin-left: 20px;
     color: #f6f6f6;
+    font-family: 'Pretendard-Regular';
+    font-weight: 900;
 }
 
-.community p:hover {
+.community h4:hover {
     color: #FCFCFC;
 }
 
+.community p {
+    color: #f6f6f6;
+    font-size: 16px;
+    font-weight: 500;
+    margin:20px;
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+    letter-spacing: 1px;
+    
+
+}
+
+
+
 /* 공지사항 */
 
-.tit {
+.title {
     position: absolute;
-    left: 0;
-    top: 0;
-    color: #222;
-    font-weight: 400;
+    /* left: 0; */
+    /* top: 0; */
+    color: #EAEAEA;
+    font-weight: bold;
+    background-color: #151616;
+
 }
 
 .link {
     position: relative;
-    left: 80px;
+    left: 90px;
+    font-weight: lighter;
+    background-color: #151616;
+   
+
+
 }
 
 .link::before {
@@ -205,17 +279,17 @@
     width: 1px;
     height: 14px;
     margin-top: -7px;
-    background-color: black;
+    background-color: #DDDDDD;
 }
 
 .link a {
     overflow: hidden;
-    display: inline-block;
-    color: #222;
+    /* display: inline-block; */
+    color: #DDDDDD;
     max-width: 100%;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     text-overflow: ellipsis;
-    margin-left:14px;
+    margin-left:20px;
 }
 
 /* .link a strong {
@@ -225,9 +299,9 @@
 
 .date {
     position: absolute;
-    right: 85px;
+    right: 76px;
     top: 0;
-    color: #666;
+    color: #929595;
     font-family: 'Roboto';
 }
 
@@ -235,9 +309,9 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 70px;
+    width: 120px;
     text-align: right;
-    color: #222;
+    
 }
 
 .more::before {
@@ -249,7 +323,8 @@
     width: 1px;
     height: 14px;
     margin-top: -7px;
-    background-color: black;
+    background-color: #DDDDDD;
+    margin-left: 8px;
 }
 
 .more .iconset {

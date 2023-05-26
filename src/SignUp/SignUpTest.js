@@ -1,138 +1,278 @@
-// import style from './SignUp.module.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import KakaoLogin from '../Login/KaKaoLogin';
-// import NaverLogin from './NaverLogin';
-// import style from './LoginTest2.module.css';
 import style from './SignUpTest.module.css';
-// import NaverLogo from './NaverLogo.png';
-// import KakaotalkLogo from './KakaotalkLogo.png';
-// import GoogleLogo from './GoogleLogo.png';
 import { useRef } from 'react';
 import React from 'react';
 import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown2 } from "react-icons/fa";
+import BridgeBlackLogo from '../SignUp/BridgeBlackLogo.png';
+import Alert from './Alert.png';
+import UnLock from './UnLock.png';
+import Locked from './Locked.png';
+import { Password } from '@mui/icons-material';
+import Swal from "sweetalert2";
+import check from './check.png';
 
 const SignUpTest = ({ history, props }) => {
-    const [dropdownVisibility, setDropdownVisibility] = React.useState(false);
-    //이름
+
     const [userName, setName] = useState();
-    //아이디
     const [userId, setUserId] = useState();
-    //닉네임
-    const [userNickname, setNickName] = useState();
-    //비밀번호
+    const [confirmId, setConfirmId] = useState();
+    const [confirmIdMessage, setConfirmIdMessage] = useState();
     const [userPassword, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
-    //연락처
+    const [confirmMessage, setConfirmMessage] = useState();
+    const [PWmessage, setPWmessage] = useState();
+
     const [userPhoneNumber, setPhone] = useState();
-    //이메일
     const [userEmail, setEmail] = useState();
 
-    const [confirmMessage, setConfirmMessage] = useState();
-    const [Pmessage, setPmassage] = useState();
-    const [Emassage, setEmassage] = useState();
-    const [verifyCode, setVerifyCode] = useState();
-    const [verifyConfirmMessage, setVerifyConfirmMessage] = useState();
+    const [Pmessage, setPmessage] = useState();
+    const [Emessage, setEmessage] = useState();
 
+    const [select, setSelect] = useState("010");
+    const [selectEmail, setSelectEmail] = useState("@bridge.com");
+
+    const [auth, setAuth] = useState('');
+    const [temp, setTemp] = useState('');
+
+    const [userFirstEmail, setFirst] = useState('');
+
+    useEffect(() => {
+        let frontmail = userFirstEmail + selectEmail;
+        if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
+            setEmail(frontmail);
+            setEmessage(null);
+
+        } else {
+            setEmail(userFirstEmail);
+            setEmessage('이메일 형식이 올바르지 않습니다.');
+        }
+    }, [])
+
+    const handleSelectFrontNumber = (e) => {
+        setSelect(e.target.value);
+    };
 
     const handlerOnClick = e => {
-        if (confirmMessage == null && Pmessage == null && Emassage == null && userId != null) {
+        e.preventDefault();
+        if (confirmMessage == null && Pmessage == null && Emessage == null && userId != null && confirmIdMessage != null
+        ) {
             axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
-                "userId": userId, "userPassword": userPassword, "userPhoneNumber": userPhoneNumber,
-                "userEmail": userEmail, "userName": userName, "userNickname": userNickname
+                "userId": userId, "userPassword": userPassword, "userName": userName, "userEmail": userEmail, "userPhoneNumber": userPhoneNumber
             })
                 .then(response => {
-
-                    alert('정상적으로 등록 되었습니다.')
+                    Swal.fire({
+                        title: 'Congraturation!',
+                        text: 'Bridge의 회원이 되신 것을 축하드립니다.',
+                        imageUrl: 'https://media.discordapp.net/attachments/1105381996731039825/1108956932884148294/20210508_150502.jpg?width=438&height=584',
+                        imageWidth: 300,
+                        imageHeight: 300
+                    })
                     history.push('/login')
-
                 })
                 .catch(error => {
-                    alert('id, pw가 일치하지 않습니다')
-                    console.log(error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'id, pw가 일치하지 않습니다.',
+                        text: '확인 후 다시 시도해주세요.',
+                    })
                     sessionStorage.clear();
                 })
         } else {
-            alert('형식이 일치하지 않습니다')
+            Swal.fire({
+                icon: 'error',
+                title: '형식이 일치하지 않습니다.',
+                text: '확인 후 다시 시도해주세요.',
+            })
         }
     };
 
-    const handlerOnClickForVerification = e => {
-        if (e.target.value === verifyCode) {
-            setVerifyCode(e.target.value)
-            setVerifyConfirmMessage(null);
-        } else {
-            setVerifyCode(e.target.value);
-            setVerifyConfirmMessage('인증에 실패했습니다. 다시 시도해주세요.')
+    const userIdCheck = (e) => {
+        e.preventDefault();
+        if (userId == undefined || userId == '') {
+            setConfirmIdMessage("사용하실 아이디를 입력해주세요.")
+            Swal.fire({
+                icon: 'info',
+                title: '입력된 내용이 없습니다.',
+                text: '사용하실 아이디를 입력해주세요.'
+            })
+            return;
         }
-    };
+        if (confirmIdMessage == "아이디 형식이 일치하지 않습니다.") {
+            Swal.fire({
+                icon: 'error',
+                title: '아이디 형식이 옳지않아~용.',
+                text: '4 ~ 16자 영문 대 소문자, 숫자를 사용하세요.'
+            })
+            return;
+        }
 
-
-
-    const handlerChangeNickName = e => {
-        setNickName(e.target.value);
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
+            .then(response => {
+                const data = response.data;
+                if (data === 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '이미 사용중인 아이디입니다.',
+                        text: '다른 아이디로 다시 시도해주세요.'
+                    })
+                    setConfirmIdMessage("이미 사용중인 아이디입니다.");
+                } else if (data === 0) {
+                    Swal.fire({
+                        title: '사용 가능한 아이디입니다.',
+                        text: "이 id를 사용하시겠습니까?",
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Success!',
+                                '탁월한 선택이십니다 :)',
+                                'success'
+                            )
+                        }
+                    })
+                    setConfirmIdMessage("탁월한 선택이십니다.");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
-    //핸들러 모음
+
+
+
+    const handlerAuth = () => {
+        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
+            // axios.post(`http://192.168.0.47:8080/emailConfirm/${userEmail}`)
+            .then((r) => {
+                console.log(r.data)
+                setAuth(r.data)
+                Swal.fire({
+                    icon: 'success',
+                    title: '인증번호가 발송되었습니다.',
+                    text: '메일함을 확인해주세요.',
+                    confirmButtonColor: '#3c3e58'
+                    // confirmButtonColor: '#3085d6'
+                })
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '메일 주소를 입력해주세요!',
+                    // text: '잠시 후 인증코드가 포함된 메일이 전송됩니다.',
+                })
+            })
+    }
+
+    const handlerCheck = () => {
+        if (auth == temp) {
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
+                // axios.post(`http://192.168.0.47:8080/emailConfirm/${userEmail}`)
+                .then((r) => {
+                    Swal.fire({
+                        title: '인증이 성공적으로 완료되었습니다.',
+                        text: "가입절차를 마무리 해주세요.",
+                        icon: 'success',
+                        confirmButtonColor: '#3c3e58'
+                        // confirmButtonColor: '#3085d6'
+                    })
+                })
+        } else {
+            Swal.fire({
+                title: '인증코드가 일치하지 않습니다.',
+                text: "입력하신 내용을 다시 확인해주세요.",
+                icon: 'error',
+            })
+        }
+    }
+
     const handlerChangeName = e => {
         setName(e.target.value);
     };
-    const handlerChangeUserId = e => {
 
+    const handlerChangeUserId = e => {
         setUserId(e.target.value);
     };
+
     const handlerChangePassword = e => {
         setPassword(e.target.value);
     };
-    const handlerChangeConfrimPassword = e => {
-        if (e.target.value === userPassword) {
-            setConfirmPassword(e.target.value)
-            setConfirmMessage(null);
-        } else {
-            setConfirmPassword(e.target.value);
-            setConfirmMessage('비밀번호가 일치하지 않습니다.')
+
+    const handlerChangeConfirmId = e => {
+        if (!/^[a-zA-Z0-9]{8,16}$/.test(userId)) {
+            setConfirmIdMessage("아이디 형식이 일치하지 않습니다")
         }
     };
+
+
+    const handlerChangeConfirmPassword = e => {
+        if (e.target.value === userPassword
+            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
+            setConfirmPassword(e.target.value)
+            setPassword(userPassword);
+            // setPWmessage(null);
+            setConfirmMessage(null);
+        } else if (e.target.value !== userPassword
+            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
+            setConfirmPassword(e.target.value);
+            setConfirmMessage('비밀번호가 일치하지 않습니다.')
+        } else {
+            setConfirmPassword(e.target.value);
+            setConfirmMessage('비밀번호 형식이 올바르지 않습니다.')
+        }
+    };
+
     const changePhone = e => {
-        if (/^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/.test(e.target.value)) {
-            setPhone(e.target.value);
-            setPmassage(null);
+        let number = select + "-" + e.target.value;
+        if (/^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/.test(number)) {
+            setPhone(number);
+            setPmessage(null);
         } else {
             setPhone(e.target.value);
-            setPmassage('번호 형식이 올바르지 않습니다.');
+            setPmessage('번호 형식이 올바르지 않습니다.');
         }
+    };
+
+    const handleSelectLastEmail = (e) => {
+        setSelectEmail(e.target.value);
     };
 
     const handlerChangeEmail = e => {
-        if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(e.target.value)) {
-            setEmail(e.target.value);
-            setEmassage(null);
-        } else {
-            setEmail(e.target.value);
-            setEmassage('이메일 형식이 올바르지 않습니다.');
-        }
-
+        setFirst(e.target.value);
     };
 
 
-    // const dropDownRef = useRef();
-    // const [mailIdentify, setMailIdentify] = useState('');
-    // const mailAddress = ['naver.com' , 'daum.net', 'google.com']  // ['010', '011', '017', ...]
+    const [hidePassword, setHidePassword] = useState(true);
 
-    // const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
+    const [src, setSrc] = useState(UnLock);
 
+    const toggleHidePassword = () => {
+        setHidePassword(!hidePassword)
+        if (!hidePassword) {
+            setSrc(!UnLock);
+        } else {
+            setSrc(Locked);
+        }
+    }
 
+    const [hidePassword2, setHidePassword2] = useState(true);
 
-    //     <select className={style.signupinput} onChange={handleSelect}>
-    //                         <option value="" disabled selected>포지션 선택</option>
-    //                         <option value="작곡가">작곡가</option>
-    //                         <option value="연주자">연주자</option>
-    //                         <option value="작곡가 겸 연주자">작곡가 겸 연주자</option>
-    //                     </select>
-    // const handleSelect = (e) => {setSelect(e.target.value);};
+    const [src2, setSrc2] = useState(UnLock);
 
-
-
+    const toggleHidePassword2 = () => {
+        setHidePassword2(!hidePassword2)
+        if (!hidePassword2) {
+            setSrc2(!UnLock);
+        } else {
+            setSrc2(Locked);
+        }
+    }
 
     return (
         <>
@@ -141,106 +281,102 @@ const SignUpTest = ({ history, props }) => {
                     <div className={style.container}>
                         <div className={style.signUpContainer}>
                             <form className={style.form}>
-                                <h1 className={style.formH1}>회원가입</h1>
+                                <img className={style.BridgeBlackLogo} src={BridgeBlackLogo} alt='브릿지 로고'></img>
 
-                                <div className={style.infoBox}>
-                                    <input className={style.formInput} type="Id" placeholder="아이디" onChange={handlerChangeUserId} />
-                                    <input className={style.formInput} type="password" placeholder="비밀번호" onChange={handlerChangePassword} />
-                                    <input className={style.formInput} type="password" placeholder="비밀번호 확인" onChange={handlerChangeConfrimPassword} />
+                                <div className={style.basicBox}>
+                                    <div className={style.line_or}>
+                                        <span className={style.line_or_before} />
+                                        <span className={style.txt_or}>회원가입</span>
+                                        <span className={style.line_or_after} />
+                                    </div>
                                 </div>
 
-                                <div className={style.infoBox2}>
-                                    <input className={style.formInput} type="text" placeholder="이름" onChange={handlerChangeName} />
-                                    {/* <input className={style.formInput} type="text" placeholder="닉네임" onChange={handlerChangeNickName} /> */}
-                                    <input className={style.formInput} type="phoneNumber" placeholder="핸드폰 번호" onChange={changePhone} />
+                                <div className={style.idBox}>
+                                    <div className={style.basicBox2}>
+                                        <input className={style.idInputBox} type="Id" placeholder="아이디" onBlur={handlerChangeConfirmId} onChange={handlerChangeUserId} />
+                                        <button className={style.idCheckButton} onClick={userIdCheck} >ID 중복확인</button>
+                                        <div>
+                                            <span type="Id" name="Id" value={confirmId} onChange={(e) => {
+                                                setConfirmId(e.target.value)
+                                            }} />
+
+                                            {
+                                                confirmIdMessage != null && <div className={style.warningMessage}> {confirmIdMessage}</div>
+                                            }
+
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className={style.mailBox}>
-                                <div className="container1111">
-        <input className={style.dropdown} id="dropdown" type="checkbox" />
-        <label className={style.dropdownLabel} for="dropdown">
-          <div>CSS</div>
-          <FaAngleDown className={style.caretIcon} />
-        </label>
-        <div className={style.content}>
-          <ul>
-            <li>Class</li>
-            <li>Selectors</li>
-            <li>Media query</li>
-          </ul>
-        </div>
-      </div>
-                                    <input className={style.mailInput} type="email" placeholder="이메일" onChange={handlerChangeEmail} />
+                                <div className={style.passwordBox}>
 
-                                    <button className={style.loginButton} onClick={handlerOnClickForVerification}>인증코드 요청</button>
+                                    <label>
+                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={16} />
 
+                                        <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} />
+                                    </label>
+
+                                    <label>
+                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={16} />
+                                        <img type="Button" className={style.Locked} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
+                                    </label>
                                 </div>
 
-                                {/* <div ref={dropDownRef}>
-                                            <input onClick={() => setIsOpen(!isOpen)} type='button' value={mailIdentify} />
-                                            
-                                            {isOpen &&
-                                                <ul>
-                                                    {mailAddress.map((value, index) => (
-                                                        <MailDropDown key={index} value={value} setIsOpen={setIsOpen} setMailIdentify={setMailIdentify} isOpen={isOpen} />
-                                                    ))}
-                                                </ul>
-	                                        }
-                                        </div> */}<div className={style.infoBox2}>
-                                    <input className={style.codeInput} type="email" placeholder="인증코드 확인" onChange={handlerChangeEmail} />
-                                    {/* <button className={style.registrationButton} onClick={handlerOnClickForVerification}>확인 </button> */}
+                                <div className={style.warningBox}>
+                                    <span type="password" name="password" value={confirmPassword} className={style.txt_or} onChange={(e) => {
+                                        setConfirmPassword(e.target.value)
+                                    }} onBlur={handlerChangeConfirmPassword} />
+
+                                    {
+                                        confirmMessage != null ? <div className={style.pwWarningMessage}> {confirmMessage}</div>
+                                            : <div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+                                    }
                                 </div>
-                                {/* <input className={style.formInput} type="PINCODE" placeholder="인증번호를 입력하세요" onChange={changePhone} /> */}
-                               
+
+                                <div>
+                                    <input className={style.nameInput} type="text" placeholder="이름" onChange={handlerChangeName} />
+                                </div>
+
+                                <div className={style.NumberBox}>
+                                    <select className={style.selectNumberBox} onChange={handleSelectFrontNumber}>
+                                        <option value="010">010</option>
+                                        <option value="011">011</option>
+                                        <option value="016">016</option>
+                                        <option value="018">018</option>
+                                    </select>
+                                    <input className={style.NumberBoxInput} type="phoneNumber" placeholder="ex) 0000 - 0000" onBlur={changePhone} />
+                                </div>
+
+                                <div className={style.line_or}>
+                                    <span className={style.line_or_before} />
+                                    <span className={style.txt_or}>본인확인 이메일</span>
+                                    <span className={style.line_or_after} />
+                                </div>
+
+                                <div className={style.MailBox}>
+                                    <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
+                                    <select className={style.selectMailBox} value={selectEmail} onChange={handleSelectLastEmail}>
+                                        <option value="@bridge.com">bridge.com</option>
+                                        <option value="@naver.com">naver.com</option>
+                                        <option value="@gmail.com">gmail.com</option>
+                                        <option value="@daum.net">daum.net</option>
+                                    </select>
+                                </div>
+
+                                <button className={style.CodeButton} onClick={handlerAuth}>인증코드 요청</button>
+
+                                <div className={style.idBox}>
+                                    <input className={style.idInputBox} type="email" placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
+                                    <button className={style.idCheckButton} onClick={handlerCheck}>코드 인증</button>
+                                </div>
+
                                 <button className={style.registrationButton} onClick={handlerOnClick}>가입하기</button>
-
-                                {/* <span className={style.span} >or use your SNS account for registration</span> */}
-                                {/* <span className={style.span}>SNS 계정으로 간편가입</span> */}
-                                {/* <div>
-                                <KakaoLogin/>
-                                <NaverLogin/>
-                                <img type="button" className={style.sns} src={KakaotalkLogo} value="logo" onClick={KakaoLogin}/> 
-                                <img type="button" className={style.sns} src={NaverLogo} value="logo" onClick={NaverLogin}/> 
-                                </div> */}
-                            
-                            
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-        
-      
-    
-
-            {/* <div className='container clearfix' >
-                <div className={style.loginbackg}>
-                    <h1 className={style.login}>회원 가입</h1>
-
-                    <input className={style.signupinput} onChange={handlerChangeName} placeholder="이름을 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeNickName} placeholder="닉네임을 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeUserId} placeholder="아이디를 입력해주세요." />
-                    <input className={style.signupinput} onChange={handlerChangeEmail} placeholder="이메일을 입력해주세요." />
-                    <div>{Emassage}</div>
-
-                    <input className={style.signupinput2} onChange={handlerChangePassword} placeholder="비밀번호를 8자 이상 입력해주세요." />
-
-                    <input className={style.signupinput2} onChange={handlerChangeConfrimPassword} placeholder="비밀번호를 재입력해주세요." />
-                    <div >{confrimMessage}</div>
-                    <input className={style.signupinput2} onChange={changePhone} placeholder="전화번호를 입력해주세요." />
-                    <div>{Pmessage}</div>
-                    <br />
-                    <button className={style.loginbutton} onClick={handlerOnClick}>회원 가입</button>
-                    <p className={style.loginsns}>SNS로 가입하기</p>
-                  <div className={style.kakao}>  <KakaoLogin/></div>
-                    <div className={style.naver}><NaverLogin/></div>
-                </div>
-            </div> */}
-
-
-
+                </div >
+            </div >
         </>
-
     )
 }
 
