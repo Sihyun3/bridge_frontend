@@ -140,11 +140,7 @@ const Waveform = forwardRef((props, ref) => {
     wavesurfer.current.playPause();
   };
 
-<<<<<<< HEAD
-  const onVolumeChange = (e) => {
-=======
   const onVolumeChange = e => {
->>>>>>> a3b08b7ede82ae00b01280bdd878969c1387200c
     const { target } = e;
     const newVolume = +target.value;
 
