@@ -67,13 +67,15 @@ const PartnerDatail = ({ match }) => {
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`, { "userId1": userId, "userId2": data.userId })
             .then(res => {
                 console.log(res);
-                history.push(`/chatting`)
 
             })
             .catch(error => {
                 console.log(error);
-
+                console.log(process.env.REACT_APP_IP);
+                console.log(process.env.REACT_APP_PORT);
+                console.log(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`)
             })
+        history.push("/chatting")
     }
 
 
@@ -86,8 +88,8 @@ const PartnerDatail = ({ match }) => {
                     </div>
                 </Link>
                 <div className={style.writer}>
-                    <img className={style.writerimg} src={writer} />
-                    <p>{data.userId}</p>
+                    <Link to={`/profile/detail/${data.userId}`}> <img className={style.writerimg} src={writer} />
+                        <p>{data.userId}</p> </Link>
                 </div>
                 <div className={style.imgbox}>
                     <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.crPhoto}`} />

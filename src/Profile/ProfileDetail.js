@@ -50,7 +50,6 @@ function ProfileDetail({}) {
     return (
         <>
             <div className='box1'>
-                <h1>Profile</h1>
             </div>
             <div className='container clearfix'>
                 <div className={style.profile}>
@@ -98,14 +97,13 @@ function ProfileDetail({}) {
                     {reviewList.map(list => {
                         return(
                             <div className={style.reviewdetail}>
+                            {/* <p className={style.reviewtitle}>작업물 제목</p> */}
                             <p className={style.reviewcontents}>
                             {list.content}
                             </p>
                         </div>
                         )
                     })}
-               
-
                 </div>
             </div>
         </>

@@ -2,60 +2,59 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 import WaveSurfer from "wavesurfer.js";
 // import style from "./wave.module.css";
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
-
+import { Icon } from "@iconify/react";
 
 
 
 const Waveform = forwardRef((props, ref) => {
-  const color = props.color
-  useEffect(() => {
-    console.log(color)
-  }, [])
-  const formWaveSurferOptions = (ref) => ({
-    container: ref,
-
-
-
-    splitChannels: false,
-    splitChannelsOptions: {
-      overlay: false,
-
-      normalize: true,
-
-      filterChannels: [
-        3
-      ],
-
-
-
-      channelColors: {
-        0: color
-      }
-    },
-
-    // waveColor: "#eee",
-    // progressColor: "#67b3e2",
-    cursorColor: "OrangeRed",
-    barWidth: 5,
-    barRadius: 2,
-    responsive: true,
-    height: 100,
-    normalize: true,
-    partialRender: true,
-    interact: true,
-    plugins: [
-      CursorPlugin.create({
-        showTime: true,
-        opacity: 1,
-        customShowTimeStyle: {
-          'background-color': '#000',
-          color: '#fff',
-          padding: '2px',
-          'font-size': '10px'
-        }
-      })
-    ]
-  });
+    const color = props.color
+    useEffect(()=>{
+        console.log(color)
+    },[])
+    const formWaveSurferOptions = (ref) => ({
+        container: ref,
+      
+        
+      
+        splitChannels: false,
+        splitChannelsOptions: {
+          overlay: false,
+          
+          normalize: true,
+      
+          filterChannels: [
+                            3
+          ],
+      
+       
+        
+        channelColors: {
+            0: color
+        }},
+      
+        // waveColor: "#eee",
+        // progressColor: "#67b3e2",
+        cursorColor: "OrangeRed",
+        barWidth: 5,
+        barRadius: 2,
+        responsive: true,
+        height: 100,
+        normalize: true,
+        partialRender: true,
+        interact: true,
+        plugins: [
+          CursorPlugin.create({
+            showTime: true,
+            opacity: 1,
+            customShowTimeStyle: {
+              'background-color': '#000',
+              color: '#fff',
+              padding: '2px',
+              'font-size': '10px'
+            }
+        })
+        ]
+      });
 
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
@@ -80,13 +79,16 @@ const Waveform = forwardRef((props, ref) => {
   //import 해서 사용 //.current.함수 로 사용하기 위해 선언
   useImperativeHandle(ref, () => ({
     // 부모 컴포넌트에서 사용할 함수를 선언
-    PlayAll
+    PlayAll,handlePlayPause
   }))
-
+  // useHandle(ref , ()=>({
+  //   handlePlayPause
+  // }))
 
   function PlayAll() {
     setPlay(!playing);
     wavesurfer.current.playPause();
+    console.log("abc")
   }
 
   useEffect(() => {
@@ -140,11 +142,7 @@ const Waveform = forwardRef((props, ref) => {
     wavesurfer.current.playPause();
   };
 
-<<<<<<< HEAD
-  const onVolumeChange = (e) => {
-=======
   const onVolumeChange = e => {
->>>>>>> a3b08b7ede82ae00b01280bdd878969c1387200c
     const { target } = e;
     const newVolume = +target.value;
 
@@ -176,21 +174,21 @@ const Waveform = forwardRef((props, ref) => {
 
         {/* <span className={style.pauseTime}> {a}</span> */}
 
-        <div><button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>{" "}
-        <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div>
+        <div><button onClick={handlePlayPause}>{!playing ? <Icon icon="mdi:play" color="#6091eb" width="24" /> : <Icon icon="mdi:pause" color="#6091eb" width="24" />}</button>{" "}
+        <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span>
+        </div> 
 
-
+       
 
 
         <div id="waveform" ref={waveformRef} />
         {/* <p className ={style.explain} >{a}</p>  */}
 
-
-        <div className="controls">
+        
+        <div style={{float:'right'}}>
           {/* <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button> */}
           {/* <button onClick={test}>asdasd</button> */}
-          <label htmlFor="volume"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-            height="20" viewBox="0 0 576 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z" /></svg></label>
+          <label htmlFor="volume"><Icon icon="material-symbols:volume-down-rounded" color="#6091eb" width="18" /></label>
           {" "}
           <input
             type="range"
@@ -209,6 +207,6 @@ const Waveform = forwardRef((props, ref) => {
 
     </>
   );
-});
+}); 
 
 export default Waveform;
