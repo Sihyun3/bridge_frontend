@@ -11,7 +11,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
 
     const { naver } = window
     const NAVER_CLIENT_ID = '9i6fzGFoSxccJUEKZ46S'
-    const NAVER_CALLBACK_URL = 'http://localhost:3000/signup'
+    const NAVER_CALLBACK_URL = `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}:3000/signup`
 
     const initializeNaverLogin = () => {
         const naverLogin = new naver.LoginWithNaverId({

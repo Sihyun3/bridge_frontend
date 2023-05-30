@@ -57,7 +57,7 @@ const MusicSplit = () => {
     axios({
       method: 'POST',
 
-      url: `http://13.124.125.68:8080/api/insertMusicForSplit/`,
+      url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertMusicForSplit/`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
@@ -77,7 +77,7 @@ const MusicSplit = () => {
     e.preventDefault();
     console.log(musicUUID);
     //
-    axios.get(`http://13.124.125.68:8080/api/splitedMusic/${musicUUID}`)
+    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;
         if (fileNames.length === 0) {

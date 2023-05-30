@@ -31,7 +31,7 @@ const KakaoLogin = ({ }) => {
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
 
         Kakao.Auth.authorize({
-            redirectUri: 'http://localhost:3000/login'
+            redirectUri: `http://${process.env.REACT_APP_IP}:80/login`
         });
     };
 
@@ -49,7 +49,7 @@ const KakaoLogin = ({ }) => {
                 'https://kauth.kakao.com/oauth/token', {
                 grant_type: 'authorization_code',                   // 고정
                 client_id: JAVASCRIPT_APP_KEY,                      // 앱 REST API 키
-                redirect_uri: 'http://localhost:3000/login',   // 인가 코드가 리다이렉트된 URI
+                redirect_uri: `http://${process.env.REACT_APP_IP}:80/login`,   // 인가 코드가 리다이렉트된 URI
                 code: code                                          // 인가 코드 받기 요청으로 얻은 인가 코드
             }, {
                 headers: {
