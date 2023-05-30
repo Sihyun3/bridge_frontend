@@ -19,7 +19,7 @@ const ToastEditor = ({title}) => {
     // const handlerChangeContents = e => setContents(e.target.value);
     const save = () => {
         const files = editorRef.current.getInstance().getHTML();
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/write`,
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/write`,
         { title, 'contents':files },  {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`}}
         )              // 요청 본문을 통해서 서버로 전달할 값
             .then(response => {

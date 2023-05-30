@@ -22,7 +22,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, han
     const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/content/${pcIdx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/content/${pcIdx}`)
             .then(response => {
                 console.log(response);
                 // setContentList({
@@ -81,7 +81,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, han
 
         axios({
             method: 'PUT',
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/update/${pcIdx}`,
+            url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/update/${pcIdx}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         })

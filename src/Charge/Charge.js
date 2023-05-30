@@ -31,7 +31,7 @@ const Charge = ({ match }) => {
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
         console.log(">>>>>>>>>>>>>>" + userId);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${userId}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${userId}`)
             .then(response => {
                 console.log(response.data);
                 setCurrentPoint(response.data.userPoint);
@@ -60,7 +60,7 @@ const Charge = ({ match }) => {
 
     const handleCharge = (e) => {
         e.preventDefault();
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/doCharge/${userId}`, { userId, "money": chargePoint })
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/doCharge/${userId}`, { userId, "money": chargePoint })
             .then(response => {
                 console.log(response.data);
             })
@@ -73,7 +73,7 @@ const Charge = ({ match }) => {
     const handleKakaopay = (e) => {
         e.preventDefault();
         //sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
                 console.log(response.data);
                 window.location.href = response.data.next_redirect_pc_url;     
@@ -84,7 +84,7 @@ const Charge = ({ match }) => {
     }
 
     // const test = () => {
-    //     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`, { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+    //     axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/test`, { header: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
     //         .then(r => {
     //             console.log(r);
     //         })

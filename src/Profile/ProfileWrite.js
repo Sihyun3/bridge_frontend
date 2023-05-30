@@ -102,7 +102,7 @@ const ProfileWrite = () => {
 
         axios({
             method: 'POST',
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertProfile/${userId}`,
+            url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertProfile/${userId}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         })

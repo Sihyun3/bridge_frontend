@@ -38,7 +38,7 @@ const PaymentList = ({ match }) => {
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/${decode_token.sub}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/${decode_token.sub}`)
             .then(res => {
                 setData(res.data);
                 setCurrentDate(new Date());
@@ -50,7 +50,7 @@ const PaymentList = ({ match }) => {
 
     const handleAll = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/${userId}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/${userId}`)
             .then(res => {
                 setData(res.data);
                 setFilteredDatas(res.data);
@@ -62,7 +62,7 @@ const PaymentList = ({ match }) => {
 
     const handleDeal = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/pay/deal/${userId}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/pay/deal/${userId}`)
             .then(res => {
                 setData(res.data);
                 setFilteredDatas(res.data);
@@ -74,7 +74,7 @@ const PaymentList = ({ match }) => {
 
     const handleCharge = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/pay/charge/${userId}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/pay/charge/${userId}`)
             .then(res => {
                 setData(res.data);
                 setFilteredDatas(res.data);

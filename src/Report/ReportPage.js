@@ -37,7 +37,7 @@ function ReportPage({ match }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail, "reportReason": select })
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/report/${reportedUserId}`, { userId, reportedUserId, reportReasonDetail, "reportReason": select })
             .then(response => {
                 Swal.fire({
                     icon: 'info',

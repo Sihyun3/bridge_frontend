@@ -35,11 +35,11 @@ const DoingDetail = ({ match }) => {
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
             .then(res => {
                 console.log("************" + res.data);
                 setList(res.data);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cidx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cidx}`)
                     .then(r => {
                         // console.log(">>>>" + r.data);
                         setProgress(r.data[0].progress);
@@ -68,11 +68,11 @@ const DoingDetail = ({ match }) => {
         let datas = { "cdComment": inputText, userId, "cIdx": cidx };
         formData.append("data", new Blob([JSON.stringify(datas)], { type: "application/json" }));
 
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommissionDetail/${cidx}`, formData)
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommissionDetail/${cidx}`, formData)
             .then((response) => {
                 // console.log("업로드 성공>>>>>>" + response.data.uuid);
                 setUuid(response.data.uuid);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
                         console.log(">>>>" + res.data);
                         setList(res.data);
@@ -118,14 +118,14 @@ const DoingDetail = ({ match }) => {
 
         axios
             .put(
-                `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/editCommissionDetail/${cidx}/${cdIdx}`,
+                `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/editCommissionDetail/${cidx}/${cdIdx}`,
                 formData
             )
             .then((res) => {
                 console.log("수정 성공");
                 setEditIdx(-1);
                 setMusic([]);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
                         setList(res.data);
                     })
@@ -140,11 +140,11 @@ const DoingDetail = ({ match }) => {
 
 
     const handleDel = (cdIdx) => {
-        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionDetail/${cdIdx}`)
+        axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionDetail/${cdIdx}`)
             .then(res => {
                 console.log("삭제 성공");
                 setEditIdx(-1);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
                         setList(res.data);
                     })
@@ -158,11 +158,11 @@ const DoingDetail = ({ match }) => {
     };
 
     const handleFileDel = (cdIdx) => {
-        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionFile/${cdIdx}`)
+        axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionFile/${cdIdx}`)
             .then(res => {
                 console.log("파일 삭제 성공");
                 setEditIdx(-1);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
                         setList(res.data);
                     })
@@ -176,7 +176,7 @@ const DoingDetail = ({ match }) => {
     }
 
     const handleEnd = () => {
-        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/commissionEnd/${cidx}`)
+        axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/commissionEnd/${cidx}`)
             .then(r => {
                 console.log("완료변경")
                 window.location.reload();
@@ -190,10 +190,10 @@ const DoingDetail = ({ match }) => {
     }
 
     const submitComment = (cdIdx) => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insert/CommissionComment/${cdIdx}`, { userId, "ccContents": comment, cdIdx })
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insert/CommissionComment/${cdIdx}`, { userId, "ccContents": comment, cdIdx })
             .then(r => {
                 console.log("댓글>>>>>>>>>>" + r.data);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
                     .then(r => {
                         setCommentList(r.data);
                         setOpen(true);
@@ -207,7 +207,7 @@ const DoingDetail = ({ match }) => {
     const [commentIdx, setCommentIdx] = useState('');
 
     const handleOpen = (cdIdx) => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
             .then(r => {
                 setCommentList(r.data);
                 setOpen(true);
@@ -320,7 +320,7 @@ const DoingDetail = ({ match }) => {
                                                             {cdFile && (
                                                                 <>
                                                                     <Waveform
-                                                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${cdFile}`}
+                                                                        src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${cdFile}`}
                                                                     />
                                                                     {/* <button onClick={() => handleFileDel(cdIdx)}>파일 삭제</button> */}
                                                                 </>

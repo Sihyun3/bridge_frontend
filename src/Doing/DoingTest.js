@@ -27,7 +27,7 @@
 //         const decode_token = jwt_decode(token);
 //         setUserId(decode_token.sub);
 
-//         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${decode_token.sub}`)
+//         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${decode_token.sub}`)
 //             .then(res => {
 //                 setData(res.data);
 //                 console.log("2222222222" + data.progress)
@@ -38,7 +38,7 @@
 //     }, []);
 
 //     const handleDetail = cidx => {
-//         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
+//         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
 //             .then(res => {
 //                 console.log(">>>>>>>>>>>" + res.data);
 //                 setDetail(res.data);
@@ -52,7 +52,7 @@
 
 //     const handleUpload = cidx => {
 //         console.log(">>>>>>>>>>>" + cidx)
-//         // axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommissionDetail/${cidx}`)
+//         // axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommissionDetail/${cidx}`)
 //     }
 
 //     return (
@@ -67,7 +67,7 @@
 //                     if (index < profileImg.length) {
 //                         return (
 //                             <div key={index} className={style.doinglist}>
-//                                 {/* <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg[index]}.jpg`} /> */}
+//                                 {/* <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg[index]}.jpg`} /> */}
 //                                 <button onClick={() => handleDetail(data.cidx)}>{data.userId2}</button>
 //                                 {/* <button>삭제</button> */}
 //                                 <hr />
@@ -76,7 +76,7 @@
 //                         );
 //                     } else {
 //                         axios
-//                             .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${data.userId2}`)
+//                             .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${data.userId2}`)
 //                             .then(res => {
 //                                 setProfileImg(prevUsers => [...prevUsers, res.data.profile[0].profileImg]);
 //                             })

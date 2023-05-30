@@ -47,8 +47,8 @@
 //         const token = sessionStorage.getItem('token');
 //         const decode_token = jwt_decode(token);
 //         setPayment(decode_token.sub);
-//         axios.get(`http://localhost:8080/api/payment/detail/${payment}`) //백엔드도 여기처럼 다시 바꿔야함
-//             // ,(`http://localhost:8080/api/payment/${userProducer}`)
+//         axios.get(`https://localhost:8080/api/payment/detail/${payment}`) //백엔드도 여기처럼 다시 바꿔야함
+//             // ,(`https://localhost:8080/api/payment/${userProducer}`)
 //             .then(response => {
 //                 console.log(response.data);
 //                 setUsepoint(response.data);
@@ -152,7 +152,7 @@
 //     //     const token = sessionStorage.getItem('token');
 //     //     const decode_token = jwt_decode(token);
 //     //     setUserId(decode_token.sub);
-//     //     axios.get(`http://localhost:8080/api/chargePoint/${userId}`)
+//     //     axios.get(`https://localhost:8080/api/chargePoint/${userId}`)
 //     //         .then(response => {
 //     //             console.log(response.data);
 //     //             setCurrentPoint(response.data.userPoint);

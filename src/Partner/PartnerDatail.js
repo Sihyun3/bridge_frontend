@@ -30,7 +30,7 @@ const PartnerDatail = ({ match }) => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerDetail/${crIdx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerDetail/${crIdx}`)
             .then((response) => {
                 setData(response.data.partnerList);
                 setTag(response.data.partnerTag);
@@ -42,7 +42,7 @@ const PartnerDatail = ({ match }) => {
 
     const handleDelete = () => {
         if (userId == data.userId || userId == 'admin') {
-            axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
+            axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/deletePartner/${crIdx}`)
                 .then((response) => {
                     Swal.fire(
                         'Success!',
@@ -64,7 +64,7 @@ const PartnerDatail = ({ match }) => {
     }
 
     const handleChat = (e) => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`, { "userId1": userId, "userId2": data.userId })
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`, { "userId1": userId, "userId2": data.userId })
             .then(res => {
                 console.log(res);
                 history.push(`/chatting`)
@@ -90,7 +90,7 @@ const PartnerDatail = ({ match }) => {
                     <p>{data.userId}</p>
                 </div>
                 <div className={style.imgbox}>
-                    <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.crPhoto}`} />
+                    <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.crPhoto}`} />
                 </div>
                 <div className={style.content}>
                     <div className={style.title}> <h2>{data.crTitle}</h2>

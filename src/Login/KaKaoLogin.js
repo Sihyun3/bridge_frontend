@@ -8,7 +8,7 @@ import KakaotalkLogo from '../Login/KakaotalkLogo.png';
 // const KakaoLogin = ({history}) => {
 
 // // const REST_API_KEY = "~~";
-// // const REDIRECT_URI =  "http://localhost:3000/auth/kakao/callback";
+// // const REDIRECT_URI =  "https://localhost:3000/auth/kakao/callback";
 
 // // export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
@@ -31,7 +31,7 @@ const KakaoLogin = ({ }) => {
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
 
         Kakao.Auth.authorize({
-            redirectUri: `http://${process.env.REACT_APP_IP}:80/login`
+            redirectUri: `https://${process.env.REACT_APP_IP}:80/login`
         });
     };
 
@@ -49,7 +49,7 @@ const KakaoLogin = ({ }) => {
                 'https://kauth.kakao.com/oauth/token', {
                 grant_type: 'authorization_code',                   // 고정
                 client_id: JAVASCRIPT_APP_KEY,                      // 앱 REST API 키
-                redirect_uri: `http://${process.env.REACT_APP_IP}:80/login`,   // 인가 코드가 리다이렉트된 URI
+                redirect_uri: `https://${process.env.REACT_APP_IP}:80/login`,   // 인가 코드가 리다이렉트된 URI
                 code: code                                          // 인가 코드 받기 요청으로 얻은 인가 코드
             }, {
                 headers: {
@@ -86,8 +86,8 @@ const KakaoLogin = ({ }) => {
                             sessionStorage.setItem('email', kakao_account.email);
                             sessionStorage.setItem('accesstoken', accessToken);
 
-                            // axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userNickName": kakao_account.profile.nickname,
-                            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userName": kakao_account.profile.name,
+                            // axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userNickName": kakao_account.profile.nickname,
+                            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userName": kakao_account.profile.name,
 
                                     'userEmail' : kakao_account.email })
                                 .then((response) => {

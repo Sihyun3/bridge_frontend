@@ -26,7 +26,7 @@ const DoingList = () => {
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${decode_token.sub}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${decode_token.sub}`)
             .then((res) => {
                 setUserList(res.data);
             })
@@ -41,7 +41,7 @@ const DoingList = () => {
         userList.forEach((list) => {
             if (userId !== list.userId2) {
                 axios
-                    .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId2}`)
+                    .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId2}`)
                     .then((r) => {
                         console.log("........." + r.data.profile);
                         profiles.push(r.data.profile);
@@ -52,7 +52,7 @@ const DoingList = () => {
                     });
             } else {
                 axios
-                    .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId1}`)
+                    .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId1}`)
                     .then((r) => {
                         console.log("........." + r.data.profile);
                         profiles.push(r.data.profile);
@@ -66,15 +66,15 @@ const DoingList = () => {
     }, [userList, userId]);
 
     const handleListDel = cIdx => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cIdx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cIdx}`)
             .then(r => {
                 // console.log("진행상황 조회>>>>" + r.data[0].progress)
                 // setProgress(r.data[0].progress)
                 if (r.data[0].progress == 1) {
-                    axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionList/${cIdx}`)
+                    axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionList/${cIdx}`)
                         .then(r => {
                             console.log("목록에서 삭제");
-                            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${userId}`)
+                            axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionList/${userId}`)
                                 .then(res => {
                                     setUserList(res.data);
                                 })
@@ -108,7 +108,7 @@ const DoingList = () => {
 
                                 <img
                                     key={index}
-                                    src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${img[0].profileImg}.jpg`}
+                                    src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${img[0].profileImg}.jpg`}
                                 />
 
                             );

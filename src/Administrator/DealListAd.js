@@ -52,7 +52,7 @@ const DealListAd = () => {
             })
             history.push(`/`)
           }
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
             .then(res => {
                 setData(res.data);
                 setCurrentDate(new Date());
@@ -66,7 +66,7 @@ const DealListAd = () => {
 
     const handleAll = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payListAll`)
             .then(res => {
                 setData(res.data);
                 setFilteredDatas(res.data);
@@ -78,7 +78,7 @@ const DealListAd = () => {
 
     const handleDeal = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/deal`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/deal`)
             .then(res => {
                 console.log(`거래내역`);
                 setData(res.data);
@@ -91,7 +91,7 @@ const DealListAd = () => {
 
     const handleCharge = (e) => {
         e.preventDefault();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/charge`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/charge`)
             .then(res => {
                 console.log(`충전내역`);
                 setData(res.data);

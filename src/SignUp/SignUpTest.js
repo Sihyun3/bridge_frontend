@@ -59,7 +59,7 @@ const SignUpTest = ({ history, props }) => {
         e.preventDefault();
         if (confirmMessage == null && Pmessage == null && Emessage == null && userId != null && confirmIdMessage != null
         ) {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/regist`, {
                 "userId": userId, "userPassword": userPassword, "userName": userName, "userEmail": userEmail, "userPhoneNumber": userPhoneNumber
             })
                 .then(response => {
@@ -109,7 +109,7 @@ const SignUpTest = ({ history, props }) => {
             return;
         }
 
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
             .then(response => {
                 const data = response.data;
                 if (data === 1) {
@@ -148,8 +148,8 @@ const SignUpTest = ({ history, props }) => {
 
 
     const handlerAuth = () => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
-            // axios.post(`http://192.168.0.47:8080/emailConfirm/${userEmail}`)
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
+            // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
             .then((r) => {
                 console.log(r.data)
                 setAuth(r.data)
@@ -172,8 +172,8 @@ const SignUpTest = ({ history, props }) => {
 
     const handlerCheck = () => {
         if (auth == temp) {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
-                // axios.post(`http://192.168.0.47:8080/emailConfirm/${userEmail}`)
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
+                // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
                 .then((r) => {
                     Swal.fire({
                         title: '인증이 성공적으로 완료되었습니다.',

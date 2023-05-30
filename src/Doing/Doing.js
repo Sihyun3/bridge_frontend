@@ -120,12 +120,12 @@
 //         setUserId1(userId);
 //         console.log(decode_token);
 //         console.log(userId);
-//         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${decode_token.sub}`,
+//         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/projectList/${decode_token.sub}`,
 //             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
 //             .then((response) => {
 //                 console.log(response);
 //                 setListArray(response.data.map((data) => {
-//                     const img = `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}`;
+//                     const img = `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}`;
 //                     return ({
 //                         pdNumber: data.pdIdx,
 //                         userId1: data.userId1,
@@ -177,12 +177,12 @@
 
 //         console.log (userId1);
 //         console.log(partnerLet1);
-//         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${partnerLet1}`,
+//         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/paylist/${userId1}/${partnerLet1}`,
 //             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
 //             .then((response) => {
 //                 console.log(response);
 //                 console.log(response.data.profileImg);
-//                 const img = `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${response.data.profileImg}`;
+//                 const img = `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${response.data.profileImg}`;
 //                 setPayList({
 //                     sender: response.data.userId1,
 //                     receiver: response.data.userId2,
@@ -197,12 +197,12 @@
 
 //         setPdIdx(pdNumber);
 //         console.log(pdIdx);
-//         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdNumber}`
+//         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/${pdNumber}`
 //         )
 //             .then(response => {
 //                 console.log(response);
 //                 setContentList(response.data.map((data) => {
-//                     const img = `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}`;
+//                     const img = `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}`;
 //                     return ({
 //                         pcNumber: data.pcIdx,
 //                         content: data.pcContent,
@@ -275,7 +275,7 @@
 //     }
 //     const CommentSet = (props) => {
 
-//         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/${props}`,
+//         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/${props}`,
 //             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
 //             .then((response) => {
 //                 console.log(response);
@@ -305,7 +305,7 @@
 
 //             return;
 //         } else {
-//             axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/delete/${pcIdx}`)
+//             axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/delete/${pcIdx}`)
 //                 .then(response => {
 //                     console.log(response);
 //                     if (response.data === "Y") {
@@ -332,7 +332,7 @@
 
 //             return;
 //         } else {
-//             axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/delete/${pdcIdx}`)
+//             axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/delete/${pdcIdx}`)
 //                 .then(response => {
 //                     if (response.data == 1) {
 //                         alert("정상적으로 삭제되었습니다.");
@@ -403,7 +403,7 @@
 //                     </div>
 //                 </div>
 //                 {contentList && contentList.map((value, index) => {
-//                     const download = `http://localhost:8080/api/bridge/partnerdetail/download/${value.file}`;
+//                     const download = `https://localhost:8080/api/bridge/partnerdetail/download/${value.file}`;
 //                     return (
 //                         <div className={style.contentBox}>
 //                             <div className={style.contentTop}>
@@ -427,7 +427,7 @@
 //                                 <div className={style.waveForm}>
 //                                     {value.uuid != null &&
 //                                         <Waveform
-//                                             src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${value.uuid}`}
+//                                             src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${value.uuid}`}
 //                                         />}
 //                                 </div>
 //                             </div>

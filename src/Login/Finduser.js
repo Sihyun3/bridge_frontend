@@ -19,7 +19,7 @@ export default function Finduser({ match }) {
 
     const handlerAuth = () => {
         if (idx == 1) {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/emailid/${email}/${userId}`)
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/emailid/${email}/${userId}`)
                 .then((r) => {
                     if (r.data == 0) {
                         Swal.fire({
@@ -38,7 +38,7 @@ export default function Finduser({ match }) {
                     return;
                 })
         }
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${email}`)
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${email}`)
             .then((r) => {
                 console.log(r.data)
                 setAuth(r.data)
@@ -59,7 +59,7 @@ export default function Finduser({ match }) {
 
     const handlerCheck = () => {
         if (auth == temp) {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/findid/${email}`)
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/findid/${email}`)
                 .then((r) => {
                     setData("회원님의 아이디는 " + r.data + "입니다.");
                 })
@@ -83,7 +83,7 @@ export default function Finduser({ match }) {
     }
     const handlerChange = () => {
         if (auth == temp) {
-            axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/findPassword/${email}/${password}`)
+            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/findPassword/${email}/${password}`)
                 .then((r) => {
                     Swal.fire(
                         'Success!',

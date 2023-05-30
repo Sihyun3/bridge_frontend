@@ -14,7 +14,7 @@ const Payment = () => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${decode_token.sub}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${decode_token.sub}`)
             .then(response => {
                 console.log(response.data);
                 setCurrentPoint(response.data.userPoint);

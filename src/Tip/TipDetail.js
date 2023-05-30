@@ -32,7 +32,7 @@ const TipDetail = ({ match }) => {
         const decode = jwtDecode(token);
         setUser(decode.sub);
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
             .then(r => {
                 setData(r.data.tipDetail);
                 setComments(r.data.commentsList);
@@ -49,12 +49,12 @@ const TipDetail = ({ match }) => {
                 text: '제한된 글자수에 맞게 다시 작성해주세요.'
             })
         } else {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
                 { "tbIdx": tb_idx, "tbcComments": temp },
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
             ).then(() => {
                 console.log("asdasdasd")
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
                     .then(r => {
                         console.log(r.data)
                         setComments(r.data)
@@ -67,7 +67,7 @@ const TipDetail = ({ match }) => {
 
     const handlerdelete = () => {
         if (user == data.userId || user == 'admin') {
-            axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
+            axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
                 .then(() => {
                     Swal.fire(
@@ -95,7 +95,7 @@ const TipDetail = ({ match }) => {
         }
     }
     const handlerHeart = () =>{
-        axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/heart/${tb_idx}`)
+        axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/heart/${tb_idx}`)
         .then((r)=>{
             setData({...data, tbHeart:data.tbHeart+1})
         }).catch(()=>{

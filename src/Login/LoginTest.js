@@ -19,7 +19,7 @@ const LoginTest = ({ setIsLogin }) => {
     const handlerOnClick = e => {
         e.preventDefault();
         setCookie('rememberUserId', userId);
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`,
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`,
             { "userId": userId, "userPassword": userPassword })
             .then(response => {
                 if (response.data.startsWith(0)) {

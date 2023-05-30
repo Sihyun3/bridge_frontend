@@ -23,7 +23,7 @@ export default function TipEdit({ match }) {
             history.push('/login')
             return;
         }
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/0`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/0`)
             .then(r => {
                 setData(r.data.tipDetail);
                 setTitle(r.data.tipDetail.tbTitle);

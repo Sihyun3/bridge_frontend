@@ -53,13 +53,13 @@ const JamWrite = () => {
 
         axios({
             method: 'POST',
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertjam`,
+            url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertjam`,
             headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${token}` },
             data: formData
         }).then((r) => {
             axios({
                 method: 'POST',
-                url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${r.data}`,
+                url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${r.data}`,
                 headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${token}` },
                 data: formData1
             })

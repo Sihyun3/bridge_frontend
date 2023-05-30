@@ -43,7 +43,7 @@ const JamDetail = ({ match }) => {
             history.push('/login')
             return;
         }
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
                 console.log(response);
                 setData(response.data.music);
@@ -64,7 +64,7 @@ const JamDetail = ({ match }) => {
         formData.append("data", new Blob([JSON.stringify(datas)], { type: "application/json" }))
         axios({
             method: 'POST',
-            url: `http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${cIdx}`,
+            url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertmusic/${cIdx}`,
             headers: { 'Content-Type': 'multipart/form-data;', 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
             data: formData
         }).then((response) => {
@@ -106,7 +106,7 @@ const JamDetail = ({ match }) => {
             return;
         }
 
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertComments/${cIdx}`, { "ccComments": comment },
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
                 setInsert(insert + 1);
@@ -123,7 +123,7 @@ const JamDetail = ({ match }) => {
 
     const handlerClickDelete = (e) => {
         e.preventDefault();
-        axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
+        axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/CommentsDelete/${e.target.value}`)
             .then(response => {
                 if (response.data === 1) {
                     setInsert(insert + 1);
@@ -152,7 +152,7 @@ const JamDetail = ({ match }) => {
                 <div className={style.title}>
                     <div className={style.imgbox}>
                         {/* 여기 수정해야됨 */}
-                        {/* <img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${info.cphoto}.jpg`}></img> */}
+                        {/* <img className={style.img} src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${info.cphoto}.jpg`}></img> */}
 
                         <div>
                             <h1>{info.ctitle} </h1>
@@ -194,7 +194,7 @@ const JamDetail = ({ match }) => {
                                     <Waveform
                                         data={musicInfo}
                                         key={musicInfo.musicUUID}
-                                        src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
+                                        src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${musicInfo.cmMusic}`}
                                         ref={(elem) => (child.current[index] = elem)}
                                     />
                                     {musicInfo.musicTitle}

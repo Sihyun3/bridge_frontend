@@ -47,7 +47,7 @@ const Chatting = ({ match }) => {
             return;
         }
         connect();
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(r => {
                 setChatList(r.data.chatting)
                 setSender(r.data.sender)
@@ -65,7 +65,7 @@ const Chatting = ({ match }) => {
     };
 
     const chatroom = (props) => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chat/${props}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chat/${props}`)
             .then(response => {
                 setMessage(response.data.messagelist);
                 setRoomIdx(response.data.chatting.roomIdx)
@@ -95,7 +95,7 @@ const Chatting = ({ match }) => {
     const handleHand = () => {
    
                 history.push(`/partner/payment/${reciver}/`)
-            //     axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
+            //     axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
             //     .then(r => {
             // })
             // .catch(e => { console.log(e) })

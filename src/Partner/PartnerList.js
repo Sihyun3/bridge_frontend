@@ -44,12 +44,12 @@ const PartnerList = () => {
       return;
     }
     axios
-      .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
+      .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
         console.log(response.data);
         setPartnerList(response.data.partnerList);
         axios
-          .get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)
+          .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)
           .then((response) => {
             setPartnerTag(response.data.partnerTag);
           })
@@ -113,7 +113,7 @@ const PartnerList = () => {
                 return (
                   <div key={index} className={style.block}>
                     <div className={style.imgbox}>
-                      <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
+                      <Link to={`/partner/detail/${partnerList.crIdx}`}><img className={style.img} src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${partnerList.crPhoto}`} alt="" /></Link>
                     </div>
                     <Link to={`/partner/detail/${partnerList.crIdx}`}><p className={style.title}>{partnerList.crTitle}</p></Link>
                     <p className={style.date}>

@@ -24,7 +24,7 @@ const Review = ({ match }) => {
     }, [])
 
     const handleSubmit = () => {
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertReview/${userId2}`, { content })
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertReview/${userId2}`, { content })
             .then((r) => {
                 Swal.fire(
                     'Success!',

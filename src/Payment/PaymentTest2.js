@@ -37,14 +37,14 @@ function PaymentTest2({ match }) {
         const decode_token = jwt_decode(token);
         setUser1(decode_token.sub);
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decode_token.sub}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decode_token.sub}`)
             .then(response => {
                 setUsepoint(response.data);
                 setClients(decode_token.sub);
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
                     .then((r) => { setProfile1(r.data.profile[0]); console.log("profile1>>" + r.data.profile[0]) })
                     .catch((e) => { console.log(e) })
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${producer}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${producer}`)
                     .then((r) => { setProfile2(r.data.profile[0]); console.log("profile2>>" + r.data.profile[0]) })
                     .catch((e) => { console.log(e) })
             })
@@ -55,7 +55,7 @@ function PaymentTest2({ match }) {
 
     const handlerOnClickToPay = (e) => {
         if (total == 0 && usepoint >= total) {
-            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/doPayment/${producer}`,
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/doPayment/${producer}`,
                 { "clients": user1, "producer": producer, "usepoint": pointBox, "totalCost": total, downpayment })
                 .then(response => {
                     Swal.fire(
@@ -63,7 +63,7 @@ function PaymentTest2({ match }) {
                         '결제가 완료되었습니다.',
                         'success'
                     )
-                    axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${producer}`, { "userId1": user1,"coMoney" : pointBox })
+                    axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${producer}`, { "userId1": user1,"coMoney" : pointBox })
                         .then(r => {
                             history.push(`/partner/doing/`);
 
@@ -128,14 +128,14 @@ function PaymentTest2({ match }) {
                     <div className={style.profile}>
                         <div className={style.request}>
                             <div className={style.requestText}>{clients}</div>
-                            <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profile1.profileImg}.jpg`} className={style.requestImg}></img>
+                            <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profile1.profileImg}.jpg`} className={style.requestImg}></img>
                         </div>
 
                         <img src={arrow} className={style.arrowImg}></img>
 
                         <div className={style.response}>
                             <div className={style.responseText}>{producer}</div>
-                            <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profile2.profileImg}.jpg`} className={style.responseImg}></img>
+                            <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profile2.profileImg}.jpg`} className={style.responseImg}></img>
                         </div>
                     </div>
 

@@ -16,7 +16,7 @@ SwiperCore.use([Autoplay])	// 추가
 const Main = () => {
     const [data, setData] = useState([])
     useEffect(() => {
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
             .then((r) => {
                 setData(r.data)
                 console.log(r.data)

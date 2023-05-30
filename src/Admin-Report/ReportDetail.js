@@ -39,19 +39,19 @@ function ReportDetail({ match }) {
       })
       history.push(`/`)
     }
-    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportDetail/${reportIdx}`)
+    axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openReportDetail/${reportIdx}`)
       .then(response => {
         setReportReason(response.data.reportReason);
         setReportReasonDetail(response.data.reportReasonDetail);
         setUserId(response.data.userId);
         setReportedUserId(response.data.reportedUserId);
 
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/reportCount/${response.data.reportedUserId}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/reportCount/${response.data.reportedUserId}`)
           .then(response => {
             setReportCount(response.data);
           })
           .catch(error => {
-            // console.log(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/reportCount/${reportedUserId}`);
+            // console.log(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/reportCount/${reportedUserId}`);
             console.log(error);
           })
       })
@@ -61,7 +61,7 @@ function ReportDetail({ match }) {
   }, []);
 
   const handleReport = () => {
-    axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/handleReport/${userId}`, { "userId": reportedUserId })
+    axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/handleReport/${userId}`, { "userId": reportedUserId })
       .then(response => {
         Swal.fire({
           icon: 'info',

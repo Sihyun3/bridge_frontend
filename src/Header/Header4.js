@@ -33,7 +33,7 @@ function Header4({ isLogin, setIsLogin }) {
             // console.log(decodedToken)
 
 
-            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decodedToken.sub}`)
+            axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decodedToken.sub}`)
                 .then(res => {
                     // console.log(">>>>>>>>>" + res.data);
                     setUserPoint(res.data);
@@ -74,6 +74,7 @@ function Header4({ isLogin, setIsLogin }) {
                                             <Link to="/partner/doing">작업페이지</Link>
                                             <Link to="/chatting">채팅</Link>
                                             <a><button className={style.logout} onClick={handlerOnLogoutClick} >LOGOUT</button></a>
+
 
 
                                         </div>

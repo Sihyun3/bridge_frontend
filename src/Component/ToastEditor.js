@@ -36,7 +36,7 @@ const ToastEditor = ({ title, data }) => {
             if (title.length >= 100) {
                 alert(`제목의 글자수가 100자를 초과했습니다. \n 다시 작성해주세요.`);
             } else {
-                axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/inserttip`,
+                axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/inserttip`,
                     { "tbTitle": title, "tbContents": files },
                     { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
                 )
@@ -54,7 +54,7 @@ const ToastEditor = ({ title, data }) => {
                 if (title.length >= 100) {
                     alert(`제목의 글자수가 100자를 초과했습니다. \n 다시 작성해주세요.`);
                 }
-                axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/update/tip`, { "tbTitle": title, "tbContents": files, "tbIdx": data.tbIdx },
+                axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/update/tip`, { "tbTitle": title, "tbContents": files, "tbIdx": data.tbIdx },
                 ).then(() => {
                     alert("정상 처리 되었습니다.");
                     history.push(`/tip/list`);

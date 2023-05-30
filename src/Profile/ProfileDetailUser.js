@@ -36,7 +36,7 @@ function ProfileDetailUser({ match }) {
             const token = sessionStorage.getItem('token');
             const decode_token = jwt_decode(token);
             setUserId(decode_token.sub);
-            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
+            axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
                 .then((response) => {
                     setData(response.data.profile[0]);
                     setUserInfo(response.data.userDto);
@@ -56,7 +56,7 @@ function ProfileDetailUser({ match }) {
             </div>
             <div className='container clearfix'>
                 <div className={style.profile}>
-                    <img className={style.profileIMG} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
+                    <img className={style.profileIMG} src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
                     <span className={style.name}>{userInfo.userId}</span>
                     {
                         a == 0 &&
@@ -88,7 +88,7 @@ function ProfileDetailUser({ match }) {
                     <div className={style.playbar}>
                         <Waveform
                             data={data.userMusic}
-                            src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.userMusic}`}
+                            src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.userMusic}`}
                         />
                     </div>
                     <div className={style.introduce}>
