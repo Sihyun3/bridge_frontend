@@ -6,11 +6,6 @@ import musicfile_upload from './icons/MusicFileIcon.png'
 import { useHistory } from "react-router";
 import { useRef } from "react";
 
-// import Dropzone from 'react-dropzone';
-
-
-
-
 const MusicSplit = () => {
 
   const [data, setData] = useState([]);
