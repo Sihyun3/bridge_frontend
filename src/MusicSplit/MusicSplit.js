@@ -56,7 +56,6 @@ const MusicSplit = () => {
     }
     axios({
       method: 'POST',
-
       url: `https://spleeter.bridge-music.life:${process.env.REACT_APP_PORT}/api/insertMusicForSplit/`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
