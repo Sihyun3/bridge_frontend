@@ -46,7 +46,7 @@
     text-underline-offset: 10px;
     line-height: 1.2;
     display: inline-block;
-    margin: 0 0 20px 0px;
+    margin: 0 0 20 0px;
     margin-left: 34px;
     padding-top: 5px;
     font-family: 'Pretendard-Regular';
@@ -112,7 +112,7 @@
 
 /* 메뉴들 */
 .Lefts:nth-child(1) {
-    margin-left: 500px;
+    margin-left: 516px;
 }
 
 /* 로그인 글씨 */
@@ -168,8 +168,8 @@
 }
 
 .pointbox {
-    float: left;
-    margin-left: 440px;
+    /* float: left; */
+    margin-left: 410px;
 
 
 }
@@ -200,6 +200,9 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
+    /* padding-left: 20px; */
+    
+
 
 }
 
@@ -219,6 +222,8 @@
     animation: fadein 0.5s;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    /* padding-left: 20px; */
 
 }
 
@@ -255,4 +260,14 @@
 
 .rightContents {
     float: right;
+    /* position: relative;
+    display: inline-flex; */
+    width: 400px;
+    /* justify-content: right; */
+
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 12px;
+
 }

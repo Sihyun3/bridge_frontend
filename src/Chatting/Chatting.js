@@ -58,8 +58,8 @@ const Chatting = ({ match }) => {
             return;
         }
         connect();
-        // axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-        axios.get(`http://192.168.0.47:8080/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        // axios.get(`https://192.168.0.47:8080/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
 
             .then(r => {
                 setChatList(r.data.chatting)
@@ -73,7 +73,7 @@ const Chatting = ({ match }) => {
 
     useEffect(() => {
         chatList.forEach(list => {
-            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId2}`)
+            axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId2}`)
                 .then(r => {
                     console.log(">>>>>>>>>" + r.data.profile[0]);
                     setUsers(prevUsers => [...prevUsers, r.data.profile[0]]);
@@ -92,13 +92,13 @@ const Chatting = ({ match }) => {
                 subscribe(response.data.chatting.roomIdx);
                 if (sender === response.data.chatting.userId1) {
                     setReceiver(response.data.chatting.userId2);
-                    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId2}`)
+                    axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId2}`)
                         .then((r) => { setReceiverImg(r.data.profile[0].profileImg); console.log("111111111111" + r.data.profile[0].profileImg); })
                         .catch((e) => { console.log(e); })
 
                 } else if (sender === response.data.chatting.userId2) {
                     setReceiver(response.data.chatting.userId1);
-                    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId1}`)
+                    axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId1}`)
                         .then((r) => { setReceiverImg(r.data.profile[0].profileImg); console.log("111111111111" + r.data.profile[0].profileImg); })
                         .catch((e) => { console.log(e); })
                 }
@@ -155,7 +155,7 @@ const Chatting = ({ match }) => {
                                     <div className={style.profile} onClick={() => chatroom(list.roomIdx)}>
                                         <div className={style.profileImg}>
                                             <img
-                                                src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg}.jpg`}
+                                                src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg}.jpg`}
                                                 className={style.profileIcon}
                                                 
                                             />
@@ -172,7 +172,7 @@ const Chatting = ({ match }) => {
                     <div className={style.chatBox}>
                         <div className={style.topText}>
                             <div className={style.receiver}>
-                                <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${receiverImg}.jpg`} className={style.chatProfile} alt="프로필" />
+                                <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${receiverImg}.jpg`} className={style.chatProfile} alt="프로필" />
                                 {/* <div className={style.chatName}>{receiver}</div> */}
                             </div>
                             <div className={style.chatName}>{receiver}</div>

@@ -105,7 +105,7 @@ function App() {
 
       <Route path="/profile/detail" component={ProfileDetail} exact={true} />
       <Route path="/profile/detail/:user" component={ProfileDetailUser} exact={true} />
-
+      <Route path="/report/write/:userId" component={ReportPage} exact={true} />
       {/* 파트너쪽 밑에 안됨 */}
       <Route path="/partner/charge/:total" component={Charge} exact={true} />
       {/* 디자인 & 기능 미완 */}

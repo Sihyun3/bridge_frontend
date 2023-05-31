@@ -7,6 +7,8 @@ import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
 import style from './Waveform.module.css'
 import image from '../Jam/musical-note.png'
 import { VolumeMute, VolumeUp } from "@mui/icons-material";
+import { Icon } from '@iconify/react';
+
 // import base from './base.png'
 
 const formWaveSurferOptions = ref => ({
@@ -166,15 +168,15 @@ const Waveform = forwardRef((props) => {
                             onChange={onVolumeChange}
                             defaultValue={volume}
                         /> */}
-            <div style={{ width: 650, marginLeft: 80 }}>
+            <div style={{ width: 700, marginLeft: 80 }}>
                 <div id="waveform" ref={waveformRef} />
             </div>
 
             <div>
                 <div style={{ marginLeft: "80px" }}>
-                    <span>{tMin}:{tSec}</span>
-                    <div style={{ float: "right", marginRight: "100px" }}>
                         <span>{min}:{sec}</span>
+                    <div style={{ float: "right", marginRight: "100px" }}>
+                    <span>{tMin}:{tSec}</span>
                     </div>
                 </div>
             </div>
@@ -188,14 +190,14 @@ const Waveform = forwardRef((props) => {
                 <div style={{ marginTop: 30, textAlign: "center", marginBottom: "-10px" }} className="clearfix">
                     {/* <img alt="악기 이미지" src={base}/> */}
 
-                    <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play} /> : <img className={style.button} src={JamBack} />}</button></span>
+                    <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <Icon icon="mdi:play" color="#6091eb" className={style.button}/> : <Icon icon="line-md:play-to-pause-transition" color="#6091eb" className={style.button}/>}</button></span>
                     <div >
 
                     </div>
                 </div>
 
-                <div style={{ textAlign: "center" }}>
-                    <label htmlFor="volume"><VolumeMute /></label>
+                <div style={{ textAlign: "center" , paddingBottom: "10px"}}>
+                    <label htmlFor="volume">
                     <input
                         type="range"
                         id="volume"
@@ -205,7 +207,8 @@ const Waveform = forwardRef((props) => {
                         step=".025"
                         onChange={onVolumeChange}
                         defaultValue={volume}
-                    /><VolumeUp />
+                    />
+                    </label>
 
                 </div>
 
