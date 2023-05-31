@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
 // import Page from 'react';
 // import '../reset.css';
 
@@ -103,7 +104,7 @@ function ReportDetail({ match }) {
 
           {/* 영구정지 처리시 1로 값 바뀜 => 스프링 로그인에서 if문 사용해서 제재 필요 */}
           <button className={style.button1} onClick={handleReport}>영구정지</button>
-          <button className={style.button1}>목록</button>
+          <Link to="/admin/report/list"><button className={style.button1}>목록</button></Link>
         </div>
       </div>
     </>

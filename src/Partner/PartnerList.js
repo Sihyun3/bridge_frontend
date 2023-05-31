@@ -12,9 +12,9 @@ const PartnerList = () => {
   const history = useHistory();
 
   //페이징
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
+  // const [limit, setLimit] = useState(10);
+  // const [page, setPage] = useState(1);
+  // const offset = (page - 1) * limit;
 
 
   const tags = [
@@ -136,10 +136,10 @@ const PartnerList = () => {
         </div>
 
         <div className={style.buttonbox}>
-          <Link to={`/partner/write`}><button > Ask Commission </button></Link>
+          <Link to={`/partner/write`}><button > Request </button></Link>
         </div>
 
-        <div className={style.page}>
+        {/* <div className={style.page}>
           <nav className="pageNum" >
             <button onClick={() => setPage(page - 1)} disabled={page === 1} >
               &lt;
@@ -158,7 +158,7 @@ const PartnerList = () => {
                                     &gt;
                                 </button>
           </nav>
-        </div>
+        </div> */}
       </div>
     </>
   );

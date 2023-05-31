@@ -6,18 +6,19 @@ import JamBack from "../Jam/Rectangle 49.png";
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor.min";
 import style from './Waveform.module.css'
 import image from '../Jam/musical-note.png'
-import { VolumeMute, VolumeUp } from "@mui/icons-material";
-// import base from './base.png'
+import base from './base.png'
+import { Pause, PlayArrow, VolumeUpRounded } from "@mui/icons-material";
+import { blue, grey } from "@mui/material/colors";
 
 const formWaveSurferOptions = ref => ({
     container: ref,
     waveColor: "#eee",
-    progressColor: "OrangeRed",
+    progressColor: "LightBlue",
     cursorColor: "OrangeRed",
     barWidth: 6,
     barRadius: 3,
     responsive: true,
-    height: 60,
+    height: 40,
     normalize: true,
     partialRender: true,
     interact: true,
@@ -35,7 +36,7 @@ const formWaveSurferOptions = ref => ({
     ]
 });
 
-const Waveform = forwardRef((props) => {
+const Waveform = forwardRef((props, ref) => {
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
@@ -57,16 +58,16 @@ const Waveform = forwardRef((props) => {
     // let [pSec, setPSec] = useState(0);
 
     //import 해서 사용 //.current.함수 로 사용하기 위해 선언
-    // useImperativeHandle(ref, () => ({
-    //     // 부모 컴포넌트에서 사용할 함수를 선언
-    //     PlayAll
-    // }))
+    useImperativeHandle(ref, () => ({
+        // 부모 컴포넌트에서 사용할 함수를 선언
+        PlayAll
+    }))
 
 
-    // function PlayAll() {
-    //     setPlay(!playing);
-    //     wavesurfer.current.playPause();
-    // }
+    function PlayAll() {
+        setPlay(!playing);
+        wavesurfer.current.playPause();
+    }
 
     useEffect(() => {
         // setPlay(false);
@@ -145,17 +146,14 @@ const Waveform = forwardRef((props) => {
 
     return (
         <>
-            {/* <div style={{marginBottom: "40px"}}> */}
-            {/* style={{ marginTop: 20 }} */}
-            {/* <span className={style.pauseTime}> {a}</span> */}
-            {/* <div style={ {float:"left",marginTop:30}} className="clearfix"> */}
-            {/* <img alt="악기 이미지" src={base}/> */}
-            {/* <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play} /> : <img className={style.button} src={JamBack} />}</button></span> */}
-            {/* <div > */}
-
-            {/* </div> */}
-            {/* </div> */}
-            {/* <label htmlFor="volume">Volume</label>
+            <div className="wavebox" style={{marginBottom: "60px"}}>
+{/* style={{ marginTop: 20 }} */}
+                {/* <span className={style.pauseTime}> {a}</span> */}
+                <div style={ {float:"left", marginTop: "-32px"}} className="clearfix">
+                    <img alt="악기 이미지" src={base}/>
+                    <span alt="재생 버튼" style={{ marginLeft: 40, marginTop: 32, float: "left" }}> <button onClick={handlePlayPause}>{!playing ? <PlayArrow sx={{ fontSize: 40 , color: blue[500] }}/> : <Pause sx={{ fontSize: 40 , color: blue[500] }} /> }</button></span>
+                    <div className="left">
+                        <label htmlFor="volume"><VolumeUpRounded sx={{ color: grey[400], fontSize: 20 }}/></label>
                         <input
                             type="range"
                             id="volume"
@@ -165,49 +163,21 @@ const Waveform = forwardRef((props) => {
                             step=".025"
                             onChange={onVolumeChange}
                             defaultValue={volume}
-                        /> */}
-            <div style={{ width: 650, marginLeft: 80 }}>
-                <div id="waveform" ref={waveformRef} />
-            </div>
-
-            <div>
-                <div style={{ marginLeft: "80px" }}>
-                    <span>{tMin}:{tSec}</span>
-                    <div style={{ float: "right", marginRight: "100px" }}>
-                        <span>{min}:{sec}</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* <p className ={style.explain} >{a}</p>  */}
-            {/* <button onClick={test}>asdasd</button> */}
-            <div style={{ marginBottom: "20px" }}>
-                <h3 style={{ marginTop: "30px", textAlign: "center" }}>업로드한 파일 제목</h3>
-                {/* style={{ marginTop: 20 }} */}
-                {/* <span className={style.pauseTime}> {a}</span> */}
-                <div style={{ marginTop: 30, textAlign: "center", marginBottom: "-10px" }} className="clearfix">
-                    {/* <img alt="악기 이미지" src={base}/> */}
-
-                    <span alt="재생 버튼" style={{ marginLeft: 10, width: 60, height: 60, marginTop: 37.5 }}> <button onClick={handlePlayPause}>{!playing ? <img className={style.button} src={play} /> : <img className={style.button} src={JamBack} />}</button></span>
-                    <div >
-
+                            
+                        />
                     </div>
                 </div>
 
-                <div style={{ textAlign: "center" }}>
-                    <label htmlFor="volume"><VolumeMute /></label>
-                    <input
-                        type="range"
-                        id="volume"
-                        name="volume"
-                        min="0.01"
-                        max="1"
-                        step=".025"
-                        onChange={onVolumeChange}
-                        defaultValue={volume}
-                    /><VolumeUp />
-
+                <div className="wavediv" style={{ width: 800, marginLeft: 160 }}>
+                    <div id="waveform" ref={waveformRef} />
                 </div>
+                <div style={{marginLeft: "160px" , marginTop: "5px"}}>
+                    <span>{min}:{sec}</span> 
+                    
+                    <span style={{ float: "right" , marginRight: "-160px"}}>{tMin}:{tSec}</span>
+                </div>
+                {/* <p className ={style.explain} >{a}</p>  */}
+                {/* <button onClick={test}>asdasd</button> */}
 
 
             </div>

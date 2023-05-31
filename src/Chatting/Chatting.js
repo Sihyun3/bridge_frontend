@@ -19,8 +19,15 @@ const Chatting = ({ match }) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
+<<<<<<< HEAD
     const [reciver, setReciver] = useState('');
     // const [connection ,setConnection] = useState(false);
+=======
+    const [receiver, setReceiver] = useState('');
+    const [users, setUsers] = useState([]);
+    const [receiverImg, setReceiverImg] = useState([]);
+
+>>>>>>> main
     const history = useHistory();
 
     const publish = () => {
@@ -34,6 +41,16 @@ const Chatting = ({ match }) => {
             }),
         });
         setChat('');
+    };
+
+    const connect = () => {
+        client.current = new StompJs.Client({
+            brokerURL: `ws://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/ws`,
+            onConnect: () => {
+                console.log('success');
+            },
+        });
+        client.current.activate();
     };
 
     useEffect(() => {
@@ -52,6 +69,7 @@ const Chatting = ({ match }) => {
 
             .then(r => {
                 setChatList(r.data.chatting)
+                console.log(">>>>>>>>" + r.data.chatting);
                 setSender(r.data.sender)
             })
         return () => {
@@ -59,15 +77,16 @@ const Chatting = ({ match }) => {
         }
     }, [])
 
-    const connect = () => {
-        client.current = new StompJs.Client({
-            brokerURL: `ws://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/ws`,
-            onConnect: () => {
-                console.log('success');
-            },
+    useEffect(() => {
+        chatList.forEach(list => {
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId2}`)
+                .then(r => {
+                    console.log(">>>>>>>>>" + r.data.profile[0]);
+                    setUsers(prevUsers => [...prevUsers, r.data.profile[0]]);
+                    console.log("+++++++++++++" + users);
+                });
         });
-        client.current.activate();
-    };
+    }, [chatList]);
 
 
     const chatroom = (props) => {
@@ -75,18 +94,25 @@ const Chatting = ({ match }) => {
 
             .then(response => {
                 setMessage(response.data.messagelist);
-                setRoomIdx(response.data.chatting.roomIdx)
+                setRoomIdx(response.data.chatting.roomIdx);
                 subscribe(response.data.chatting.roomIdx);
-                if (sender == response.data.chatting.userId1) {
-                    setReciver(response.data.chatting.userId2)
-                } else if (sender == response.data.chatting.userId2) {
-                    setReciver(response.data.chatting.userId1)
+                if (sender === response.data.chatting.userId1) {
+                    setReceiver(response.data.chatting.userId2);
+                    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId2}`)
+                        .then((r) => { setReceiverImg(r.data.profile[0].profileImg); console.log("111111111111" + r.data.profile[0].profileImg); })
+                        .catch((e) => { console.log(e); })
+
+                } else if (sender === response.data.chatting.userId2) {
+                    setReceiver(response.data.chatting.userId1);
+                    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId1}`)
+                        .then((r) => { setReceiverImg(r.data.profile[0].profileImg); console.log("111111111111" + r.data.profile[0].profileImg); })
+                        .catch((e) => { console.log(e); })
                 }
             })
             .catch(error => {
                 console.log(error);
             });
-    }
+    };
 
     const currentRoomIdx = useRef([]);
 
@@ -121,57 +147,78 @@ const Chatting = ({ match }) => {
                 <div className={style.mainBox}>
                     <div className={style.chatListBox}>
                         <div className={style.chatListText}>채팅 목록</div>
-                        <hr className={style.hr}></hr>
                         <div className={style.chatListProfile}>
-                            {chatList.map((list) => {
-                                var reciver;
-                                if (list.userId1 == sender) {
-                                    reciver = list.userId2;
-                                } else if (list.userId2 == sender) {
-                                    reciver = list.userId1
+                            {chatList.map(list => {
+                                let receiver;
+                                if (list.userId1 === sender) {
+                                    receiver = list.userId2;
+                                } else if (list.userId2 === sender) {
+                                    receiver = list.userId1;
                                 }
+                                const userProfile = users.find(user => user.userId === receiver);
+                                const profileImg = userProfile ? userProfile.profileImg : '';
                                 return (
                                     <div className={style.profile} onClick={() => chatroom(list.roomIdx)}>
                                         <div className={style.profileImg}>
-                                            <img src={user} className={style.profileIcon}></img>
+                                            <img
+                                                src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg}.jpg`}
+                                                className={style.profileIcon}
+                                                
+                                            />
                                         </div>
                                         <div className={style.profileContent}>
-
-                                            <div className={style.profileName}>{reciver}</div>
-
-                                            {/* <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div> */}
+                                            <div className={style.profileName}>{receiver}</div>
+                                            <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div>
                                         </div>
-                                    </div>)
+                                    </div>
+                                );
                             })}
                         </div>
                     </div>
                     <div className={style.chatBox}>
                         <div className={style.topText}>
-                            <img src={user} className={style.chatProfile}></img>
-                            <div className={style.chatName}>{reciver}</div>
+                            <div className={style.receiver}>
+                                <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${receiverImg}.jpg`} className={style.chatProfile} alt="프로필" />
+                                {/* <div className={style.chatName}>{receiver}</div> */}
+                            </div>
+                            <div className={style.chatName}>{receiver}</div>
                         </div>
-                        <hr className={style.chatHr}></hr>
                         <div className={style.chat}>
                             <div className={style.chatbox}>
-                                {
-                                    message.map(d => {
-                                        if (d.writer == sender) {
-                                            return (<div className={style.chatContent1}><p>{d.data}</p></div>)
-                                        } else if (d.writer != null && d.writer != sender) {
-                                            return (<div className={style.chatContent4}><p>{d.data}</p></div>)
-                                        }
-                                    })
-                                }
+                                {message.map(d => {
+                                    if (d.writer === sender) {
+                                        return <div className={style.chatContent1}><p>{d.data}</p></div>;
+                                    } else if (d.writer != null && d.writer !== sender) {
+                                        return <div className={style.chatContent4}><p>{d.data}</p></div>;
+                                    }
+                                })}
                             </div>
                             <div className={style.chatFoot}>
+                            <input
+                                    type="text"
+                                    onChange={(e) => setChat(e.target.value)}
+                                    value={chat}
+                                    className={style.chatInput}
+                                />
+
+                                {/* <div className={style.v_line}> */}
                                 <button onClick={handleHand} className={style.handButton}>
-                                    <img src={hand} className={style.handIcon}></img>
+                                    <Icon icon="la:handshake" color="#aaa" width="24" />
                                 </button>
-                                <input type="text" onChange={(e) => { setChat(e.target.value) }} value={chat} className={style.chatInput}></input>
+
+                               
+
+
+                                {/* <input
+                                    type="text"
+                                    onChange={(e) => setChat(e.target.value)}
+                                    value={chat}
+                                    className={style.chatInput}
+                                /> */}
                                 <button className={style.sendButton} onClick={publish}>
-                                    <Icon icon="mingcute:send-fill" color="#345" width="36" />
-                                    {/* <img src={send} className={style.sendIcon}></img> */}
+                                    <Icon icon="mingcute:send-fill" color="#fcfcfc" width="24" />
                                 </button>
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>

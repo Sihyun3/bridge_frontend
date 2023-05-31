@@ -89,7 +89,7 @@ const Main = () => {
                                     </p>
                                     <div><p className={style.date} style={{ padding: 21, marginRight: '16px' }}>{data.getFullYear() +"년 "+ month + "월 " +data.getDate() +"일"}</p></div>
                                     <div> <p className={style.more} style={{ padding: 21 }}>
-                                        <Link to="/bridge/admin/notice/list" style={{ color: '#EAEAEA' }} title="전체공지 더보기">더보기</Link>
+                                        <Link to="/admin/notice/list" style={{ color: '#EAEAEA' }} title="전체공지 더보기">더보기</Link>
                                     </p></div>
                                 </SwiperSlide>
                             )

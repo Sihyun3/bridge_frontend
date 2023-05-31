@@ -3,8 +3,7 @@ import axios from "axios";
 import Waveform from "../Waveform";
 import style from './MusicSplit.module.css';
 import musicfile_upload from './icons/MusicFileIcon.png'
-import { useHistory } from "react-router";
-import { useRef } from "react";
+import { Icon } from '@iconify/react';
 
 const MusicSplit = () => {
 
@@ -20,25 +19,8 @@ const MusicSplit = () => {
   const [isSplitCompleted, setIsSplitCompleted] = useState(false);
   const [music, setMusic] = useState('');
 
-  const history = useHistory();
 
-  const wavesurfer = useRef(null);
-  let [min, setMin] = useState(0);
-  let [sec, setSec] = useState(0);
-  const [playing, setPlay] = useState(false);
-  let [tMin, setTMin] = useState(0);
-  let [tSec, setTSec] = useState(0);
-  // const [volume, setVolume] = useState(0.5);
-  const volumeRef = useRef(0);
-
-  useEffect(() => {
-    if (sessionStorage.getItem('token') == null) {
-      alert(`로그인이 필요합니다. 로그인해주세요`);
-      history.push('/login')
-      return;
-    }
-  }, []);
-
+ 
 
 
   // 분리할 음원 파일 업로드
@@ -112,7 +94,7 @@ const MusicSplit = () => {
     const interval = setInterval(() => {
       axios.get(`https://spleeter.bridge-music.life:8080/api/IsDockerRun`)
         .then(response => {
-          if (response.data == false) {
+          if (response.data === false) {
             clearInterval(interval);
             setIsLoading(false);
             setIsSplitCompleted(true);
@@ -126,39 +108,14 @@ const MusicSplit = () => {
   useEffect(() => {
     console.log(files)
   }, [])
-  const childComponentRef = useRef([]);
-  const handlePlayPause2 = (index) => () => {
-    childComponentRef.current[index].handlePlayPause();
-  };
 
-  const onVolumeChange = (event) => {
-    // const newVolume = event.target.value;
-    // volumeRef.current = newVolume; // 볼륨 값을 업데이트
 
-    // if (childComponentRef.current && childComponentRef.current.setVolume) {
-    //   childComponentRef.current.setVolume(newVolume); // 웨이브폼 컴포넌트의 setVolume 메서드를 호출하여 볼륨 조절
-    // }
-  };
 
 
 
   return (
 
     <>
-      <div className='container clearfix'>
-        <div className={style.info}>
-          <h2>음원 분리</h2>
-          <h3>Music Split</h3>
-          <p>분리하고, 조합하고, 추출하며 새로운 소리를 탐구해 보세요.</p><br />
-          <p>1. '선택된 파일 없음'을 클릭해 파일을 넣는다.</p><br />
-          <p>2. 제출버튼을 클릭해 확인한다.</p><br />
-          <p>3. 분리 시작 버튼을 누른 뒤 잠시 기다린다.</p><br />
-          <p>4. '분리가 완료되었습니다.'라는 문장이 나오면 분리 확인 버튼을 누른다.</p>
-
-        </div>
-      </div>
-
-
 
       <section className={style.Page}>
         <div className={style.above_title}>
@@ -179,8 +136,6 @@ const MusicSplit = () => {
               </button>
 
 
-
-
               <div className={style.form_submit}>
                 {/* <div className={style.download}> */}
 
@@ -197,7 +152,9 @@ const MusicSplit = () => {
                       <img src={musicfile_upload} className={style.music_upload} alt="음악 파일 첨부"></img>
 
                     </span>
-                    <div>
+
+                    
+                    <div className={style.fileName}>
                       <input className={style.upload_file} type="file" name="profile_files" multiple="multiple" onChange={(e) => setMusic(e.target.files)} />
                       {isLoading && <div className={style.splitStatus}> 분리 중 입니다.</div>}
                       {isSplitCompleted && <div className={style.splitStatus}> 분리가 완료되었습니다.</div>}
@@ -216,16 +173,11 @@ const MusicSplit = () => {
                     </select> */}
 
 
-
-
-
                     <button className={style.split} onClick={startSplit}>분리 시작</button>
+                    
 
 
-                    {/* 분리확인 버튼 클릭시 만들어진 map 이 화면에 보여짐 */}
-                    <div className={style.split}>
-                      {!clicked && <button onClick={handleCheck}>분리 확인</button>}
-                    </div>
+                    
 
 
                     {/* {isLoading && <div className={style.splitStatus}> 분리중입니다.</div>}
@@ -245,17 +197,29 @@ const MusicSplit = () => {
 
 
 
-
         <div>
+
+        {!clicked && <div className='container clearfix'>
+         <div className={style.info}>
+          <h2>음원 분리</h2>
+          <h3>Music Split</h3>
+          <p>1. '선택된 파일 없음'을 클릭해 파일을 넣는다.</p><br/>
+          <p>2. 제출버튼을 클릭해 확인한다.</p><br/>
+          <p>3. 분리 시작 버튼을 누른 뒤 잠시 기다린다.</p><br/>
+          <p>4. '분리가 완료되었습니다.'라는 문장이 나오면 분리 확인 버튼을 누른다.</p><br/>
+          </div>
+        </div>}
+
+        
           <ul className={style.splitIng}>
             {/* 분리 상태 메세지 */}
             {/* {isLoading && <div> 분리중입니다.</div>}
           {isSplitCompleted && <div> 분리가 완료되었습니다.</div>} */}
 
             {/* 분리확인 버튼 클릭시 만들어진 map 이 화면에 보여짐 */}
-            {/* <div className={style.checkSplit}>
+            <div className={style.checkSplit}>
               {!clicked && <button onClick={handleCheck}>분리 확인</button>}
-            </div> */}
+            </div>
 
             {/* 분리된 음원파일 다운로드 링크 및 재생 파형 만드는 Map */}
             {
@@ -265,28 +229,10 @@ const MusicSplit = () => {
                 return (
                   <>
                     <div className={style.inst_list}>
-                      <li className={style.instruments}><a href={url}>{fn}</a>
-                        {/* value={idx} */}
-                        <div><button onClick={handlePlayPause2(idx)} >{!playing ? "Play" : "Pause"}</button>{" "}
-                          <input
-                            type="range"
-                            id="volume"
-                            name="volume"
-                            min="0.01"
-                            max="1"
-                            step=".025"
-                            // defaultValue={volumeRef.current}
-                            // value={volumeRef.current}
-                            onChange={onVolumeChange}
-                            defaultValue={0.5}
-                            color="#3523d2"
-                          />
-                          {/* <span>{min}:{sec}</span> - <span>{tMin}:{tSec}</span></div> */}
-                        </div>
+                      <li className={style.instruments}><a style={{marginTop:'40px', fontWeight:'600', letterSpacing:'0.5px'}} href={url}>{fn}<br/><br/><Icon icon="bx:download" color="#141515" width="18" /></a>
 
-
-
-
+                      
+                      
                       </li>
                       {/* <Waveform   src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {
@@ -310,7 +256,6 @@ const MusicSplit = () => {
 
 
                     </div>
-
                   </>
                 )
               })
@@ -318,6 +263,7 @@ const MusicSplit = () => {
           </ul>
 
         </div>
+     
 
       </section>
     </>

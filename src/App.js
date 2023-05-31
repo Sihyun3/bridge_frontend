@@ -94,14 +94,14 @@ function App() {
 
 
       {/* 기능 완성 & 디자인 x */}
-      <Route path="/find/:idx" component={Finduser} exact={true} /> {/* 은정언니 작업중 */}
+      <Route path="/find/:idx" component={Finduser} exact={true} /> 
 
-      <Route path="/partner/doing" component={DoingList} exact={true} /> {/* 쏘 작업중 */}
+      <Route path="/partner/doing" component={DoingList} exact={true} /> 
       <Route path="/partner/doing/detail/:cidx" component={DoingDetail} exact={true} />
 
       <Route path="/chatting" component={Chatting} exact={true} />
 
-      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} /> {/* 지민쓰 작업중 */}
+      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} /> 
 
       <Route path="/profile/detail" component={ProfileDetail} exact={true} />
       <Route path="/profile/detail/:user" component={ProfileDetailUser} exact={true} />

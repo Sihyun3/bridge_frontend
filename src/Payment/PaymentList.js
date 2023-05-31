@@ -106,16 +106,21 @@ const PaymentList = ({ match }) => {
         e.preventDefault();
 
         const month2 = currentDate.getMonth() + 1;
-        const ago6 = month2 - 6;
+        const ago6 = (month2 - 6);
+        // console.log(">>>>>>>>" + ago6);
 
         const ago = ago6 < 10 ? '0' + ago6.toString() : ago6.toString()
         const now = month2 < 10 ? '0' + month2.toString() : month2.toString()
 
+        const ago2 = ago <= 0 ? "12" : ago
+
         const day = currentDate.getDate();
         const date = day < 10 ? '0' + day.toString() : day.toString()
 
-        setDate1(currentDate.getFullYear() + "-" + ago + "-" + date);
+
+        setDate1(currentDate.getFullYear() + "-" + ago2 + "-" + date);
         setDate2(currentDate.getFullYear() + "-" + now + "-" + date);
+        console.log(date1);
     }
 
 

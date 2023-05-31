@@ -16,6 +16,7 @@ const PartnerDatail = ({ match }) => {
     const [tag, setTag] = useState([]);
     const history = useHistory();
     const [userId, setUserId] = useState('');
+    const [writer, setWriter] = useState('');
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
@@ -34,6 +35,10 @@ const PartnerDatail = ({ match }) => {
             .then((response) => {
                 setData(response.data.partnerList);
                 setTag(response.data.partnerTag);
+                const user = response.data.partnerList.userId; 
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
+                    .then((r) => {console.log(">>>>>>>>>>>" + r.data.profile[0]); setWriter(r.data.profile[0]);})
+                    .catch((e) => { console.log(e) })
             })
             .catch((error) => {
                 console.log(error);
@@ -67,13 +72,15 @@ const PartnerDatail = ({ match }) => {
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`, { "userId1": userId, "userId2": data.userId })
             .then(res => {
                 console.log(res);
-                history.push(`/chatting`)
 
             })
             .catch(error => {
                 console.log(error);
-
+                console.log(process.env.REACT_APP_IP);
+                console.log(process.env.REACT_APP_PORT);
+                console.log(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`)
             })
+        history.push("/chatting")
     }
     
 
@@ -86,8 +93,9 @@ const PartnerDatail = ({ match }) => {
                     </div>
                 </Link>
                 <div className={style.writer}>
-                    {/* <img className={style.writerimg} src={writer} /> */}
-                   <Link to= {`/profile/detail/${data.userId}`}> <p> 작성자 : {data.userId}</p> </Link>
+                    <Link to={`/profile/detail/${data.userId}`}> <img className={style.writerimg} 
+                    src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${writer.profileImg}.jpg`} />
+                        <p>{data.userId}</p> </Link>
                 </div>
                 <div className={style.imgbox}>
                     <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.crPhoto}`} />

@@ -108,7 +108,7 @@ const TipList = () => {
     return (
         <>
             <div className={style.box1} >
-                <h1>게시판</h1>
+                <h1>Community</h1>
             </div>
             <div className='container clearfix'>
                 <div className={style.topBox}>
