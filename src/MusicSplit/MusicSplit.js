@@ -74,8 +74,6 @@ const MusicSplit = () => {
   // 분리 확인 버튼 연결 핸들러
   const handleCheck = (e) => {
     e.preventDefault();
-    console.log(musicUUID);
-    //
     axios.get(`https://spleeter.bridge-music.life:${process.env.REACT_APP_PORT}/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;
