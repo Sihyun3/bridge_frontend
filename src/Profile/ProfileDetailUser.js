@@ -36,7 +36,7 @@ function ProfileDetailUser({ match }) {
             const token = sessionStorage.getItem('token');
             const decode_token = jwt_decode(token);
             setUserId(decode_token.sub);
-            axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
+            axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
                 .then((response) => {
                     setData(response.data.profile[0]);
                     setUserInfo(response.data.userDto);
@@ -52,16 +52,16 @@ function ProfileDetailUser({ match }) {
     return (
         <>
             <div className='box1'>
-                <h1>Profile</h1>
+                
             </div>
             <div className='container clearfix'>
                 <div className={style.profile}>
-                    <img className={style.profileIMG} src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
+                    <img className={style.profileIMG} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
                     <span className={style.name}>{userInfo.userId}</span>
-                    {
-                        a == 0 &&
-                        <img src={certiMark} className={style.certi}></img>
-                    }
+                    
+                   
+                      
+                    
                     <p style={{ marginTop: "10px", marginBottom: "10px" }}>{data.userPosition}</p>
 
                     <p className={style.comment}>
@@ -88,7 +88,7 @@ function ProfileDetailUser({ match }) {
                     <div className={style.playbar}>
                         <Waveform
                             data={data.userMusic}
-                            src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.userMusic}`}
+                            src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.userMusic}`}
                         />
                     </div>
                     <div className={style.introduce}>
@@ -96,20 +96,18 @@ function ProfileDetailUser({ match }) {
                     </div>
                 </div>
                 <div className={style.review}>
-                    <p style={{ fontSize: "20px", marginTop: "20px" }}>후기</p>
-
-                    {reviewList.map(list => {
-                        return (
+                    <p style={{ fontSize: "22px", marginTop: "20px", fontWeight: "bold" }}>후기</p>
+                    {console.log(reviewList)}
+                    {reviewList.length != 0 ? reviewList.map(list => {
+                        return(
                             <div className={style.reviewdetail}>
-                                {/* <p className={style.reviewtitle}>작업물 제목</p> */}
-                                <p className={style.reviewcontents}>
-                                    {list.content}
-                                </p>
-                            </div>
+                            {/* <p className={style.reviewtitle}>작업물 제목</p> */}
+                            <p className={style.reviewcontents}>
+                            {list.content}
+                            </p>
+                        </div>
                         )
-                    })}
-
-
+                    }) : <div className={style.reviewnone}>후기가 없습니다.</div>}
                 </div>
             </div>
         </>
