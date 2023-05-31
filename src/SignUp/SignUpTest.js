@@ -23,14 +23,7 @@ const SignUpTest = ({ history, props }) => {
     //아이디
     const [userId, setUserId] = useState();
     const [confirmId, setConfirmId] = useState();
-<<<<<<< HEAD
     const [confirmIdMessage, setConfirmIdMessage] = useState('8~16자 영문,숫자를 사용하세요.');
-=======
-    const [confirmIdMessage, setConfirmIdMessage] = useState();
-    //닉네임
-    const [userNickname, setNickName] = useState();
-    //비밀번호
->>>>>>> main
     const [userPassword, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [confirmMessage, setConfirmMessage] = useState('*8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');

@@ -19,15 +19,8 @@ const Chatting = ({ match }) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-<<<<<<< HEAD
     const [reciver, setReciver] = useState('');
     // const [connection ,setConnection] = useState(false);
-=======
-    const [receiver, setReceiver] = useState('');
-    const [users, setUsers] = useState([]);
-    const [receiverImg, setReceiverImg] = useState([]);
-
->>>>>>> main
     const history = useHistory();
 
     const publish = () => {
