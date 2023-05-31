@@ -267,7 +267,7 @@ const MusicSplit = () => {
             {/* 분리된 음원파일 다운로드 링크 및 재생 파형 만드는 Map */}
             {
               files && files.map((fn, idx) => {
-                const url = `https://13.209.80.136:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
+                const url = `https://spleeter.bridge-music.life:8080/api/downloadSplitedMusic/${musicUUID}/${fn}`;
 
                 return (
                   <>
@@ -297,22 +297,22 @@ const MusicSplit = () => {
                       </li>
                       {/* <Waveform   src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {
-                        idx == 0 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 0 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#67b3e2" }} src={`https://spleeter.bridge-music.life:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
                       {
-                        idx == 1 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`}  />
-                      }
-
-                      {
-                        idx == 2 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 1 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#df923f" }} src={`https://spleeter.bridge-music.life:8080/api/getSplitedMusic/${musicUUID}/${fn}`}  />
                       }
 
                       {
-                        idx == 3 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 2 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#dcd44c" }} src={`https://spleeter.bridge-music.life:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
                       {
-                        idx == 4 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`https://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                        idx == 3 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#76c654" }} src={`https://spleeter.bridge-music.life:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
+                      }
+
+                      {
+                        idx == 4 && <Waveform ref={childComponentRef} color={{ waveColor: "#eee", progressColor: "#947AF0" }} src={`https://spleeter.bridge-music.life:8080/api/getSplitedMusic/${musicUUID}/${fn}`} />
                       }
 
 
