@@ -52,7 +52,7 @@ function App() {
 
   return (
     <>
-    {/* 충전하기 거래내역 안뜸 */}
+      {/* 충전하기 거래내역 안뜸 */}
       <Header4 isLogin={isLogin} setIsLogin={setIsLogin} />
 
       {/* 기능 & 디자인 완성된 페이지 */}
@@ -75,7 +75,7 @@ function App() {
       <Route path="/admin/report/detail/:reportIdx" component={ReportDetail} exact={true} /> {/* 영구정지 권한 제어 필요 */} {/* 기능 됐는데 시현만 있음 */}
 
       <Route path="/notice/detail/:noticeIdx" component={NoticeDetail} exact={true} />
-      
+
       <Route path="/partner/list" component={PartnerList} exact={true} />
       <Route path="/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
@@ -94,20 +94,20 @@ function App() {
 
 
       {/* 기능 완성 & 디자인 x */}
-      <Route path="/find/:idx" component={Finduser} exact={true} /> 
+      <Route path="/find/:idx" component={Finduser} exact={true} />
 
-      <Route path="/partner/doing" component={DoingList} exact={true} /> 
+      <Route path="/partner/doing" component={DoingList} exact={true} />
       <Route path="/partner/doing/detail/:cidx" component={DoingDetail} exact={true} />
 
       <Route path="/chatting" component={Chatting} exact={true} />
 
-      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} /> 
+      <Route path="/jam/detail/:cIdx" component={JamDetail} exact={true} />
 
       <Route path="/profile/detail" component={ProfileDetail} exact={true} />
       <Route path="/profile/detail/:user" component={ProfileDetailUser} exact={true} />
 
-{/* 파트너쪽 밑에 안됨 */}
-
+      {/* 파트너쪽 밑에 안됨 */}
+      <Route path="/partner/charge/:total" component={Charge} exact={true} />
       {/* 디자인 & 기능 미완 */}
       <Route path="/partner/payment/:producer" component={PaymentTest2} exact={true} /> {/* 프로필 불러오기 필요 (기능만 필요) */}
       <Route path="/partner/review/:userId2" component={Review} exact={true} />

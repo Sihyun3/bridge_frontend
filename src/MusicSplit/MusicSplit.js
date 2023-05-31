@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import axios from "axios";
 import Waveform from "../Waveform";
 import style from './MusicSplit.module.css';
@@ -110,6 +110,7 @@ const MusicSplit = () => {
   }, [])
 
 
+  const childComponentRef = useRef([]);
 
 
 

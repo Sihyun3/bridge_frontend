@@ -19,8 +19,9 @@ const Chatting = ({ match }) => {
     const [message, setMessage] = useState([]);
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
-    const [reciver, setReciver] = useState('');
-    // const [connection ,setConnection] = useState(false);
+    const [receiver, setReceiver] = useState('');
+    const [users, setUsers] = useState([]);
+    const [receiverImg, setReceiverImg] = useState([]);
     const history = useHistory();
 
     const publish = () => {
@@ -127,7 +128,7 @@ const Chatting = ({ match }) => {
 
     const handleHand = () => {
 
-        history.push(`/partner/payment/${reciver}/`)
+        history.push(`/partner/payment/${receiver}/`)
         //     axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
         //     .then(r => {
         // })
