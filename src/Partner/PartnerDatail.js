@@ -75,7 +75,7 @@ const PartnerDatail = ({ match }) => {
 
             })
     }
-
+    
 
     return (
         <>
@@ -86,8 +86,8 @@ const PartnerDatail = ({ match }) => {
                     </div>
                 </Link>
                 <div className={style.writer}>
-                    <img className={style.writerimg} src={writer} />
-                    <p>{data.userId}</p>
+                    {/* <img className={style.writerimg} src={writer} /> */}
+                   <Link to= {`/profile/detail/${data.userId}`}> <p> 작성자 : {data.userId}</p> </Link>
                 </div>
                 <div className={style.imgbox}>
                     <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.crPhoto}`} />

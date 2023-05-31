@@ -50,7 +50,6 @@ function ProfileDetail({}) {
     return (
         <>
             <div className='box1'>
-                <h1>Profile</h1>
             </div>
             <div className='container clearfix'>
                 <div className={style.profile}>
