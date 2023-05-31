@@ -20,7 +20,7 @@ const Chatting = ({ match }) => {
     const [chat, setChat] = useState('');
     const [roomIdx, setRoomIdx] = useState('');
     const [reciver, setReciver] = useState('');
-
+    // const [connection ,setConnection] = useState(false);
     const history = useHistory();
 
     const publish = () => {
@@ -47,11 +47,16 @@ const Chatting = ({ match }) => {
             return;
         }
         connect();
-        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        // axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+        axios.get(`http://192.168.0.47:8080/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+
             .then(r => {
                 setChatList(r.data.chatting)
                 setSender(r.data.sender)
             })
+        return () => {
+            client.current.deactivate();
+        }
     }, [])
 
     const connect = () => {
@@ -64,8 +69,10 @@ const Chatting = ({ match }) => {
         client.current.activate();
     };
 
+
     const chatroom = (props) => {
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chat/${props}`)
+
             .then(response => {
                 setMessage(response.data.messagelist);
                 setRoomIdx(response.data.chatting.roomIdx)
@@ -81,24 +88,31 @@ const Chatting = ({ match }) => {
             });
     }
 
-    function subscribe(roomIdx) {
-        client.current.subscribe('/sub/channel/' + roomIdx, recive)
-    }
+    const currentRoomIdx = useRef([]);
+
+    const subscribe = useCallback((roomIdx) => {
+        if (!currentRoomIdx.current.includes(roomIdx)) {
+            currentRoomIdx.current = [...currentRoomIdx.current, roomIdx];
+            client.current.subscribe('/sub/channel/' + roomIdx, recive)
+        }
+    }, []);
 
     const recive = useCallback((body) => {
+
         const json_body = JSON.parse(body.body);
+
         setMessage((message) =>
             [...message, { roomIdx: json_body.roomIdx, data: json_body.data, writer: json_body.writer }]
         );
-    })
+    }, [chatList]);
 
     const handleHand = () => {
-   
-                history.push(`/partner/payment/${reciver}/`)
-            //     axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
-            //     .then(r => {
-            // })
-            // .catch(e => { console.log(e) })
+
+        history.push(`/partner/payment/${reciver}/`)
+        //     axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertCommission/${reciver}`, { "userId1": sender })
+        //     .then(r => {
+        // })
+        // .catch(e => { console.log(e) })
     }
 
     return (
@@ -116,7 +130,6 @@ const Chatting = ({ match }) => {
                                 } else if (list.userId2 == sender) {
                                     reciver = list.userId1
                                 }
-                                console.log(list);
                                 return (
                                     <div className={style.profile} onClick={() => chatroom(list.roomIdx)}>
                                         <div className={style.profileImg}>

@@ -57,7 +57,7 @@ const MusicSplit = () => {
     axios({
       method: 'POST',
 
-      url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insertMusicForSplit/`,
+      url: `https://spleeter.bridge-music.life:${process.env.REACT_APP_PORT}/api/insertMusicForSplit/`,
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
@@ -77,7 +77,7 @@ const MusicSplit = () => {
     e.preventDefault();
     console.log(musicUUID);
     //
-    axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/splitedMusic/${musicUUID}`)
+    axios.get(`https://spleeter.bridge-music.life:${process.env.REACT_APP_PORT}/api/splitedMusic/${musicUUID}`)
       .then(response => {
         const fileNames = response.data;
         if (fileNames.length === 0) {
@@ -101,7 +101,7 @@ const MusicSplit = () => {
   }
   // 음원 분리 컨테이너 실행
   const handleMusicSplit = () => {
-    axios.get(`https://13.124.125.68:8080/api/docker/${musicUUID}`)
+    axios.get(`https://spleeter.bridge-music.life:8080/api/docker/${musicUUID}`)
       .then(response => {
         console.log(response);
       })
@@ -118,7 +118,7 @@ const MusicSplit = () => {
     setIsSplitCompleted(false);
 
     const interval = setInterval(() => {
-      axios.get(`https://13.124.125.68:8080/api/IsDockerRun`)
+      axios.get(`https://spleeter.bridge-music.life:8080/api/IsDockerRun`)
         .then(response => {
           if (response.data == false) {
             clearInterval(interval);

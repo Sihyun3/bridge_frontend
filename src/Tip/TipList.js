@@ -1,4 +1,3 @@
-
 import style from './TipList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
@@ -7,24 +6,21 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import guitars from '../img/guitars.jpg'
-import Swal from "sweetalert2";
 
 const TipList = () => {
     const history = useHistory();
     const [filteredDatas, setFilteredDatas] = useState([]);
     const [data, setData] = useState([]);
 
+
+
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            Swal.fire({
-                icon: 'error',
-                title: '로그인이 필요합니다.',
-                text: '로그인 페이지로 이동합니다.',
-            })
+            alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login');
             return;
         }
-        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
             .then(r => {
                 console.log(">>>>>>>>>>" + r.data);
                 // setData(r.data);
@@ -64,7 +60,7 @@ const TipList = () => {
     const [heartsList, setHeartsList] = useState([]);
     // useEffect(() => {
 
-    //     axios.get('https://localhost:8080/api/tiplist/heartsList')
+    //     axios.get('http://localhost:8080/api/tiplist/heartsList')
     //         .then(response => {
     //             console.log(response);
     //             setData(response.data);
@@ -77,7 +73,7 @@ const TipList = () => {
 
     // const [heartsList, setHeartsList] = useState([data]);
     // const arr = useState([heartsList]);
-    const [temp, setTemp] = useState('')
+    const [temp,setTemp] = useState('')
     const handleHeartClick = (e) => {
         // heartsList.sort((a, b) => b - a);
         // console.log(heartsList);
@@ -88,14 +84,14 @@ const TipList = () => {
         // setTemp("d");
         console.log(temp);
     };
-
+ 
     const handlerDesc = (d) => {
-        if (data == '') {
+        if(data == ''){
             const temp = d.sort((a, b) => { return (b.tbIdx - a.tbIdx) })
-            setData([...temp]);
-        } else if (data != '') {
+            setData([... temp]);
+        }else if(data != ''){
             const temp = data.sort((a, b) => { return (b.tbIdx - a.tbIdx) })
-            setData([...temp]);
+            setData([... temp]);
         }
 
     }

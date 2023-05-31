@@ -19,10 +19,10 @@ const SignUpTest = ({ history, props }) => {
     const [userName, setName] = useState();
     const [userId, setUserId] = useState();
     const [confirmId, setConfirmId] = useState();
-    const [confirmIdMessage, setConfirmIdMessage] = useState();
+    const [confirmIdMessage, setConfirmIdMessage] = useState('8~16자 영문,숫자를 사용하세요.');
     const [userPassword, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
-    const [confirmMessage, setConfirmMessage] = useState();
+    const [confirmMessage, setConfirmMessage] = useState('*8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
     const [PWmessage, setPWmessage] = useState();
 
     const [userPhoneNumber, setPhone] = useState();
@@ -39,17 +39,7 @@ const SignUpTest = ({ history, props }) => {
 
     const [userFirstEmail, setFirst] = useState('');
 
-    useEffect(() => {
-        let frontmail = userFirstEmail + selectEmail;
-        if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
-            setEmail(frontmail);
-            setEmessage(null);
 
-        } else {
-            setEmail(userFirstEmail);
-            setEmessage('이메일 형식이 올바르지 않습니다.');
-        }
-    }, [])
 
     const handleSelectFrontNumber = (e) => {
         setSelect(e.target.value);
@@ -147,7 +137,8 @@ const SignUpTest = ({ history, props }) => {
 
 
 
-    const handlerAuth = () => {
+    const handlerAuth =(e) => {
+        e.preventDefault();
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
             // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
             .then((r) => {
@@ -172,17 +163,13 @@ const SignUpTest = ({ history, props }) => {
 
     const handlerCheck = () => {
         if (auth == temp) {
-            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
-                // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
-                .then((r) => {
-                    Swal.fire({
-                        title: '인증이 성공적으로 완료되었습니다.',
-                        text: "가입절차를 마무리 해주세요.",
-                        icon: 'success',
-                        confirmButtonColor: '#3c3e58'
-                        // confirmButtonColor: '#3085d6'
-                    })
-                })
+            Swal.fire({
+                title: '인증이 성공적으로 완료되었습니다.',
+                text: "가입절차를 마무리 해주세요.",
+                icon: 'success',
+                confirmButtonColor: '#3c3e58'
+                // confirmButtonColor: '#3085d6'
+            })
         } else {
             Swal.fire({
                 title: '인증코드가 일치하지 않습니다.',
@@ -207,26 +194,27 @@ const SignUpTest = ({ history, props }) => {
     const handlerChangeConfirmId = e => {
         if (!/^[a-zA-Z0-9]{8,16}$/.test(userId)) {
             setConfirmIdMessage("아이디 형식이 일치하지 않습니다")
+        }else{
+            setConfirmIdMessage(null);
         }
     };
 
-
-    const handlerChangeConfirmPassword = e => {
-        if (e.target.value === userPassword
-            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
-            setConfirmPassword(e.target.value)
-            setPassword(userPassword);
-            // setPWmessage(null);
+    const handlerconfrimPassword = e => {
+        console.log(userPassword);
+        console.log(/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[a-z\d@$!%*#?&]{8,16}$/.test(userPassword))
+        if (/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[a-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
             setConfirmMessage(null);
-        } else if (e.target.value !== userPassword
-            && /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
-            setConfirmPassword(e.target.value);
-            setConfirmMessage('비밀번호가 일치하지 않습니다.')
         } else {
-            setConfirmPassword(e.target.value);
-            setConfirmMessage('비밀번호 형식이 올바르지 않습니다.')
+            setConfirmMessage("비밀번호 형식이 일치하지 않습니다.")
         }
-    };
+    }
+    const handlerChangeConfirmPassword = e => {
+        if (confirmPassword === userPassword) {
+            setConfirmMessage(null);
+        } else if (confirmPassword !== userPassword) {
+            setConfirmMessage('비밀번호가 일치하지 않습니다.')
+        }
+    }
 
     const changePhone = e => {
         let number = select + "-" + e.target.value;
@@ -240,7 +228,16 @@ const SignUpTest = ({ history, props }) => {
     };
 
     const handleSelectLastEmail = (e) => {
-        setSelectEmail(e.target.value);
+        // setSelect(e.target.value);
+        let frontmail = userFirstEmail + e.target.value;
+        if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
+            setEmail(frontmail);
+            setEmessage(null);  
+
+        } else {
+            setEmail(userFirstEmail);
+            setEmessage('이메일 형식이 올바르지 않습니다.');
+        }
     };
 
     const handlerChangeEmail = e => {
@@ -311,25 +308,26 @@ const SignUpTest = ({ history, props }) => {
                                 <div className={style.passwordBox}>
 
                                     <label>
-                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onChange={handlerChangePassword} required minLength={8} maxLength={16} />
+                                        <input className={style.formInput} type={hidePassword ? "password" : "text"} placeholder="비밀번호" onBlur={handlerconfrimPassword} onChange={handlerChangePassword} required minLength={8} maxLength={16} />
 
                                         <img type="Button" className={style.Locked} src={src ? UnLock : Locked} value={Locked} onClick={toggleHidePassword} />
                                     </label>
 
                                     <label>
-                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={handlerChangeConfirmPassword} required minLength={8} maxLength={16} />
+                                        <input className={style.formInput} type={hidePassword2 ? "password" : "text"} placeholder="비밀번호 확인" onChange={(e) => { setConfirmPassword(e.target.value) }}
+                                            onBlur={handlerChangeConfirmPassword} required minLength={8} maxLength={16} />
                                         <img type="Button" className={style.Locked} src={src2 ? UnLock : Locked} value={Locked} onClick={toggleHidePassword2} />
                                     </label>
                                 </div>
 
                                 <div className={style.warningBox}>
-                                    <span type="password" name="password" value={confirmPassword} className={style.txt_or} onChange={(e) => {
+                                    {/* <span type="password" name="password" value={confirmPassword} className={style.txt_or} onChange={(e) => {
                                         setConfirmPassword(e.target.value)
-                                    }} onBlur={handlerChangeConfirmPassword} />
+                                    }} onBlur={handlerChangeConfirmPassword} /> */}
 
                                     {
-                                        confirmMessage != null ? <div className={style.pwWarningMessage}> {confirmMessage}</div>
-                                            : <div className={style.pwWarningMessage}>  *8 ~ 16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+                                        confirmMessage != null && <div className={style.pwWarningMessage}> {confirmMessage}</div>
+
                                     }
                                 </div>
 
@@ -355,7 +353,7 @@ const SignUpTest = ({ history, props }) => {
 
                                 <div className={style.MailBox}>
                                     <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
-                                    <select className={style.selectMailBox} value={selectEmail} onChange={handleSelectLastEmail}>
+                                    <select className={style.selectMailBox}  onChange={handleSelectLastEmail}>
                                         <option value="@bridge.com">bridge.com</option>
                                         <option value="@naver.com">naver.com</option>
                                         <option value="@gmail.com">gmail.com</option>

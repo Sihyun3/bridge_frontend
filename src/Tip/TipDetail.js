@@ -8,23 +8,33 @@ import { Viewer } from '@toast-ui/react-editor';
 import { useHistory } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import jwtDecode from 'jwt-decode';
-import Swal from "sweetalert2";
+// import HeartButton from './HeartButton';
+import HeartImg from './HeartImg.png';
+import EmptyHeartImg from './EmptyHeartImg.png';
+import TipHeartCnt from './TipHeartCnt';
+
 
 const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
     const [comments, setComments] = useState([]);
+    
+
     const tb_idx = match.params.tbIdx;
     const [temp, setTemp] = useState()
     const history = useHistory();
     const [user, setUser] = useState('');
 
+    // const [likeUpdate, setLikeUpdate] = useState(false)
+    // const [LikeCt, setLikeCt] = useState(0)
+    // const [userNickname, setUserNickname] = useState('');
+    // const tb_heart = match.params.tbHeart;
+    // const [hearts, setHearts] = useState();
+    
+    const [heartsCnt, setHeartsCnt] = useState();
+
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            Swal.fire({
-                icon: 'error',
-                title: '로그인이 필요합니다.',
-                text: '로그인 페이지로 이동합니다.',
-            })
+            alert(`로그인이 필요합니다. 로그인해주세요`);
             history.push('/login')
             return;
         }
@@ -32,29 +42,26 @@ const TipDetail = ({ match }) => {
         const decode = jwtDecode(token);
         setUser(decode.sub);
 
-        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/1`)
             .then(r => {
                 setData(r.data.tipDetail);
                 setComments(r.data.commentsList);
-                console.log(r.data)
+                setHeartsCnt(r.data.tbHeart);
+                console.log(">>>>>>>>>>>>>>>>>" + JSON.stringify(r.data.tipDetail));
             })
     }, [])
 
     const insert = (e) => {
         e.preventDefault();
         if (temp.length >= 100) {
-            Swal.fire({
-                icon: 'error',
-                title: '글자수가 100자를 초과합니다.',
-                text: '제한된 글자수에 맞게 다시 작성해주세요.'
-            })
+            alert(`작성하신 댓글의 글자수가 100자를 초과합니다 \n 제한된 글자수에 맞게 다시 작성해주세요.`);
         } else {
-            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comment`,
                 { "tbIdx": tb_idx, "tbcComments": temp },
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } }
             ).then(() => {
                 console.log("asdasdasd")
-                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
+                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/comments/${tb_idx}`)
                     .then(r => {
                         console.log(r.data)
                         setComments(r.data)
@@ -67,40 +74,21 @@ const TipDetail = ({ match }) => {
 
     const handlerdelete = () => {
         if (user == data.userId || user == 'admin') {
-            axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
+            axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
                 .then(() => {
-                    Swal.fire(
-                        'Success!',
-                        '정상적으로 삭제되었습니다.',
-                        'success'
-                    )
+                    alert("성공적으로 삭제 되었습니다.")
                     history.push('/tip/list')
 
                 })
                 .catch(() => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '삭제에 실패했습니다.',
-                        text: '다시 시도해주세요.'
-                    })
+                    alert("삭제에 실패했습니다.")
                 })
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: '삭제에 실패했습니다.',
-                text: '작성자만 삭제 가능합니다.'
-            })
+            alert('작성자만 삭제 가능합니다.');
             history.push('/')
         }
-    }
-    const handlerHeart = () =>{
-        axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/heart/${tb_idx}`)
-        .then((r)=>{
-            setData({...data, tbHeart:data.tbHeart+1})
-        }).catch(()=>{
-            alert("오류가 발생하였습니다.")
-        })
+
     }
 
     return (
@@ -126,6 +114,17 @@ const TipDetail = ({ match }) => {
                 </ul>
             </div>
             <div className={style.line}></div>
+            <div className={style.heartbox}> 
+            {/* <HeartButton like={like} onClick={toggleLike}/> */}
+                            {/* <TipHeartCnt tbIdx={tb_idx} /> */}
+                            {/* <div className={style.heartSection}> */}
+                            
+                            <TipHeartCnt tbIdx={tb_idx} />
+                        {/* </div> */}
+                        </div>
+             
+            
+            <div className={style.line}></div>
             <div className={style.comment}><h2>댓글</h2></div>
             <div className={style.commentall}>
                 {comments.map((data, idx) => {
@@ -147,5 +146,6 @@ const TipDetail = ({ match }) => {
         </div>
     )
 }
+// }
 
 export default TipDetail;

@@ -60,14 +60,14 @@
 }
 
 /* 좋아요 하트를 담는 div */
-/* .heartbox {
+.heartbox {
     float:left;
     margin-top:20px;
-    margin-left: 560px;
+    margin-left: 280px;
 }
 .heartbox i {
     font-size:40px;
-} */
+}
 
 /*좋아요부분 박스 */
 .likesBox {
@@ -77,7 +77,7 @@
 }
 
 /*좋아요 하트 버튼*/
-.heartSection button {
+.heartSection-button {
     color: #DB124C;
     border: 0;
     background-color: transparent;
@@ -203,4 +203,23 @@
 } */
 .com div:first-child {
     border-top: none;
+}
+
+
+.Heart {
+
+    position: relative;
+    width: 80px;
+    height: 40px;
+    padding-right: 30px;
+    /* color: #DB124C; */
+}
+
+.HeartAfter {
+    text-align: center;
+    position: relative;
+    width: 80px;
+    height: 40px;
+    padding-right: 30px;
+    color: #DB124C;
 }
