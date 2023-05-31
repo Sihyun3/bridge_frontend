@@ -34,7 +34,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
         console.log(decodedToken);
         // setUserNickname(decodedToken.userNickname);
 
-        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}`)
         // axios.get(`https://localhost:8080/api/tipdetail/${tbIdx}/getHeart`)
             .then(response => {
                 console.log(response.data.tbHeart);
@@ -51,7 +51,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
 
         if (!heartUpdate) {
             setHeartCnt(heartCnt + 1)
-            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/Heart`,
+            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/Heart`,
             // axios.put(`https://localhost:8080/api/tipdetail/${tbIdx}/heart`,
                 { tbIdx , tbHeart })
                 .then(response => {
@@ -65,7 +65,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
                 });
         } else if (heartUpdate) {
             setHeartCnt(heartCnt - 1)
-            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/unlike`,
+            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/unlike`,
             // axios.put(`https://localhost:8080/api/tipdetail/${tbIdx}/unHeart`,
                 { tbIdx , tbHeart })
                 .then(response => {
