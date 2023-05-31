@@ -200,7 +200,7 @@ const DoingDetail = ({ match }) => {
     const submitComment = (cdIdx) => {
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/insert/CommissionComment/${cdIdx}`, { userId, "ccContents": comment, cdIdx })
             .then(r => {
-                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
+                axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/get/CommissionComment/${cdIdx}`)
                     .then(r => {
                         setCommentList(r.data);
                         setOpen(true);

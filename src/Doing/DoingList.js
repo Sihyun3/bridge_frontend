@@ -42,7 +42,7 @@ const DoingList = () => {
         const fetchProfileImages = async () => {
             const promises = userList.map((list) => {
                 const userIdToFetch = userId !== list.userId2 ? list.userId2 : list.userId1;
-                return axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userIdToFetch}`);
+                return axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${userIdToFetch}`);
             });
 
             try {
