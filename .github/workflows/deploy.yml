@@ -48,4 +48,11 @@ jobs:
             --recursive \
             --region ap-northeast-2 \
             ./build s3://${{env.S3_BUCKET_NAME}}
+            
+      - name: Invalidate CloudFront Cache # 새로 리소스를 업데이트할 때 기존 캐시 무효화
+        uses: chetan/invalidate-cloudfront-action@master
+        env:
+          AWS_DISTRIBUTION: E6T7MRWN3K12L
+          PATHS: '/*'
+        continue-on-error: true
 
