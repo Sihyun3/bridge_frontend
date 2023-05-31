@@ -20,7 +20,7 @@ const TipList = () => {
             history.push('/login');
             return;
         }
-        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
             .then(r => {
                 console.log(">>>>>>>>>>" + r.data);
                 // setData(r.data);
@@ -57,10 +57,13 @@ const TipList = () => {
 
 
 
+
+
+
     const [heartsList, setHeartsList] = useState([]);
     // useEffect(() => {
 
-    //     axios.get('http://localhost:8080/api/tiplist/heartsList')
+    //     axios.get('https://localhost:8080/api/tiplist/heartsList')
     //         .then(response => {
     //             console.log(response);
     //             setData(response.data);
