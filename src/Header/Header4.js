@@ -105,7 +105,7 @@ function Header4({ isLogin, setIsLogin }) {
                             <div className={style.rightContents}>
                                 <div className={style.pointbox}>
                                     
-                                    <li> <a className={style.point}>{userPoint}<Icon icon="mdi:coins" color="#fcee26" /></a></li>
+                                    <li> <a className={style.point}>{userPoint}<Icon icon="mdi:coins" color="#fcee26" style={{position:'absolute' , marginTop:'1px' , marginLeft:'2px'}}/></a></li>
                                     <div className={style.drop}>
                                         <Link to="/partner/charge">충전하기</Link>
                                         <Link to="/deal/list">거래내역</Link>

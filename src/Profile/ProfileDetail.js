@@ -55,20 +55,20 @@ function ProfileDetail({}) {
                 <div className={style.profile}>
                     <img className={style.profileIMG} src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
                     <span className={style.name}>{userInfo.userId}</span>
-                    {
+                    {/* {
                         a == 0 &&
                         <img src={certiMark} className={style.certi}></img>
-                    }
-                    <p style={{ marginTop: "10px", marginBottom: "10px" }}>{data.userPosition}</p>
+                    } */}
+                    <p style={{ marginTop: "20px", marginBottom: "20px", fontWeight: "bold", fontSize: "18px"}}>{data.userPosition}</p>
 
-                    <p className={style.comment}>
+                    <div className={style.comment}>
                         {data.userIntroduction}
-                    </p>
+                    </div>
 
                     <p>
                         {
                             Array.isArray(tag) && tag.map((d) => {
-                                return (<span>#{d.tag}</span>)
+                                return (<span style={{fontWeight: "bold", fontSize: "17px"}}>#{d.tag}</span>)
 
                             })
                         }
@@ -76,8 +76,8 @@ function ProfileDetail({}) {
 
                     <p className={style.link} onClick={() => { window.open('https://google.co.kr', '_blank') }}>{data.userSite}</p>
 
-                    <Link to="#">   <MailOutline sx={{ fontSize: 24 }} /> </Link>
-                    <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 }} /></Link>
+                    <Link to="/chatting">   <MailOutline sx={{ fontSize: 24 , marginRight: "15px"}} /> </Link>
+                    <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24, marginRight: "15px"}} /></Link>
                     <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
                 </div>
                 
@@ -92,9 +92,11 @@ function ProfileDetail({}) {
                         {data.userPortfolio && <Viewer initialValue={data.userPortfolio}></Viewer>}
                     </div>
                 </div>
+                <hr className={style.hr}></hr>
                 <div className={style.review}>
-                    <p style={{ fontSize: "20px", marginTop: "20px" }}>후기</p>
-                    {reviewList.map(list => {
+                    <p style={{ fontSize: "22px", marginTop: "20px", fontWeight: "bold" }}>후기</p>
+                    {console.log(reviewList)}
+                    {reviewList.length != 0 ? reviewList.map(list => {
                         return(
                             <div className={style.reviewdetail}>
                             {/* <p className={style.reviewtitle}>작업물 제목</p> */}
@@ -103,7 +105,7 @@ function ProfileDetail({}) {
                             </p>
                         </div>
                         )
-                    })}
+                    }) : <div className={style.reviewnone}>후기가 없습니다.</div>}
                 </div>
             </div>
         </>

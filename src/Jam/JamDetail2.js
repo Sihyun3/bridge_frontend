@@ -244,7 +244,7 @@ const JamDetail = ({ match }) => {
                     }
                 </div>
 
-                <div style={{ margin: "0 auto", width: "900px" }}>
+                <div style={{ margin: "0 auto", width: "1000px" }}>
                     <input type="text" value={comment} onChange={handleChangeComment} className={style.writeComment}></input>
                     <button onClick={handleCommentSubmit} className={style.finish} >등록</button>
                 </div>

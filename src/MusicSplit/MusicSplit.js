@@ -25,7 +25,7 @@ const MusicSplit = () => {
   const [music, setMusic] = useState('');
 
 
- 
+
 
 
   // 분리할 음원 파일 업로드
@@ -112,6 +112,8 @@ const MusicSplit = () => {
         });
     }, 1000);
   };
+
+  
   useEffect(() => {
     console.log(files)
   }, [])
@@ -160,7 +162,7 @@ const MusicSplit = () => {
 
                     </span>
 
-                    
+
                     <div className={style.fileName}>
                       <input className={style.upload_file} type="file" name="profile_files" multiple="multiple" onChange={(e) => setMusic(e.target.files)} />
                       {isLoading && <div className={style.splitStatus}> 분리 중 입니다.</div>}
@@ -181,10 +183,10 @@ const MusicSplit = () => {
 
 
                     <button className={style.split} onClick={startSplit}>분리 시작</button>
-                    
 
 
-                    
+
+
 
 
                     {/* {isLoading && <div className={style.splitStatus}> 분리중입니다.</div>}
@@ -206,18 +208,18 @@ const MusicSplit = () => {
 
         <div>
 
-        {!clicked && <div className='container clearfix'>
-         <div className={style.info}>
-          <h2>음원 분리</h2>
-          <h3>Music Split</h3>
-          <p>1. '선택된 파일 없음'을 클릭해 파일을 넣는다.</p><br/>
-          <p>2. 제출버튼을 클릭해 확인한다.</p><br/>
-          <p>3. 분리 시작 버튼을 누른 뒤 잠시 기다린다.</p><br/>
-          <p>4. '분리가 완료되었습니다.'라는 문장이 나오면 분리 확인 버튼을 누른다.</p><br/>
-          </div>
-        </div>}
+          {!clicked && <div className='container clearfix'>
+            <div className={style.info}>
+              <h2>음원 분리</h2>
+              <h3>Music Split</h3>
+              <p>1. '선택된 파일 없음'을 클릭해 파일을 넣는다.</p><br />
+              <p>2. 제출버튼을 클릭해 확인한다.</p><br />
+              <p>3. 분리 시작 버튼을 누른 뒤 잠시 기다린다.</p><br />
+              <p>4. '분리가 완료되었습니다.'라는 문장이 나오면 분리 확인 버튼을 누른다.</p><br />
+            </div>
+          </div>}
 
-        
+
           <ul className={style.splitIng}>
             {/* 분리 상태 메세지 */}
             {/* {isLoading && <div> 분리중입니다.</div>}
@@ -236,10 +238,10 @@ const MusicSplit = () => {
                 return (
                   <>
                     <div className={style.inst_list}>
-                      <li className={style.instruments}><a style={{marginTop:'40px', fontWeight:'600', letterSpacing:'0.5px'}} href={url}>{fn}<br/><br/><Icon icon="bx:download" color="#141515" width="18" /></a>
+                      <li className={style.instruments}><a style={{ marginTop: '40px', fontWeight: '600', letterSpacing: '0.5px' }} href={url}>{fn}<br /><br /><Icon icon="bx:download" color="#141515" width="18" /></a>
 
-                      
-                      
+
+
                       </li>
                       {/* <Waveform   src={`http://localhost:8080/api/getSplitedMusic/${musicUUID}/${fn}`} /> */}
                       {
@@ -270,7 +272,7 @@ const MusicSplit = () => {
           </ul>
 
         </div>
-     
+
 
       </section>
     </>
