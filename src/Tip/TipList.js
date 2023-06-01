@@ -1,4 +1,3 @@
-
 import style from './TipList.module.css'
 import searchImg from '../Admin-Notice/searchImg.png'
 import '../reset.css'
@@ -13,6 +12,8 @@ const TipList = () => {
     const history = useHistory();
     const [filteredDatas, setFilteredDatas] = useState([]);
     const [data, setData] = useState([]);
+
+
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
@@ -77,7 +78,7 @@ const TipList = () => {
 
     // const [heartsList, setHeartsList] = useState([data]);
     // const arr = useState([heartsList]);
-    const [temp, setTemp] = useState('')
+    const [temp,setTemp] = useState('')
     const handleHeartClick = (e) => {
         // heartsList.sort((a, b) => b - a);
         // console.log(heartsList);
@@ -88,14 +89,14 @@ const TipList = () => {
         // setTemp("d");
         console.log(temp);
     };
-
+ 
     const handlerDesc = (d) => {
-        if (data == '') {
+        if(data == ''){
             const temp = d.sort((a, b) => { return (b.tbIdx - a.tbIdx) })
-            setData([...temp]);
-        } else if (data != '') {
+            setData([... temp]);
+        }else if(data != ''){
             const temp = data.sort((a, b) => { return (b.tbIdx - a.tbIdx) })
-            setData([...temp]);
+            setData([... temp]);
         }
 
     }
@@ -109,7 +110,7 @@ const TipList = () => {
     return (
         <>
             <div className={style.box1} >
-                <h1>게시판</h1>
+                <h1>Community</h1>
             </div>
             <div className='container clearfix'>
                 <div className={style.topBox}>

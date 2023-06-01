@@ -13,37 +13,12 @@ import base from '../img/base.png'
 import drum from '../img/drum.png'
 import piano from '../img/piano.png'
 import elseinstrument from '../img/elseinstrument.png'
+// import VolumePlugin from "wavesurfer.js/dist/plugin/wavesurfer.volume.min";
 
 
 
 import { Pause, PlayArrow, VolumeUpRounded } from "@mui/icons-material";
 import { blue, grey } from "@mui/material/colors";
-
-const formWaveSurferOptions = ref => ({
-    container: ref,
-    waveColor: "#eee",
-    progressColor: "LightBlue",
-    cursorColor: "OrangeRed",
-    barWidth: 6,
-    barRadius: 3,
-    responsive: true,
-    height: 60,
-    normalize: true,
-    partialRender: true,
-    interact: true,
-    plugins: [
-        CursorPlugin.create({
-            showTime: true,
-            opacity: 1,
-            customShowTimeStyle: {
-                'background-color': '#000',
-                color: '#fff',
-                padding: '2px',
-                'font-size': '10px'
-            }
-        })
-    ]
-});
 
 const Waveform = forwardRef((props, ref) => {
     const waveformRef = useRef(null);
@@ -52,6 +27,37 @@ const Waveform = forwardRef((props, ref) => {
     const [volume, setVolume] = useState(0.5);
 
     const url = props.src
+
+    useEffect(() => { console.log("첫번째이펙트") }, [])
+
+    const formWaveSurferOptions = ref => ({
+        container: ref,
+        waveColor: "#eee",
+        progressColor: "LightBlue",
+        cursorColor: "OrangeRed",
+        barWidth: 6,
+        barRadius: 3,
+        responsive: true,
+        height: 60,
+        normalize: true,
+        partialRender: true,
+        interact: true,
+        plugins: [
+            CursorPlugin.create({
+                showTime: true,
+                opacity: 1,
+                customShowTimeStyle: {
+                    'background-color': '#000',
+                    color: '#fff',
+                    padding: '2px',
+                    'font-size': '10px'
+                }
+            })
+            // VolumePlugin.create()
+        ]
+    });
+
+
 
     //추가
     let [currentTime, setCurrentTime] = useState('');
@@ -135,7 +141,10 @@ const Waveform = forwardRef((props, ref) => {
 
         if (newVolume) {
             setVolume(newVolume);
-            wavesurfer.current.setVolume(newVolume || 1);
+            // wavesurfer.current.setVolume(newVolume || 1);
+            wavesurfer.current.setVolume(newVolume);
+            // console.log(">>>>>>>>>>>" + volume);
+            // console.log("=============" + wavesurfer.current.getVolume())
         }
     };
 
@@ -182,22 +191,22 @@ const Waveform = forwardRef((props, ref) => {
                 {/* style={{ marginTop: 20 }} */}
                 {/* <span className={style.pauseTime}> {a}</span> */}
                 <div style={{ float: "left", marginTop: "-32px" }} className="clearfix">
-                    <img alt="악기 이미지" style={{width:"118px",height:"123px"}} src={img} />
+                    <img alt="악기 이미지" style={{ width: "118px", height: "123px" }} src={img} />
                     <span alt="재생 버튼" style={{ marginLeft: 40, marginTop: 44, float: "right" }}> <button onClick={handlePlayPause}>{!playing ? <PlayArrow sx={{ fontSize: 40, color: blue[500] }} /> : <Pause sx={{ fontSize: 40, color: blue[500] }} />}</button></span>
-                    <div >
+                    {/* <div >
                         <label htmlFor="volume"><VolumeUpRounded sx={{ color: grey[400], fontSize: 24 }} /></label>
                         <input
                             type="range"
                             id="volume"
                             name="volume"
-                            min="0.01"
+                            min="0"
                             max="1"
                             step=".025"
                             onChange={onVolumeChange}
-                            defaultValue={volume}
+                            // value={volume}
 
                         />
-                    </div>
+                    </div> */}
                 </div>
 
                 <div style={{ width: 800, marginLeft: 220 }}>

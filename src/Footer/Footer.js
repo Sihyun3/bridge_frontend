@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import FacebookIcon from './FooterIcons/Facebook.svg';
 import InstagramIcon from './FooterIcons/Instagram.svg';
 import TwitterIcon from './FooterIcons/Twitter.svg';
+import GithubIcon from './FooterIcons/Github.svg';
 import BridgeBlackLogo from './FooterIcons/BridgeBlackLogo.png';
 
+
+    const url = "https://github.com/Sihyun3/bridge_frontend"
 
 
 
@@ -26,6 +29,10 @@ import BridgeBlackLogo from './FooterIcons/BridgeBlackLogo.png';
 
                                 <a className={style.socialbtn}></a>
                                     <img src={TwitterIcon}></img>
+
+                                <button className={style.socialbtn} style= {{bottom: '8px' , left: '12px'}}onClick={()=>{window.open(url)}}>
+                                    <img src={GithubIcon}></img></button>
+                                    
                                     
                         </div>
 

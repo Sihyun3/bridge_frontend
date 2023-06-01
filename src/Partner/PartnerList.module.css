@@ -139,6 +139,10 @@
 .buttonbox button:hover {
     font-weight: bold;
 }
+
+.page {
+    margin-left: 600px;
+}
 /*파트너 찾기 버튼 hover*/
 /* .buttonbox:hover:after {
     width: 50%

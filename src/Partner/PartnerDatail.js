@@ -16,6 +16,7 @@ const PartnerDatail = ({ match }) => {
     const [tag, setTag] = useState([]);
     const history = useHistory();
     const [userId, setUserId] = useState('');
+    const [writer, setWriter] = useState('');
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
@@ -34,6 +35,10 @@ const PartnerDatail = ({ match }) => {
             .then((response) => {
                 setData(response.data.partnerList);
                 setTag(response.data.partnerTag);
+                const user = response.data.partnerList.userId; 
+                axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${user}`)
+                    .then((r) => {console.log(">>>>>>>>>>>" + r.data.profile[0]); setWriter(r.data.profile[0]);})
+                    .catch((e) => { console.log(e) })
             })
             .catch((error) => {
                 console.log(error);
@@ -88,7 +93,8 @@ const PartnerDatail = ({ match }) => {
                     </div>
                 </Link>
                 <div className={style.writer}>
-                    <Link to={`/profile/detail/${data.userId}`}> <img className={style.writerimg} src={writer} />
+                    <Link to={`/profile/detail/${data.userId}`}> <img className={style.writerimg} 
+                    src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${writer.profileImg}.jpg`} />
                         <p>{data.userId}</p> </Link>
                 </div>
                 <div className={style.imgbox}>

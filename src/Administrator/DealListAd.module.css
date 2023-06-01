@@ -215,11 +215,16 @@ td {
 }
 /*돋보기 이미지 */
 .searchImg {
-    width:26px;
-    height:26px;
-    margin: 0px 0px;
-    padding: 0px 0px;
-    position: absolute;
-    bottom: 790px;
-    right: 110px;
+    /* width:26px; */
+    height:24px;
+    /* margin: 0px 0px; */
+    /* padding: 0px 0px; */
+    /* position: absolute; */
+    /* bottom: 790px; */
+    /* right: 110px; */
+    padding: 2px;
+    margin-left: 10px;
+    margin-bottom: -5px;
+    cursor: pointer;
+
 }

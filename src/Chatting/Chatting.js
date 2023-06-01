@@ -144,7 +144,7 @@ const Chatting = ({ match }) => {
                                             <img
                                                 src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg}.jpg`}
                                                 className={style.profileIcon}
-                                                alt="프로필"
+                                                
                                             />
                                         </div>
                                         <div className={style.profileContent}>
@@ -160,8 +160,9 @@ const Chatting = ({ match }) => {
                         <div className={style.topText}>
                             <div className={style.receiver}>
                                 <img src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${receiverImg}.jpg`} className={style.chatProfile} alt="프로필" />
-                                <div className={style.chatName}>{receiver}</div>
+                                {/* <div className={style.chatName}>{receiver}</div> */}
                             </div>
+                            <div className={style.chatName}>{receiver}</div>
                         </div>
                         <div className={style.chat}>
                             <div className={style.chatbox}>
@@ -174,18 +175,31 @@ const Chatting = ({ match }) => {
                                 })}
                             </div>
                             <div className={style.chatFoot}>
-                                <button onClick={handleHand} className={style.handButton}>
-                                    <Icon icon="la:handshake" color="#aaa" width="24" />
-                                </button>
-                                <input
+                            <input
                                     type="text"
                                     onChange={(e) => setChat(e.target.value)}
                                     value={chat}
                                     className={style.chatInput}
                                 />
+
+                                {/* <div className={style.v_line}> */}
+                                <button onClick={handleHand} className={style.handButton}>
+                                    <Icon icon="la:handshake" color="#aaa" width="24" />
+                                </button>
+
+                               
+
+
+                                {/* <input
+                                    type="text"
+                                    onChange={(e) => setChat(e.target.value)}
+                                    value={chat}
+                                    className={style.chatInput}
+                                /> */}
                                 <button className={style.sendButton} onClick={publish}>
                                     <Icon icon="mingcute:send-fill" color="#fcfcfc" width="24" />
                                 </button>
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,8 @@ import Waveform from './Waveform.js';
 import { Link } from "react-router-dom";
 import style from './DoingDetail.module.css';
 import { Send } from "@mui/icons-material";
+import Swal from "sweetalert2";
+
 const DoingDetail = ({ match }) => {
     const { cidx } = match.params;
     const history = useHistory();
@@ -22,18 +24,24 @@ const DoingDetail = ({ match }) => {
     const [commentList, setCommentList] = useState([]);
     const [open, setOpen] = useState(false);
     const [uuid, setUuid] = useState('');
+    const [login, setLogin] = useState('');
 
 
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert('로그인이 필요합니다. 로그인해주세요');
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login');
             return;
         }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
+        setLogin(decode_token.sub);
 
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
             .then(res => {
@@ -60,7 +68,11 @@ const DoingDetail = ({ match }) => {
         let formData = new FormData();
         for (let i = 0; i < files.length; i++) {
             if (!files[i].type.includes('audio')) {
-                alert(`음악 파일만 업로드 가능합니다`)
+                Swal.fire({
+                    icon: 'info',
+                    title: '음악 파일만 업로드 가능합니다',
+                    text: '다시 시도해주세요.'
+                })
                 return;
             }
             formData.append("files", files[i]);
@@ -73,7 +85,6 @@ const DoingDetail = ({ match }) => {
                 setUuid(response.data.uuid);
                 axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
                     .then(res => {
-                        // console.log(">>>>" + res.data);
                         setList(res.data);
                         setInputText('');
                         setMusic([]);
@@ -83,7 +94,11 @@ const DoingDetail = ({ match }) => {
                     });
             })
             .catch(() => {
-                alert(`업로드 중 오류가 발생했습니다.`);
+                Swal.fire({
+                    icon: 'error',
+                    title: '업로드 중 오류가 발생했습니다.',
+                    text: '다시 시도해주세요.'
+                })
             });
     };
 
@@ -222,9 +237,9 @@ const DoingDetail = ({ match }) => {
 
                     </div>
                     <Link to='/partner/doing'><button> 목록으로 </button></Link>
-                    
+
                     {money == 0 ? <Link to={`/partner/payment/${userId2}`}><button> 안심결제 </button></Link> : ""}
-                   
+
                     {progress == 0 ? <button onClick={handleEnd}> 작업완료 </button> : ""}
                 </div>
 
@@ -272,7 +287,7 @@ const DoingDetail = ({ match }) => {
                                                             onChange={(e) => setEditText(e.target.value)}
                                                         />
                                                         <input className={style.filein2} type="file" multiple="multiple" onChange={(e) => setMusic(e.target.files)} />
-                                                       {/* 기존에 업로드한 파일명 */}
+                                                        {/* 기존에 업로드한 파일명 */}
                                                         {/* {music.length === 0 && cdFile && (
                        
                                                       <div>
@@ -333,7 +348,9 @@ const DoingDetail = ({ match }) => {
 
 
                                                     {/* <div className={style.btn}> */}
-                                                    <button onClick={() => handleDel(cdIdx)}>삭제</button>  &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    {login == userId && <button onClick={() => handleDel(cdIdx)}>삭제</button>}  &nbsp;&nbsp;&nbsp;&nbsp;
+
+
                                                     {editIdx === cdIdx ? (
                                                         <>
                                                             <button onClick={() => handleSave(cdIdx)}>저장</button>  &nbsp;
@@ -341,7 +358,7 @@ const DoingDetail = ({ match }) => {
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <button onClick={() => handleEditBtn(cdIdx)}>수정</button>
+                                                            {login == userId && <button onClick={() => handleEditBtn(cdIdx)}>수정</button>}
                                                         </>
                                                     )}
 

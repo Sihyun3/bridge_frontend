@@ -16,7 +16,11 @@ const DoingList = () => {
 
     useEffect(() => {
         if (sessionStorage.getItem('token') == null) {
-            alert('로그인이 필요합니다. 로그인해주세요');
+            Swal.fire({
+                icon: 'error',
+                title: '로그인이 필요합니다.',
+                text: '로그인 페이지로 이동합니다.',
+            })
             history.push('/login');
             return;
         }
@@ -54,17 +58,12 @@ const DoingList = () => {
     }, [userList, userId]);
 
     const handleListDel = (cIdx) => {
-        console.log("+++++++++++++++++++++삭제버튼 눌림" )
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cIdx}`)
             .then((r) => {
-                console.log("++++++++++프로그레스 받아옴")
-                console.log("===========" + r.data[0].progress)
                 if (r.data[0].progress == true) {
                     axios
                         .put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/delCommissionList/${cIdx}`)
                         .then((r) => {
-                            console.log("목록에서 삭제");
-                            // 삭제한 항목을 제외한 나머지 목록만 업데이트
                             const updatedList = userList.filter((user) => user.cidx !== cIdx);
                             setUserList(updatedList);
                         })
@@ -72,7 +71,11 @@ const DoingList = () => {
                             console.log("cIdx>>>>>>>>>" + cIdx);
                         });
                 } else if (r.data[0].progress == false) {
-                    alert(`아직 작업이 진행중입니다.`);
+                    Swal.fire({
+                        icon: 'info',
+                        title: '목록 삭제에 실패했습니다.',
+                        text: '아직 작업이 진행중입니다. 완료 후 시도해주세요.'
+                    })
                 }
             })
             .catch((e) => {
@@ -90,10 +93,13 @@ const DoingList = () => {
                     <div className={style.profileimg}>
                         {profileImg.map((img, index) => {
                             return (
-                                <img
+                                <>
+                                {console.log(">>>>>>>>>>" + img[0].userId)}
+                                <Link to={`/profile/detail/${img[0].userId}`}><img
                                     key={index}
                                     src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${img[0].profileImg}.jpg`}
-                                />
+                                /></Link>
+                                </>
                             );
                         })}
                     </div>

@@ -58,7 +58,7 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
     /* padding-top: 50px; */
     /* padding-left: 120px; */
     /* margin-bottom: 30px; */
-    padding: 26px;
+    padding: 32px;
     font-family: 'SUITE-Regular';
     background-color: #FFF;
     position: sticky;
@@ -92,13 +92,18 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
 /* 프로필 내 이미지 박스 */
 .profileImg{
     float: left;
-    padding-left: 30px;
+    margin-left: 30px;
+    width: 32px;
+    height: 32px;
+    border-radius: 70%;
+    overflow: hidden;
 }
 
 /* 프로필 내 이미지 아이콘 */
 .profileIcon {
-    width: 32px;
-    height: 32px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* 프로필 내 컨텐츠 박스 */
@@ -118,36 +123,40 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
 
 /* 채팅 박스 최상위 텍스트 박스 */
 .topText {
-    padding-top: 20px;
-    /* margin-left: 65px; */
-    /* padding-left: 300px; */
+    padding: 20px 0 0 20px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     box-shadow: 0px 2px 3px 0px #EAEAEA;
 }
 
 .receiver {
-    padding-left: 20px;
-    padding-bottom: 10px;
+    /* padding-left: 20px; */
+    /* padding-bottom: 10px; */
+    /* float: left; */
+    width: 48px;
+    height: 48px;
+    border-radius: 70%;
+    overflow: hidden;
 }
 
 
 /*  위 텍스트 박스 내 아이콘 */
 .chatProfile {
-    width: 48px;
-    height: 48px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* 위 텍스트 박스 닉네임 텍스트 */
 .chatName {
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 24px;
     /* margin-bottom: 12px; */
-    margin-left: 10px;
+    margin-left: 60px;
     position: relative;
-    top: -15px;
+    top: -36px;
     font-family: 'SUITE-Regular';
-    width: 350px;
+    width: 600px;
 }
 
 /* 채팅 수평선 */
@@ -227,7 +236,7 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
     /* position: relative; */
     /* margin-top: 32px;  */
     /* margin-left:32px; */
-    height: 77px;
+    height: 66px;
     background-color: #F2F5F9;
 }
 
@@ -254,8 +263,8 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
     position: relative;
     /* right: 84px; */
     /* top:6px; */
-    left: 610px;
-    bottom: 58px;
+    left: 624px;
+    bottom: 42px;
     background: #2367E2;
     border-radius: 6px;
     box-shadow: 0px 3px 1px 1px #f6f6f6;
@@ -272,9 +281,11 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
     width: 640px;
     height: 48px;
     border-radius: 10px;
-    background-color: #fcfcfc;
+    /* background-color: #fcfcfc; */
     border: none;
-    margin: 16px;
+    /* margin: 16px; */
+    /* margin-top: 30px; */
+    margin-left: 36px;
     font-family: 'SUITE-Regular';
     font-size: 16px;
     padding:0px 12px;
