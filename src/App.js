@@ -79,7 +79,7 @@ function App() {
       <Route path="/partner/list" component={PartnerList} exact={true} />
       <Route path="/partner/write" component={PartnerWrite} exact={true} />
       <Route path="/partner/detail/:crIdx" component={PartnerDatail} exact={true} />
-      <Route path="/partner/charge" component={Charge} exact={true} />
+      <Route path="/partner/charge/:total" component={Charge} exact={true} />
 
       <Route path="/tip/list" component={TipList} exact={true} /> {/* 좋아요 / 좋아요순 기능 구현 x / DESC  */}
       <Route path="/tip/write" component={TipWrite} exact={true} />
