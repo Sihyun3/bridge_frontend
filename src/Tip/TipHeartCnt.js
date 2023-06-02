@@ -51,7 +51,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
 
         if (!heartUpdate) {
             setHeartCnt(heartCnt + 1)
-            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/Heart`,
+            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/heart`,
             // axios.put(`https://localhost:8080/api/tipdetail/${tbIdx}/heart`,
                 { tbIdx , tbHeart })
                 .then(response => {
@@ -65,7 +65,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
                 });
         } else if (heartUpdate) {
             setHeartCnt(heartCnt - 1)
-            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/unlike`,
+            axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/unHeart`,
             // axios.put(`https://localhost:8080/api/tipdetail/${tbIdx}/unHeart`,
                 { tbIdx , tbHeart })
                 .then(response => {
