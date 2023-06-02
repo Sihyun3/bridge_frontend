@@ -39,7 +39,7 @@ const Chatting = ({ match }) => {
 
     const connect = () => {
         client.current = new StompJs.Client({
-            brokerURL: `ws://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/ws`,
+            brokerURL: `wss://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/ws`,
             onConnect: () => {
                 // console.log('success');
             },

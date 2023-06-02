@@ -54,7 +54,8 @@ const JamList = () => {
             // console.log(data.ctitle.includes(searchInput))
             return data.ctitle.includes(searchInput)
         });
-        // console.log(filtered);
+        
+        console.log(filtered);
         setFilteredDatas(filtered);
         setPage(1);
     }
@@ -92,21 +93,6 @@ const JamList = () => {
                             );
                         })
                     }
-                    { filteredDatas !=''  && filteredDatas.map((data) => {
-                        return (
-                            <>
-                                <div className={style.block}>
-                                    <Link to={`/jam/detail/${data.cidx}`}>
-                                        <img className={style.img} src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getMusic/${data.cphoto}.jpg`}></img>
-                                        <p className={style.title}>{data.ctitle}</p>
-                                    </Link>
-                                </div>
-                            </>
-                        );
-                    })
-
-                    }
-
 
                     {
                         filteredDatas == "" && data && data.slice(offset, offset + limit).map((data) => {
