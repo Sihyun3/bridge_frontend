@@ -108,10 +108,10 @@ const LoginTest = ({ setIsLogin }) => {
                                 <span className={style.span2}>SNS 계정으로 간편로그인</span>
                                 <div>
                                     <div className={style.kakaoBtn}>
-                                        <KakaoLogin />
+                                        <KakaoLogin setIsLogin={setIsLogin}/>
                                     </div>
                                     <div className={style.naverBtn}>
-                                        <NaverLogin />
+                                        <NaverLogin setIsLogin={setIsLogin}/>
                                     </div>
                                 </div>
                             </form>
