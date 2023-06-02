@@ -57,8 +57,8 @@ const Login = ({ setIsLogin}) => {
                 <button className={style.loginbutton} onClick={handlerOnClick}>로그인</button>
                 <Link to="/5"><p className={style.signup}>회원가입</p></Link>
                 <p className={style.loginsns}>SNS계정 간편 로그인</p>
-               <div className={style.kakao}> <KakaoLogin /></div>
-                <div className={style.naver}><NaverLogin /></div>
+               <div className={style.kakao}> <KakaoLogin setIsLogin={setIsLogin}/></div>
+                <div className={style.naver}><NaverLogin setIsLogin={setIsLogin}/></div>
             </div>
             </div>
         </>

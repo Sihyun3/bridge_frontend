@@ -34,10 +34,10 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
         // console.log(decodedToken);
         // setUserNickname(decodedToken.userNickname);
 
-        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}`)
+        axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}/getHeart`)
         // axios.get(`https://localhost:8080/api/tipdetail/${tbIdx}/getHeart`)
             .then(response => {
-                // console.log(response.data.tbHeart);
+                console.log(response.data.tbHeart);
                 setHeartCnt(response.data.tbHeart);
             })
             .catch(error => console.log(error));

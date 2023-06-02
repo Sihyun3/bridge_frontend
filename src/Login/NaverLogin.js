@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import './Naver.css'
 import style from './LoginTest.module.css';
 
-const NaverLogin = ({ setGetToken, setUserInfo }) => {
+const NaverLogin = ({ setGetToken, setUserInfo,setIsLogin }) => {
     const naverRef = useRef()
 
 
@@ -53,7 +53,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
                             sessionStorage.setItem("token", response.data);
                             alert('로그인 성공');
                             window.location.href = "/";
-
+                            setIsLogin(true);
                         }
                         else {
                             sessionStorage.clear();

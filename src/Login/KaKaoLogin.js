@@ -14,7 +14,7 @@ import KakaotalkLogo from '../Login/KakaotalkLogo.png';
 
 // const KakaoLogin = ({history}) => {
 
-const KakaoLogin = ({ }) => {
+const KakaoLogin = ({setIsLogin}) => {
     const { Kakao } = window;
 
     const JAVASCRIPT_APP_KEY = '7e512efaee6eeeeca2d427733a82b016';
@@ -96,7 +96,7 @@ const KakaoLogin = ({ }) => {
                                         sessionStorage.setItem("token", response.data);
                                         alert('로그인 성공');
                                         window.location.href = "/";
-
+                                        setIsLogin(true);
                                     }
                                     else {
                                         sessionStorage.clear();
