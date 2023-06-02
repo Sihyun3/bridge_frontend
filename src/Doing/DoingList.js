@@ -68,7 +68,7 @@ const DoingList = () => {
                             setUserList(updatedList);
                         })
                         .catch((e) => {
-                            console.log("cIdx>>>>>>>>>" + cIdx);
+                            console.log(e);
                         });
                 } else if (r.data[0].progress == false) {
                     Swal.fire({
@@ -94,7 +94,7 @@ const DoingList = () => {
                         {profileImg.map((img, index) => {
                             return (
                                 <>
-                                {console.log(">>>>>>>>>>" + img[0].userId)}
+                                {/* {console.log(">>>>>>>>>>" + img[0].userId)} */}
                                 <Link to={`/profile/detail/${img[0].userId}`}><img
                                     key={index}
                                     src={`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${img[0].profileImg}.jpg`}

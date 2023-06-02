@@ -107,7 +107,7 @@ const ProfileWrite = () => {
             data: formData
         })
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 Swal.fire(
                     'Success!',
                     '업로드가 정상적으로 완료되었습니다.',
@@ -116,7 +116,7 @@ const ProfileWrite = () => {
                 history.push(`/profile/detail`);
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 Swal.fire({
                     icon: 'error',
                     title: '업로드 중 오류가 발생했습니다.',
@@ -153,7 +153,7 @@ const ProfileWrite = () => {
                         multiple
                         placeholder='프로필 음악을 첨부해주세요.'
                     />
-                    {console.log("music--->" + music)}
+                    {/* {console.log("music--->" + music)} */}
                 </div>
 
                 <div className={style.button}>

@@ -26,7 +26,7 @@ const DealListAd = () => {
 
     const hadleSearchInput = (e) => { setSearchInput(e.target.value) }
     const handleDate1 = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setDate1(e.target.value)
     }
     const handleDate2 = (e) => { setDate2(e.target.value) }
@@ -56,7 +56,7 @@ const DealListAd = () => {
             .then(res => {
                 setData(res.data);
                 setCurrentDate(new Date());
-                console.log(new Date());
+                // console.log(new Date());
             })
             .catch(err => {
                 console.log(err);
@@ -80,7 +80,7 @@ const DealListAd = () => {
         e.preventDefault();
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/deal`)
             .then(res => {
-                console.log(`거래내역`);
+                // console.log(`거래내역`);
                 setData(res.data);
                 setFilteredDatas(res.data);
             })
@@ -93,7 +93,7 @@ const DealListAd = () => {
         e.preventDefault();
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payList/charge`)
             .then(res => {
-                console.log(`충전내역`);
+                // console.log(`충전내역`);
                 setData(res.data);
                 setFilteredDatas(res.data);
             })
@@ -114,11 +114,11 @@ const DealListAd = () => {
         const day = currentDate.getDate();
         const date = day < 10 ? '0' + day.toString() : day.toString()
 
-        console.log(day + "-" + date)
+        // console.log(day + "-" + date)
 
         setDate1(currentDate.getFullYear() + "-" + ago + "-" + date);
         setDate2(currentDate.getFullYear() + "-" + now + "-" + date);
-        console.log(currentDate.getFullYear() + "-" + ago + "-" + date);
+        // console.log(currentDate.getFullYear() + "-" + ago + "-" + date);
     };
 
 
@@ -140,7 +140,7 @@ const DealListAd = () => {
 
         setDate1(currentDate.getFullYear() + "-" + ago2 + "-" + date);
         setDate2(currentDate.getFullYear() + "-" + now + "-" + date);
-        console.log(date1);
+        // console.log(date1);
     }
 
 

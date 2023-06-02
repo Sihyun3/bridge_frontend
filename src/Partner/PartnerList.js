@@ -46,7 +46,7 @@ const PartnerList = () => {
     axios
       .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openPartnerList`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setPartnerList(response.data.partnerList);
         axios
           .get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/openTagList`)

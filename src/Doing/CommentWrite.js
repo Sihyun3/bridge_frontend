@@ -30,7 +30,7 @@ const CommentWrite = ({ pcIdx, CommentSet}) => {
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/comment/write/${pcIdx}`, data,
             { headers: header })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 if(response.data == 1){
                 alert("댓글 추가 성공");
                 CommentSet(pcIdx);

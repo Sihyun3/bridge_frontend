@@ -31,7 +31,7 @@ const KakaoLogin = ({ }) => {
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
 
         Kakao.Auth.authorize({
-            redirectUri: `https://${process.env.REACT_APP_IP}:80/login`
+            redirectUri: `https://www.bridge-music.life/login`
         });
     };
 
@@ -49,7 +49,7 @@ const KakaoLogin = ({ }) => {
                 'https://kauth.kakao.com/oauth/token', {
                 grant_type: 'authorization_code',                   // 고정
                 client_id: JAVASCRIPT_APP_KEY,                      // 앱 REST API 키
-                redirect_uri: `https://${process.env.REACT_APP_IP}:80/login`,   // 인가 코드가 리다이렉트된 URI
+                redirect_uri: `https://www.bridge-music.life/login`,   // 인가 코드가 리다이렉트된 URI
                 code: code                                          // 인가 코드 받기 요청으로 얻은 인가 코드
             }, {
                 headers: {
@@ -59,14 +59,14 @@ const KakaoLogin = ({ }) => {
             )
                 .then(response => {
 
-                    console.log(response);
+                    // console.log(response);
 
                     const accessToken = response.data.access_token;         // 사용자 액세스 토큰 값
                     setAccessToken(accessToken);
 
                     // 액세스 토큰 값을 할당
                     Kakao.Auth.setAccessToken(accessToken);
-                    console.log(accessToken);
+                    // console.log(accessToken);
 
                     // 사용자 정보 가져오기
                     Kakao.API.request({
@@ -74,7 +74,7 @@ const KakaoLogin = ({ }) => {
                     })
                         .then(response => {
                             // 사용자 정보 로깅
-                            console.log(response);
+                            // console.log(response);
 
                             // 애플리케이션에서 필요한 정보를 추출해서 로컬 스토리지에 저장
                             const { kakao_account } = response;
@@ -91,7 +91,7 @@ const KakaoLogin = ({ }) => {
 
                                     'userEmail' : kakao_account.email })
                                 .then((response) => {
-                                    console.log(response);
+                                    // console.log(response);
                                     if (response.data) {
                                         sessionStorage.setItem("token", response.data);
                                         alert('로그인 성공');

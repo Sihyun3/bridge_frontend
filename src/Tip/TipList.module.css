@@ -29,7 +29,8 @@
 
 /*정렬버튼을 묶는 박스*/
 .leftbox {
-  padding: 30px 0;
+  /* padding: 30px 0; */
+  margin-top: 100px;
   float: left;
 }
 
@@ -41,6 +42,10 @@
   width: 72px;
   border: none;
   /* border-bottom:3px solid #686868; */
+}
+
+.good:hover {
+  font-weight: 600;
 }
 
 /*검색창을 묶는 박스*/
@@ -56,25 +61,25 @@
 /*검색창*/
 .search {
   float: right;
-  height:28px;
-  border:none;
-  /* background-color: #ebebeb; */
-  border-bottom:3px solid #777777;
-  width:240px;
-  /* display: f; */
-  margin-left: 60px;
- font-size: 16px;
+  height: 30px;
+  border: none;
+  width: 270px;
+  font-size: 14px;
   position: relative;
+  border: 1px solid #d6d6d6;
+  border-radius: 20px;
+  letter-spacing: .1rem;
+  padding-left: 10px;
   
 
 }
 /*검색창 돋보기 이미지*/
 .searchImg {
-  width:18px;
-  height:18px;
-  top: 64px;
+  width: 14px;
+  height: 14px;
+  top: 67px;
   position: absolute;
- right:5px;
+  right: 10px;
 }
 
 /*작성 버튼 박스 */
@@ -108,18 +113,24 @@ float: right;
 }
 /*게시글 리스트*/
 .list {
-
-  border-top:1px solid #acacac;
-  /* width:1168px; */
-  width: 100%;
-  height:44px;
-  float: left;
-  padding: 13px;
-  /* margin-right:32px; */
-  padding-left: 12px;
-
-  
+    border-top:1px solid #acacac;
+    /* width:1168px; */
+    width: 100%;
+    height:44px;
+    float: left;
+    padding: 13px;
+    /* margin-right:32px; */
+    padding-left: 12px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
 }
+
+.list:hover {
+  background-color: #F0F0F0;
+}
+
+
+
 /*게시글 리스트 속 글씨*/
 .list a {
   color: black;

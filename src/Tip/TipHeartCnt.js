@@ -31,13 +31,13 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         const decodedToken = jwt_decode(token);
-        console.log(decodedToken);
+        // console.log(decodedToken);
         // setUserNickname(decodedToken.userNickname);
 
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tbIdx}`)
         // axios.get(`https://localhost:8080/api/tipdetail/${tbIdx}/getHeart`)
             .then(response => {
-                console.log(response.data.tbHeart);
+                // console.log(response.data.tbHeart);
                 setHeartCnt(response.data.tbHeart);
             })
             .catch(error => console.log(error));
@@ -55,7 +55,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
             // axios.put(`https://localhost:8080/api/tipdetail/${tbIdx}/heart`,
                 { tbIdx , tbHeart })
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
                     heartUpdateHandler()
 
                 })
@@ -69,7 +69,7 @@ function TipHeartCnt({ match, history, tbIdx, tbHeart }) {
             // axios.put(`https://localhost:8080/api/tipdetail/${tbIdx}/unHeart`,
                 { tbIdx , tbHeart })
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
                     heartUpdateHandler()
 
                 })

@@ -137,12 +137,12 @@ const SignUpTest = ({ history, props }) => {
 
 
 
-    const handlerAuth =(e) => {
+    const handlerAuth = (e) => {
         e.preventDefault();
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
             // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
             .then((r) => {
-                console.log(r.data)
+                // console.log(r.data)
                 setAuth(r.data)
                 Swal.fire({
                     icon: 'success',
@@ -194,14 +194,14 @@ const SignUpTest = ({ history, props }) => {
     const handlerChangeConfirmId = e => {
         if (!/^[a-zA-Z0-9]{8,16}$/.test(userId)) {
             setConfirmIdMessage("아이디 형식이 일치하지 않습니다")
-        }else{
+        } else {
             setConfirmIdMessage(null);
         }
     };
 
     const handlerconfrimPassword = e => {
-        console.log(userPassword);
-        console.log(/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[a-z\d@$!%*#?&]{8,16}$/.test(userPassword))
+        // console.log(userPassword);
+        // console.log(/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[a-z\d@$!%*#?&]{8,16}$/.test(userPassword))
         if (/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[a-z\d@$!%*#?&]{8,16}$/.test(userPassword)) {
             setConfirmMessage(null);
         } else {
@@ -230,18 +230,17 @@ const SignUpTest = ({ history, props }) => {
     const handleSelectLastEmail = (e) => {
         // setSelect(e.target.value);
         let frontmail = userFirstEmail + e.target.value;
-        if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
-            setEmail(frontmail);
-            setEmessage(null);  
+        setSelectEmail(e.target.value);
+        setEmail(frontmail);
+        // setEmessage(null);  
 
-        } else {
-            setEmail(userFirstEmail);
-            setEmessage('이메일 형식이 올바르지 않습니다.');
-        }
     };
 
     const handlerChangeEmail = e => {
+
         setFirst(e.target.value);
+        let frontmail = e.target.value + selectEmail;
+        setEmail(frontmail);
     };
 
 
@@ -353,7 +352,7 @@ const SignUpTest = ({ history, props }) => {
 
                                 <div className={style.MailBox}>
                                     <input className={style.mailBoxInput} type="text" placeholder="이메일" onChange={handlerChangeEmail} />
-                                    <select className={style.selectMailBox}  onChange={handleSelectLastEmail}>
+                                    <select className={style.selectMailBox} onChange={handleSelectLastEmail}>
                                         <option value="@bridge.com">bridge.com</option>
                                         <option value="@naver.com">naver.com</option>
                                         <option value="@gmail.com">gmail.com</option>

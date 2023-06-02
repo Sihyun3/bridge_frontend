@@ -15,8 +15,8 @@ const ToastEditor = ({ title, data }) => {
 
     const handler = (e) => {
         e.preventDefault();
-        console.log("assasasassasasa");
-        console.log(data);
+        // console.log("assasasassasasa");
+        // console.log(data);
         // editorRef.current.getInstance().setHTML(data);
     }
     const submit = (e) => {
@@ -30,8 +30,8 @@ const ToastEditor = ({ title, data }) => {
         const decode = jwtDecode(token);
 
         const files = editorRef.current.getInstance().getHTML();
-        console.log(files);
-        console.log(typeof (title))
+        // console.log(files);
+        // console.log(typeof (title))
         if (!data) {
             if (title.length >= 100) {
                 alert(`제목의 글자수가 100자를 초과했습니다. \n 다시 작성해주세요.`);

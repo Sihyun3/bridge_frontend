@@ -19,6 +19,7 @@ const TipDetail = ({ match }) => {
     const [data, setData] = useState({});
     const [comments, setComments] = useState([]);
 
+
     const tb_idx = match.params.tbIdx;
     const [temp, setTemp] = useState()
     const history = useHistory();
@@ -29,6 +30,7 @@ const TipDetail = ({ match }) => {
     // const [userNickname, setUserNickname] = useState('');
     // const tb_heart = match.params.tbHeart;
     // const [hearts, setHearts] = useState();
+
     const [heartsCnt, setHeartsCnt] = useState();
 
     useEffect(() => {
@@ -83,12 +85,20 @@ const TipDetail = ({ match }) => {
             axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tip/delete/${tb_idx}`,
                 { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
                 .then(() => {
-                    alert("성공적으로 삭제 되었습니다.")
+                    Swal.fire(
+                        'Success!',
+                        '정상적으로 삭제되었습니다.',
+                        'success'
+                    )
                     history.push('/tip/list')
 
                 })
                 .catch(() => {
-                    alert("삭제에 실패했습니다.")
+                    Swal.fire({
+                        icon: 'error',
+                        title: '삭제에 실패했습니다.',
+                        text: '다시 시도해주세요.'
+                    })
                 })
         } else {
             Swal.fire({
@@ -100,131 +110,6 @@ const TipDetail = ({ match }) => {
         }
 
     }
-
-    // // const Post = (props) => {
-    //     const [like, setLike] = useState(false)
-    //     const [hearts, setHearts] = useState();
-    //     useEffect(async () => {
-    //         // ...
-    //       const fetchData = async () => {
-    //         const res = await axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}`,
-    //         { "tbIdx": tb_idx, "tbHeart": tb_heart },
-    //         { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-
-    //         if (res.data.type === 'liked') {
-    //         setLike(true)
-    //         // setHearts(heartsCnt + 1)
-
-    //       } else {
-    //         setLike(false)
-    //       }
-    //       fetchData()
-    //     }
-    //     }, []);
-
-
-    //     // const [hidePassword2, setHidePassword2] = useState(true);
-    // // const [showLockedButton, setShowLockedButton] = useState(true);
-    // const [src, setSrc] = useState(EmptyHeartImg);
-
-    // const toggleLike = () => {
-    //     const res = axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}`)
-
-
-    //     setLike(!like)
-    //     if (!like) {
-    //         setSrc(!EmptyHeartImg);
-    //         // setHeartsCnt(tb_heart);
-    //     } else {
-    //         setSrc(HeartImg);
-    //         // setHeartsCnt(tb_heart);
-    //         // setHeartsCnt(heartsCnt + 1);
-    //     }
-    // }
-
-
-    // axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/delete/${pcIdx}`)
-    //         .then(response => {
-    //             console.log(response);
-    //             if (response.data === "Y") {
-    //                 alert('정상적으로 삭제되었습니다.');
-    //                 window.location.replace(`/17`);
-    //             } else {
-    //                 alert('삭제에 실패했습니다.');
-    //                 return;
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             alert(`삭제에 실패했습니다. (${error.message})`);
-    //             return;
-    //         });
-
-
-    // const toggleLike = async (e) => {
-    //   const res = await axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail`) // [POST] 사용자가 좋아요를 누름 -> DB 갱신
-    //   setLike(!like)
-    // }
-
-
-
-
-
-
-    // function TipHeartCnt({history, tbIdx}) {
-
-
-    //     const [heartUpdate, setHeartUpdate] = useState(false)
-    //     const [heartCnt, setHeartCnt] = useState(0) 
-    //     // const [userNickname, setUserNickname] = useState('');
-
-    //     useEffect(() => {
-    //         const token = sessionStorage.getItem('token');
-    //         const decodedToken = jwt_decode(token);
-    //         console.log(decodedToken);
-    //         // setUserNickname(decodedToken.userNickname);
-
-    //         // axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}`)
-    //         axios.get(`http://localhost:8080/api/tipdetail/${tbIdx}/getHeart`)
-    //             .then(response => {
-    //                 console.log(response);
-    //                 setHeartCnt(response.data.tbHeart);
-    //             })
-    //             .catch(error => console.log(error));
-    //     }, []);
-
-    //     const heartUpdateHandler = () => {
-    //         setHeartUpdate(!heartUpdate)
-    //       }
-
-    //     const heartCountHandler = () => {
-    //         heartUpdateHandler()
-
-    //     if (!heartUpdate) {
-    //         setHeartCnt(heartCnt +1)
-    //         // axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/Heart`,
-    //         axios.put(`http://localhost:8080/api/tipdetail/${tb_idx}/heart`,  
-    //         {tbIdx})
-    //         .then(response => {                           
-    //             console.log(response);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             return;
-    //         });
-    //     } else if (heartUpdate) {
-    //         setHeartCnt(heartCnt -1)
-    //         // axios.put(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/unlike`,
-    //         axios.put(`http://localhost:8080/api/tipdetail/${tb_idx}/unHeart`,  
-    //         {tbIdx})
-    //         .then(response => {                           
-    //             console.log(response);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             return;
-    //         });
-    //     }} 
 
     return (
         <div className='container clearfix' >
@@ -250,10 +135,6 @@ const TipDetail = ({ match }) => {
             </div>
             <div className={style.line}></div>
             <div className={style.heartbox}>
-                {/* <HeartButton like={like} onClick={toggleLike}/> */}
-                {/* <TipHeartCnt tbIdx={tb_idx} /> */}
-                {/* <div className={style.heartSection}> */}
-
                 <TipHeartCnt tbIdx={tb_idx} />
                 {/* </div> */}
             </div>

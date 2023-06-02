@@ -108,7 +108,7 @@
       height: 30px;
       border: none;
       border-bottom: 2px solid #464646;
-      width: 220px;
+      width: 250px;
       display: inline;
       /* margin-right: -9px; */
       font-size: 14px;
@@ -116,18 +116,22 @@
       text-transform: uppercase;
       /* position: absolute; */
       margin-left: -18px;
+      border: 1px solid #d6d6d6;
+      border-radius: 20px;
+      letter-spacing: .1rem;
+      padding-left: 10px;
 }
 
 /*검색창 돋보기 이미지*/
 .searchImg {
     /* margin-top: 24px; */
     /* float: right; */
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     margin-top: 84px;
     /* right: 100px; */
     position: relative;
-    left: 196px;
+    left: 220px;
     margin-bottom: -3px;
 }
 

@@ -31,7 +31,7 @@ const LoginTest = ({ setIsLogin }) => {
                         imageHeight: 60,
                         confirmButtonColor: '#3c3e58'
                     })
-                    console.log(">>>>>>>>>>" + response.data.substr(1))
+                    // console.log(">>>>>>>>>>" + response.data.substr(1))
                     sessionStorage.setItem("token", response.data.substr(1));
                     setIsLogin(true);
                     history.push('/');

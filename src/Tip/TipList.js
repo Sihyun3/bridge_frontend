@@ -22,7 +22,7 @@ const TipList = () => {
         }
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tiplist`)
             .then(r => {
-                console.log(">>>>>>>>>>" + r.data);
+                // console.log(">>>>>>>>>>" + r.data);
                 // setData(r.data);
                 handlerDesc(r.data)
             })
@@ -43,12 +43,12 @@ const TipList = () => {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         const filtered = data.filter(data => {
-            console.log(`>${searchInput}<`)
-            console.log(data.tbTitle.includes(searchInput))
+            // console.log(`>${searchInput}<`)
+            // console.log(data.tbTitle.includes(searchInput))
             return data.tbTitle.includes(searchInput)
         }
         );
-        console.log(filtered);
+        // console.log(filtered);
         setFilteredDatas(filtered);
         setPage(1);
     }
@@ -85,7 +85,7 @@ const TipList = () => {
         const temp = data.sort((a, b) => { return (b.tbHeart - a.tbHeart) });
         setData([...temp]);
         // setTemp("d");
-        console.log(temp);
+        // console.log(temp);
     };
  
     const handlerDesc = (d) => {
@@ -140,8 +140,7 @@ const TipList = () => {
                 <div className={style.tipbox}>
                     {
                         filteredDatas != "" && filteredDatas.slice(offset, offset + limit).map((data) => {
-                            console.log(data.tbIdx)
-                            { console.log("++++++++++" + filteredDatas) }
+
                             return (
 
                                 <Link to={`/tip/detail/${data.tbIdx}`} className={style.list}>

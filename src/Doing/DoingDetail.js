@@ -45,7 +45,7 @@ const DoingDetail = ({ match }) => {
 
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getCommissionDetail/${cidx}`)
             .then(res => {
-                console.log("************" + res.data);
+                // console.log("************" + res.data);
                 setList(res.data);
                 axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getProgress/${cidx}`)
                     .then(r => {

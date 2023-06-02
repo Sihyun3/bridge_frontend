@@ -71,14 +71,12 @@ const PartnerDatail = ({ match }) => {
     const handleChat = (e) => {
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`, { "userId1": userId, "userId2": data.userId })
             .then(res => {
-                console.log(res);
+                // console.log(res);
 
             })
             .catch(error => {
                 console.log(error);
-                console.log(process.env.REACT_APP_IP);
-                console.log(process.env.REACT_APP_PORT);
-                console.log(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chatroom`)
+
             })
         history.push("/chatting")
     }

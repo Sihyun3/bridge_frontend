@@ -41,7 +41,7 @@ const Chatting = ({ match }) => {
         client.current = new StompJs.Client({
             brokerURL: `ws://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/ws`,
             onConnect: () => {
-                console.log('success');
+                // console.log('success');
             },
         });
         client.current.activate();
@@ -59,11 +59,11 @@ const Chatting = ({ match }) => {
         }
         connect();
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
-        // axios.get(`https://192.168.0.47:8080/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
+            // axios.get(`https://192.168.0.47:8080/chatroom`, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
 
             .then(r => {
                 setChatList(r.data.chatting)
-                console.log(">>>>>>>>" + r.data.chatting);
+                // console.log(">>>>>>>>" + r.data.chatting);
                 setSender(r.data.sender)
             })
         return () => {
@@ -75,9 +75,9 @@ const Chatting = ({ match }) => {
         chatList.forEach(list => {
             axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${list.userId2}`)
                 .then(r => {
-                    console.log(">>>>>>>>>" + r.data.profile[0]);
+                    // console.log(">>>>>>>>>" + r.data.profile[0]);
                     setUsers(prevUsers => [...prevUsers, r.data.profile[0]]);
-                    console.log("+++++++++++++" + users);
+                    // console.log("+++++++++++++" + users);
                 });
         });
     }, [chatList]);
@@ -93,13 +93,13 @@ const Chatting = ({ match }) => {
                 if (sender === response.data.chatting.userId1) {
                     setReceiver(response.data.chatting.userId2);
                     axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId2}`)
-                        .then((r) => { setReceiverImg(r.data.profile[0].profileImg); console.log("111111111111" + r.data.profile[0].profileImg); })
+                        .then((r) => { setReceiverImg(r.data.profile[0].profileImg); })
                         .catch((e) => { console.log(e); })
 
                 } else if (sender === response.data.chatting.userId2) {
                     setReceiver(response.data.chatting.userId1);
                     axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${response.data.chatting.userId1}`)
-                        .then((r) => { setReceiverImg(r.data.profile[0].profileImg); console.log("111111111111" + r.data.profile[0].profileImg); })
+                        .then((r) => { setReceiverImg(r.data.profile[0].profileImg); })
                         .catch((e) => { console.log(e); })
                 }
             })
@@ -157,12 +157,12 @@ const Chatting = ({ match }) => {
                                             <img
                                                 src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${profileImg}.jpg`}
                                                 className={style.profileIcon}
-                                                
+
                                             />
                                         </div>
                                         <div className={style.profileContent}>
                                             <div className={style.profileName}>{receiver}</div>
-                                            <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div>
+                                            {/* <div className={style.shortChat}>안녕하세요 작곡의뢰 ..</div> */}
                                         </div>
                                     </div>
                                 );
@@ -172,7 +172,10 @@ const Chatting = ({ match }) => {
                     <div className={style.chatBox}>
                         <div className={style.topText}>
                             <div className={style.receiver}>
-                                <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${receiverImg}.jpg`} className={style.chatProfile} alt="프로필" />
+                                {
+                                    currentRoomIdx.current.length != 0 &&
+                                    <img src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${receiverImg}.jpg`} className={style.chatProfile} alt="프로필" />
+                                }
                                 {/* <div className={style.chatName}>{receiver}</div> */}
                             </div>
                             <div className={style.chatName}>{receiver}</div>
@@ -188,7 +191,7 @@ const Chatting = ({ match }) => {
                                 })}
                             </div>
                             <div className={style.chatFoot}>
-                            <input
+                                <input
                                     type="text"
                                     onChange={(e) => setChat(e.target.value)}
                                     value={chat}
@@ -200,7 +203,7 @@ const Chatting = ({ match }) => {
                                     <Icon icon="la:handshake" color="#aaa" width="24" />
                                 </button>
 
-                               
+
 
 
                                 {/* <input

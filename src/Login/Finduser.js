@@ -40,7 +40,7 @@ export default function Finduser({ match }) {
         }
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${email}`)
             .then((r) => {
-                console.log(r.data)
+                // console.log(r.data)
                 setAuth(r.data)
                 Swal.fire({
                     icon: 'info',

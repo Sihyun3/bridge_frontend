@@ -24,7 +24,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, han
     useEffect(() => {
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/content/${pcIdx}`)
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 // setContentList({
                 //     content: response.data.pcContent,
                 //     date: response.data.pcDate,
@@ -77,7 +77,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, han
         //     console.log(value);
         // }
 
-        console.log(pcIdx);
+        // console.log(pcIdx);
 
         axios({
             method: 'PUT',
@@ -86,7 +86,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, han
             data: formData
         })
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.count == 0) {
                     alert("수정된 내용이 없습니다.");
                 } else {
@@ -111,7 +111,7 @@ const ContentUpdate = ({ pcIdx, setEditClick, setIsClick, index1, pdNumber1, han
                     {/* {ContentList.writer} */}
                     <textarea className={style.write} type="text" value={pcContent} onChange={handlerChangePcContent} />
                         {/* {ContentList.content} */}
-                    {console.log(ContentList.file)}
+                    {/* {console.log(ContentList.file)} */}
                     <input className={style.file} type="file" id="pcFile"  name="a" multiple="multiple" onChange={handlerChangePcFile} placeholder={pcFile} />
                 
                     {/* <button className={style.delete} onClick={() => handlerClickDelete(pcContent, pcFile, pcWriter)} value="삭제"> 삭제 </button> */}

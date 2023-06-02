@@ -46,15 +46,15 @@ function Content({ pdIdx, uploadClick, setUploadClick, handlerClickSelect, index
         }
         formData.append("Data", new Blob([JSON.stringify({ pcContent, pcWriter, pdIdx })], { type: "application/json" }))
         // formData.append("Data", {PartnerContentDto:{pcContent,pcWriter}})
-        console.log(formData)
+        // console.log(formData)
         axios({
             method: 'POST',
             url: `https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/write/${pdIdx}`,
             headers: { 'Content-Type': 'multipart/form-data;' },
             data: formData
         }).then((response) => {
-            console.log("축 성공");
-            console.log(response);
+            // console.log("축 성공");
+            // console.log(response);
 
             if(response.data.count == 0) {
                 alert("등록된 내용이 없습니다.")

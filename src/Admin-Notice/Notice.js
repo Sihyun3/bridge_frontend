@@ -51,7 +51,7 @@ function Notice({ history, noticeIdx, title, writer }) {
     /* 체크박스 전체 */
     const onAllCheckBox = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
+        // console.log(e.target.value);
         if (e.target.value == "false") {
             const indexArray = datas.map((notice, index) => notice.noticeIdx);
             setValue(indexArray);
@@ -81,7 +81,7 @@ function Notice({ history, noticeIdx, title, writer }) {
         axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`, { noticeIdx })
 
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.length === noticeIdx.length) {
                     Swal.fire(
                         'Success!',

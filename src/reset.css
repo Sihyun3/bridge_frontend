@@ -189,10 +189,10 @@ button {
 }
 
 .box1 {
-
-	height: 280px;
-	width: 100%;
-	/* background-color: #f8dbdb; */
-	text-align: center;
-	/* margin-top: 80px; */
+	height: 200px;
+    width: 1200px;
+    background-color: #F0D2B4;
+    border-bottom-width: 1px;
+    --un-bg-opacity: 1;
+    margin-left: 360px;
 }

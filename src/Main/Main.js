@@ -19,7 +19,7 @@ const Main = () => {
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice`)
             .then((r) => {
                 setData(r.data)
-                console.log(r.data)
+                // console.log(r.data)
             }
             )
     }, [])

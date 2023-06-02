@@ -16,7 +16,7 @@ const Payment = () => {
         setUserId(decode_token.sub);
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${decode_token.sub}`)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setCurrentPoint(response.data.userPoint);
                 // setWillPoint(currentPoint);
             })

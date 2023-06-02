@@ -42,10 +42,10 @@ function PaymentTest2({ match }) {
                 setUsepoint(response.data);
                 setClients(decode_token.sub);
                 axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${decode_token.sub}`)
-                    .then((r) => { setProfile1(r.data.profile[0]); console.log("profile1>>" + r.data.profile[0]) })
+                    .then((r) => { setProfile1(r.data.profile[0]);  })
                     .catch((e) => { console.log(e) })
                 axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/profile/${producer}`)
-                    .then((r) => { setProfile2(r.data.profile[0]); console.log("profile2>>" + r.data.profile[0]) })
+                    .then((r) => { setProfile2(r.data.profile[0]);  })
                     .catch((e) => { console.log(e) })
             })
             .catch(error => {

@@ -67,7 +67,7 @@ const SignUp = ({ history, props }) => {
 
         if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(frontmail)) {
             setEmail(frontmail);
-            console.log(frontmail);
+            // console.log(frontmail);
             setEmessage(null);
 
         } else {
@@ -108,11 +108,11 @@ const SignUp = ({ history, props }) => {
     //ID 중복체크
     const userIdCheck = (e) => {
         e.preventDefault();
-        console.log("asjsdfjfkds")
+        // console.log("asjsdfjfkds")
         // axios.post(`https://192.168.0.47:8080/api/idlist/${userId}`,)
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/idlist/${userId}`,)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 const data = response.data;
                 if (data === 1) {
                     alert("이미 사용중인 아이디입니다.");
@@ -129,10 +129,10 @@ const SignUp = ({ history, props }) => {
     }
 
     const handlerAuth = () => {
-        // axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
-        axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
+        axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
+        // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
             .then((r) => {
-                console.log(r.data)
+                // console.log(r.data)
                 setAuth(r.data)
                 alert("인증번호가 발송되었습니다.")
             })
@@ -143,8 +143,8 @@ const SignUp = ({ history, props }) => {
 
     const handlerCheck = () => {
         if (auth == temp) {
-            // axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
-            axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
+            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/emailConfirm/${userEmail}`)
+            // axios.post(`https://192.168.0.47:8080/emailConfirm/${userEmail}`)
                 .then((r) => {
                     alert("인증이 성공적으로 완료되었습니다.");
                 })
@@ -232,7 +232,7 @@ const SignUp = ({ history, props }) => {
         if (/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(userPassword)) {
             setPassword(userPassword);
             setPWmessage(null);
-            console.log(userPassword);
+            // console.log(userPassword);
         } else {
             setPassword(e.target.value);
             setPWmessage('비밀번호 형식이 올바르지 않습니다.');

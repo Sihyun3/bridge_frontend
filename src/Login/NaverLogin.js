@@ -11,7 +11,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
 
     const { naver } = window
     const NAVER_CLIENT_ID = '9i6fzGFoSxccJUEKZ46S'
-    const NAVER_CALLBACK_URL = `https://${process.env.REACT_APP_IP}:80/signup`
+    const NAVER_CALLBACK_URL = `https://www.bridge-music.life`
 
     const initializeNaverLogin = () => {
         const naverLogin = new naver.LoginWithNaverId({
@@ -23,7 +23,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
             loginButton: { color: 'green', type: 2, height: 58, float:'left'},
             callbackHandle: true
         })
-        console.log(naverLogin)
+        // console.log(naverLogin)
         naverLogin.init()
 
         // 선언된 naverLogin 을 이용하여 유저 (사용자) 정보를 불러오는데  

@@ -29,7 +29,7 @@ const JamList = () => {
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam`)
             .then(r => {
                 setData(r.data);
-                console.log(r.data);
+                // console.log(r.data);
             })
     }, [])
 
@@ -50,11 +50,11 @@ const JamList = () => {
     const handlerSerchSubmit = (e) => {
         e.preventDefault();
         const filtered = data.filter(data => {
-            console.log(`>${searchInput}<`)
-            console.log(data.ctitle.includes(searchInput))
+            // console.log(`>${searchInput}<`)
+            // console.log(data.ctitle.includes(searchInput))
             return data.ctitle.includes(searchInput)
         });
-        console.log(filtered);
+        // console.log(filtered);
         setFilteredDatas(filtered);
         setPage(1);
     }
@@ -64,7 +64,7 @@ const JamList = () => {
     return (
         <>
             <div className={style.box1}>
-                <h1>Jam</h1>
+                <h1>Make Music</h1>
             </div>
             <div className='container clearfix'>
 
@@ -75,7 +75,7 @@ const JamList = () => {
                     </div>
                 </form>
                 <div className={style.pbox}>
-                    <Link to="/jam/write"><input type="button" className={style.playbutton} value="Make" /></Link>
+                    <Link to="/jam/write"><input type="button" className={style.playbutton} value="글쓰기" /></Link>
                 </div>
                 <div className='clearfix' style={{ margin: "50px 0" }}>
                     {
@@ -131,7 +131,7 @@ const JamList = () => {
 
                 <div className={style.page}>
 
-                    <nav className="pageNum" >
+                    <nav className={style.pageNum} >
                         <button onClick={() => setPage(page - 1)} disabled={page === 1} >
                             &lt;
                         </button>

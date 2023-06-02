@@ -73,7 +73,7 @@ word-spacing: 2px;
 }
 /*인풋창*/
 .musicinput {
-  width:700px;
+  width:730px;
   /* height:30px; */
   /* margin-bottom: 20px; */
   border-radius: 0.5rem;
@@ -83,7 +83,7 @@ word-spacing: 2px;
   font-size: 14px;
   margin-left: 100px;
   color: #141515;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   /* background-color: #d9d9d9; */
   /* vertical-align: bottom; */
@@ -99,8 +99,8 @@ word-spacing: 2px;
   margin-left: 10px;
   position: relative;
   /* bottom: 20px; */
-  top: 1px
-  /* cursor: pointer; */
+  top: 1px;
+  cursor: pointer;
 
 }
 
@@ -199,13 +199,13 @@ word-spacing: 2px;
   }
   
   .writeComment{
-    width:836px;
+    width:826px;
     height:36px;
     border-radius: 0.5rem;
     border: 0.5px solid #d9d9d9;
     margin-top: 40px;
     margin-bottom: 40px;
-    margin-left: 52px;
+    margin-left: 78px;
     padding-left:12px;
     outline:none;
 

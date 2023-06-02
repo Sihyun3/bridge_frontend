@@ -11,6 +11,7 @@ import { CreateOutlined, MailOutline, ReportProblemOutlined } from '@mui/icons-m
 import { Link } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
+import { Icon } from '@iconify/react';
 
 
 function ProfileDetail({}) {
@@ -55,30 +56,30 @@ function ProfileDetail({}) {
                 <div className={style.profile}>
                     <img className={style.profileIMG} src={`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/getImage/${data.profileImg}.jpg`} />
                     <span className={style.name}>{userInfo.userId}</span>
-                    {
+                    {/* {
                         a == 0 &&
                         <img src={certiMark} className={style.certi}></img>
-                    }
-                    <p style={{ marginTop: "10px", marginBottom: "10px" }}>{data.userPosition}</p>
+                    } */}
+                    <p className={style.user_job}>{data.userPosition}</p>
 
                     <p className={style.comment}>
                         {data.userIntroduction}
                     </p>
 
-                    <p>
+                    <p className={style.profile_tagbox}>
                         {
                             Array.isArray(tag) && tag.map((d) => {
-                                return (<span>#{d.tag}</span>)
+                                return (<span className={style.profile_tags}>#{d.tag}</span>)
 
                             })
                         }
                     </p>
 
-                    <p className={style.link} onClick={() => { window.open('https://google.co.kr', '_blank') }}>{data.userSite}</p>
+                    <p className={style.link} onClick={() => { window.open('https://google.co.kr', '_blank') }}><Icon style={{marginBottom:'-3px' , marginRight: '2px'}} icon="mdi:earth" color="#141515" width="18" height="18" />{data.userSite}</p>
 
-                    <Link to="#">   <MailOutline sx={{ fontSize: 24 }} /> </Link>
-                    <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 }} /></Link>
-                    <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
+                    <Link to="#">   <MailOutline sx={{ fontSize: 24 , position:'absolute', top:'5.5rem', right:'7rem', width:'2rem', height:'2rem', alignItems:'center', color:'#868e96'}} /> </Link>
+                    <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 , position:'absolute', top:'5.5rem', right:'4.5rem', width:'2rem', height:'2rem', alignItems:'center' , color:'#868e96'}} /></Link>
+                    <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24, position:'absolute', top:'5.5rem', right:'2.5rem', width:'2rem', height:'2rem', alignItems:'center', color:'#868e96'}} /></Link>
                 </div>
                 
                 <div className={style.detail}>
@@ -92,9 +93,11 @@ function ProfileDetail({}) {
                         {data.userPortfolio && <Viewer initialValue={data.userPortfolio}></Viewer>}
                     </div>
                 </div>
+                <hr className={style.hrReview}></hr>
                 <div className={style.review}>
-                    <p style={{ fontSize: "20px", marginTop: "20px" }}>후기</p>
-                    {reviewList.map(list => {
+                    <p style={{ fontSize: "22px", marginTop: "20px", fontWeight: "bold", textAlign: "center" }}>후기</p>
+                    {console.log(reviewList)}
+                    {reviewList.length != 0 ? reviewList.map(list => {
                         return(
                             <div className={style.reviewdetail}>
                             {/* <p className={style.reviewtitle}>작업물 제목</p> */}
@@ -103,7 +106,8 @@ function ProfileDetail({}) {
                             </p>
                         </div>
                         )
-                    })}
+                    }) : <div className={style.reviews}>후기가 없습니다.</div>}
+                    <hr className={style.hrReview}></hr>
                 </div>
             </div>
         </>

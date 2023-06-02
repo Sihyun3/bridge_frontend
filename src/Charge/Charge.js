@@ -30,10 +30,10 @@ const Charge = ({ match }) => {
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
         setUserId(decode_token.sub);
-        console.log(">>>>>>>>>>>>>>" + userId);
+        // console.log(">>>>>>>>>>>>>>" + userId);
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/chargePoint/${userId}`)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setCurrentPoint(response.data.userPoint);
                 setWillPoint(currentPoint);
             })
@@ -51,8 +51,8 @@ const Charge = ({ match }) => {
     }
 
     useEffect(() =>{
-        console.log(total);
-        console.log(usepoint);
+        // console.log(total);
+        // console.log(usepoint);
         setChargePoint(total);
         setCurrentPoint(usepoint);
     },[]);
@@ -62,7 +62,7 @@ const Charge = ({ match }) => {
         e.preventDefault();
         axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/doCharge/${userId}`, { userId, "money": chargePoint })
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -75,7 +75,7 @@ const Charge = ({ match }) => {
         //sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInN1YiI6InRlc3QiLCJqdGkiOiJiNjA2NGU4Mi1jYTE5LTQxODUtODY1YS05NThiZWNiZTM3NTAiLCJpYXQiOjE2ODI5MjYxMjQsImV4cCI6MTY4MzAxMjUyNH0.uYp4WAIcEKas7DrtK90sVA5jzSroszUosynG8pYYLko")
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/order/pay/${chargePoint}/${userId}`)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 window.location.href = response.data.next_redirect_pc_url;     
             })
             .catch(error => {

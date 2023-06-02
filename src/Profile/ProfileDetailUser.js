@@ -42,7 +42,7 @@ function ProfileDetailUser({ match }) {
                     setUserInfo(response.data.userDto);
                     setTag(response.data.taglist)
                     setReviewList(response.data.reviewlist);
-                    console.log("리뷰리스트>>>>>>>>>" + reviewList);
+                    // console.log("리뷰리스트>>>>>>>>>" + reviewList);
                 })
         }
     }, [userId])
@@ -81,7 +81,7 @@ function ProfileDetailUser({ match }) {
 
                     <Link to="#">   <MailOutline sx={{ fontSize: 24 }} /> </Link>
                     <Link to="/profile/write"><CreateOutlined sx={{ fontSize: 24 }} /></Link>
-                    <Link to={`/report/write/${userId}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
+                    <Link to={`/report/write/${user}`}><ReportProblemOutlined sx={{ fontSize: 24 }} /></Link>
                 </div>
 
                 <div className={style.detail}>
@@ -95,8 +95,10 @@ function ProfileDetailUser({ match }) {
                         {data.userPortfolio && <Viewer initialValue={data.userPortfolio}></Viewer>}
                     </div>
                 </div>
+
+                <hr className={style.hrReview}></hr>
                 <div className={style.review}>
-                    <p style={{ fontSize: "22px", marginTop: "20px", fontWeight: "bold" }}>후기</p>
+                    <p style={{ fontSize: "22px", marginTop: "20px", fontWeight: "bold" , textAlign: "center" }}>후기</p>
                     {console.log(reviewList)}
                     {reviewList.length != 0 ? reviewList.map(list => {
                         return(
@@ -107,7 +109,8 @@ function ProfileDetailUser({ match }) {
                             </p>
                         </div>
                         )
-                    }) : <div className={style.reviewnone}>후기가 없습니다.</div>}
+                    }) : <div className={style.reviews}>후기가 없습니다.</div>}
+                    <hr className={style.hrReview}></hr>
                 </div>
             </div>
         </>

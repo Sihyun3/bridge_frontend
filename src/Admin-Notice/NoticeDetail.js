@@ -42,7 +42,7 @@ function NoticeDetail({ match }) {
         // sessionStorage.setItem("token",'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6ImFkbWluIiwianRpIjoiN2I4MTY2Y2UtY2IzZC00NWU1LWExZDEtNjRhOGMzZGU0NWJhIiwiaWF0IjoxNjgzNTMwMTA4LCJleHAiOjg2NDAxNjgzNTMwMTA4fQ.0Ky3pPm61VOXna1rLOlI2KEUxTtxiPKxPwRDE5xSDko');
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/detail/${noticeIdx}`)
             .then(reponse => {
-                console.log(reponse);
+                // console.log(reponse);
                 setNotice(reponse.data);
                 setTitle(reponse.data.title);
                 setContents(reponse.data.contents);
@@ -51,7 +51,7 @@ function NoticeDetail({ match }) {
     }, []);
 
     const handlerClickList = () => {
-        console.log(history);
+        // console.log(history);
         history.push('/admin/notice/list');
     };
 
@@ -59,7 +59,7 @@ function NoticeDetail({ match }) {
         axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/update/${noticeIdx}`,
             { "title": title, "contents": contents }, { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 if (response.data === 1) {
                     Swal.fire(
                         'Success!',
@@ -90,7 +90,7 @@ function NoticeDetail({ match }) {
         axios.delete(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/notice/delete/${noticeIdx}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then(response => {
-                console.log(response);
+                // console.log(response);
 
                 if (response.data) {
                     Swal.fire(

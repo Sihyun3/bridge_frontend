@@ -16,8 +16,6 @@ export default function TipEdit({ match }) {
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/tipdetail/${tb_idx}/0`)
             .then(r => {
                 setData(r.data.tipDetail);
-                console.log(">>>>>>>>>>>>>>>>>>>" + r.data.tipDetail);
-                console.log("*******************" + data.tbContents);
                 setTitle(r.data.tipDetail.tbTitle);
             })
     }, [])

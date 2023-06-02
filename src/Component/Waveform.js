@@ -28,7 +28,7 @@ const Waveform = forwardRef((props, ref) => {
 
     const url = props.src
 
-    useEffect(() => { console.log("첫번째이펙트") }, [])
+    // useEffect(() => { console.log("첫번째이펙트") }, [])
 
     const formWaveSurferOptions = ref => ({
         container: ref,
@@ -90,7 +90,7 @@ const Waveform = forwardRef((props, ref) => {
 
         const options = formWaveSurferOptions(waveformRef.current);
         wavesurfer.current = WaveSurfer.create(options);
-        console.log(url);
+        // console.log(url);
         wavesurfer.current.load(url);
 
 
@@ -163,7 +163,7 @@ const Waveform = forwardRef((props, ref) => {
     // };
     const [img, setImg] = useState("");
     useEffect(() => {
-        console.log(props.data)
+        // console.log(props.data)
         switch (props.data.cmInstrument) {
             case "여성보컬": setImg(vocal)
                 break;

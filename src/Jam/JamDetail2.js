@@ -45,7 +45,7 @@ const JamDetail = ({ match }) => {
         }
         axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/jam/${cIdx}`)
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 setData(response.data.music);
                 setInfo(response.data.data)
                 setCommentsList(response.data.commentsList)
@@ -204,7 +204,7 @@ const JamDetail = ({ match }) => {
                     </div>
 
                     <div className={style.input}>
-                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "44px", outlineStyle: "none", marginBottom: 21, marginRight: 0, border: 0 }} >
+                        <select className={style.Select} onChange={(e) => { setInstrument(e.target.value) }} style={{ marginLeft: "20px", outlineStyle: "none", marginBottom: 21, marginRight: 0, border: 0 }} >
                             <option value="" disabled selected>악기 선택</option>
                             <option value="여성보컬">여성보컬  </option>
                             <option value="남성보컬">남성보컬  </option>
@@ -221,7 +221,7 @@ const JamDetail = ({ match }) => {
                             <option value="신디사이저">신디사이저  </option>
                         </select>
 
-                        <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => { console.log(e.target.files[0].name); setMusic(e.target.files) }} />
+                        <input type="file" className={style.musicinput} multiple="multiple" onChange={(e) => {  setMusic(e.target.files) }} />
                         <input type="button" className={style.music} onClick={onSubmit} value="등록" />
                     </div>
                 </div>
@@ -244,7 +244,7 @@ const JamDetail = ({ match }) => {
                     }
                 </div>
 
-                <div style={{ margin: "0 auto", width: "900px" }}>
+                <div style={{ margin: "0 auto", width: "1000px" }}>
                     <input type="text" value={comment} onChange={handleChangeComment} className={style.writeComment}></input>
                     <button onClick={handleCommentSubmit} className={style.finish} >등록</button>
                 </div>

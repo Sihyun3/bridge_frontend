@@ -76,7 +76,7 @@ const Waveform = forwardRef((props) => {
 
         const options = formWaveSurferOptions(waveformRef.current);
         wavesurfer.current = WaveSurfer.create(options);
-        console.log(url);
+        // console.log(url);
         wavesurfer.current.load(url);
 
 

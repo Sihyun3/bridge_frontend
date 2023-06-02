@@ -28,7 +28,7 @@ const MainAd = () => {
         }
         const token = sessionStorage.getItem('token');
         const decode_token = jwt_decode(token);
-        console.log(">>>>>>>>>>>>> " + decode_token);
+        // console.log(">>>>>>>>>>>>> " + decode_token);
 
         if (decode_token.sub != 'admin') {
             Swal.fire({

@@ -4,6 +4,7 @@ import Waveform from "../Waveform";
 import style from './MusicSplit.module.css';
 import musicfile_upload from './icons/MusicFileIcon.png'
 import { Icon } from '@iconify/react';
+import Swal from "sweetalert2";
 
 const MusicSplit = () => {
 
@@ -37,14 +38,24 @@ const MusicSplit = () => {
       headers: { 'Content-Type': 'multipart/form-data;' },
       data: formData
     }).then((response) => {
-      console.log("축 성공");
+      // console.log("축 성공");
       let musicInfo = { musicTitle: response.data.fileNames, musicUUID: response.data.uuid }
       setData([...data, musicInfo]);
-      console.log(response.data.uuid);
+      // console.log(response.data.uuid);
       setMusicUUID(response.data.uuid);
-      alert(`업로드가 성공했습니다. 분리 시작 버튼을 눌러주세요.`)
+      Swal.fire({
+        icon: 'success',
+        title: '업로드가 성공했습니다',
+        text: '분리 시작 버튼을 눌러주세요.',
+        confirmButtonColor: '#3c3e58'
+        // confirmButtonColor: '#3085d6'
+    })
     }).catch(() => {
-      alert(`업로드 중 오류가 발생했습니다.`);
+      Swal.fire({
+        icon: 'error',
+        title: '업로드 중 오류가 발생했습니다.',
+        // text: '잠시 후 인증코드가 포함된 메일이 전송됩니다.',
+    })
     });
   };
 
@@ -55,9 +66,13 @@ const MusicSplit = () => {
       .then(response => {
         const fileNames = response.data;
         if (fileNames.length === 0) {
-          alert('분리된 음악 파일이 존재하지 않습니다.');
+          Swal.fire({
+            icon: 'error',
+            title: '분리된 음악 파일이 존재하지 않습니다.',
+            // text: '잠시 후 인증코드가 포함된 메일이 전송됩니다.',
+        })
         } else {
-          console.log(fileNames);
+          // console.log(fileNames);
           setFiles(fileNames);
           setClicked(true);
         }
@@ -77,12 +92,16 @@ const MusicSplit = () => {
   const handleMusicSplit = () => {
     axios.get(`https://spleeter.bridge-music.life:8080/api/docker/${musicUUID}`)
       .then(response => {
-        console.log(response);
+        // console.log(response);
       })
       .catch(error => {
         console.log(error);
-        console.log("분리 오류 url ==> " + `/api/docker/${musicUUID}`);
-        alert(`오류가 발생했습니다 (${error.message})`);
+        // console.log("분리 오류 url ==> " + `/api/docker/${musicUUID}`);
+        Swal.fire({
+          icon: 'error',
+          title: '오류가 발생했습니다. 다시 시도해주세요.',
+          // text: '잠시 후 인증코드가 포함된 메일이 전송됩니다.',
+      })
       });
   };
 
@@ -105,9 +124,7 @@ const MusicSplit = () => {
         });
     }, 3000);
   };
-  useEffect(() => {
-    console.log(files)
-  }, [])
+
 
 
   const childComponentRef = useRef([]);

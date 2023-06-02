@@ -11,7 +11,7 @@ const Complete = ({ pdIdx,setProgress }) => {
         if (result) {
             axios.put(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/partnerdetail/complete/${pdIdx}`)
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
                     alert("결제가 진행되었습니다.");
                     setProgress(true);
                 })

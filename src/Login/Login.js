@@ -21,8 +21,8 @@ const Login = ({ setIsLogin}) => {
             .then(response => {
                 if(response.data){
                     alert('정상적으로 로그인되었습니다');
-                    console.log(response);
-                    console.log(history)
+                    // console.log(response);
+                    // console.log(history)
                     sessionStorage.setItem("token",response.data);
                     setIsLogin(true);
                     history.push('/');
@@ -30,7 +30,7 @@ const Login = ({ setIsLogin}) => {
             })
             .catch(error => {
                 alert('id, pw가 일치하지 않습니다')
-                console.log(error)
+                // console.log(error)
                 sessionStorage.clear();
             })
     };
