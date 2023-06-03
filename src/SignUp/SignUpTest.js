@@ -363,7 +363,7 @@ const SignUpTest = ({ history, props }) => {
                                 <button className={style.CodeButton} onClick={handlerAuth}>인증코드 요청</button>
 
                                 <div className={style.idBox}>
-                                    <input className={style.idInputBox} type="email" placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
+                                    <input className={style.idInputBox}  placeholder="인증코드 입력" value={temp} onChange={(e) => { setTemp(e.target.value) }} />
                                     <button className={style.idCheckButton} onClick={handlerCheck}>코드 인증</button>
                                 </div>
 
