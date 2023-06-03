@@ -94,9 +94,9 @@ const KakaoLogin = ({setIsLogin}) => {
                                     // console.log(response);
                                     if (response.data) {
                                         sessionStorage.setItem("token", response.data);
-                                        alert('로그인 성공');
+                                                                                setIsLogin(true);
+
                                         window.location.href = "/";
-                                        setIsLogin(true);
                                     }
                                     else {
                                         sessionStorage.clear();
