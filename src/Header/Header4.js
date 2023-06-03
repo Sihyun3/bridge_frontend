@@ -30,7 +30,7 @@ function Header4({ isLogin, setIsLogin }) {
             // console.log("aaaaaaaaaaaaaa");
             const token = sessionStorage.getItem('token');
             const decodedToken = jwt_decode(token);
-            // console.log(decodedToken)
+            console.log(decodedToken)
 
 
             axios.get(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/payment/detail/${decodedToken.sub}`)
