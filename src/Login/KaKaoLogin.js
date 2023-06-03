@@ -86,8 +86,8 @@ const KakaoLogin = ({setIsLogin}) => {
                             sessionStorage.setItem('email', kakao_account.email);
                             sessionStorage.setItem('accesstoken', accessToken);
 
-                            // axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userNickName": kakao_account.profile.nickname,
-                            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userName": kakao_account.profile.name,
+                            axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userName": kakao_account.profile.nickname,
+//                             axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userName": kakao_account.profile.name,
 
                                     'userEmail' : kakao_account.email })
                                 .then((response) => {
