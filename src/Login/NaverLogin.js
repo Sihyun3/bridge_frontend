@@ -49,16 +49,9 @@ const NaverLogin = ({ setGetToken, setUserInfo,setIsLogin ,history}) => {
                 // axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userNickName": naverLogin.user.name,'userEmail':naverLogin.user.email })
                 axios.post(`https://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/bridge/pass/login`, { "userName": naverLogin.user.name,'userEmail':naverLogin.user.email }) 
                 .then((response) => {
-                        if (response.data) {
                             sessionStorage.setItem("token", response.data);
                             setIsLogin(true);
                             history.push('/')
-
-                        }
-                        else {
-                            sessionStorage.clear();
-                            alert('로그인 실패');
-                        }
                     })
                     .catch(error => {
                         console.log(error);
